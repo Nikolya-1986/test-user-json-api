@@ -1,0 +1,13 @@
+<section class="home__container">
+    <app-users-cards
+        [users]="users$"
+        [error]="error$"
+        >
+        <img 
+            #contentImage
+            *ngIf="isLoading$"
+            src="assets/images/ZC9Y.gif"
+        />
+    </app-users-cards>
+
+</section>

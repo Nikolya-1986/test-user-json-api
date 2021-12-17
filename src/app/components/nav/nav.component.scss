@@ -13,4 +13,24 @@
             }
         }
     }
+
+    &__navigation {
+        display: flex;
+        justify-content: space-between;
+
+        ul {
+            display: flex;
+            align-items: center;
+            margin: 0;
+
+            li {
+                padding: 0 .6rem;
+                font-size: 2rem;
+
+                a {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
 }

@@ -1,0 +1,22 @@
+<article class="cards__conteiner cards">
+    <ng-content select="img"></ng-content>
+    
+    <div *ngIf="error else showCards">
+        <strong>
+            Error from backend: {{ error }}
+        </strong>
+        <p>
+            Users list is empty
+        </p>
+    </div>
+    <ng-template #showCards>
+        <app-user-item
+            *ngFor="let user of users; let ind = index; let count = count; trackBy: trackByFn"
+            [user]="user"
+            >
+            <p #contentText>
+                user {{ ind + 1 }} from {{ count }}
+            </p>
+        </app-user-item>
+    </ng-template>
+</article>
