@@ -3,6 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ErrorComponent } from './components/error/error.component';
 
 const routes: Routes = [
+  {
+    path: 'home', loadChildren: () => import('./modules/home/home.module').then(module => module.HomeModule)
+  },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
   { 
     path: 'error', component: ErrorComponent 
   },
