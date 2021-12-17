@@ -1,0 +1,423 @@
+{
+    "results":[
+        {
+            "userId": 1,
+            "gender":"male",
+            "status": "married",
+            "name": {
+                "title":"Mr",
+                "first":"Stephen",
+                "last":"May"
+            },
+            "location": { 
+                "street": {
+                    "number":5498,
+                    "name":"Grove Road"
+                },
+                "city":"Laytown-Bettystown-Mornington",
+                "state":"Kilkenny",
+                "country":"Ireland",
+                "postcode":40302,
+                "coordinates": {
+                    "latitude":"17.5676",
+                    "longitude":"-12.2013"
+                },
+                "timezone": {
+                    "offset":"-12:00",
+                    "description":"Eniwetok, Kwajalein"
+                }
+            },
+            "email":"stephen.may@example.com",
+            "language": ["English", "Spanish"],
+            "login": {
+                "uuid":"e9084865-bfcf-42da-9e68-b22048cc2336",
+                "username":"happyleopard772",
+                "password":"tarpon",
+                "salt":"S7V0k1NZ",
+                "md5":"386c0e593c287095bd38a812a2d3eba7",
+                "sha1":"f91bf5bff4be6f2ce1c8dab63136537ab1f8d868",
+                "sha256":"3064a1df2c30f661af94582dbc8cb3f2fea1cb4b5322275db667a3391bd92e17"
+            },
+            "dob": {
+                "date":"1952-05-06T22:14:49.869Z",
+                "age":69
+            },
+            "registered": {
+                "date":"2004-08-31T23:25:00.959Z",
+                "age":17
+            },
+            "phone":"021-577-1124",
+            "cell":"081-248-8151",
+            "id": {
+                "name":"PPS",
+                "value":"9753700T"
+            },
+            "picture": {
+                "large":"https://randomuser.me/api/portraits/men/4.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/men/4.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/4.jpg"
+            },
+            "nat":"IE"
+        },
+        
+        {
+            "userId": 2,
+            "gender":"female",
+            "status": "divorced",
+            "name": {
+                "title":"Ms",
+                "first":"Marianne",
+                "last":"Claire"
+            },
+            "location":{
+                "street":{
+                    "number":9636,
+                    "name":"Pine Rd"
+                },
+                "city":"Carleton",
+                "state":"Alberta",
+                "country":"Canada",
+                "postcode":"N1B 6J6",
+                "coordinates":{
+                    "latitude":"-49.0408",
+                    "longitude":"-22.3120"
+                },
+                "timezone":{
+                    "offset":"-10:00",
+                    "description":"Hawaii"
+                }
+            },
+            "email":"marianne.claire@example.com",
+            "language": ["English", "Italian"],
+            "login":{
+                "uuid":"ce292fb9-6b11-42fc-bd1f-b205ef7367ad",
+                "username":"sadpeacock534",
+                "password":"wolverine",
+                "salt":"49CnABO2",
+                "md5":"add8000a66cd149a95aecfff70223e06",
+                "sha1":"0d0868748f29ea3eece3ac72e3799e5ebc70142f",
+                "sha256":"063fb66daf93c1a4c091293c46ddd93d50e188d40157622a092df6c685096f30"
+            },
+            "dob":{
+                "date":"1982-06-17T16:33:36.322Z",
+                "age":39
+            },
+            "registered":{
+                "date":"2017-07-27T00:25:58.185Z",
+                "age":4
+            },
+            "phone":"643-180-9717",
+            "cell":"118-115-3471",
+            "id":{
+                "name":"",
+                "value":null
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/women/95.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/women/95.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/95.jpg"
+            },
+            "nat":"CA"
+        },
+        
+        {
+            "userId": 3,
+            "gender":"male",
+            "status": "single",
+            "name":{
+                "title":"Mr",
+                "first":"آرسین",
+                "last":"موسوی"
+            },
+            "location":{
+                "street":{
+                    "number":6990,
+                    "name":"پارک لاله"
+                },
+                "city":"مشهد",
+                "state":"مرکزی",
+                "country":"Iran",
+                "postcode":90704,
+                "coordinates":{
+                    "latitude":"85.4918",
+                    "longitude":"73.6634"
+                },
+                "timezone":{
+                    "offset":"-5:00",
+                    "description":"Eastern Time (US & Canada), Bogota, Lima"
+                }
+            },
+            "email":"arsyn.mwswy@example.com",
+            "language": ["Hebrew", "Italian"],
+            "login":{
+                "uuid":"c7befa65-2d1f-4b2c-91d2-1966b1820a5a",
+                "username":"organickoala659",
+                "password":"andre",
+                "salt":"VklbCodE",
+                "md5":"d30145f32687e42c29d87c25331e8b1f",
+                "sha1":"02ee196452d403fda01e09b8096af04008f207a8",
+                "sha256":"ebc4676d266064355ceea64475ec74a046f253eabe3acf09c0d245fb5a44eece"
+            },
+            "dob":{
+                "date":"1988-06-12T13:35:31.130Z",
+                "age":33
+            },
+            "registered":{
+                "date":"2012-11-20T01:55:43.489Z",
+                "age":9
+            },
+            "phone":"066-45841454",
+            "cell":"0943-534-7017",
+            "id":{
+                "name":"",
+                "value":null
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/men/42.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/men/42.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/42.jpg"
+            },
+            "nat":"IR"
+        },
+        
+        {
+            "userId": 4,
+            "gender":"female",
+            "status": "married",
+            "name":{
+                "title":"Ms",
+                "first":"Serenity",
+                "last":"Cole"
+            },
+            "location":{
+                "street":{
+                    "number":6818,
+                    "name":"Blossom Hill Rd"
+                },
+                "city":"Gladstone",
+                "state":"Australian Capital Territory",
+                "country":"Australia",
+                "postcode":7402,
+                "coordinates":{
+                    "latitude":"35.7472",
+                    "longitude":"-8.4574"
+                },
+                "timezone":{
+                    "offset":"+3:30",
+                    "description":"Tehran"
+                }
+            },
+            "email":"serenity.cole@example.com",
+            "language": ["Spanish", "French"],
+            "login":{
+                "uuid":"1a4bebae-c220-4730-b197-9c96a979d727",
+                "username":"brownbutterfly168",
+                "password":"kristi",
+                "salt":"oMFJzEw1",
+                "md5":"2e07a6aa1ab64c4ab8f5ba48c5523b5e",
+                "sha1":"e9ca485d218bcbd8c38346ff3d73f953628e5cca",
+                "sha256":"43a8716e4ac9ee2bc378c47ba007b47962782c426002a595a47b79180620b2bd"
+            },
+            "dob":{
+                "date":"1957-03-16T01:09:46.708Z",
+                "age":64
+            },
+            "registered":{
+                "date":"2007-09-28T19:45:22.153Z",
+                "age":14
+            },
+            "phone":"07-7164-7941",
+            "cell":"0484-790-512",
+            "id":{
+                "name":"TFN",
+                "value":"269256381"
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/women/59.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/women/59.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/59.jpg"
+            },
+            "nat":"AU"
+        },
+        
+        {
+            "userId": 5,
+            "gender":"female",
+            "status": "divorced",
+            "name":{
+                "title":"Ms",
+                "first":"Angelina",
+                "last":"Finnøy"
+            },
+            "location":{
+                "street":{
+                    "number":9900,
+                    "name":"Østre vei"
+                },
+                "city":"Lyngseidet",
+                "state":"Finnmark - Finnmárku",
+                "country":"Norway",
+                "postcode":"1284",
+                "coordinates":{
+                    "latitude":"7.0445",
+                    "longitude":"-20.7307"
+                },
+                "timezone":{
+                    "offset":"+9:30",
+                    "description":"Adelaide, Darwin"
+                }
+            },
+            "email":"angelina.finnoy@example.com",
+            "language": ["Spanish", "French"],
+            "login":{
+                "uuid":"65867b03-c0bd-42f9-a061-33989675d831",
+                "username":"ticklishelephant976",
+                "password":"salem",
+                "salt":"DEcDemom",
+                "md5":"5658a1f8a0140402d7c8dd8f1aaf4f2d",
+                "sha1":"39137d96664d38a6c5c48fc098df6f2d2d9d78f6",
+                "sha256":"732f16836dcf1f1853a3791d04f3dd7f914710e02b4d710115504ddb8591df93"
+            },
+            "dob":{
+                "date":"1982-09-07T08:35:39.070Z",
+                "age":39
+            },
+            "registered":{
+                "date":"2002-12-16T15:11:37.407Z",
+                "age":19
+            },
+            "phone":"31456026",
+            "cell":"94194311",
+            "id":{
+                "name":"FN",
+                "value":"07098221446"
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/women/14.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/women/14.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/14.jpg"
+            },
+            "nat":"NO"
+        },
+
+        {
+            "userId": 6,
+            "gender":"male",
+            "status": "married",
+            "name":{
+                "title":"Mr",
+                "first":"Valdemar",
+                "last":"Olsen"
+            },
+            "location":{
+                "street":{
+                    "number":1812,
+                    "name":"Snebærvej"
+                },
+                "city":"Sundby/Erslev",
+                "state":"Sjælland",
+                "country":"Denmark",
+                "postcode":79369,
+                "coordinates":{
+                    "latitude":"-31.5501",
+                    "longitude":"-128.5512"
+                },
+                "timezone":{
+                    "offset":"-5:00",
+                    "description":"Eastern Time (US & Canada), Bogota, Lima"
+                }
+            },
+            "email":"valdemar.olsen@example.com",
+            "language": ["Portuguese", "Spanish"],
+            "login":{
+                "uuid":"ea42cddc-c75e-480d-b83c-102261f5c7cc",
+                "username":"brownrabbit199",
+                "password":"lizard",
+                "salt":"VDv6GaY8",
+                "md5":"b090188b633dd8f840191cf05de61e67",
+                "sha1":"9d5ac235950fe5e75356eca3461d75650cc933eb",
+                "sha256":"862622d1e48dc5480676f7aabd23f4a918070f837123b89d1991219ded73f65b"
+            },
+            "dob":{
+                "date":"1947-09-11T17:21:16.817Z",
+                "age":74
+            },
+            "registered":{
+                "date":"2004-08-02T18:07:52.236Z",
+                "age":17
+            },
+            "phone":"41938477",
+            "cell":"30557031",
+            "id":{
+                "name":"CPR",
+                "value":"110947-4975"
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/men/14.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/men/14.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/14.jpg"
+                },
+            "nat":"DK"
+        },
+
+        {
+            "userId": 7,
+            "gender":"female",
+            "status": "single",
+            "name":{
+                "title":"Mrs",
+                "first":"Pippa",
+                "last":"Green"
+            },
+            "location":{
+                "street":{
+                    "number":5456,
+                    "name":"Hereford Street"
+                },
+                "city":"Whangarei",
+                "state":"Gisborne",
+                "country":"New Zealand",
+                "postcode":12135,
+                "coordinates":{
+                    "latitude":"64.5253",
+                    "longitude":"23.3834"
+                },
+                "timezone":{
+                    "offset":"-12:00",
+                    "description":"Eniwetok, Kwajalein"
+                }
+            },
+            "email":"pippa.green@example.com",
+            "language": ["English", "Italian"],
+            "login":{
+                "uuid":"c38085f3-03f9-4767-88c2-c15507cb0b37",
+                "username":"blackrabbit163",
+                "password":"sahara",
+                "salt":"n8JDyCFF",
+                "md5":"74f0227bd30f416e7461680464a01273",
+                "sha1":"0d803a09d2ec3d35d9f63037098916bb29dcb242",
+                "sha256":"90dccc3c056c7e52b9c91d3e884418154e82c67bbe546f512cb3060520bc73d8"
+            },
+            "dob":{
+                "date":"1964-10-03T21:32:04.725Z",
+                "age":57
+            },
+            "registered":{
+                "date":"2008-03-26T18:35:13.741Z",
+                "age":13
+            },
+            "phone":"(477)-072-4725",
+            "cell":"(527)-340-5969",
+            "id":{
+                "name":"",
+                "value":null
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/women/0.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/women/0.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/0.jpg"
+                },
+            "nat":"NZ"
+        }
+    ]
+}
