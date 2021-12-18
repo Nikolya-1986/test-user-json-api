@@ -35,7 +35,7 @@ export const userReduser = createReducer (
     })),
     on(userActions.loadUsersFail, (state, action) => ({
         ...state,
-        errorMessage: action.error
+        errorMessage: action.message
     }))
 );
 

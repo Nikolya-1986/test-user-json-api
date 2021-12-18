@@ -28,7 +28,7 @@ export const loadUsersSuccess = createAction (
 
 export const loadUsersFail = createAction (
     UsersActionsType.LOAD_USERS_FAIL,
-    props<{error: string}>()
+    props<{message: string}>()
 );
 
 const allUserActions = union({

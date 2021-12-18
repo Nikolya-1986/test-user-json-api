@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -15,7 +15,13 @@ import { ErrorComponent } from './components/error/error.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { reduserUser } from './store/user/user.reducer';
 import { UsersEffects } from './store/user/user.effects';
+import { IsLoadingInterceptor } from './interseptors/isLoading.interceptor';
 
+const ISLOADING_INTERSEPTOR: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: IsLoadingInterceptor
+};
 
 @NgModule({
   declarations: [
@@ -33,7 +39,7 @@ import { UsersEffects } from './store/user/user.effects';
     EffectsModule.forRoot([UsersEffects]),
     StoreRouterConnectingModule.forRoot()
   ],
-  providers: [],
+  providers: [ISLOADING_INTERSEPTOR],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
