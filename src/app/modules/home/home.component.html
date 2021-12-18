@@ -1,11 +1,11 @@
 <section class="home__container">
     <app-users-cards
-        [users]="users$"
-        [error]="error$"
+        [users]="users$ | async"
+        [error]="error$ | async"
         >
         <img 
             #contentImage
-            *ngIf="isLoading$"
+            *ngIf="isLoading$ | async"
             src="assets/images/ZC9Y.gif"
         />
     </app-users-cards>

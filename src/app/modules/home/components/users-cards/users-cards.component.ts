@@ -10,8 +10,8 @@ import { UserDTO } from 'src/app/interfaces/user.interface';
 export class UsersCardsComponent implements AfterContentInit {
 
   @ContentChild('contentImage') contentImageElementRef!: ElementRef;
-  @Input() users!: UserDTO[];
-  @Input() error!: string;
+  @Input() users: UserDTO[] | any;
+  @Input() error: string | any;
 
   constructor(
     private renderor: Renderer2,
@@ -23,7 +23,7 @@ export class UsersCardsComponent implements AfterContentInit {
   };
 
   public ngAfterContentInit(): void {
-    this.renderor.setStyle(this.contentImageElementRef.nativeElement,  "position", "fixed");
+    this.renderor.setStyle(this.contentImageElementRef.nativeElement, "position", "fixed");
     this.renderor.setStyle(this.contentImageElementRef.nativeElement, "top", "25%");
     this.renderor.setStyle(this.contentImageElementRef.nativeElement, "left", "40%");
   }
