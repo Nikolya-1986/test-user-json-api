@@ -1,46 +1,31 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 
 import { UserDTO } from 'src/app/interfaces/user.interface';
-import { UserService } from 'src/app/services/user.service';
+import * as userActions from 'src/app/store/user/user.actions';
+import * as userSelectors from 'src/app/store/user/user.selectors';
+import AppUserState from 'src/app/store/user/user.state';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
 
-  public users$!: UserDTO[];
-  public isLoading$!: boolean;
-  public error$: string = '';
-  public destroy$: Subject<boolean> = new Subject();
+  public users$!: Observable<UserDTO[]>;
+  public isLoading$!: Observable<boolean>;
+  public error$!: Observable<string>
 
   constructor(
-    private userService: UserService
+    private store: Store<AppUserState>
   ) {}
 
   public ngOnInit(): void {
-    this.fetchAllUsers();
-  };
-
-  public fetchAllUsers(): UserDTO[] | any {
-    this.isLoading$ = true;
-    this.userService.getUsers().pipe(
-      takeUntil(this.destroy$),
-    )
-    .subscribe(users => {
-      this.users$ = users;
-      this.isLoading$ = false;
-    },(errorFromBackend) => {
-      this.isLoading$ = false;
-      this.error$ = errorFromBackend.message
-    })
-  };
-
-  public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this.store.dispatch(userActions.loadUsersRequest());
+    this.isLoading$ = this.store.pipe(select(userSelectors.getIsLoadingSelector));
+    this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
+    this.error$ = this.store.pipe(select(userSelectors.getFailSelector))
   };
 }
