@@ -9,16 +9,17 @@ import { UserDTO } from 'src/app/interfaces/user.interface';
 })
 export class UsersCardsComponent implements AfterContentInit {
 
-  @ContentChild('contentImage') contentImageElementRef!: ElementRef;
-  @Input() users: UserDTO[] | any;
-  @Input() error: string | any;
+  @ContentChild('contentImage') private contentImageElementRef!: ElementRef;
+  @Input() public users: UserDTO[] | any;
+  @Input() public error: string | any;
+  @Input() public searchUserName!: string;
 
   constructor(
     private renderor: Renderer2,
   ) { }
   
   public trackByFn(ind: number, item: any): number {
-    console.log("User id:", ind);
+    // console.log("User id:", ind);
     return ind;
   };
 

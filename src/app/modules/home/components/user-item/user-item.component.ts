@@ -9,8 +9,8 @@ import { UserDTO } from 'src/app/interfaces/user.interface';
 })
 export class UserItemComponent implements AfterContentInit {
 
-  @ContentChild('contentText') contentTextElementRef!: ElementRef;
-  @Input() user!: UserDTO;
+  @ContentChild('contentText') private contentTextElementRef!: ElementRef;
+  @Input() public user!: UserDTO;
   
   constructor(
     private renderor: Renderer2,

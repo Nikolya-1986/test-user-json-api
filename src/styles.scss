@@ -24,7 +24,7 @@ html, body  {
     min-height: 100%;
     display: grid;
     grid-template:  [row1-start] "header header" 95px [row1-end]
-                    [row2-start] "aside main" 1fr [row2-end]
+                    [row2-start] "main main" 1fr [row2-end]
                     [row3-start] "footer footer" auto [row3-end]
                     /17% 83%;
     grid-gap: .6rem 0;
@@ -38,12 +38,6 @@ header {
     top: 0;
     grid-area: header;
     background-color: var(--transparent-color);
-}
-
-aside {
-    height: auto;
-    grid-area: aside;
-    background-color: var(--light-color-1);
 }
 
 main {

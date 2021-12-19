@@ -1,7 +1,15 @@
-<section class="home__container">
+<section class="home__container home">
+    <app-users-filters
+        [searchUserName]="searchUserName"
+        (currentSearchName)="onCurrentSearchName($event)"
+        >
+
+    </app-users-filters> 
+    
     <app-users-cards
         [users]="users$ | async"
         [error]="error$ | async"
+        [searchUserName]="searchUserName"
         >
         <img 
             #contentImage

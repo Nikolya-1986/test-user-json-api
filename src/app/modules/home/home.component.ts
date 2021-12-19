@@ -16,7 +16,8 @@ export class HomeComponent implements OnInit {
 
   public users$!: Observable<UserDTO[]>;
   public isLoading$!: Observable<boolean>;
-  public error$!: Observable<string>
+  public error$!: Observable<string>;
+  public searchUserName: string = '';
 
   constructor(
     private store: Store<AppUserState>
@@ -28,4 +29,8 @@ export class HomeComponent implements OnInit {
     this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
     this.error$ = this.store.pipe(select(userSelectors.getFailSelector))
   };
+
+  public onCurrentSearchName(searchName: string) {
+    this.searchUserName = searchName;
+  }
 }

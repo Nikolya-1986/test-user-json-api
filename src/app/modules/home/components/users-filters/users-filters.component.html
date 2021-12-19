@@ -1,0 +1,18 @@
+<section class="filters__container filters">
+    <div class="filters__name"> 
+        <label 
+            class="filters__label label" 
+            for="name"
+            >
+            Search name
+        </label>
+        <input
+            id="name"
+            type="text"
+            placeholder="Enter name for search"
+            [(ngModel)]="searchUserName"
+            (input)="inputCurrentName()"
+            #focusInput
+        />
+    </div>
+</section>
