@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 
-import { UserDTO } from 'src/app/interfaces/user.interface';
+import { Gender, UserDTO } from 'src/app/interfaces/user.interface';
 import * as userActions from 'src/app/store/user/user.actions';
 import * as userSelectors from 'src/app/store/user/user.selectors';
 import AppUserState from 'src/app/store/user/user.state';
@@ -18,8 +18,10 @@ export class HomeComponent implements OnInit {
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
   public searchUserName: string = '';
-  public filterUserName: string = '';
+  public filterUserName: string = 'Default';
   public sortAlfabetParamets: string[] = ['Default', 'Alphabet(Aa-Zz)', 'Alphabet(Zz-Aa)'];
+  public filterUserGender: Gender = Gender.all;
+  public gender: Gender[] = [Gender.all, Gender.female, Gender.male];
 
   constructor(
     private store: Store<AppUserState>
@@ -37,7 +39,10 @@ export class HomeComponent implements OnInit {
   };
 
   public onCurrentAlfabetValue(alfabetValue: string): void {
-    console.log(this.filterUserName)
     this.filterUserName = alfabetValue
+  };
+
+  public onCurrentGender(genderValue: string | any): void {
+    this.filterUserGender = genderValue
   }
 }

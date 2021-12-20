@@ -36,4 +36,26 @@
             </option>
         </select>
     </div>
+
+    <div class="filters__filter">
+        <label
+            class="filters__label label"
+            for="gender-sort"
+            >
+            Sort user gender
+        </label>
+        <select
+            id="gender-sort"
+            [(ngModel)]="filterUserGender"
+            (change)="selectGenderSort()"
+            >
+            <option
+                *ngFor="let item of gender"
+                [value]="item"
+                >
+                {{ item }}
+            </option>
+        </select>
+
+    </div>
 </section>

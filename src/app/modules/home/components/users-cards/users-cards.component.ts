@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, Input, Renderer2 } from '@angular/core';
 
-import { UserDTO } from 'src/app/interfaces/user.interface';
+import { Gender, UserDTO } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-users-cards',
@@ -14,6 +14,7 @@ export class UsersCardsComponent implements AfterContentInit {
   @Input() public error: string | any;
   @Input() public searchUserName!: string;
   @Input() public filterUserName!: string;
+  @Input() public filterUserGender!: Gender;
 
   constructor(
     private renderor: Renderer2,

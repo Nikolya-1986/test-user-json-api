@@ -13,6 +13,7 @@
         <ng-container 
             *ngFor="let user of users 
                 | searchName: searchUserName
+                | filterGender: filterUserGender
                 | filterName: filterUserName
             
             ; let ind = index; let count = count; trackBy: trackByFn"

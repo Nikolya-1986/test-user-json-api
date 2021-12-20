@@ -3,8 +3,11 @@
         [searchUserName]="searchUserName"
         [filterUserName]="filterUserName"
         [sortAlfabetParamets]="sortAlfabetParamets"
+        [filterUserGender]="filterUserGender"
+        [gender]="gender"
         (currentSearchName)="onCurrentSearchName($event)"
         (currentAlfabetValue)="onCurrentAlfabetValue($event)"
+        (currentGender)="onCurrentGender($event)"
         >
 
     </app-users-filters> 
@@ -14,6 +17,7 @@
         [error]="error$ | async"
         [searchUserName]="searchUserName"
         [filterUserName]="filterUserName"
+        [filterUserGender]="filterUserGender"
         >
         <img 
             #contentImage

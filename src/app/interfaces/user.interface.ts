@@ -20,10 +20,10 @@ export interface UserDTO {
     nat: string,
 };
 
-export interface Gender {
-    female: 'female',
-    male: 'male',
-    all: 'all',
+export enum Gender {
+    female = 'female',
+    male = 'male',
+    all = 'all',
 };
 
 export interface Status {

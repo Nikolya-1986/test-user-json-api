@@ -9,6 +9,7 @@ import { UserItemComponent } from './components/user-item/user-item.component';
 import { UsersFiltersComponent } from './components/users-filters/users-filters.component';
 import { SearchNamePipe } from './pipes/search-name.pipe';
 import { FilterNamePipe } from './pipes/filter-name.pipe';
+import { FilterGenderPipe } from './pipes/filter-gender.pipe';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FilterNamePipe } from './pipes/filter-name.pipe';
     UserItemComponent,
     UsersFiltersComponent,
     SearchNamePipe,
-    FilterNamePipe
+    FilterNamePipe,
+    FilterGenderPipe
   ],
   imports: [
     CommonModule,
