@@ -14,7 +14,7 @@ export class SearchNamePipe implements PipeTransform {
         const isUserNameIncludesSearchName = lowerUserName.includes(lowerSearchName);
         return isUserNameIncludesSearchName;
       })
-      return filterUsers;
+      return filterUsers; 
     }
     return users;
   }

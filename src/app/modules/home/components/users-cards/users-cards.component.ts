@@ -17,7 +17,7 @@ export class UsersCardsComponent implements AfterContentInit {
   constructor(
     private renderor: Renderer2,
   ) { }
-  
+   
   public trackByFn(ind: number, item: any): number {
     // console.log("User id:", ind);
     return ind;

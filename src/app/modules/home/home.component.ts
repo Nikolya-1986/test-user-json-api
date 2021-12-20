@@ -31,6 +31,6 @@ export class HomeComponent implements OnInit {
   };
 
   public onCurrentSearchName(searchName: string) {
-    this.searchUserName = searchName;
+    this.searchUserName = searchName; 
   }
 }

@@ -15,7 +15,7 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   public ngOnInit(): void {
-  };
+  }; 
 
   public ngAfterViewInit(): void {
     this.focusInputElementRef.nativeElement.focus();
