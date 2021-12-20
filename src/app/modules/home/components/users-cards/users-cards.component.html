@@ -11,7 +11,11 @@
     </ng-container>
     <ng-template #showCards>
         <ng-container 
-            *ngFor="let user of users | searchName: searchUserName; let ind = index; let count = count; trackBy: trackByFn"
+            *ngFor="let user of users 
+                | searchName: searchUserName
+                | filterName: filterUserName
+            
+            ; let ind = index; let count = count; trackBy: trackByFn"
             >
             <app-user-item
                 [user]="user"

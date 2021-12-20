@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
   public searchUserName: string = '';
+  public filterUserName: string = '';
+  public sortAlfabetParamets: string[] = ['Default', 'Alphabet(Aa-Zz)', 'Alphabet(Zz-Aa)'];
 
   constructor(
     private store: Store<AppUserState>
@@ -30,7 +32,12 @@ export class HomeComponent implements OnInit {
     this.error$ = this.store.pipe(select(userSelectors.getFailSelector))
   };
 
-  public onCurrentSearchName(searchName: string) {
-    this.searchUserName = searchName; 
+  public onCurrentSearchName(searchName: string): void {
+    this.searchUserName = searchName 
+  };
+
+  public onCurrentAlfabetValue(alfabetValue: string): void {
+    console.log(this.filterUserName)
+    this.filterUserName = alfabetValue
   }
 }

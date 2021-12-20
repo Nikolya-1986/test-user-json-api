@@ -13,6 +13,7 @@ export class UsersCardsComponent implements AfterContentInit {
   @Input() public users: UserDTO[] | any;
   @Input() public error: string | any;
   @Input() public searchUserName!: string;
+  @Input() public filterUserName!: string;
 
   constructor(
     private renderor: Renderer2,

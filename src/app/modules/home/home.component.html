@@ -1,7 +1,10 @@
 <section class="home__container home">
     <app-users-filters
         [searchUserName]="searchUserName"
+        [filterUserName]="filterUserName"
+        [sortAlfabetParamets]="sortAlfabetParamets"
         (currentSearchName)="onCurrentSearchName($event)"
+        (currentAlfabetValue)="onCurrentAlfabetValue($event)"
         >
 
     </app-users-filters> 
@@ -10,6 +13,7 @@
         [users]="users$ | async"
         [error]="error$ | async"
         [searchUserName]="searchUserName"
+        [filterUserName]="filterUserName"
         >
         <img 
             #contentImage

@@ -1,18 +1,39 @@
 <section class="filters__container filters">
-    <div class="filters__name"> 
+    <div class="filters__filter"> 
         <label 
             class="filters__label label" 
-            for="name"
+            for="name-search"
             >
-            Search name
+            Search user name
         </label>
         <input
-            id="name"
+            id="name-search"
             type="text"
             placeholder="Enter name for search"
             [(ngModel)]="searchUserName"
             (input)="inputCurrentName()"
             #focusInput
         /> 
+    </div>
+
+    <div class="filters__filter">
+        <label
+            class="filters__label label" 
+            for="name-sort"
+            >
+            Sort user name
+        </label>
+        <select
+            id="name-sort"
+            [(ngModel)]="filterUserName"
+            (change)="selectAlfabetSort()"
+            >
+            <option
+                *ngFor="let sortAlfabet of sortAlfabetParamets"
+                [value]="sortAlfabet"
+                >
+                {{ sortAlfabet }}
+            </option>
+        </select>
     </div>
 </section>

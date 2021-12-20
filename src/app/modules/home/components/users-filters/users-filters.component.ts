@@ -10,7 +10,10 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   @ViewChild('focusInput') focusInputElementRef!: ElementRef;
 
   @Input() public searchUserName!: string;
+  @Input() public filterUserName: string = 'Default';
+  @Input() public sortAlfabetParamets!: string[];
   @Output() public currentSearchName = new EventEmitter<string>();
+  @Output() public currentAlfabetValue = new EventEmitter<string>();
 
   constructor() { }
 
@@ -24,5 +27,8 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   public inputCurrentName(): void {
     this.currentSearchName.emit(this.searchUserName);
   };
-
+  
+  public selectAlfabetSort(): void {
+    this.currentAlfabetValue.emit(this.filterUserName);
+  }
 }

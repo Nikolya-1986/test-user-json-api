@@ -8,6 +8,7 @@ import { UsersCardsComponent } from './components/users-cards/users-cards.compon
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { UsersFiltersComponent } from './components/users-filters/users-filters.component';
 import { SearchNamePipe } from './pipes/search-name.pipe';
+import { FilterNamePipe } from './pipes/filter-name.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SearchNamePipe } from './pipes/search-name.pipe';
     UsersCardsComponent,
     UserItemComponent,
     UsersFiltersComponent,
-    SearchNamePipe
+    SearchNamePipe,
+    FilterNamePipe
   ],
   imports: [
     CommonModule,
