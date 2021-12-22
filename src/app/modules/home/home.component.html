@@ -5,9 +5,12 @@
         [sortAlfabetParamets]="sortAlfabetParamets"
         [filterUserGender]="filterUserGender"
         [gender]="gender"
+        [fiterUserStatus]="fiterUserStatus"
+        [status]="status"
         (currentSearchName)="onCurrentSearchName($event)"
         (currentAlfabetValue)="onCurrentAlfabetValue($event)"
         (currentGender)="onCurrentGender($event)"
+        (currentSratus)="onCurrentSratus($event)"
         >
 
     </app-users-filters> 
@@ -18,6 +21,7 @@
         [searchUserName]="searchUserName"
         [filterUserName]="filterUserName"
         [filterUserGender]="filterUserGender"
+        [fiterUserStatus]="fiterUserStatus"
         >
         <img 
             #contentImage

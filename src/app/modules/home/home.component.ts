@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { Gender, UserDTO } from 'src/app/interfaces/user.interface';
+import { Gender, Status, UserDTO } from 'src/app/interfaces/user.interface';
 import * as userActions from 'src/app/store/user/user.actions';
 import * as userSelectors from 'src/app/store/user/user.selectors';
 import AppUserState from 'src/app/store/user/user.state';
@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   public sortAlfabetParamets: string[] = ['Default', 'Alphabet(Aa-Zz)', 'Alphabet(Zz-Aa)'];
   public filterUserGender: Gender = Gender.all;
   public gender: Gender[] = [Gender.all, Gender.female, Gender.male];
+  public fiterUserStatus: Status = Status.all;
+  public status: Status[] = [Status.all, Status.married, Status.single, Status.divorced];
 
   constructor(
     private store: Store<AppUserState>
@@ -44,5 +46,9 @@ export class HomeComponent implements OnInit {
 
   public onCurrentGender(genderValue: string | any): void {
     this.filterUserGender = genderValue
+  };
+
+  public onCurrentSratus(statusValue: string | any): void {
+    this.fiterUserStatus = statusValue
   }
 }

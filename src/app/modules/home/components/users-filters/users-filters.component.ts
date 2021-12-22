@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Gender } from 'src/app/interfaces/user.interface';
+import { Gender, Status } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-users-filters',
@@ -15,9 +15,12 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   @Input() public sortAlfabetParamets!: string[];
   @Input() public filterUserGender: Gender = Gender.all;
   @Input() public gender!: Gender[]; 
+  @Input() public fiterUserStatus: Status = Status.all;
+  @Input() public status!: Status[];
   @Output() public currentSearchName = new EventEmitter<string>();
   @Output() public currentAlfabetValue = new EventEmitter<string>();
   @Output() public currentGender = new EventEmitter<string>();
+  @Output() public currentSratus = new EventEmitter<string>();
 
   constructor() { }
 
@@ -38,5 +41,9 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
 
   public selectGenderSort(): void {
     this.currentGender.emit(this.filterUserGender)
+  };
+
+  public selectStatusSort(): void {
+    this.currentSratus.emit(this.fiterUserStatus)
   }
 }

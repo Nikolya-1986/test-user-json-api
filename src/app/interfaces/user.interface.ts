@@ -26,10 +26,11 @@ export enum Gender {
     all = 'all',
 };
 
-export interface Status {
-    married: 'married',
-    divorced: 'divorced',
-    single: 'single'
+export enum Status {
+    married ='married',
+    divorced = 'divorced',
+    single ='single',
+    all = 'all'
 }
 
 export interface Name {
