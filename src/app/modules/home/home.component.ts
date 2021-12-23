@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable, reduce, Subject, takeUntil, tap } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
 
-import { Gender, Status, UserDTO } from 'src/app/interfaces/user.interface';
-import * as userActions from 'src/app/store/user/user.actions';
-import * as userSelectors from 'src/app/store/user/user.selectors';
-import AppUserState from 'src/app/store/user/user.state';
+import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
+import * as userActions from '../../store/user/user.actions';
+import * as userSelectors from '../../store/user/user.selectors';
+import AppUserState from '../../store/user/user.state';
 
 @Component({
   selector: 'app-home',
@@ -24,16 +25,34 @@ export class HomeComponent implements OnInit {
   public gender: Gender[] = [Gender.all, Gender.female, Gender.male];
   public fiterUserStatus: Status = Status.all;
   public status: Status[] = [Status.all, Status.married, Status.single, Status.divorced];
+  public destroy$: Subject<boolean> = new Subject();
+  public languages!: string[];
+  public filterUserLanguage!: string;
 
   constructor(
-    private store: Store<AppUserState>
+    private store: Store<AppUserState>,
+    private userService: UserService
   ) {}
 
   public ngOnInit(): void {
     this.store.dispatch(userActions.loadUsersRequest());
     this.isLoading$ = this.store.pipe(select(userSelectors.getIsLoadingSelector));
     this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
-    this.error$ = this.store.pipe(select(userSelectors.getFailSelector))
+    this.error$ = this.store.pipe(select(userSelectors.getFailSelector));
+    this.getLanguages()
+  };
+  
+  public getLanguages(): string[] {
+    this.userService.getUsers().pipe(
+      takeUntil(this.destroy$),
+      map((response) => {
+        const users = response;
+        const arraysLanguages = users.map((languages) => languages.language);
+        this.languages = [...new Set(arraysLanguages.reduce((acc, item) => acc.concat(item)))]
+      })
+    )
+    .subscribe(() => console.log(this.languages))
+    return this.languages;
   };
 
   public onCurrentSearchName(searchName: string): void {
@@ -50,5 +69,10 @@ export class HomeComponent implements OnInit {
 
   public onCurrentSratus(statusValue: string | any): void {
     this.fiterUserStatus = statusValue
+  };
+
+  public onCurrentLanguage(selectedLanguage: string) {
+    this.filterUserLanguage = selectedLanguage
+    console.log(this.filterUserLanguage)
   }
 }

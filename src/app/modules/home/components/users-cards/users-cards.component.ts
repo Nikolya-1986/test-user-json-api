@@ -16,6 +16,7 @@ export class UsersCardsComponent implements AfterContentInit {
   @Input() public filterUserName!: string;
   @Input() public filterUserGender!: Gender;
   @Input() public fiterUserStatus!: Status;
+  @Input() public filterUserLanguage!: string;
 
   constructor(
     private renderor: Renderer2,

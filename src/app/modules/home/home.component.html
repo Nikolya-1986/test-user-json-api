@@ -7,10 +7,12 @@
         [gender]="gender"
         [fiterUserStatus]="fiterUserStatus"
         [status]="status"
+        [languages]="languages"
         (currentSearchName)="onCurrentSearchName($event)"
         (currentAlfabetValue)="onCurrentAlfabetValue($event)"
         (currentGender)="onCurrentGender($event)"
         (currentSratus)="onCurrentSratus($event)"
+        (currentLanguage)="onCurrentLanguage($event)"
         >
 
     </app-users-filters> 
@@ -22,6 +24,7 @@
         [filterUserName]="filterUserName"
         [filterUserGender]="filterUserGender"
         [fiterUserStatus]="fiterUserStatus"
+        [filterUserLanguage]="filterUserLanguage"
         >
         <img 
             #contentImage

@@ -17,11 +17,15 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   @Input() public gender!: Gender[]; 
   @Input() public fiterUserStatus: Status = Status.all;
   @Input() public status!: Status[];
+  @Input() public languages!: string[];
   @Output() public currentSearchName = new EventEmitter<string>();
   @Output() public currentAlfabetValue = new EventEmitter<string>();
   @Output() public currentGender = new EventEmitter<string>();
   @Output() public currentSratus = new EventEmitter<string>();
+  @Output() public currentLanguage = new EventEmitter<string>();
 
+  public isActibe!: boolean;
+  
   constructor() { }
 
   public ngOnInit(): void {
@@ -45,5 +49,9 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
 
   public selectStatusSort(): void {
     this.currentSratus.emit(this.fiterUserStatus)
+  }
+
+  public onCurrentLanguage(language: string): void {
+    this.currentLanguage.emit(language)
   }
 }

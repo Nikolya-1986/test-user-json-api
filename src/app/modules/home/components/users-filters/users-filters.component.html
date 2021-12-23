@@ -77,4 +77,15 @@
             </mat-radio-button>
         </mat-radio-group>
     </div>
+    <!-- <mat-divider></mat-divider> -->
+
+    <div class="filters__filter">
+        <app-languages-filter
+            *ngFor="let language of languages"
+            [language]="language"
+            (currentLanguage)="onCurrentLanguage($event)"
+            >
+
+        </app-languages-filter>
+    </div>
 </section>

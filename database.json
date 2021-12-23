@@ -537,6 +537,66 @@
                 "thumbnail":"https://randomuser.me/api/portraits/thumb/women/34.jpg"
             },
         "nat":"CA"
+        },
+
+        {
+            "userId": 10,
+            "gender":"male",
+            "status": "married",
+            "name":{
+                "title":"Mr",
+                "first":"Alain",
+                "last":"Nieuwland"
+            },
+            "location":{
+                "street":{
+                    "number":9789,
+                    "name":"Burgemeester Vissersstraat"
+                },
+                "city":"Numansdorp",
+                "state":"Friesland",
+                "country":"Netherlands",
+                "postcode":69460,
+                "coordinates":{
+                    "latitude":"38.2366",
+                    "longitude":"-160.8498"
+                },
+                "timezone":{
+                    "offset":"+3:30",
+                    "description":"Tehran"
+                }
+            },
+            "email":"alain.nieuwland@example.com",
+            "language": ["Spanish", "Portuguese"],
+            "login":{
+                "uuid":"089f493a-e6de-4130-9809-8c0efde5a963",
+                "username":"beautifulmouse564",
+                "password":"kodiak",
+                "salt":"5A25emdf",
+                "md5":"63ccbeb6ea3d2076993a8ea28fbbd908",
+                "sha1":"4ad2b095741280a727d56697dac341f802883493",
+                "sha256":"9ea347a5fa74bfca63502770ab6e29234adac7aac15afda8333f56853cae017e"
+            },
+            "dob":{
+                "date":"1986-07-25T20:50:52.882Z",
+                "age":35
+            },
+            "registered":{
+                "date":"2003-03-12T21:40:20.015Z",
+                "age":18
+            },
+            "phone":"(989)-365-4108",
+            "cell":"(275)-425-3458",
+            "id":{
+                "name":"BSN",
+                "value":"67332592"
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/men/90.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/men/90.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/90.jpg"
+            },
+            "nat":"NL"
         }
     ]
 }
