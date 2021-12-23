@@ -73,6 +73,5 @@ export class HomeComponent implements OnInit {
 
   public onCurrentLanguage(selectedLanguage: string) {
     this.filterUserLanguage = selectedLanguage
-    console.log(this.filterUserLanguage)
   }
 }

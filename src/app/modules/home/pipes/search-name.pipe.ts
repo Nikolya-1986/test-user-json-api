@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { UserDTO } from 'src/app/interfaces/user.interface';
+
+import { UserDTO } from '../../../interfaces/user.interface';
 
 @Pipe({
   name: 'searchName'

@@ -13,6 +13,7 @@ import { FilterNamePipe } from './pipes/filter-name.pipe';
 import { FilterGenderPipe } from './pipes/filter-gender.pipe';
 import { FilterStatusPipe } from './pipes/filter-status.pipe';
 import { LanguagesFilterComponent } from './components/languages-filter/languages-filter.component';
+import { FilterLaguagePipe } from './pipes/filter-laguage.pipe';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { LanguagesFilterComponent } from './components/languages-filter/language
     FilterNamePipe,
     FilterGenderPipe,
     FilterStatusPipe,
-    LanguagesFilterComponent
+    LanguagesFilterComponent,
+    FilterLaguagePipe
   ],
   imports: [
     CommonModule,
