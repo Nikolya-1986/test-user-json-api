@@ -22,11 +22,11 @@ import { FilterLaguagePipe } from './pipes/filter-laguage.pipe';
     UsersCardsComponent,
     UserItemComponent,
     UsersFiltersComponent,
+    LanguagesFilterComponent,
     SearchNamePipe,
     FilterNamePipe,
     FilterGenderPipe,
     FilterStatusPipe,
-    LanguagesFilterComponent,
     FilterLaguagePipe
   ],
   imports: [

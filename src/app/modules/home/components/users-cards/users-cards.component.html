@@ -16,12 +16,12 @@
                 | filterGender: filterUserGender
                 | filterStatus: fiterUserStatus
                 | filterName: filterUserName
-                | filterLaguage: filterUserLanguage
-                
-            ; let ind = index; let count = count; trackBy: trackByFn"
+                | filterLaguage: filterUserLanguage;
+                let ind = index; let count = count; trackBy: trackByFn"
             >
             <app-user-item
                 [user]="user"
+                (detailCurrentUser)="onDetailCurrentUser($event)"
                 >
                 <p #contentText> 
                     user {{ ind + 1 }} from {{ count }}

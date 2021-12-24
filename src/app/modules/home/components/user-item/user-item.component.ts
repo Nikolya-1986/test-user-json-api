@@ -1,6 +1,6 @@
-import { AfterContentInit, Component, ContentChild, ElementRef, Input, Renderer2 } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
-import { UserDTO } from 'src/app/interfaces/user.interface';
+import { UserDTO, UsersDTO } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-user-item',
@@ -11,6 +11,7 @@ export class UserItemComponent implements AfterContentInit {
 
   @ContentChild('contentText') private contentTextElementRef!: ElementRef;
   @Input() public user!: UserDTO;
+  @Output() public detailCurrentUser = new EventEmitter<number>();
   
   constructor(
     private renderor: Renderer2,
@@ -21,5 +22,9 @@ export class UserItemComponent implements AfterContentInit {
     this.renderor.setStyle(this.contentTextElementRef.nativeElement,  "color","var(--primary-color-1)");
     this.renderor.setStyle(this.contentTextElementRef.nativeElement, "text-align","end");
   };
+
+  public getailUser():void {
+    this.detailCurrentUser.emit(this.user.userId)
+  }
 
 }
