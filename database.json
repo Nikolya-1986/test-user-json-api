@@ -418,6 +418,241 @@
                 "thumbnail":"https://randomuser.me/api/portraits/thumb/women/0.jpg"
                 },
             "nat":"NZ"
+        },
+
+        {
+            "userId": 8,
+            "gender":"female",
+            "status": "married",
+            "name":{
+                "title":"Ms",
+                "first":"Beritiana",
+                "last":"Nogueira"
+            },
+            "location":{
+                "street":{
+                    "number":8727,
+                    "name":"Rua Bela Vista"
+                },
+                "city":"Lages",
+                "state":"Alagoas",
+                "country":"Brazil",
+                "postcode":94035,
+                "coordinates":{
+                    "latitude":"-77.7540",
+                    "longitude":"44.9635"
+                },"timezone":{
+                    "offset":"-9:00",
+                    "description":"Alaska"
+                }
+            },
+            "email":"beritiana.nogueira@example.com",
+            "language": ["English", "French"],
+            "login":{
+                "uuid":"1ac1d270-e94a-45bd-85a4-5b19ea1323c8",
+                "username":"crazyfrog729",
+                "password":"passport",
+                "salt":"JrNvS1sv",
+                "md5":"1e929928b180f8c4b458c8eedcb0ff3c",
+                "sha1":"3d83f02a33cca38c16de93115e5baceaf113bed7",
+                "sha256":"2d382c03b23260c1c4f1ffa4f822212ba73e1f82d9c0ff946e67317a3f6c9810"
+            },
+            "dob":{
+                "date":"1951-04-18T17:52:07.406Z",
+                "age":70
+            },
+            "registered":{
+                "date":"2012-06-23T14:48:14.285Z",
+                "age":9
+            },
+            "phone":"(60) 2127-5232",
+            "cell":"(02) 4337-6635",
+            "id":{
+                "name":"",
+                "value":null
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/women/84.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/women/84.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/84.jpg"
+            },
+            "nat":"BR"
+        },
+
+        {
+            "userId": 9,
+            "gender":"female",
+            "status": "divorced",
+            "name":{
+                "title":"Mrs",
+                "first":"Jeanne",
+                "last":"Pelletier"
+            },
+            "location":{
+                "street":{
+                    "number":8984,
+                    "name":"Queen St"
+                },
+                "city":"Trout Lake",
+                "state":"Newfoundland and Labrador",
+                "country":"Canada",
+                "postcode":"O5N 1X0",
+                "coordinates":{
+                    "latitude":"-62.9076",
+                    "longitude":"116.7479"
+                },
+                "timezone":{
+                    "offset":"-10:00",
+                    "description":"Hawaii"
+                }
+            },
+            "email":"jeanne.pelletier@example.com",
+            "language": ["Hebrew", "English"],
+            "login":{
+                "uuid":"9c81ece4-a4cf-4632-b899-596c521fb6ea",
+                "username":"organicfrog651",
+                "password":"megan1",
+                "salt":"qX8znj7F",
+                "md5":"05b1dc690f6b19edf607b51ef90cf4c4",
+                "sha1":"78d8e40c0797bafa2412fd0f663b8fe72bbd6742",
+                "sha256":"ac2d8125c4e73720f80e1b05a2fe78e3267503922d21c6c3cb1cfd0c63a69b74"
+            },
+            "dob":{
+                "date":"1965-08-06T01:48:18.006Z",
+                "age":56
+            },
+            "registered":{
+                "date":"2015-11-21T08:52:58.302Z",
+                "age":6
+            },
+            "phone":"109-748-6332",
+            "cell":"277-907-6376",
+            "id":{
+                "name":"",
+                "value":null
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/women/34.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/women/34.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/34.jpg"
+            },
+        "nat":"CA"
+        },
+
+        {
+            "userId": 10,
+            "gender":"male",
+            "status": "married",
+            "name":{
+                "title":"Mr",
+                "first":"Alain",
+                "last":"Nieuwland"
+            },
+            "location":{
+                "street":{
+                    "number":9789,
+                    "name":"Burgemeester Vissersstraat"
+                },
+                "city":"Numansdorp",
+                "state":"Friesland",
+                "country":"Netherlands",
+                "postcode":69460,
+                "coordinates":{
+                    "latitude":"38.2366",
+                    "longitude":"-160.8498"
+                },
+                "timezone":{
+                    "offset":"+3:30",
+                    "description":"Tehran"
+                }
+            },
+            "email":"alain.nieuwland@example.com",
+            "language": ["Spanish", "Portuguese"],
+            "login":{
+                "uuid":"089f493a-e6de-4130-9809-8c0efde5a963",
+                "username":"beautifulmouse564",
+                "password":"kodiak",
+                "salt":"5A25emdf",
+                "md5":"63ccbeb6ea3d2076993a8ea28fbbd908",
+                "sha1":"4ad2b095741280a727d56697dac341f802883493",
+                "sha256":"9ea347a5fa74bfca63502770ab6e29234adac7aac15afda8333f56853cae017e"
+            },
+            "dob":{
+                "date":"1986-07-25T20:50:52.882Z",
+                "age":35
+            },
+            "registered":{
+                "date":"2003-03-12T21:40:20.015Z",
+                "age":18
+            },
+            "phone":"(989)-365-4108",
+            "cell":"(275)-425-3458",
+            "id":{
+                "name":"BSN",
+                "value":"67332592"
+            },
+            "picture":{
+                "large":"https://randomuser.me/api/portraits/men/90.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/men/90.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/90.jpg"
+            },
+            "nat":"NL"
+        },
+
+        {
+            "userId": 11,
+            "gender":"female",
+            "status": "single",
+            "name":{
+                "title":"Ms",
+                "first":"Emilia",
+                "last":"Ahola"
+            },
+            "location":{
+                "street":{
+                    "number":6325,
+                    "name":"Reijolankatu"
+                },
+                "city":"Pelkosenniemi",
+                "state":"Central Ostrobothnia",
+                "country":"Finland",
+                "postcode":98995,
+                "coordinates":{
+                    "latitude":"-8.7795",
+                    "longitude":"157.7161"
+                },"timezone":{
+                    "offset":"-12:00",
+                    "description":"Eniwetok, Kwajalein"
+                }
+            },
+            "email":"emilia.ahola@example.com",
+            "language": ["Spanish", "Italian"],
+            "login":{
+                "uuid":"30a0ab91-fe2f-4625-a278-51bfe5e133f5",
+                "username":"orangefrog202",
+                "password":"jackjack",
+                "salt":"4i9Ahwij",
+                "md5":"2d3140106efaf8310039d8f280339034",
+                "sha1":"781948bbda31f06ac91000f291210afefbfe62a3",
+                "sha256":"0334f279741381c54bc9f9df32ba62812cfdab8d78e337f021616743d736c6a4"
+            },"dob":{
+                "date":"1984-06-06T06:08:51.588Z",
+                "age":37
+            },"registered":{
+                "date":"2019-09-17T14:33:05.745Z",
+                "age":2
+            },
+            "phone":"04-902-293",
+            "cell":"040-655-54-90",
+            "id":{
+                "name":"HETU",
+                "value":"NaNNA474undefined"
+            },"picture":{
+                "large":"https://randomuser.me/api/portraits/women/88.jpg",
+                "medium":"https://randomuser.me/api/portraits/med/women/88.jpg",
+                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/88.jpg"
+            },
+            "nat":"FI"
         }
     ]
 }

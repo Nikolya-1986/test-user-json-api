@@ -1,7 +1,31 @@
-<section class="home__container">
+<section class="home__container home">
+    <app-users-filters
+        [searchUserName]="searchUserName"
+        [filterUserName]="filterUserName"
+        [sortAlfabetParamets]="sortAlfabetParamets"
+        [filterUserGender]="filterUserGender"
+        [gender]="gender"
+        [fiterUserStatus]="fiterUserStatus"
+        [status]="status"
+        [languages]="languages"
+        [activelanguage]="activelanguage"
+        (currentSearchName)="onCurrentSearchName($event)"
+        (currentAlfabetValue)="onCurrentAlfabetValue($event)"
+        (currentGender)="onCurrentGender($event)"
+        (currentSratus)="onCurrentSratus($event)"
+        (currentLanguage)="onCurrentLanguage($event)"
+        >
+
+    </app-users-filters> 
+    
     <app-users-cards
         [users]="users$ | async"
         [error]="error$ | async"
+        [searchUserName]="searchUserName"
+        [filterUserName]="filterUserName"
+        [filterUserGender]="filterUserGender"
+        [fiterUserStatus]="fiterUserStatus"
+        [filterUserLanguage]="filterUserLanguage"
         >
         <img 
             #contentImage
@@ -9,5 +33,5 @@
             src="assets/images/ZC9Y.gif"
         />
     </app-users-cards>
-
+ 
 </section>

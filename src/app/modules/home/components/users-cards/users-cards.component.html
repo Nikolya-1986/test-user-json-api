@@ -1,22 +1,33 @@
 <article class="cards__conteiner cards">
     <ng-content select="img"></ng-content>
     
-    <div *ngIf="error else showCards">
+    <ng-container *ngIf="error else showCards">
         <strong>
             Error from backend: {{ error }}
         </strong>
         <p>
             Users list is empty
         </p>
-    </div>
+    </ng-container>
     <ng-template #showCards>
-        <app-user-item
-            *ngFor="let user of users; let ind = index; let count = count; trackBy: trackByFn"
-            [user]="user"
+        <ng-container 
+            *ngFor="let user of users 
+                | searchName: searchUserName
+                | filterGender: filterUserGender
+                | filterStatus: fiterUserStatus
+                | filterName: filterUserName
+                | filterLaguage: filterUserLanguage
+                
+            ; let ind = index; let count = count; trackBy: trackByFn"
             >
-            <p #contentText>
-                user {{ ind + 1 }} from {{ count }}
-            </p>
-        </app-user-item>
+            <app-user-item
+                [user]="user"
+                >
+                <p #contentText> 
+                    user {{ ind + 1 }} from {{ count }}
+                </p>
+            </app-user-item>
+        </ng-container>
     </ng-template>
+
 </article>

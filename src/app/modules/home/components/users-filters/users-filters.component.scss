@@ -1,0 +1,19 @@
+.filters {
+
+    &__container {
+        margin-right: 1rem;
+    }
+
+    &__filter {
+        margin-bottom: .6rem;
+
+        .example-radio-group {
+            display: flex;
+            flex-direction: column;
+        }
+          
+        .example-radio-button {
+            margin: .2rem .2rem .2rem 0;
+        }
+    }
+} 

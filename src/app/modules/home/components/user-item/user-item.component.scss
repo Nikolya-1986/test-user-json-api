@@ -1,13 +1,17 @@
-:host {
+// :host {
+//     border: 2px solid var(--primary-color-2);
+//     width: 295px;
+//     margin: 5px;
+//     cursor: pointer;
+// }
+
+.user {
     border: 2px solid var(--primary-color-2);
     width: 295px;
     margin: 5px;
     cursor: pointer;
-}
 
-.user {
-
-    &__head {
+    &__head { 
 
         img {
             width: 100%;

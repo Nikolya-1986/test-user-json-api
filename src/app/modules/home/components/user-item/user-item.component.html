@@ -1,4 +1,4 @@
-<ng-container class="user__conteiner user">
+<div class="user__conteiner user">
     <div class="user__head">
         <img 
             [src]="user.picture.large" 
@@ -11,16 +11,13 @@
                 First name: {{ user.name.first }}
             </li>
             <li>
-                Last name: {{ user.name.last }}
+                Gender: {{ user.gender }}
             </li>
             <li>
                 Status: {{ user.status }}
             </li>
             <li>
-                Species: {{ user.gender }}
-            </li>
-            <li>
-                Email: {{ user.email }}
+                Languages: {{ user.language }}
             </li>
             <li>
                 City: {{ user.location.city }}
@@ -28,4 +25,4 @@
         </ul>
         <ng-content select="p"></ng-content>
     </div>
-</ng-container>
+</div>

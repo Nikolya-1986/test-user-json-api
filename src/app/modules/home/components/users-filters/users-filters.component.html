@@ -1,0 +1,98 @@
+<section class="filters__container filters">
+    <div class="filters__filter"> 
+        <label 
+            class="filters__label label" 
+            for="name-search"
+            >
+            Search user by name
+        </label>
+        <input
+            id="name-search"
+            type="text"
+            placeholder="Enter name for search"
+            [(ngModel)]="searchUserName"
+            (input)="inputCurrentName()"
+            #focusInput
+        /> 
+    </div>
+
+    <div class="filters__filter">
+        <label
+            class="filters__label label" 
+            for="name-sort"
+            >
+            Sort users by name
+        </label>
+        <select
+            id="name-sort"
+            [(ngModel)]="filterUserName"
+            (change)="selectAlfabetSort()"
+            >
+            <option
+                *ngFor="let sortAlfabet of sortAlfabetParamets"
+                [value]="sortAlfabet"
+                >
+                {{ sortAlfabet }}
+            </option>
+        </select>
+    </div>
+
+    <div class="filters__filter">
+        <label
+            class="filters__label label"
+            for="gender-sort"
+            >
+            Sort users by gender
+        </label>
+        <select
+            id="gender-sort"
+            [(ngModel)]="filterUserGender"
+            (change)="selectGenderSort()"
+            >
+            <option
+                *ngFor="let item of gender"
+                [value]="item"
+                >
+                {{ item }}
+            </option>
+        </select>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="filters__filter">
+        <label id="example-radio-group-label">
+            Sort users by status
+        </label>
+        <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [(ngModel)]="fiterUserStatus"
+            (change)="selectStatusSort()"
+            >
+            <mat-radio-button 
+                class="example-radio-button" 
+                *ngFor="let item of status" 
+                [value]="item"
+                >
+                {{ item }}
+            </mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="filters__filter">
+        <p>
+            Sort users by languages
+        </p>
+        <app-languages-filter
+            *ngFor="let language of languages"
+            [language]="language"
+            [activelanguage]="activelanguage"
+            (currentLanguage)="onCurrentLanguage($event)"
+            >
+
+        </app-languages-filter>
+    </div>
+    <mat-divider></mat-divider>
+    
+</section>

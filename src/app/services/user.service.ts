@@ -29,7 +29,7 @@ export class UserService {
 
     public getUsers(): Observable<UserDTO[]> {
         return this.httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`).pipe(
-            tap(users => console.log("Users:", users)),
+            // tap(users => console.log("Users:", users)),
             retry(3),
             catchError(this.errorsBackend),
         )
