@@ -18,6 +18,7 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   @Input() public fiterUserStatus: Status = Status.all;
   @Input() public status!: Status[];
   @Input() public languages!: string[];
+  @Input() public activelanguage!: string;
   @Output() public currentSearchName = new EventEmitter<string>();
   @Output() public currentAlfabetValue = new EventEmitter<string>();
   @Output() public currentGender = new EventEmitter<string>();

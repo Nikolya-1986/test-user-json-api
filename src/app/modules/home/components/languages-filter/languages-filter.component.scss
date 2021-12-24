@@ -7,3 +7,7 @@ button {
 button:hover {
     cursor: pointer;
 }
+
+.active-button {
+    background-color: var(--primary-color-1);
+}

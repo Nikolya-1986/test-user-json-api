@@ -57,6 +57,7 @@
             </option>
         </select>
     </div>
+    <mat-divider></mat-divider>
 
     <div class="filters__filter">
         <label id="example-radio-group-label">
@@ -77,15 +78,21 @@
             </mat-radio-button>
         </mat-radio-group>
     </div>
-    <!-- <mat-divider></mat-divider> -->
+    <mat-divider></mat-divider>
 
     <div class="filters__filter">
+        <p>
+            Sort users by languages
+        </p>
         <app-languages-filter
             *ngFor="let language of languages"
             [language]="language"
+            [activelanguage]="activelanguage"
             (currentLanguage)="onCurrentLanguage($event)"
             >
 
         </app-languages-filter>
     </div>
+    <mat-divider></mat-divider>
+    
 </section>

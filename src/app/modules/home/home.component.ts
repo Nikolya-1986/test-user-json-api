@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map, Observable, reduce, Subject, takeUntil, tap } from 'rxjs';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../services/user.service';
 
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import * as userActions from '../../store/user/user.actions';
@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   public status: Status[] = [Status.all, Status.married, Status.single, Status.divorced];
   public destroy$: Subject<boolean> = new Subject();
   public languages!: string[];
+  public activelanguage!: string;
   public filterUserLanguage!: string;
 
   constructor(
@@ -48,10 +49,14 @@ export class HomeComponent implements OnInit {
       map((response) => {
         const users = response;
         const arraysLanguages = users.map((languages) => languages.language);
-        this.languages = [...new Set(arraysLanguages.reduce((acc, item) => acc.concat(item)))]
+        const allLanguages = 'All languages';
+        this.languages = [...new Set(arraysLanguages.reduce((acc, item) => acc.concat(item)))];
+        this.languages = [allLanguages, ...this.languages];
       })
     )
-    .subscribe(() => console.log(this.languages))
+    .subscribe(() => {
+      this.activelanguage = this.languages[0]
+    })
     return this.languages;
   };
 
@@ -72,6 +77,7 @@ export class HomeComponent implements OnInit {
   };
 
   public onCurrentLanguage(selectedLanguage: string) {
-    this.filterUserLanguage = selectedLanguage
+    this.activelanguage = selectedLanguage;
+    this.filterUserLanguage = this.activelanguage;
   }
 }
