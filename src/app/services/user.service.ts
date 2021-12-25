@@ -34,8 +34,4 @@ export class UserService {
             catchError(this.errorsBackend),
         )
     };
-
-    public getUser(id: number): Observable<UserDTO> {
-        return this.httpClient.get<UserDTO>(`${this.BASE_URL}/results/${id}`)
-    }
 }

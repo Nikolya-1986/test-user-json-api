@@ -1,24 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 
 import { UserDTO } from '../../interfaces/user.interface';
-import { UserService } from 'src/app/services/user.service';
+import { select, Store } from '@ngrx/store';
+import AppUserState from '../../store/user/user.state';
+import * as userSelectors from '../../store/user/user.selectors';
 
 @Component({
   selector: 'app-description',
   templateUrl: './description.component.html',
   styleUrls: ['./description.component.scss']
 })
-export class DescriptionComponent implements OnInit, OnDestroy {
+export class DescriptionComponent implements OnInit {
 
-  public userDetail$!: UserDTO;
-  private userId!: number;
-  private userSubscribe!: Subscription;
+  public userDetail$!: Observable<UserDTO | any>
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private userService: UserService
+    private store: Store<AppUserState>,
   ) { }
 
   public ngOnInit(): void {
@@ -26,24 +26,11 @@ export class DescriptionComponent implements OnInit, OnDestroy {
   };
 
   public getUserDetail(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.userId  = params['id'];
-      const detail = this.userService.getUser(this.userId);
-      this.userSubscribe = detail.subscribe((res) => {
-          if(res !== undefined) {
-              this.userDetail$ = res;
-          } else {
-            (error: any) => {
-              console.log(error)
-            }
-          }
-        }
-      )
-    });
-  };
-
-  public ngOnDestroy(): void {
-    const userUnSubscribe = this.userSubscribe.unsubscribe()
+    this.userDetail$ = this.activatedRoute.params.pipe(
+      map((userId: Params) => Number(userId['id'])),
+      switchMap((id: number) => this.store.pipe(select(userSelectors.getUserSelector(id)))),
+      tap(user => console.log(user))
+    )
   };
 
 }

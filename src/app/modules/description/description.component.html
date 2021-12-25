@@ -1,71 +1,16 @@
-<button 
-    routerLink="/home"
-    mat-raised-button color="accent"
-    >
-    Back users
-</button>
-<section 
-    class="user__detail user"
-    *ngIf="userDetail$ as userDetail"
-    >
-    <h2>
-        Detail inform about user
-    </h2>
-    <div class="user__item">
-        <div class="user__image">
-            <img [src]="userDetail.picture.large">
-        </div>
-        
-        <ul>
-            <li>
-                Appeal: {{ userDetail.name.title }}
-            </li>
-            <li>
-                First name: {{ userDetail.name.first }}
-            </li>
-            <li>
-                Last name: {{ userDetail.name.last }}
-            </li>
-            <li>
-                Gender: {{ userDetail.gender }}
-            </li>
-            <li>
-                Status: {{ userDetail.status }}
-            </li>
-            <li>
-                Country: {{ userDetail.location.country }}
-            </li>
-            <li>
-                City: {{ userDetail.location.city }}
-            </li>
-            <li>
-                Date of birthday: {{ userDetail.dob.date }}
-            </li>
-            <li>
-                Street name: {{ userDetail.location.street.name }}
-            </li>
-            <li>
-                Street number: {{ userDetail.location.street.number }}
-            </li>
-            <li>
-                Postcode: {{ userDetail.location.postcode }}
-            </li>
-            <li>
-                Email: {{ userDetail.email }}
-            </li>
-            <li>
-                Languages: {{ userDetail.language }}
-            </li>
-            <li>
-                Date registered: {{ userDetail.registered.date }}
-            </li>
-            <li>
-                Phone: {{ userDetail.phone }}
-            </li>
-            <li>
-                Nationality: {{ userDetail.nat }}
-            </li>
-        </ul>
-    </div>
-
-</section>
+<ng-container *ngIf="userDetail$ | async as userDetail">
+    <app-details
+        [userDetail]="userDetail"
+        >
+        <h2 #contentHead>
+            Detail information about user
+        </h2>
+        <button 
+            routerLink="/home"
+            mat-raised-button color="accent"
+            #contentButton
+            >
+            Back users
+        </button>
+    </app-details>
+</ng-container>
