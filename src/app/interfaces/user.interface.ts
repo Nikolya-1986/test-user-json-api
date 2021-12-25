@@ -3,7 +3,7 @@ export interface UsersDTO {
 };
 
 export interface UserDTO {
-    userId: number,
+    id: number,
     gender: Gender,
     status: Status,
     name: Name,
@@ -15,7 +15,6 @@ export interface UserDTO {
     registered: Registered,
     phone: string,
     cell: string,
-    id: Id,
     picture: Picture,
     nat: string,
 };
@@ -82,11 +81,6 @@ export interface Dob {
 export interface Registered {
     date: string;
     age: number,
-};
-
-export interface Id {
-    name: string,
-    value: string,
 };
 
 export interface Picture {

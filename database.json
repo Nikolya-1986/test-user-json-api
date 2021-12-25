@@ -1,7 +1,7 @@
 {
     "results":[
         {
-            "userId": 1,
+            "id": 1,
             "gender":"male",
             "status": "married",
             "name": {
@@ -48,10 +48,6 @@
             },
             "phone":"021-577-1124",
             "cell":"081-248-8151",
-            "id": {
-                "name":"PPS",
-                "value":"9753700T"
-            },
             "picture": {
                 "large":"https://randomuser.me/api/portraits/men/4.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/men/4.jpg",
@@ -61,7 +57,7 @@
         },
         
         {
-            "userId": 2,
+            "id": 2,
             "gender":"female",
             "status": "divorced",
             "name": {
@@ -108,10 +104,6 @@
             },
             "phone":"643-180-9717",
             "cell":"118-115-3471",
-            "id":{
-                "name":"",
-                "value":null
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/women/95.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/women/95.jpg",
@@ -121,7 +113,7 @@
         },
         
         {
-            "userId": 3,
+            "id": 3,
             "gender":"male",
             "status": "single",
             "name":{
@@ -168,10 +160,6 @@
             },
             "phone":"066-45841454",
             "cell":"0943-534-7017",
-            "id":{
-                "name":"",
-                "value":null
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/men/42.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/men/42.jpg",
@@ -181,7 +169,7 @@
         },
         
         {
-            "userId": 4,
+            "id": 4,
             "gender":"female",
             "status": "married",
             "name":{
@@ -228,10 +216,6 @@
             },
             "phone":"07-7164-7941",
             "cell":"0484-790-512",
-            "id":{
-                "name":"TFN",
-                "value":"269256381"
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/women/59.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/women/59.jpg",
@@ -241,7 +225,7 @@
         },
         
         {
-            "userId": 5,
+            "id": 5,
             "gender":"female",
             "status": "divorced",
             "name":{
@@ -288,10 +272,6 @@
             },
             "phone":"31456026",
             "cell":"94194311",
-            "id":{
-                "name":"FN",
-                "value":"07098221446"
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/women/14.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/women/14.jpg",
@@ -301,7 +281,7 @@
         },
 
         {
-            "userId": 6,
+            "id": 6,
             "gender":"male",
             "status": "married",
             "name":{
@@ -348,10 +328,6 @@
             },
             "phone":"41938477",
             "cell":"30557031",
-            "id":{
-                "name":"CPR",
-                "value":"110947-4975"
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/men/14.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/men/14.jpg",
@@ -361,7 +337,7 @@
         },
 
         {
-            "userId": 7,
+            "id": 7,
             "gender":"female",
             "status": "single",
             "name":{
@@ -408,10 +384,6 @@
             },
             "phone":"(477)-072-4725",
             "cell":"(527)-340-5969",
-            "id":{
-                "name":"",
-                "value":null
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/women/0.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/women/0.jpg",
@@ -421,7 +393,7 @@
         },
 
         {
-            "userId": 8,
+            "id": 8,
             "gender":"female",
             "status": "married",
             "name":{
@@ -467,10 +439,6 @@
             },
             "phone":"(60) 2127-5232",
             "cell":"(02) 4337-6635",
-            "id":{
-                "name":"",
-                "value":null
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/women/84.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/women/84.jpg",
@@ -480,7 +448,7 @@
         },
 
         {
-            "userId": 9,
+            "id": 9,
             "gender":"female",
             "status": "divorced",
             "name":{
@@ -527,10 +495,6 @@
             },
             "phone":"109-748-6332",
             "cell":"277-907-6376",
-            "id":{
-                "name":"",
-                "value":null
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/women/34.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/women/34.jpg",
@@ -540,7 +504,7 @@
         },
 
         {
-            "userId": 10,
+            "id": 10,
             "gender":"male",
             "status": "married",
             "name":{
@@ -587,10 +551,6 @@
             },
             "phone":"(989)-365-4108",
             "cell":"(275)-425-3458",
-            "id":{
-                "name":"BSN",
-                "value":"67332592"
-            },
             "picture":{
                 "large":"https://randomuser.me/api/portraits/men/90.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/men/90.jpg",
@@ -600,7 +560,7 @@
         },
 
         {
-            "userId": 11,
+            "id": 11,
             "gender":"female",
             "status": "single",
             "name":{
@@ -644,10 +604,7 @@
             },
             "phone":"04-902-293",
             "cell":"040-655-54-90",
-            "id":{
-                "name":"HETU",
-                "value":"NaNNA474undefined"
-            },"picture":{
+            "picture":{
                 "large":"https://randomuser.me/api/portraits/women/88.jpg",
                 "medium":"https://randomuser.me/api/portraits/med/women/88.jpg",
                 "thumbnail":"https://randomuser.me/api/portraits/thumb/women/88.jpg"

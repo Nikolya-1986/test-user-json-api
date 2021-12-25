@@ -24,7 +24,7 @@ export class UserItemComponent implements AfterContentInit {
   };
 
   public getailUser():void {
-    this.detailCurrentUser.emit(this.user.userId)
+    this.detailCurrentUser.emit(this.user.id)
   }
 
 }

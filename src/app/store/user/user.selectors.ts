@@ -14,6 +14,11 @@ export const getUsersSelector = createSelector (
     (users: UserState) => users.usersDTO
 );
 
+export const getUserSelector = (userId: number) => createSelector (
+    getUserFeatureSelector,
+    (users: UserState) => users.usersDTO.filter(user => user.id === userId)
+);
+
 export const getFailSelector = createSelector (
     getUserFeatureSelector,
     (users: UserState) => users.errorMessage
