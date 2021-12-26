@@ -10,6 +10,7 @@ import { UserDTO } from '../../../../interfaces/user.interface';
 export class DetailsComponent implements OnInit {
 
   @Input() userDetail!: UserDTO;
+  @Input() checked!: boolean;
   
   constructor() { }
 

@@ -15,6 +15,7 @@ import * as userSelectors from '../../store/user/user.selectors';
 export class DescriptionComponent implements OnInit {
 
   public userDetail$!: Observable<UserDTO | any>
+  public checked: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,

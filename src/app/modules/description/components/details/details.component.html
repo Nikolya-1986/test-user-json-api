@@ -2,61 +2,117 @@
     <ng-content select="h2"></ng-content>
 
     <div class="details__item">
-        <div class="details__image">
+        <div class="details__slider">
             <img [src]="userDetail.picture.large">
         </div>
-        
-        <ul>
-            <li>
-                Appeal: {{ userDetail.name.title }}
-            </li>
-            <li>
-                First name: {{ userDetail.name.first }}
-            </li>
-            <li>
-                Last name: {{ userDetail.name.last }}
-            </li>
-            <li>
-                Gender: {{ userDetail.gender }}
-            </li>
-            <li>
-                Status: {{ userDetail.status }}
-            </li>
-            <li>
-                Country: {{ userDetail.location.country }}
-            </li>
-            <li>
-                City: {{ userDetail.location.city }}
-            </li>
-            <li>
-                Date of birthday: {{ userDetail.dob.date | formatDate }}
-            </li>
-            <li>
-                Street name: {{ userDetail.location.street.name }}
-            </li>
-            <li>
-                Street number: {{ userDetail.location.street.number }}
-            </li>
-            <li>
-                Postcode: {{ userDetail.location.postcode }}
-            </li>
-            <li>
-                Email: {{ userDetail.email }}
-            </li>
-            <li>
-                Languages: {{ userDetail.language }}
-            </li>
-            <li>
-                Date registered: {{ userDetail.registered.date | formatDate }}
-            </li>
-            <li>
-                Phone: {{ userDetail.phone }}
-            </li>
-            <li>
-                Nationality: {{ userDetail.nat }}
-            </li>
-        </ul>
-    </div>
+   
+        <div class="details__choice">
+            <ng-content select="button"></ng-content>
+            <ng-content select="mat-checkbox"></ng-content>
+        </div>
 
-    <ng-content select="button"></ng-content>
+        <table class="details__table">
+            <tr>
+                <th>
+                    Appeal
+                </th>
+                <th>
+                    First name
+                </th>
+                <th>
+                    Last name
+                </th>
+                <th>
+                    Date of birthday
+                </th>
+                <th>
+                    Gender
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Country
+                </th>
+                <th>
+                    City
+                </th>
+                <th>
+                    Street name
+                </th>
+                <th>
+                    Street number
+                </th>
+                <th>
+                    Postcode
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Languages
+                </th>
+                <th>
+                    Date registered
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Nationality
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    {{ userDetail.name.title }}
+                </td>
+                <td>
+                    {{ userDetail.name.first }}
+                </td>
+                <td>
+                    {{ userDetail.name.last }}
+                </td>
+                <td>
+                    {{ userDetail.dob.date | formatDate }}
+                </td>
+                <td>
+                    {{ userDetail.gender }}
+                </td>
+                <td>
+                    {{ userDetail.status }}
+                </td>
+                <td>
+                    {{ userDetail.location.country }}
+                </td>
+                <td>
+                    {{ userDetail.location.city }}
+                </td>
+                <td>
+                    {{ userDetail.location.street.name }}
+                </td>
+                <td>
+                    {{ userDetail.location.street.number }}
+                </td>
+                <td>
+                    {{ userDetail.location.postcode }}
+                </td>
+                <td>
+                    {{ userDetail.email }}
+                </td>
+                <td>
+                    {{ userDetail.language }}
+                </td>
+                <td>
+                    {{ userDetail.registered.date | formatDate }}
+                </td>
+                <td>
+                    {{ userDetail.phone }}
+                </td>
+                <td>
+                    {{ userDetail.nat }}
+                </td>
+            </tr>
+    
+        </table>
+    </div>
 </div>
