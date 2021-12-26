@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Action } from "@ngrx/store";
+import { Action, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { map, catchError, mergeMap } from 'rxjs/operators';
+import { map, catchError, mergeMap, withLatestFrom } from 'rxjs/operators';
 
-import { UserService } from "src/app/services/user.service";
+import AppUserState from "./user.state";
+import { UserService } from "../../services/user.service";
 import * as userActions from "./user.actions";
+import * as userSelectors from './user.selectors';
 
 @Injectable()
 export class UsersEffects {
@@ -15,18 +17,26 @@ export class UsersEffects {
             ofType(userActions.UsersActionsType.LOAD_USERS_REQUEST),
             mergeMap(() => this.userService.getUsers()
                 .pipe(
-                    map((usersSuccess) => {
-                        console.log("Users Success:", usersSuccess);
-                        return (userActions.loadUsersSuccess({users: usersSuccess}))
+                    withLatestFrom(this.store.select(userSelectors.getUsersSelector)),
+                    map(([newUsers, currentUsers]) => {
+                        if(currentUsers.length < 1){
+                            return (userActions.loadUsersSuccess({users: newUsers}))
+                        }else {
+                            return {
+                                type: 'Empty Action'
+                            }
+                        }
                     }),
                     catchError((error) => of(userActions.loadUsersFail(error)))
                 )
             )
-        )
+        ),
+        { useEffectsErrorHandler: false }
     );
 
     constructor(
         private actions$: Actions,
         private userService: UserService,
+        private store: Store<AppUserState>
     ){ }
 } 

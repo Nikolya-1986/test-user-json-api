@@ -29,8 +29,7 @@
                 City: {{ userDetail.location.city }}
             </li>
             <li>
-                Date of birthday: {{ userDetail.dob.date }}
-                 <!-- City: {{ userDetail.location.city | formatData }} -->
+                Date of birthday: {{ userDetail.dob.date | formatDate }}
             </li>
             <li>
                 Street name: {{ userDetail.location.street.name }}
@@ -48,7 +47,7 @@
                 Languages: {{ userDetail.language }}
             </li>
             <li>
-                Date registered: {{ userDetail.registered.date }}
+                Date registered: {{ userDetail.registered.date | formatDate }}
             </li>
             <li>
                 Phone: {{ userDetail.phone }}

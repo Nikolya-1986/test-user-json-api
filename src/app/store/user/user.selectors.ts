@@ -11,12 +11,12 @@ export const getIsLoadingSelector = createSelector (
 
 export const getUsersSelector = createSelector (
     getUserFeatureSelector,
-    (state: UserState) => state.usersDTO
+    (state: UserState) => state.userDTO
 );
 
 export const getUserSelector = (userId: number) => createSelector (
     getUserFeatureSelector,
-    (state: UserState) => state.usersDTO.find(user => user.id === userId)
+    (state: UserState) => state.userDTO.find(user => user.id === userId)
 );
 
 export const getFailSelector = createSelector (

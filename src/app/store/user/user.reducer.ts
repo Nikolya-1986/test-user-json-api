@@ -5,13 +5,13 @@ import * as userActions from "./user.actions";
 import AppUserState from "./user.state";
 
 export interface UserState {
-    usersDTO: UserDTO[],
+    userDTO: UserDTO[],
     loadCouter: number,
     errorMessage: string
 };
 
 const initialstate: UserState = {
-    usersDTO: [],
+    userDTO: [],
     loadCouter: 0,
     errorMessage: ""
 };
@@ -31,7 +31,7 @@ export const userReduser = createReducer (
     })),
     on(userActions.loadUsersSuccess, (state, action) => ({
         ...state,
-        usersDTO: [...state.usersDTO, ...action.users]
+        userDTO: [...state.userDTO, ...action.users]
     })),
     on(userActions.loadUsersFail, (state, action) => ({
         ...state,
