@@ -7,12 +7,14 @@ import { DescriptionRoutingModule } from './description-routing.module';
 import { DetailsComponent } from './components/details/details.component';
 import { FormatDatePipe } from './pipes/format-date.pipe';
 import { MaterialExampleModule } from 'src/app/material-example.module';
+import { ShowTableDirective } from './directives/show-table.directive';
 
 @NgModule({
   declarations: [
     DescriptionComponent,
     DetailsComponent,
-    FormatDatePipe
+    FormatDatePipe,
+    ShowTableDirective
   ],
   imports: [
     CommonModule,

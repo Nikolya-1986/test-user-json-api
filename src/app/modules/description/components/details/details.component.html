@@ -11,108 +11,111 @@
             <ng-content select="mat-checkbox"></ng-content>
         </div>
 
-        <table class="details__table">
-            <tr>
-                <th>
-                    Appeal
-                </th>
-                <th>
-                    First name
-                </th>
-                <th>
-                    Last name
-                </th>
-                <th>
-                    Date of birthday
-                </th>
-                <th>
-                    Gender
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    Country
-                </th>
-                <th>
-                    City
-                </th>
-                <th>
-                    Street name
-                </th>
-                <th>
-                    Street number
-                </th>
-                <th>
-                    Postcode
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Languages
-                </th>
-                <th>
-                    Date registered
-                </th>
-                <th>
-                    Phone
-                </th>
-                <th>
-                    Nationality
-                </th>
-            </tr>
-            <tr>
-                <td>
-                    {{ userDetail.name.title }}
-                </td>
-                <td>
-                    {{ userDetail.name.first }}
-                </td>
-                <td>
-                    {{ userDetail.name.last }}
-                </td>
-                <td>
-                    {{ userDetail.dob.date | formatDate }}
-                </td>
-                <td>
-                    {{ userDetail.gender }}
-                </td>
-                <td>
-                    {{ userDetail.status }}
-                </td>
-                <td>
-                    {{ userDetail.location.country }}
-                </td>
-                <td>
-                    {{ userDetail.location.city }}
-                </td>
-                <td>
-                    {{ userDetail.location.street.name }}
-                </td>
-                <td>
-                    {{ userDetail.location.street.number }}
-                </td>
-                <td>
-                    {{ userDetail.location.postcode }}
-                </td>
-                <td>
-                    {{ userDetail.email }}
-                </td>
-                <td>
-                    {{ userDetail.language }}
-                </td>
-                <td>
-                    {{ userDetail.registered.date | formatDate }}
-                </td>
-                <td>
-                    {{ userDetail.phone }}
-                </td>
-                <td>
-                    {{ userDetail.nat }}
-                </td>
-            </tr>
-    
-        </table>
+        <ng-template [appShowTable]="checked">
+            <table class="details__table">
+                <tr>
+                    <th>
+                        Appeal
+                    </th>
+                    <th>
+                        First name
+                    </th>
+                    <th>
+                        Last name
+                    </th>
+                    <th>
+                        Date of birthday
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Country
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Street name
+                    </th>
+                    <th>
+                        Street number
+                    </th>
+                    <th>
+                        Postcode
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Languages
+                    </th>
+                    <th>
+                        Date registered
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Nationality
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        {{ userDetail.name.title }}
+                    </td>
+                    <td>
+                        {{ userDetail.name.first }}
+                    </td>
+                    <td>
+                        {{ userDetail.name.last }}
+                    </td>
+                    <td>
+                        {{ userDetail.dob.date | formatDate }}
+                    </td>
+                    <td>
+                        {{ userDetail.gender }}
+                    </td>
+                    <td>
+                        {{ userDetail.status }}
+                    </td>
+                    <td>
+                        {{ userDetail.location.country }}
+                    </td>
+                    <td>
+                        {{ userDetail.location.city }}
+                    </td>
+                    <td>
+                        {{ userDetail.location.street.name }}
+                    </td>
+                    <td>
+                        {{ userDetail.location.street.number }}
+                    </td>
+                    <td>
+                        {{ userDetail.location.postcode }}
+                    </td>
+                    <td>
+                        {{ userDetail.email }}
+                    </td>
+                    <td>
+                        {{ userDetail.language }}
+                    </td>
+                    <td>
+                        {{ userDetail.registered.date | formatDate }}
+                    </td>
+                    <td>
+                        {{ userDetail.phone }}
+                    </td>
+                    <td>
+                        {{ userDetail.nat }}
+                    </td>
+                </tr>
+        
+            </table>
+        </ng-template>
+ 
     </div>
 </div>

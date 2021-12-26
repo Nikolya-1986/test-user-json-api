@@ -1,6 +1,7 @@
 <ng-container *ngIf="userDetail$ | async as userDetail">
     <app-details
         [userDetail]="userDetail"
+        [checked]="checked"
         >
         <h2 #contentHead>
             Detail information about user
