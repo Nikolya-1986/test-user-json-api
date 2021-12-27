@@ -2,10 +2,29 @@
     <ng-content select="h2"></ng-content>
 
     <div class="details__item">
-        <div class="details__slider">
-            <img [src]="userDetail.picture.large">
+        <div class="details__images">
+            <ng-container *ngFor="let image of images; let i = index">
+                <img
+                    *ngIf="i === currentImage"
+                    [src]="image.large"
+                    class="slide"
+                >
+            </ng-container>
+        
+            <button 
+                class="control prev" 
+                (click)="previousClick()"
+                >
+                <span class="arrow left"></span>
+              </button>
+              <button 
+                class="control next" 
+                (click)="nextClick()"
+                >
+                <span class="arrow right"></span>
+              </button>
         </div>
-   
+ 
         <div class="details__choice">
             <ng-content select="button"></ng-content>
             <ng-content select="mat-checkbox"></ng-content>

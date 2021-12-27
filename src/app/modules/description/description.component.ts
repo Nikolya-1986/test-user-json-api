@@ -3,7 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 
-import { UserDTO } from '../../interfaces/user.interface';
+import { Picture, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userSelectors from '../../store/user/user.selectors';
 
@@ -17,6 +17,8 @@ export class DescriptionComponent implements OnInit {
   public userDetail$!: Observable<UserDTO | any>
   public showTable!: boolean;
   public showText!: boolean;
+  public currentImage: number = 0;
+  public images!: Picture[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -24,7 +26,8 @@ export class DescriptionComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.getUserDetail()
+    this.getUserDetail();
+    this.preloadImages()
   };
 
   public getUserDetail(): void {
@@ -34,5 +37,19 @@ export class DescriptionComponent implements OnInit {
       tap(user => console.log(user))
     )
   };
+
+  public preloadImages(): void {
+    for (const image of this.images) {
+      new Image().src = image.large;
+    }
+  };
+
+  public onPreviousImage(previous: number): void {
+    this.currentImage = previous < 0 ? this.images.length - 1 : previous 
+  };
+
+  public onNextImage(next: number): void {
+    this.currentImage = next === this.images.length ? 0 : next
+  }
 
 }

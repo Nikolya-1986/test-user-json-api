@@ -3,6 +3,10 @@
         [userDetail]="userDetail"
         [showTable]="showTable"
         [showText]="showText"
+        [currentImage]="currentImage"
+        [images]="images"
+        (previousImage)="onPreviousImage($event)"
+        (nextImage)="onNextImage($event)"
         >
         <h2 #contentHead>
             Detail information about user

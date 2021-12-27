@@ -18,7 +18,7 @@ import { CellColorSwitcherDirective } from './directives/cell-color-switcher.dir
     FormatDatePipe,
     IsVisibleOrNotDirective,
     CellColorDirective,
-    CellColorSwitcherDirective
+    CellColorSwitcherDirective,
   ],
   imports: [
     CommonModule,
