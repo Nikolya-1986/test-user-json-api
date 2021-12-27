@@ -7,14 +7,18 @@ import { DescriptionRoutingModule } from './description-routing.module';
 import { DetailsComponent } from './components/details/details.component';
 import { FormatDatePipe } from './pipes/format-date.pipe';
 import { MaterialExampleModule } from 'src/app/material-example.module';
-import { ShowTableDirective } from './directives/show-table.directive';
+import { IsVisibleOrNotDirective } from './directives/is-visible.directive';
+import { CellColorDirective } from './directives/cell-color.directive';
+import { CellColorSwitcherDirective } from './directives/cell-color-switcher.directive';
 
 @NgModule({
   declarations: [
     DescriptionComponent,
     DetailsComponent,
     FormatDatePipe,
-    ShowTableDirective
+    IsVisibleOrNotDirective,
+    CellColorDirective,
+    CellColorSwitcherDirective
   ],
   imports: [
     CommonModule,

@@ -11,7 +11,7 @@
             <ng-content select="mat-checkbox"></ng-content>
         </div>
 
-        <ng-template [appShowTable]="checked">
+        <ng-template [isVisibleOrNot]="showTable">
             <table class="details__table">
                 <tr>
                     <th>

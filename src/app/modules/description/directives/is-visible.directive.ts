@@ -1,20 +1,19 @@
 import { Directive, Input, TemplateRef, ViewContainerRef, SimpleChange } from '@angular/core';
-import { UserDTO } from 'src/app/interfaces/user.interface';
 
 @Directive({
-  selector: '[appShowTable]'
+  selector: '[isVisibleOrNot]'
 })
-export class ShowTableDirective {
+export class IsVisibleOrNotDirective {
 
   constructor(
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<Object>
   ) { }
 
-  @Input('appShowTable') result!: boolean;
+  @Input('isVisibleOrNot') expressionResult!: boolean;
 
   ngOnChanges(changes: {[property: string]: SimpleChange}){
-    let change = changes['result'];
+    let change = changes['expressionResult'];
 
     if(!change.isFirstChange()  && !change.currentValue) {
       this.viewContainerRef.clear();

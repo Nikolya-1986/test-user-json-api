@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { map, Observable, switchMap, tap } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 
 import { UserDTO } from '../../interfaces/user.interface';
-import { select, Store } from '@ngrx/store';
 import AppUserState from '../../store/user/user.state';
 import * as userSelectors from '../../store/user/user.selectors';
 
@@ -15,7 +15,8 @@ import * as userSelectors from '../../store/user/user.selectors';
 export class DescriptionComponent implements OnInit {
 
   public userDetail$!: Observable<UserDTO | any>
-  public checked!: boolean;
+  public showTable!: boolean;
+  public showText!: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
