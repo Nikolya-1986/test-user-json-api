@@ -28,5 +28,15 @@
                 {{ showText ? 'hide details' : 'show details' }}
             </span>
         </mat-checkbox>
+        <a 
+            class="referense-margin"
+            [routerLink]="['/description', userDetail.id, 'extra']"
+            mat-raised-button 
+            #contentReference
+            >
+            Extra
+        </a>
     </app-details>
+
+    <router-outlet></router-outlet>
 </ng-container>

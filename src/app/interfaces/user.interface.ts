@@ -38,6 +38,13 @@ export interface Name {
     last: string,
 };
 
+export enum Appeal {
+    Mr = 'Mr',
+    Ms = 'Ms',
+    Mrs = 'Mrs',
+    Miss = 'Miss'
+};
+
 export interface Location {
     street: Street,
     city: string,

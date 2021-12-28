@@ -3,7 +3,7 @@
 
     <div class="details__item">
         <div class="details__images">
-            <ng-container *ngFor="let image of images; let i = index">
+            <!-- <ng-container *ngFor="let image of images; let i = index">
                 <img
                     *ngIf="i === currentImage"
                     [src]="image.large"
@@ -22,7 +22,8 @@
                 (click)="nextClick()"
                 >
                 <span class="arrow right"></span>
-              </button>
+              </button> -->
+            <img [src]="userDetail.picture.large">
         </div>
  
         <div class="details__choice">
@@ -56,15 +57,6 @@
                     </th>
                     <th>
                         City
-                    </th>
-                    <th>
-                        Street name
-                    </th>
-                    <th>
-                        Street number
-                    </th>
-                    <th>
-                        Postcode
                     </th>
                     <th>
                         Email
@@ -108,15 +100,6 @@
                         {{ userDetail.location.city }}
                     </td>
                     <td>
-                        {{ userDetail.location.street.name }}
-                    </td>
-                    <td>
-                        {{ userDetail.location.street.number }}
-                    </td>
-                    <td>
-                        {{ userDetail.location.postcode }}
-                    </td>
-                    <td>
                         {{ userDetail.email }}
                     </td>
                     <td>
@@ -132,9 +115,9 @@
                         {{ userDetail.nat }}
                     </td>
                 </tr>
-        
             </table>
         </ng-template>
- 
+        <ng-content *ngIf="showTable" selcet="a"></ng-content>
+
     </div>
 </div>

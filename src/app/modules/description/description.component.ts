@@ -27,7 +27,7 @@ export class DescriptionComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getUserDetail();
-    this.preloadImages()
+    // this.preloadImages()
   };
 
   public getUserDetail(): void {
@@ -45,11 +45,11 @@ export class DescriptionComponent implements OnInit {
   };
 
   public onPreviousImage(previous: number): void {
-    this.currentImage = previous < 0 ? this.images.length - 1 : previous 
+    // this.currentImage = previous < 0 ? this.images.length - 1 : previous 
   };
 
   public onNextImage(next: number): void {
-    this.currentImage = next === this.images.length ? 0 : next
+    // this.currentImage = next === this.images.length ? 0 : next
   }
 
 }

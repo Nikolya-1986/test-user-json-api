@@ -10,6 +10,7 @@ import { MaterialExampleModule } from 'src/app/material-example.module';
 import { IsVisibleOrNotDirective } from './directives/is-visible.directive';
 import { CellColorDirective } from './directives/cell-color.directive';
 import { CellColorSwitcherDirective } from './directives/cell-color-switcher.directive';
+import { ExtraComponent } from './components/extra/extra.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CellColorSwitcherDirective } from './directives/cell-color-switcher.dir
     IsVisibleOrNotDirective,
     CellColorDirective,
     CellColorSwitcherDirective,
+    ExtraComponent,
   ],
   imports: [
     CommonModule,
