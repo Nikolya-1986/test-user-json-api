@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { select, Store } from '@ngrx/store';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
@@ -19,6 +20,9 @@ export class DescriptionComponent implements OnInit {
   public showText!: boolean;
   public currentImage: number = 0;
   public images!: Picture[];
+  public dataSource = new MatTableDataSource();
+  public displayedColumns: string[] = ['name.title', 'name.first', 'name.last', 'dob.date', 'name.gender', 'name.status', 'location.country', 
+                                      'location.city', 'email', 'language', 'registered.date', 'phone', 'nat'];
 
   constructor(
     private activatedRoute: ActivatedRoute,

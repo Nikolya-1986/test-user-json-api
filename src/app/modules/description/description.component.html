@@ -30,7 +30,7 @@
         </mat-checkbox>
         <a 
             class="referense-margin"
-            [routerLink]="['/description', userDetail.id, 'extra']"
+            [routerLink]="['/description', userDetail.id, 'extra', { appeal: userDetail.name.title }]"
             mat-raised-button 
             #contentReference
             >

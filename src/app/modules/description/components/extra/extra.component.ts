@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-extra',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExtraComponent implements OnInit {
 
+  @Input() public displayedColumns!: string[];
+  @Input() public dataSource = new MatTableDataSource();
+  
   constructor() { }
 
   ngOnInit(): void {
