@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, ElementRef, Input, Renderer2 } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
 import { Gender, Status, UserDTO } from 'src/app/interfaces/user.interface';
 
@@ -17,6 +17,7 @@ export class UsersCardsComponent implements AfterContentInit {
   @Input() public filterUserGender!: Gender;
   @Input() public fiterUserStatus!: Status;
   @Input() public filterUserLanguage!: string;
+  @Output() public detailUser = new EventEmitter<number>();
 
   constructor(
     private renderor: Renderer2,
@@ -31,6 +32,10 @@ export class UsersCardsComponent implements AfterContentInit {
     this.renderor.setStyle(this.contentImageElementRef.nativeElement, "position", "fixed");
     this.renderor.setStyle(this.contentImageElementRef.nativeElement, "top", "25%");
     this.renderor.setStyle(this.contentImageElementRef.nativeElement, "left", "40%");
+  };
+
+  public onDetailCurrentUser(id: number): void {
+    this.detailUser.emit(id)
   }
 
 }

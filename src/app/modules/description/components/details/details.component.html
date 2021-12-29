@@ -1,0 +1,123 @@
+<div class="details__container details">
+    <ng-content select="h2"></ng-content>
+
+    <div class="details__item">
+        <div class="details__images">
+            <!-- <ng-container *ngFor="let image of images; let i = index">
+                <img
+                    *ngIf="i === currentImage"
+                    [src]="image.large"
+                    class="slide"
+                >
+            </ng-container>
+        
+            <button 
+                class="control prev" 
+                (click)="previousClick()"
+                >
+                <span class="arrow left"></span>
+              </button>
+              <button 
+                class="control next" 
+                (click)="nextClick()"
+                >
+                <span class="arrow right"></span>
+              </button> -->
+            <img [src]="userDetail.picture.large">
+        </div>
+ 
+        <div class="details__choice">
+            <ng-content select="button"></ng-content>
+            <ng-content select="mat-checkbox"></ng-content>
+        </div>
+
+        <ng-template [isVisibleOrNot]="showTable">
+            <table class="details__table">
+                <tr>
+                    <th>
+                        Appeal
+                    </th>
+                    <th>
+                        First name
+                    </th>
+                    <th>
+                        Last name
+                    </th>
+                    <th>
+                        Date of birthday
+                    </th>
+                    <th>
+                        Gender
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Country
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Languages
+                    </th>
+                    <th>
+                        Date registered
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th>
+                        Nationality
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        {{ userDetail.name.title }}
+                    </td>
+                    <td>
+                        {{ userDetail.name.first }}
+                    </td>
+                    <td>
+                        {{ userDetail.name.last }}
+                    </td>
+                    <td>
+                        {{ userDetail.dob.date | formatDate }}
+                    </td>
+                    <td>
+                        {{ userDetail.gender }}
+                    </td>
+                    <td>
+                        {{ userDetail.status }}
+                    </td>
+                    <td>
+                        {{ userDetail.location.country }}
+                    </td>
+                    <td>
+                        {{ userDetail.location.city }}
+                    </td>
+                    <td>
+                        {{ userDetail.email }}
+                    </td>
+                    <td>
+                        {{ userDetail.language }}
+                    </td>
+                    <td>
+                        {{ userDetail.registered.date | formatDate }}
+                    </td>
+                    <td>
+                        {{ userDetail.phone }}
+                    </td>
+                    <td>
+                        {{ userDetail.nat }}
+                    </td>
+                </tr>
+            </table>
+        </ng-template>
+        <ng-content *ngIf="showTable" selcet="a"></ng-content>
+
+    </div>
+</div>

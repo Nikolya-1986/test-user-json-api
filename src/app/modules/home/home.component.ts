@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { map, Observable, reduce, Subject, takeUntil, tap } from 'rxjs';
-import { UserService } from '../../services/user.service';
+import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
+import { UserService } from '../../services/user.service';
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
 import AppUserState from '../../store/user/user.state';
+
 
 @Component({
   selector: 'app-home',
@@ -32,7 +34,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private store: Store<AppUserState>,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -43,21 +46,8 @@ export class HomeComponent implements OnInit {
     this.getLanguages()
   };
   
-  public getLanguages(): string[] {
-    this.userService.getUsers().pipe(
-      takeUntil(this.destroy$),
-      map((response) => {
-        const users = response;
-        const arraysLanguages = users.map((languages) => languages.language);
-        const allLanguages = 'All languages';
-        this.languages = [...new Set(arraysLanguages.reduce((acc, item) => acc.concat(item)))];
-        this.languages = [allLanguages, ...this.languages];
-      })
-    )
-    .subscribe(() => {
-      this.activelanguage = this.languages[0]
-    })
-    return this.languages;
+  public onDetailUser(id: number): void {
+    this.router.navigate(['description', id])
   };
 
   public onCurrentSearchName(searchName: string): void {
@@ -75,9 +65,33 @@ export class HomeComponent implements OnInit {
   public onCurrentSratus(statusValue: string | any): void {
     this.fiterUserStatus = statusValue
   };
-
-  public onCurrentLanguage(selectedLanguage: string) {
+//////////////////
+  public onCurrentLanguage(selectedLanguage: string): void {
     this.activelanguage = selectedLanguage;
-    this.filterUserLanguage = this.activelanguage;
-  }
+    this.filterUserLanguage = selectedLanguage;
+  };
+
+  public getLanguages(): string[] {
+    this.userService.getUsers().pipe(
+      takeUntil(this.destroy$),
+      map((response) => {
+        this.languages = this.uniqueLanguages(response);
+      })
+    )
+    .subscribe(() => {
+      this.activelanguage = this.languages[0]
+    })
+    return this.languages;
+  };
+
+  private uniqueLanguages(users: UserDTO[]): string[] {
+    const arraysLanguages = users.map((languages) => languages.language);
+    const nameButtonAllLanguages = 'All languages';
+    const arraylanguages = arraysLanguages.reduce((acc, item) => {
+      const uniqueLanguages = [...new Set(acc.concat(item))];
+      return uniqueLanguages;
+    });
+    const allLanguages = [nameButtonAllLanguages, ...arraylanguages];
+    return allLanguages;
+  };
 }
