@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map, Observable, Subject, takeUntil } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService } from '../../services/user.service';
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
   public users$!: Observable<UserDTO[]>;
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
+  public destroy$: Subject<boolean> = new Subject();
+
   public searchUserName: string = '';
   public filterUserName: string = 'Default';
   public sortAlfabetParamets: string[] = ['Default', 'Alphabet(Aa-Zz)', 'Alphabet(Zz-Aa)'];
@@ -27,7 +29,6 @@ export class HomeComponent implements OnInit {
   public gender: Gender[] = [Gender.all, Gender.female, Gender.male];
   public fiterUserStatus: Status = Status.all;
   public status: Status[] = [Status.all, Status.married, Status.single, Status.divorced];
-  public destroy$: Subject<boolean> = new Subject();
   public languages!: string[];
   public activelanguage!: string;
   public filterUserLanguage!: string;
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private store: Store<AppUserState>,
     private userService: UserService,
+    private activateRoute: ActivatedRoute,
     private router: Router,
   ) {}
 
@@ -43,7 +45,8 @@ export class HomeComponent implements OnInit {
     this.isLoading$ = this.store.pipe(select(userSelectors.getIsLoadingSelector));
     this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
     this.error$ = this.store.pipe(select(userSelectors.getFailSelector));
-    this.getLanguages()
+    this.getLanguages();
+    this.saveQueryParams()
   };
   
   public onDetailUser(id: number): void {
@@ -65,12 +68,25 @@ export class HomeComponent implements OnInit {
   public onCurrentSratus(statusValue: string | any): void {
     this.fiterUserStatus = statusValue
   };
-//////////////////
-  public onCurrentLanguage(selectedLanguage: string): void {
+
+  public onCurrentLanguage(selectedLanguage: string): void {//
     this.activelanguage = selectedLanguage;
     this.filterUserLanguage = selectedLanguage;
   };
 
+  public saveQueryParams(): void{
+    const routerQueryParams$ = this.activateRoute.queryParamMap;
+    routerQueryParams$.pipe(
+      takeUntil(this.destroy$)
+    )
+    .subscribe(queryParams => {
+      this.searchUserName = queryParams.get('selectedSearchName') || '';
+      this.filterUserName = queryParams.get('selectedAlfabetValue') || 'Default';
+      this.filterUserGender = queryParams.get('selectedGender') as Gender || Gender.all;
+      this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all
+    })
+  }
+///////
   public getLanguages(): string[] {
     this.userService.getUsers().pipe(
       takeUntil(this.destroy$),

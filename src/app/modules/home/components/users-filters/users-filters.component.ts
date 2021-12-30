@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Gender, Status } from 'src/app/interfaces/user.interface';
 
 @Component({
@@ -27,7 +28,9 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
 
   public isActibe!: boolean;
   
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   public ngOnInit(): void {
   }; 
@@ -38,18 +41,22 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
 
   public inputCurrentName(): void {
     this.currentSearchName.emit(this.searchUserName);
+    this.router.navigate(['home'], { queryParams: { selectedSearchName: this.searchUserName }, queryParamsHandling: 'merge' })
   };
   
   public selectAlfabetSort(): void {
     this.currentAlfabetValue.emit(this.filterUserName);
+    this.router.navigate(['home'], { queryParams: { selectedAlfabetValue: this.filterUserName }, queryParamsHandling: 'merge' })
   };
 
   public selectGenderSort(): void {
-    this.currentGender.emit(this.filterUserGender)
+    this.currentGender.emit(this.filterUserGender);
+    this.router.navigate(['home'], { queryParams: { selectedGender: this.filterUserGender }, queryParamsHandling: 'merge' })
   };
 
   public selectStatusSort(): void {
-    this.currentSratus.emit(this.fiterUserStatus)
+    this.currentSratus.emit(this.fiterUserStatus);
+    this.router.navigate(['home'], { queryParams: { selectedStatus: this.fiterUserStatus }, queryParamsHandling: 'merge' })
   }
 
   public onCurrentLanguage(language: string): void {
