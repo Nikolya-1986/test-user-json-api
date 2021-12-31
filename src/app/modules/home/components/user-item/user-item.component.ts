@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
-import { UserDTO, UsersDTO } from 'src/app/interfaces/user.interface';
+import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-user-item',

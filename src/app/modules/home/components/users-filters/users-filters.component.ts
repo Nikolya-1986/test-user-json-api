@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Gender, Status } from 'src/app/interfaces/user.interface';
+
+import { Gender, Status } from '../../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-users-filters',
@@ -12,8 +13,8 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   @ViewChild('focusInput') focusInputElementRef!: ElementRef;
 
   @Input() public searchUserName!: string;
-  @Input() public filterUserName!: string;
-  @Input() public sortAlfabetParamets!: string[];
+  @Input() public filterUserNameAge!: string;
+  @Input() public sortParamets!: string[];
   @Input() public filterUserGender: Gender = Gender.all;
   @Input() public gender!: Gender[]; 
   @Input() public fiterUserStatus: Status = Status.all;
@@ -22,7 +23,7 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   @Input() public languages!: string[];
   @Input() public activelanguage!: string;
   @Output() public currentSearchName = new EventEmitter<string>();
-  @Output() public currentAlfabetValue = new EventEmitter<string>();
+  @Output() public currentForSortValue = new EventEmitter<string>();
   @Output() public currentGender = new EventEmitter<string>();
   @Output() public currentSratus = new EventEmitter<string>();
   @Output() public currentLanguage = new EventEmitter<string>();
@@ -45,9 +46,9 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
     this.router.navigate(['home'], { queryParams: { selectedSearchName: this.searchUserName }, queryParamsHandling: 'merge' })
   };
   
-  public selectAlfabetSort(): void {
-    this.currentAlfabetValue.emit(this.filterUserName);
-    this.router.navigate(['home'], { queryParams: { selectedAlfabetValue: this.filterUserName }, queryParamsHandling: 'merge' })
+  public selectForSortSort(): void {
+    this.currentForSortValue.emit(this.filterUserNameAge);
+    this.router.navigate(['home'], { queryParams: { selectedForSortValue: this.filterUserNameAge }, queryParamsHandling: 'merge' })
   };
 
   public selectGenderSort(): void {

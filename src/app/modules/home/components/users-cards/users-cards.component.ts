@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
-import { Gender, Status, UserDTO } from 'src/app/interfaces/user.interface';
+import { Gender, Status, UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-users-cards',
@@ -13,7 +13,7 @@ export class UsersCardsComponent implements AfterContentInit {
   @Input() public users: UserDTO[] | any;
   @Input() public error: string | any;
   @Input() public searchUserName!: string;
-  @Input() public filterUserName!: string;
+  @Input() public filterUserNameAge!: string;
   @Input() public filterUserGender!: Gender;
   @Input() public fiterUserStatus!: Status;
   @Input() public filterUserLanguage!: string;
@@ -37,5 +37,4 @@ export class UsersCardsComponent implements AfterContentInit {
   public onDetailCurrentUser(id: number): void {
     this.detailUser.emit(id)
   }
-
 }

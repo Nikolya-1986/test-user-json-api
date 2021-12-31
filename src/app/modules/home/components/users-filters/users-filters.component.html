@@ -23,15 +23,15 @@
             Sort users by name
         </mat-label>
         <select matNativeControl 
-            [(ngModel)]="filterUserName" 
-            (change)="selectAlfabetSort()"
-            name="sortAlfabet"
+            [(ngModel)]="filterUserNameAge" 
+            (change)="selectForSortSort()"
+            name="sortParamet"
             >
             <option 
-                *ngFor="let sortAlfabet of sortAlfabetParamets"
-                [value]="sortAlfabet"
+                *ngFor="let sortParamet of sortParamets"
+                [value]="sortParamet"
                 >
-                {{ sortAlfabet }}
+                {{ sortParamet }}
             </option>
         </select>
     </mat-form-field>

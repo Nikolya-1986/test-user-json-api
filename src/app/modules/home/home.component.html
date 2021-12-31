@@ -1,8 +1,8 @@
 <section class="home__container home">
     <app-users-filters
         [searchUserName]="searchUserName"
-        [filterUserName]="filterUserName"
-        [sortAlfabetParamets]="sortAlfabetParamets"
+        [filterUserNameAge]="filterUserNameAge"
+        [sortParamets]="sortParamets"
         [filterUserGender]="filterUserGender"
         [gender]="gender"
         [fiterUserStatus]="fiterUserStatus"
@@ -11,7 +11,7 @@
         [languages]="languages"
         [activelanguage]="activelanguage"
         (currentSearchName)="onCurrentSearchName($event)"
-        (currentAlfabetValue)="onCurrentAlfabetValue($event)"
+        (currentForSortValue)="onCurrentForSortValue($event)"
         (currentGender)="onCurrentGender($event)"
         (currentSratus)="onCurrentSratus($event)"
         (currentLanguage)="onCurrentLanguage($event)"
@@ -23,7 +23,7 @@
         [users]="users$ | async"
         [error]="error$ | async"
         [searchUserName]="searchUserName"
-        [filterUserName]="filterUserName"
+        [filterUserNameAge]="filterUserNameAge"
         [filterUserGender]="filterUserGender"
         [fiterUserStatus]="fiterUserStatus"
         [filterUserLanguage]="filterUserLanguage"

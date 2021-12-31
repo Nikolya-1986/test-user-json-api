@@ -3,9 +3,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { UserDTO } from '../../../interfaces/user.interface';
 
 @Pipe({
-  name: 'filterName'
+  name: 'filterNameAge'
 })
-export class FilterNamePipe implements PipeTransform {
+export class FilterNameAgePipe implements PipeTransform {
 
   transform(users: UserDTO[], value: string): UserDTO[] {
 
@@ -20,6 +20,12 @@ export class FilterNamePipe implements PipeTransform {
       if(value === 'Alphabet(Zz-Aa)'){
         return b.name.first.localeCompare(a.name.first)
       };
+      if(value === 'Age(Old-young)'){
+        return b.dob.age - a.dob.age
+      };
+      if(value === 'Age(Young-old)'){
+        return a.dob.age - b.dob.age
+      }
       return null;
     });
     return usersFilter;

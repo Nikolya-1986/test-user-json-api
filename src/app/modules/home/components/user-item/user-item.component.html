@@ -13,6 +13,9 @@
                 First name: {{ user.name.first }}
             </li>
             <li>
+                Age: {{ user.dob.date | formatAge }}
+            </li>
+            <li>
                 Gender: {{ user.gender }}
             </li>
             <li>
@@ -20,9 +23,6 @@
             </li>
             <li>
                 Languages: {{ user.language }}
-            </li>
-            <li>
-                City: {{ user.location.city }}
             </li>
         </ul>
         <ng-content select="p"></ng-content>

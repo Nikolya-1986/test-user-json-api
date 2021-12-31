@@ -21,10 +21,9 @@ export class HomeComponent implements OnInit {
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
   public destroy$: Subject<boolean> = new Subject();
-
   public searchUserName: string = '';
-  public filterUserName: string = 'Default';
-  public sortAlfabetParamets: string[] = ['Default', 'Alphabet(Aa-Zz)', 'Alphabet(Zz-Aa)'];
+  public filterUserNameAge: string = 'Default';
+  public sortParamets: string[] = ['Default', 'Alphabet(Aa-Zz)', 'Alphabet(Zz-Aa)', 'Age(Old-young)', 'Age(Young-old)'];
   public filterUserGender: Gender = Gender.all;
   public gender: Gender[] = [Gender.all, Gender.female, Gender.male];
   public fiterUserStatus: Status = Status.all;
@@ -57,8 +56,8 @@ export class HomeComponent implements OnInit {
     this.searchUserName = searchName 
   };
 
-  public onCurrentAlfabetValue(alfabetValue: string): void {
-    this.filterUserName = alfabetValue
+  public onCurrentForSortValue(alfabetValue: string): void {
+    this.filterUserNameAge = alfabetValue
   };
 
   public onCurrentGender(genderValue: string | any): void {
@@ -80,7 +79,7 @@ export class HomeComponent implements OnInit {
     )
     .subscribe(queryParams => {
       this.searchUserName = queryParams.get('selectedSearchName') || '';
-      this.filterUserName = queryParams.get('selectedAlfabetValue') || 'Default';
+      this.filterUserNameAge = queryParams.get('selectedForSortValue') || 'Default';
       this.filterUserGender = queryParams.get('selectedGender') as Gender || Gender.all;
       this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all;
       this.filterUserLanguage = queryParams.get('selectedlanguage') || this.languages[0];
