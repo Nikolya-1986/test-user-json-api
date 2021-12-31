@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { map, Observable, Subject, takeUntil } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
+import { takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { UserService } from '../../services/user.service';
@@ -8,7 +9,6 @@ import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
 import AppUserState from '../../store/user/user.state';
-
 
 @Component({
   selector: 'app-home',
@@ -29,9 +29,9 @@ export class HomeComponent implements OnInit {
   public gender: Gender[] = [Gender.all, Gender.female, Gender.male];
   public fiterUserStatus: Status = Status.all;
   public status: Status[] = [Status.all, Status.married, Status.single, Status.divorced];
-  public languages!: string[];
+  public filterUserLanguage!: string;//for pipe
+  public languages!: string[];//keep all languages from server
   public activelanguage!: string;
-  public filterUserLanguage!: string;
 
   constructor(
     private store: Store<AppUserState>,
@@ -45,8 +45,8 @@ export class HomeComponent implements OnInit {
     this.isLoading$ = this.store.pipe(select(userSelectors.getIsLoadingSelector));
     this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
     this.error$ = this.store.pipe(select(userSelectors.getFailSelector));
-    this.getLanguages();
-    this.saveQueryParams()
+    this.fetchLanguages();
+    this.saveQueryParams();
   };
   
   public onDetailUser(id: number): void {
@@ -70,44 +70,34 @@ export class HomeComponent implements OnInit {
   };
 
   public onCurrentLanguage(selectedLanguage: string): void {//
-    this.activelanguage = selectedLanguage;
     this.filterUserLanguage = selectedLanguage;
+    this.activelanguage = selectedLanguage;
   };
 
   public saveQueryParams(): void{
-    const routerQueryParams$ = this.activateRoute.queryParamMap;
-    routerQueryParams$.pipe(
+    this.activateRoute.queryParamMap.pipe(
       takeUntil(this.destroy$)
     )
     .subscribe(queryParams => {
       this.searchUserName = queryParams.get('selectedSearchName') || '';
       this.filterUserName = queryParams.get('selectedAlfabetValue') || 'Default';
       this.filterUserGender = queryParams.get('selectedGender') as Gender || Gender.all;
-      this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all
+      this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all;
+      this.filterUserLanguage = queryParams.get('selectedlanguage') || this.languages[0];
     })
   }
-///////
-  public getLanguages(): string[] {
-    this.userService.getUsers().pipe(
+
+  public fetchLanguages(): string[] {
+    this.userService.getLanguages().pipe(
       takeUntil(this.destroy$),
       map((response) => {
-        this.languages = this.uniqueLanguages(response);
+        const nameButtonAllLanguages = 'All languages';
+        this.languages = [nameButtonAllLanguages, ...response];
       })
     )
     .subscribe(() => {
       this.activelanguage = this.languages[0]
     })
     return this.languages;
-  };
-
-  private uniqueLanguages(users: UserDTO[]): string[] {
-    const arraysLanguages = users.map((languages) => languages.language);
-    const nameButtonAllLanguages = 'All languages';
-    const arraylanguages = arraysLanguages.reduce((acc, item) => {
-      const uniqueLanguages = [...new Set(acc.concat(item))];
-      return uniqueLanguages;
-    });
-    const allLanguages = [nameButtonAllLanguages, ...arraylanguages];
-    return allLanguages;
-  };
+  }
 }

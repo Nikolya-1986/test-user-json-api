@@ -18,6 +18,7 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   @Input() public gender!: Gender[]; 
   @Input() public fiterUserStatus: Status = Status.all;
   @Input() public status!: Status[];
+  @Input() public filterUserLanguage!: string;
   @Input() public languages!: string[];
   @Input() public activelanguage!: string;
   @Output() public currentSearchName = new EventEmitter<string>();
@@ -60,6 +61,7 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   }
 
   public onCurrentLanguage(language: string): void {
-    this.currentLanguage.emit(language)
+    this.currentLanguage.emit(language);
+    this.router.navigate(['home'], { queryParams: { selectedlanguage: this.filterUserLanguage }, queryParamsHandling: 'merge' })
   }
 }
