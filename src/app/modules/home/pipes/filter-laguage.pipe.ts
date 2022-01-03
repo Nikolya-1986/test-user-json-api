@@ -14,7 +14,10 @@ export class FilterLaguagePipe implements PipeTransform {
         const isIncludeslanguage = languages.includes(language);
         return isIncludeslanguage;
       })
-      console.log(usersFilterLanguage)
+      if(language === 'All languages'){
+        return usersDTO;
+      }
+      console.log(usersFilterLanguage);
       return usersFilterLanguage;
     }
     return usersDTO;

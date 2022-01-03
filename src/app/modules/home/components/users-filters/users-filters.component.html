@@ -1,65 +1,64 @@
-<section class="filters__container filters">
-    <div class="filters__filter"> 
-        <label 
-            class="filters__label label" 
-            for="name-search"
-            >
-            Search user by name
-        </label>
-        <input
-            id="name-search"
-            type="text"
+<section class="filters__container filters example-form">
+    <mat-form-field 
+        class="example-full-width"
+        appearance="fill"
+        >
+        <mat-label>
+            Search users by name
+        </mat-label>
+        <input 
+            matInput
             placeholder="Enter name for search"
             [(ngModel)]="searchUserName"
             (input)="inputCurrentName()"
             #focusInput
-        /> 
-    </div>
+        >
+    </mat-form-field>
 
-    <div class="filters__filter">
-        <label
-            class="filters__label label" 
-            for="name-sort"
-            >
+    <mat-form-field 
+        class="example-full-width" 
+        appearance="fill"
+        >
+        <mat-label>
             Sort users by name
-        </label>
-        <select
-            id="name-sort"
-            [(ngModel)]="filterUserName"
-            (change)="selectAlfabetSort()"
+        </mat-label>
+        <select matNativeControl 
+            [(ngModel)]="filterUserNameAge" 
+            (change)="selectForSortSort()"
+            name="sortParamet"
             >
-            <option
-                *ngFor="let sortAlfabet of sortAlfabetParamets"
-                [value]="sortAlfabet"
+            <option 
+                *ngFor="let sortParamet of sortParamets"
+                [value]="sortParamet"
                 >
-                {{ sortAlfabet }}
+                {{ sortParamet }}
             </option>
         </select>
-    </div>
+    </mat-form-field>
 
-    <div class="filters__filter">
-        <label
-            class="filters__label label"
-            for="gender-sort"
-            >
+    <mat-form-field 
+        class="example-full-width" 
+        appearance="fill"
+        >
+        <mat-label>
             Sort users by gender
-        </label>
-        <select
-            id="gender-sort"
+        </mat-label>
+        <select matNativeControl 
             [(ngModel)]="filterUserGender"
             (change)="selectGenderSort()"
+            name="sortAlfabet"
             >
-            <option
+            <option 
                 *ngFor="let item of gender"
                 [value]="item"
                 >
                 {{ item }}
             </option>
         </select>
-    </div>
+    </mat-form-field>
     <mat-divider></mat-divider>
-
-    <div class="filters__filter">
+    
+    <ng-container>
         <label id="example-radio-group-label">
             Sort users by status
         </label>
@@ -77,10 +76,10 @@
                 {{ item }}
             </mat-radio-button>
         </mat-radio-group>
-    </div>
+    </ng-container>
     <mat-divider></mat-divider>
 
-    <div class="filters__filter">
+    <div class="example-full-width">
         <p>
             Sort users by languages
         </p>
@@ -90,9 +89,16 @@
             [activelanguage]="activelanguage"
             (currentLanguage)="onCurrentLanguage($event)"
             >
-
         </app-languages-filter>
     </div>
     <mat-divider></mat-divider>
     
+    <mat-checkbox 
+        #saveUserAvailable
+        class="example-margin"
+        (change)="selectedAvailable(saveUserAvailable.checked)"
+        >
+        Only Online
+    </mat-checkbox>
+
 </section>

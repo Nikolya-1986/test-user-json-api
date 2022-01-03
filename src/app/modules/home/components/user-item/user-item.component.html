@@ -8,9 +8,18 @@
         />
     </div>
     <div class="user__body">
+        <div 
+            class="user__circle"
+            [ngStyle]="{'background-color': this.user.available === true ? 'var(--primary-color-4)' : 'var(--primary-color-1)'}"
+            >
+            <!-- [ngClass]="getClassName()" -->
+        </div>
         <ul>
             <li>
                 First name: {{ user.name.first }}
+            </li>
+            <li>
+                Age: {{ user.dob.date | formatAge }}
             </li>
             <li>
                 Gender: {{ user.gender }}
@@ -20,9 +29,6 @@
             </li>
             <li>
                 Languages: {{ user.language }}
-            </li>
-            <li>
-                City: {{ user.location.city }}
             </li>
         </ul>
         <ng-content select="p"></ng-content>

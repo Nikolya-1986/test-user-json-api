@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { catchError, retry, tap } from 'rxjs/operators';
+import { catchError, map, retry } from 'rxjs/operators';
 
 import { UserDTO } from "../interfaces/user.interface";
 
@@ -34,4 +34,23 @@ export class UserService {
             catchError(this.errorsBackend),
         )
     };
+
+    public getLanguages(): Observable<string[]> {
+        return this.httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`).pipe(
+            map((response) => {
+                const result = response;
+                const languages = this.uniqueLanguages(result);
+                return languages;
+            })
+        );
+    };
+
+    private uniqueLanguages(userDTO: UserDTO[]): string[] {
+        const arraysLanguages = userDTO.map(users => users.language);
+        const arrayLanguages = arraysLanguages.reduce((acc, item) => {
+            const uniqueLanguages = [...new Set(acc.concat(item))];
+            return uniqueLanguages;
+        });
+        return [...arrayLanguages];
+    }
 }

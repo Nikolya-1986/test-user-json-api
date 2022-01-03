@@ -21,6 +21,23 @@
     }
     
     &__body {
+        position: relative;
         padding: 0 10px;
+    }
+
+    &__circle {
+        position: absolute;
+        right: 1rem;
+        clip-path: circle(50%);
+        height: 1rem;
+        width: 1rem;
+    }
+
+    .offline {
+        background-color: var(--primary-color-4);
+    }
+
+    .online {
+        background-color: var(--primary-color-1);
     }
 }

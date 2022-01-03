@@ -13,7 +13,6 @@ export class LanguagesFilterComponent implements OnInit, OnChanges {
     this.isActive = this.language === value
   }
   @Output() public currentLanguage = new EventEmitter<string>();
-
   public isActive!: boolean;
   
   constructor() { }

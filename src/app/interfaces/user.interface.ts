@@ -10,6 +10,7 @@ export interface UserDTO {
     location: Location,
     email: string,
     language: string[],
+    available: boolean,
     login: Login,
     dob: Dob,
     registered: Registered,

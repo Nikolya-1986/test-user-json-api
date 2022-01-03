@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
-import { UserDTO, UsersDTO } from 'src/app/interfaces/user.interface';
+import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-user-item',
@@ -12,7 +12,7 @@ export class UserItemComponent implements AfterContentInit {
   @ContentChild('contentText') private contentTextElementRef!: ElementRef;
   @Input() public user!: UserDTO;
   @Output() public detailCurrentUser = new EventEmitter<number>();
-  
+
   constructor(
     private renderor: Renderer2,
   ) { }
@@ -25,6 +25,19 @@ export class UserItemComponent implements AfterContentInit {
 
   public getailUser():void {
     this.detailCurrentUser.emit(this.user.id)
-  }
+  };
 
+  // public getClassName(): boolean {
+  //   if(this.user.available === true){
+  //     let bgColorRed = {
+  //       'offline': true
+  //     }
+  //     return bgColorRed;
+  //   }else {
+  //     let bgColorGreen = {
+  //       'online': true
+  //     }
+  //     return bgColorGreen;
+  //   }
+  // }
 }
