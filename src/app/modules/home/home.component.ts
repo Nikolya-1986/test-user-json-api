@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   public filterUserLanguage!: string;//for pipe
   public languages!: string[];//keep all languages from server
   public activelanguage!: string;
+  public filterUserAvailable!: boolean;
 
   constructor(
     private store: Store<AppUserState>,
@@ -73,6 +74,11 @@ export class HomeComponent implements OnInit {
     this.activelanguage = selectedLanguage;
   };
 
+  public onCurrentAvailable(selectedAvailable: boolean): void {
+    this.filterUserAvailable = selectedAvailable;
+    console.log(this.filterUserAvailable);
+  };
+
   public saveQueryParams(): void{
     this.activateRoute.queryParamMap.pipe(
       takeUntil(this.destroy$)
@@ -83,8 +89,9 @@ export class HomeComponent implements OnInit {
       this.filterUserGender = queryParams.get('selectedGender') as Gender || Gender.all;
       this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all;
       this.filterUserLanguage = queryParams.get('selectedlanguage') || this.languages[0];
+      this.filterUserAvailable = queryParams.get('selectedAvailable') as unknown as boolean || false; 
     })
-  }
+  };
 
   public fetchLanguages(): string[] {
     this.userService.getLanguages().pipe(

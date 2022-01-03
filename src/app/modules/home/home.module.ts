@@ -15,7 +15,7 @@ import { FilterStatusPipe } from './pipes/filter-status.pipe';
 import { LanguagesFilterComponent } from './components/languages-filter/languages-filter.component';
 import { FilterLaguagePipe } from './pipes/filter-laguage.pipe';
 import { FormatAgePipe } from './pipes/format-age.pipe';
-
+import { FilterAvailablePipe } from './pipes/filter-available.pipe';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { FormatAgePipe } from './pipes/format-age.pipe';
     FilterGenderPipe,
     FilterStatusPipe,
     FilterLaguagePipe,
-    FormatAgePipe
+    FormatAgePipe,
+    FilterAvailablePipe
   ],
   imports: [
     CommonModule,

@@ -12,7 +12,7 @@ export class UserItemComponent implements AfterContentInit {
   @ContentChild('contentText') private contentTextElementRef!: ElementRef;
   @Input() public user!: UserDTO;
   @Output() public detailCurrentUser = new EventEmitter<number>();
-  
+
   constructor(
     private renderor: Renderer2,
   ) { }
@@ -25,6 +25,19 @@ export class UserItemComponent implements AfterContentInit {
 
   public getailUser():void {
     this.detailCurrentUser.emit(this.user.id)
-  }
+  };
 
+  // public getClassName(): boolean {
+  //   if(this.user.available === true){
+  //     let bgColorRed = {
+  //       'offline': true
+  //     }
+  //     return bgColorRed;
+  //   }else {
+  //     let bgColorGreen = {
+  //       'online': true
+  //     }
+  //     return bgColorGreen;
+  //   }
+  // }
 }

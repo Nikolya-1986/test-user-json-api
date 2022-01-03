@@ -11,7 +11,6 @@ import { Gender, Status } from '../../../../interfaces/user.interface';
 export class UsersFiltersComponent implements OnInit, AfterViewInit {
 
   @ViewChild('focusInput') focusInputElementRef!: ElementRef;
-
   @Input() public searchUserName!: string;
   @Input() public filterUserNameAge!: string;
   @Input() public sortParamets!: string[];
@@ -22,14 +21,14 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   @Input() public filterUserLanguage!: string;
   @Input() public languages!: string[];
   @Input() public activelanguage!: string;
+  @Input() public filterUserAvailable!: boolean;
   @Output() public currentSearchName = new EventEmitter<string>();
   @Output() public currentForSortValue = new EventEmitter<string>();
   @Output() public currentGender = new EventEmitter<string>();
   @Output() public currentSratus = new EventEmitter<string>();
   @Output() public currentLanguage = new EventEmitter<string>();
+  @Output() public currentAvailable = new EventEmitter<boolean>();
 
-  public isActibe!: boolean;
-  
   constructor(
     private router: Router,
   ) { }
@@ -59,10 +58,17 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
   public selectStatusSort(): void {
     this.currentSratus.emit(this.fiterUserStatus);
     this.router.navigate(['home'], { queryParams: { selectedStatus: this.fiterUserStatus }, queryParamsHandling: 'merge' })
-  }
+  };
 
   public onCurrentLanguage(language: string): void {
-    this.currentLanguage.emit(language);
+    this.filterUserLanguage = language;
+    this.currentLanguage.emit(this.filterUserLanguage);
     this.router.navigate(['home'], { queryParams: { selectedlanguage: this.filterUserLanguage }, queryParamsHandling: 'merge' })
+  };
+
+  public selectedAvailable(checkedAvailable: boolean): void {
+    this.filterUserAvailable = checkedAvailable;
+    this.currentAvailable.emit(this.filterUserAvailable);
+    this.router.navigate(['home'], { queryParams: { selectedAvailable: this.filterUserAvailable }, queryParamsHandling: 'merge' })
   }
 }

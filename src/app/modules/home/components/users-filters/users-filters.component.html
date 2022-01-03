@@ -93,4 +93,12 @@
     </div>
     <mat-divider></mat-divider>
     
+    <mat-checkbox 
+        #saveUserAvailable
+        class="example-margin"
+        (change)="selectedAvailable(saveUserAvailable.checked)"
+        >
+        Only Online
+    </mat-checkbox>
+
 </section>

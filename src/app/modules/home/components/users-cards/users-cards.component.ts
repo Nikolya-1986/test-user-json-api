@@ -17,6 +17,7 @@ export class UsersCardsComponent implements AfterContentInit {
   @Input() public filterUserGender!: Gender;
   @Input() public fiterUserStatus!: Status;
   @Input() public filterUserLanguage!: string;
+  @Input() public filterUserAvailable!: boolean;
   @Output() public detailUser = new EventEmitter<number>();
 
   constructor(

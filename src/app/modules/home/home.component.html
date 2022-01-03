@@ -10,11 +10,13 @@
         [filterUserLanguage]="filterUserLanguage"
         [languages]="languages"
         [activelanguage]="activelanguage"
+        [filterUserAvailable]="filterUserAvailable"
         (currentSearchName)="onCurrentSearchName($event)"
         (currentForSortValue)="onCurrentForSortValue($event)"
         (currentGender)="onCurrentGender($event)"
         (currentSratus)="onCurrentSratus($event)"
         (currentLanguage)="onCurrentLanguage($event)"
+        (currentAvailable)="onCurrentAvailable($event)"
         >
 
     </app-users-filters> 
@@ -27,6 +29,7 @@
         [filterUserGender]="filterUserGender"
         [fiterUserStatus]="fiterUserStatus"
         [filterUserLanguage]="filterUserLanguage"
+        [filterUserAvailable]="filterUserAvailable"
         (detailUser)="onDetailUser($event)"
         >
         <img 
