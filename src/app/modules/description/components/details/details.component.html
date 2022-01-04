@@ -3,12 +3,12 @@
 
     <div class="details__item">
         <div class="details__images">
-            <!-- <ng-container *ngFor="let image of images; let i = index">
+            <ng-container *ngFor="let image of userDetail.picture; let i = index">
                 <img
                     *ngIf="i === currentImage"
-                    [src]="image.large"
+                    [src]="image.src"
                     class="slide"
-                >
+                />
             </ng-container>
         
             <button 
@@ -22,8 +22,7 @@
                 (click)="nextClick()"
                 >
                 <span class="arrow right"></span>
-              </button> -->
-            <img [src]="userDetail.picture.large">
+              </button>
         </div>
  
         <div class="details__choice">

@@ -49,11 +49,17 @@
             },
             "phone":"021-577-1124",
             "cell":"081-248-8151",
-            "picture": {
-                "large":"https://randomuser.me/api/portraits/men/4.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/men/4.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/4.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/men/4.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/men/4.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/men/4.jpg"
+                }
+            ],
             "nat":"IE"
         },
         
@@ -106,11 +112,16 @@
             },
             "phone":"643-180-9717",
             "cell":"118-115-3471",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/95.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/95.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/95.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/95.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/95.jpg"                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/95.jpg"
+                }
+            ],
             "nat":"CA"
         },
         
@@ -163,11 +174,17 @@
             },
             "phone":"066-45841454",
             "cell":"0943-534-7017",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/men/42.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/men/42.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/42.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/men/42.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/men/42.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/men/42.jpg"
+                }
+            ],
             "nat":"IR"
         },
         
@@ -220,11 +237,17 @@
             },
             "phone":"07-7164-7941",
             "cell":"0484-790-512",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/59.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/59.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/59.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/59.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/59.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/59.jpg"
+                }
+            ],
             "nat":"AU"
         },
         
@@ -277,11 +300,17 @@
             },
             "phone":"31456026",
             "cell":"94194311",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/14.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/14.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/14.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/14.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/14.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/14.jpg"
+                }
+            ],
             "nat":"NO"
         },
 
@@ -334,11 +363,17 @@
             },
             "phone":"41938477",
             "cell":"30557031",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/men/14.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/men/14.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/14.jpg"
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/men/14.jpg"
                 },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/men/14.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/men/14.jpg"
+                }
+            ],
             "nat":"DK"
         },
 
@@ -391,11 +426,17 @@
             },
             "phone":"(477)-072-4725",
             "cell":"(527)-340-5969",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/0.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/0.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/0.jpg"
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/0.jpg"
                 },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/0.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/0.jpg"
+                }
+            ],
             "nat":"NZ"
         },
 
@@ -447,11 +488,17 @@
             },
             "phone":"(60) 2127-5232",
             "cell":"(02) 4337-6635",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/84.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/84.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/84.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/84.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/84.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/84.jpg"
+                }
+            ],
             "nat":"BR"
         },
 
@@ -504,11 +551,17 @@
             },
             "phone":"109-748-6332",
             "cell":"277-907-6376",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/34.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/34.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/34.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/34.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/34.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/34.jpg"
+                }
+            ],
         "nat":"CA"
         },
 
@@ -561,11 +614,17 @@
             },
             "phone":"(989)-365-4108",
             "cell":"(275)-425-3458",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/men/90.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/men/90.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/90.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/men/90.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/men/90.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/men/90.jpg"
+                }
+            ],
             "nat":"NL"
         },
 
@@ -615,11 +674,17 @@
             },
             "phone":"04-902-293",
             "cell":"040-655-54-90",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/88.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/88.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/88.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/88.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/88.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/88.jpg"
+                }
+            ],
             "nat":"FI"
         },
 
@@ -672,11 +737,17 @@
             },
             "phone":"(008)-516-0314",
             "cell":"(734)-918-8119",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/men/73.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/men/73.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/73.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/men/73.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/men/73.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/men/73.jpg"
+                }
+            ],
             "nat":"NL"
         },
 
@@ -729,11 +800,17 @@
             },
             "phone":"(974)-779-6105",
             "cell":"(440)-080-0811",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/24.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/24.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/24.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/24.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/24.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/24.jpg"
+                }
+            ],
             "nat":"NL"
         },
 
@@ -786,11 +863,17 @@
             },
             "phone":"00-1922-5841",
             "cell":"0441-150-761",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/20.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/20.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/20.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/20.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/20.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/20.jpg"
+                }
+            ],
             "nat":"AU"
         },
 
@@ -842,11 +925,17 @@
             },
             "phone":"076 543 41 31",
             "cell":"075 667 75 73",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/men/39.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/men/39.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/men/39.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/men/39.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/men/39.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/men/39.jpg"
+                }
+            ],
             "nat":"CH"
         },
 
@@ -899,11 +988,17 @@
             },
             "phone":"08-1209-9512",
             "cell":"0472-569-268",
-            "picture":{
-                "large":"https://randomuser.me/api/portraits/women/54.jpg",
-                "medium":"https://randomuser.me/api/portraits/med/women/54.jpg",
-                "thumbnail":"https://randomuser.me/api/portraits/thumb/women/54.jpg"
-            },
+            "picture": [
+                {
+                    "src": "https://randomuser.me/api/portraits/women/54.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/women/54.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/women/54.jpg"
+                }
+            ],
             "nat":"AU"
         }
     ]

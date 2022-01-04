@@ -13,22 +13,28 @@ export class DetailsComponent implements OnInit {
   @Input() public showTable!: boolean;
   @Input() public showText!: boolean;
   @Input() public currentImage!: number;
-  @Input() public images!: Picture[];
-  @Output() public previousImage = new EventEmitter<number>();
-  @Output() public nextImage = new EventEmitter<number>();
+  @Output() public previousImage = new EventEmitter<{ previous: number, images: Picture[] }>();
+  @Output() public nextImage = new EventEmitter<{ next: number, images: Picture[] }>();
 
-  constructor() { }
+  constructor() {}
 
   public ngOnInit(): void {
   };
 
+  private getImages() {
+    const images = this.userDetail.picture;
+    return images;
+  }
+
   public previousClick(): void {
     const previous = this.currentImage - 1;
-    this.previousImage.emit(previous)
+    const images = this.getImages();
+    this.previousImage.emit({previous, images})
   };
 
   public nextClick(): void {
     const next = this.currentImage + 1;
-    this.nextImage.emit(next)
+    const images = this.getImages();
+    this.nextImage.emit({next, images})
   };
 }

@@ -36,7 +36,8 @@ export class UserService {
     };
 
     public getLanguages(): Observable<string[]> {
-        return this.httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`).pipe(
+        const users$ = this.getUsers();
+        return users$.pipe(
             map((response) => {
                 const result = response;
                 const languages = this.uniqueLanguages(result);
@@ -52,5 +53,5 @@ export class UserService {
             return uniqueLanguages;
         });
         return [...arrayLanguages];
-    }
+    };
 }

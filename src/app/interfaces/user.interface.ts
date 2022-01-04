@@ -16,7 +16,7 @@ export interface UserDTO {
     registered: Registered,
     phone: string,
     cell: string,
-    picture: Picture,
+    picture: Picture[],
     nat: string,
 };
 
@@ -92,7 +92,8 @@ export interface Registered {
 };
 
 export interface Picture {
-    large: string,
-    medium: string,
-    thumbnail: string,
+    src: string,
+    // large: string,
+    // medium: string,
+    // thumbnail: string,
 };
