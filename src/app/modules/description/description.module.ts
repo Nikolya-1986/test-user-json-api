@@ -11,6 +11,7 @@ import { IsVisibleOrNotDirective } from './directives/is-visible.directive';
 import { CellColorDirective } from './directives/cell-color.directive';
 import { CellColorSwitcherDirective } from './directives/cell-color-switcher.directive';
 import { ExtraComponent } from './components/extra/extra.component';
+import { SliderComponent } from './components/slider/slider.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ExtraComponent } from './components/extra/extra.component';
     CellColorDirective,
     CellColorSwitcherDirective,
     ExtraComponent,
+    SliderComponent,
   ],
   imports: [
     CommonModule,

@@ -15,7 +15,7 @@ import * as userSelectors from '../../store/user/user.selectors';
 })
 export class DescriptionComponent implements OnInit {
 
-  public userDetail$!: Observable<UserDTO | any>
+  public userDetails$!: Observable<UserDTO | any>
   public destroy$: Subject<boolean> = new Subject();
   public showTable!: boolean;
   public showText!: boolean;
@@ -34,7 +34,7 @@ export class DescriptionComponent implements OnInit {
   };
 
   public getUserDetail(): void {
-    this.userDetail$ = this.activatedRoute.params.pipe(
+    this.userDetails$ = this.activatedRoute.params.pipe(
       map((userId: Params) => Number(userId['id'])),
       switchMap((id: number) => this.store.pipe(select(userSelectors.getUserSelector(id)))),
       tap(user => console.log(user))

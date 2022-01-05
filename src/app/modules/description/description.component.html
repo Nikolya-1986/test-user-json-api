@@ -1,11 +1,16 @@
-<ng-container *ngIf="userDetail$ | async as userDetail">
-    <app-details
-        [userDetail]="userDetail"
-        [showTable]="showTable"
-        [showText]="showText"
+<ng-container *ngIf="userDetails$ | async as userDetails">
+    <app-slider
+        [userDetails]="userDetails"
         [currentImage]="currentImage"
         (previousImage)="onPreviousImage($event)"
         (nextImage)="onNextImage($event)"
+        >
+    </app-slider>
+
+    <app-details
+        [userDetails]="userDetails"
+        [showTable]="showTable"
+        [showText]="showText"
         >
         <h2 #contentHead>
             Detail information about user
@@ -29,7 +34,8 @@
         </mat-checkbox>
         <a 
             class="referense-margin"
-            [routerLink]="['/description', userDetail.id, 'extra', { appeal: userDetail.name.title }]"
+            [routerLink]="['/description', userDetails.id, 'extra', { appeal: userDetails.name.title }]" 
+            [queryParams]="{ userDetails: 'userDetails' }"
             mat-raised-button 
             #contentReference
             >

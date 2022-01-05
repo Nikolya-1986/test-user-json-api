@@ -1,0 +1,23 @@
+<div class="details__images images">
+    <ng-container *ngFor="let image of userDetails.picture; let i = index">
+        <img
+            *ngIf="i === currentImage"
+            [src]="image.src"
+            class="slide"
+            title="image: {{ i + 1 }}"
+        />
+    </ng-container>
+
+    <button 
+        class="control prev" 
+        (click)="previousClick()"
+        >
+        <span class="arrow left"></span>
+      </button>
+      <button 
+        class="control next" 
+        (click)="nextClick()"
+        >
+        <span class="arrow right"></span>
+      </button>
+</div>

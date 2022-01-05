@@ -6,7 +6,7 @@ import { ExtraComponent } from './components/extra/extra.component';
 
 const childRouters: Routes =[
     {
-        path: 'extra', component: ExtraComponent 
+        path: 'extra', component: ExtraComponent
     }
 ];
 
