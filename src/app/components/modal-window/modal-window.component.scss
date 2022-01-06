@@ -1,0 +1,33 @@
+.modal {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    color: var(--light-color-1);
+
+    &__body {
+
+        h1 {
+            font-size: 1.5rem;
+        }
+        
+        p {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__footer {
+        justify-self: right;
+        align-self: center;
+    }
+
+    &__action-button {
+        margin-right: 30px;
+        background-color: var(--dark-color-5);
+        color: var(--light-color-1);
+    }
+
+    &__cancel-button {
+        background-color: var(--dark-color-6);
+        color: var(--light-color-1);
+    }
+}

@@ -7,7 +7,11 @@
     --primary-color-4: #0d9700;
     --dark-color-1: #452F21;
     --dark-color-2: #575757;
-    --transparent-color: rgba(0, 0, 0, 0.582);
+    --dark-color-3: #262626;
+    --dark-color-4: #1a1a1a;
+    --dark-color-5: #3b3b3b;
+    --dark-color-6: #4e4e4e;
+    --transparent-color: rgba(2, 2, 2, 0.582);
 }
 
 html, body  {
@@ -66,7 +70,7 @@ ul {
   
 a {
     text-decoration: none;
-    color: var(--light-color-1)
+    color: var(--light-color-1);
 }
 
 .active a {
@@ -75,4 +79,11 @@ a {
 
 .content {
     padding: .2rem 1.6rem;
+}
+
+mat-dialog-container#modal-component {
+    border: 3px solid var(--dark-color-3);
+    border-radius: 11px;
+    background-color: var(--dark-color-4);
+    color:  var(--light-color-1);
 }

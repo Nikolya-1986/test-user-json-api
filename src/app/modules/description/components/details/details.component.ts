@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { UserDTO } from '../../../../interfaces/user.interface';
 
@@ -12,12 +12,17 @@ export class DetailsComponent implements OnInit {
   @Input() public userDetails!: UserDTO;
   @Input() public showTable!: boolean;
   @Input() public showText!: boolean;
-  public darcColor!: boolean;
+  @Output() public openModalDeleteUser = new EventEmitter<{ userId: number, userName: string }>();
 
-  constructor(
-  ) {}
+  constructor() {}
 
   public ngOnInit(): void {
   };
+
+  public deleteUser(): void {
+    const userId = this.userDetails.id;
+    const userName = this.userDetails.name.first;
+    this.openModalDeleteUser.emit({ userId, userName })
+  }
 
 }

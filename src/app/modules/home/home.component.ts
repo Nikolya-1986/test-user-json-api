@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { map, Observable, Subject } from 'rxjs';
 import { takeUntil } from "rxjs/operators";
@@ -15,7 +15,7 @@ import AppUserState from '../../store/user/user.state';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   public users$!: Observable<UserDTO[]>;
   public isLoading$!: Observable<boolean>;
@@ -105,5 +105,10 @@ export class HomeComponent implements OnInit {
       this.activelanguage = this.languages[0]
     })
     return this.languages;
-  }
+  };
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  };
 }

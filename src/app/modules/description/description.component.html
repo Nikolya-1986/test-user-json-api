@@ -11,13 +11,14 @@
         [userDetails]="userDetails"
         [showTable]="showTable"
         [showText]="showText"
+        (openModalDeleteUser)="onOpenModalDeleteUser($event)"
         >
         <h2 #contentHead>
             Detail information about user
         </h2>
         <button 
             routerLink="/home"
-            mat-raised-button color="accent"
+            mat-raised-button color="primary"
             #contentButton
             >
             Back users
@@ -35,7 +36,6 @@
         <a 
             class="referense-margin"
             [routerLink]="['/description', userDetails.id, 'extra', { appeal: userDetails.name.title }]" 
-            [queryParams]="{ userDetails: 'userDetails' }"
             mat-raised-button 
             #contentReference
             >

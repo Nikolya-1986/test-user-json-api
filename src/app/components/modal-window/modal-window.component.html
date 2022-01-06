@@ -1,0 +1,31 @@
+<section class="modal__container modal">
+        <!-- <header id="modal-header">
+            <h1 class="modal-title">
+                {{ modalData.title }}
+            </h1>
+        </header> -->
+    <div class="modal__body">
+        <h1>
+            {{ modalData.title }}
+        </h1>
+        <p>
+            {{ modalData.description }}
+        </p>
+    </div>
+    <footer class="modal__footer">
+        <button 
+            mat-raised-button 
+            class="modal__action-button" 
+            (click)="actionConfirm()"
+            >
+            {{ modalData.actionButtonText }}
+        </button>
+        <button 
+            mat-raised-button 
+            class="modal__cancel-button" 
+            (click)="closeModal()"
+            >
+            Cancel
+        </button>
+    </footer>
+</section>

@@ -12,6 +12,7 @@ import { CellColorDirective } from './directives/cell-color.directive';
 import { CellColorSwitcherDirective } from './directives/cell-color-switcher.directive';
 import { ExtraComponent } from './components/extra/extra.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { ModalWindowModule } from 'src/app/components/modal-window/modal-window.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SliderComponent } from './components/slider/slider.component';
     DescriptionRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialExampleModule
+    MaterialExampleModule,
+    ModalWindowModule
   ]
 })
 export class DescriptionModule { }
