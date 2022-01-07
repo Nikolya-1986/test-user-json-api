@@ -6,7 +6,10 @@ export enum UsersActionsType {
     LOAD_END = '[LOADING] Load End',
     LOAD_USERS_REQUEST = '[USER] Load Users Request',
     LOAD_USERS_SUCCESS = '[USER] Load Users Success',
-    LOAD_USERS_FAIL = '[USER] Load Users Fail'
+    LOAD_USERS_FAIL = '[USER] Load Users Fail',
+    DELETE_USER_REQUEST = '[USER] Delete User Request',
+    DELETE_USER_SUCCESS = '[USER] Delete User Success',
+    DELETE_USER_FAIL = '[USER] Delete User Fail'
 };
 
 export const loadStart = createAction (
@@ -31,12 +34,30 @@ export const loadUsersFail = createAction (
     props<{message: string}>()
 );
 
+export const DeleteUserRequest = createAction (
+    UsersActionsType.DELETE_USER_REQUEST,
+    props<{userId: number}>()
+);
+
+export const DeleteUserSuccess = createAction (
+    UsersActionsType.DELETE_USER_SUCCESS,
+    props<{userId: number}>()
+);
+
+export const DeleteUserFail = createAction (
+    UsersActionsType.DELETE_USER_FAIL,
+    props<{message: string}>()
+);
+
 const allUserActions = union({
     loadStart,
     loadEnd,
     loadUsersRequest,
     loadUsersSuccess,
-    loadUsersFail
+    loadUsersFail,
+    DeleteUserRequest,
+    DeleteUserSuccess,
+    DeleteUserFail
 });
 
 export type UserActions = typeof allUserActions

@@ -12,7 +12,7 @@ export class DetailsComponent implements OnInit {
   @Input() public userDetails!: UserDTO;
   @Input() public showTable!: boolean;
   @Input() public showText!: boolean;
-  @Output() public openModalDeleteUser = new EventEmitter<{ userId: number, userName: string }>();
+  @Output() public openModalDeleteUser = new EventEmitter<UserDTO>();
 
   constructor() {}
 
@@ -20,9 +20,6 @@ export class DetailsComponent implements OnInit {
   };
 
   public deleteUser(): void {
-    const userId = this.userDetails.id;
-    const userName = this.userDetails.name.first;
-    this.openModalDeleteUser.emit({ userId, userName })
+    this.openModalDeleteUser.emit(this.userDetails)
   }
-
 }

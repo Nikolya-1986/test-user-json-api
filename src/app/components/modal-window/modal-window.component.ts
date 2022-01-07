@@ -1,7 +1,4 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-import { ModalWindowService } from '../../services/modal-window.service/modal-window.servise';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal-window',
@@ -9,21 +6,18 @@ import { ModalWindowService } from '../../services/modal-window.service/modal-wi
   styleUrls: ['./modal-window.component.scss']
 })
 export class ModalWindowComponent {
+  
+  @Input() public title: string = '';
+  @Input() public body: string = '';
+  @Input() public name: string = 'User name';
+  @Output() public cancelOpenModal = new EventEmitter();
+  @Output() public confirmAction = new EventEmitter();
 
-  constructor(
-    public dialogRef: MatDialogRef<ModalWindowComponent>,
-    @Inject(MAT_DIALOG_DATA) public modalData: any,
-    private modalWindowService: ModalWindowService
-  ) {
-    console.log(modalData);
-  }
+  public cancel(): void  {
+      this.cancelOpenModal.emit();
+  } 
 
-  public actionConfirm(): void {
-    this.modalWindowService.modalAction(this.modalData);
-    this.closeModal();
-  };
-
-  public closeModal(): void {
-    this.dialogRef.close();
+  public confirm(): void {
+      this.confirmAction.emit();
   }
 }

@@ -1,31 +1,23 @@
 <section class="modal__container modal">
-        <!-- <header id="modal-header">
-            <h1 class="modal-title">
-                {{ modalData.title }}
-            </h1>
-        </header> -->
-    <div class="modal__body">
+    <div class="modal__window">
         <h1>
-            {{ modalData.title }}
+            {{ title }}
         </h1>
-        <p>
-            {{ modalData.description }}
-        </p>
+        <ul>
+            <li>
+                The name of the user you want to remove: {{ name }}
+            </li>
+            <li>
+                {{ body }}
+            </li>
+        </ul>
+        <div class="modal__btn">
+            <button (click)="cancel()">
+                Cancel
+            </button>
+            <button (click)="confirm()">
+                Confirm
+            </button>
+        </div>
     </div>
-    <footer class="modal__footer">
-        <button 
-            mat-raised-button 
-            class="modal__action-button" 
-            (click)="actionConfirm()"
-            >
-            {{ modalData.actionButtonText }}
-        </button>
-        <button 
-            mat-raised-button 
-            class="modal__cancel-button" 
-            (click)="closeModal()"
-            >
-            Cancel
-        </button>
-    </footer>
 </section>

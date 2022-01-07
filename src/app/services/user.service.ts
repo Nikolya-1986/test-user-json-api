@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { catchError, map, retry } from 'rxjs/operators';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 
 import { UserDTO } from "../interfaces/user.interface";
 
@@ -15,6 +15,12 @@ export class UserService {
     constructor(
         private httpClient: HttpClient
     ){}
+    
+    private httpHeader = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+    };
     
     private errorsBackend(errorHttp: HttpErrorResponse) {
         let message = '';
@@ -32,6 +38,13 @@ export class UserService {
             // tap(users => console.log("Users:", users)),
             retry(3),
             catchError(this.errorsBackend),
+        )
+    };
+
+    public deleteUser(id: number): Observable<UserDTO> {
+        return this.httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
+            tap((item) => console.log("User delete:", item)),
+            catchError(this.errorsBackend)
         )
     };
 

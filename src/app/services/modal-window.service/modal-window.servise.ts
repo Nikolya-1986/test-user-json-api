@@ -1,25 +1,41 @@
-import { Injectable } from '@angular/core';
+import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+
+import { ModalWindowComponent } from '../../components/modal-window/modal-window.component';
+import { UserDTO } from '../../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ModalWindowService {
 
-  constructor() { }
+  private componentRef!: ComponentRef<ModalWindowComponent>;
+  private subject$!: Subject<string>;
 
-  public modalAction(modalData: any): void {
-    switch (modalData.name) {
+  constructor(
+    private resolver: ComponentFactoryResolver,
+  ){}
 
-      case "Delete":
-        this.deleteUser(modalData);
-        break;
-        
-      default:
-        break;
-    }
+  public modalWindowUserDelete(viewContainerRef: ViewContainerRef, modalTitle: string, modalBody: string, user: UserDTO): Observable<string>{
+    const modalFactory  = this.resolver.resolveComponentFactory(ModalWindowComponent);
+    this.componentRef = viewContainerRef.createComponent(modalFactory);
+    this.componentRef.instance.title = modalTitle;
+    this.componentRef.instance.body = modalBody;
+    this.componentRef.instance.name = user.name.first;
+    this.componentRef.instance.cancelOpenModal.subscribe(() => this.closeModal());
+    this.componentRef.instance.confirmAction.subscribe(() => this.confirm());
+    this.subject$ = new Subject<string>();
+    return this.subject$.asObservable();
+  }
+
+  private closeModal(): void {
+    this.subject$.complete();
+    this.componentRef.destroy()
   };
 
-  private deleteUser(modalData: any): void {
-    alert(`User with ID ${modalData.userId} has been deleted.`)
+  private confirm(): void {
+    this.subject$.next('Confirmed user delete');
+    this.closeModal();
+    this.subject$.unsubscribe()
   }
 }

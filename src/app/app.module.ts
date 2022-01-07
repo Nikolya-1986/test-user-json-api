@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { reduserUser } from './store/user/user.reducer';
 import { UsersEffects } from './store/user/user.effects';
 import { IsLoadingInterceptor } from './interseptors/isLoading.interceptor';
+import { MaterialExampleModule } from './material-example.module';
 
 const ISLOADING_INTERSEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -38,6 +39,7 @@ const ISLOADING_INTERSEPTOR: Provider = {
     BrowserAnimationsModule,
     MatNativeDateModule,
     HttpClientModule,
+    MaterialExampleModule,
     StoreModule.forRoot(reduserUser),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([UsersEffects]),

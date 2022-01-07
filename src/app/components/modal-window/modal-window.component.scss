@@ -1,33 +1,36 @@
 .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
-    display: grid;
-    color: var(--light-color-1);
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: var(--transparent-color);
 
-    &__body {
+    &__window {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: auto;
+        padding: 1.5rem;
+        text-align: center;
+        border: var(--primary-color-2) 1px solid;
+        background-color: var(--light-color-1);
+        border-radius: 1rem;
+    }
 
-        h1 {
-            font-size: 1.5rem;
+    &__btn {
+        display: flex;
+
+        button {
+            margin: 5px;
+            padding: .4rem 1rem;
         }
-        
-        p {
-            font-size: 1.2rem;
-        }
     }
-
-    &__footer {
-        justify-self: right;
-        align-self: center;
-    }
-
-    &__action-button {
-        margin-right: 30px;
-        background-color: var(--dark-color-5);
-        color: var(--light-color-1);
-    }
-
-    &__cancel-button {
-        background-color: var(--dark-color-6);
-        color: var(--light-color-1);
-    }
-}
+} 
