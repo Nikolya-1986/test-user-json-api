@@ -61,7 +61,7 @@ export class DescriptionComponent implements OnInit {
       takeUntil(this.destroy$)
     )
     .subscribe(() => {
-      this.store.dispatch(userActions.DeleteUserRequest({userId: user.id}))
+      this.store.dispatch(userActions.DeleteUserRequest({ userId: user.id }))
     })
   };
 

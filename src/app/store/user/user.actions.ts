@@ -1,5 +1,6 @@
 import { createAction, props, union } from "@ngrx/store";
-import { UserDTO } from "src/app/interfaces/user.interface";
+
+import { UserDTO } from "../../interfaces/user.interface";
 
 export enum UsersActionsType {
     LOAD_START = '[LOADING] Load Start',

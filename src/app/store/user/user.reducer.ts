@@ -38,12 +38,19 @@ export const userReduser = createReducer (
         ...state,
         errorMessage: action.message
     })),
-    on(userActions.DeleteUserRequest, (state, {userId}) => ({
-        ...state,
-        deleteUser: userId
+    on(userActions.DeleteUserRequest, state => ({
+        ...state
     })),
-    on(userActions.DeleteUserSuccess, (state, action) => {
-        const otherUsers = [...state.userDTO.filter(user => user.id !== action.userId )];
+    on(userActions.DeleteUserSuccess, (state, {userId}) => {
+        console.log(userId)
+        // const userIndes = state.userDTO.findIndex((item) => item.id === userId);
+        // const otherUsers = [...state.userDTO];
+        // otherUsers.splice(userIndes, 1);
+        // return {
+        //     ...state,
+        //     userDTO: otherUsers
+        // }
+        const otherUsers = [...state.userDTO.filter(user => user.id !== userId)];
         return {
             ...state,
             userDTO: otherUsers

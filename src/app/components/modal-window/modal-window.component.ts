@@ -10,11 +10,11 @@ export class ModalWindowComponent {
   @Input() public title: string = '';
   @Input() public body: string = '';
   @Input() public name: string = 'User name';
-  @Output() public cancelOpenModal = new EventEmitter();
+  @Output() public cancelAction = new EventEmitter();
   @Output() public confirmAction = new EventEmitter();
 
   public cancel(): void  {
-      this.cancelOpenModal.emit();
+      this.cancelAction.emit();
   } 
 
   public confirm(): void {

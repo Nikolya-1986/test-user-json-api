@@ -42,8 +42,9 @@ export class UserService {
     };
 
     public deleteUser(id: number): Observable<UserDTO> {
+        console.log(id)
         return this.httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
-            tap((item) => console.log("User delete:", item)),
+            tap((item) => console.log("User delete:", item.id)),
             catchError(this.errorsBackend)
         )
     };

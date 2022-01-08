@@ -22,19 +22,20 @@ export class ModalWindowService {
     this.componentRef.instance.title = modalTitle;
     this.componentRef.instance.body = modalBody;
     this.componentRef.instance.name = user.name.first;
-    this.componentRef.instance.cancelOpenModal.subscribe(() => this.closeModal());
+    this.componentRef.instance.cancelAction.subscribe(() => this.closeModal());
     this.componentRef.instance.confirmAction.subscribe(() => this.confirm());
     this.subject$ = new Subject<string>();
     return this.subject$.asObservable();
   }
 
   private closeModal(): void {
+    this.subject$.next('Cancel action');
     this.subject$.complete();
     this.componentRef.destroy()
   };
 
   private confirm(): void {
-    this.subject$.next('Confirmed user delete');
+    this.subject$.next('Confirmed action');
     this.closeModal();
     this.subject$.unsubscribe()
   }
