@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+
+import { UserDTO } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-extra',
@@ -8,12 +10,14 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ExtraComponent implements OnInit {
 
-  @Input() public displayedColumns!: string[];
-  @Input() public dataSource = new MatTableDataSource();
+  @Input() public data!: UserDTO;
   
-  constructor() { }
+  constructor(
+    private params: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+
   }
 
 }

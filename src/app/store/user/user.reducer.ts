@@ -3,6 +3,7 @@ import { ActionReducerMap, createReducer, on } from "@ngrx/store";
 import { UserDTO } from "src/app/interfaces/user.interface";
 import * as userActions from "./user.actions";
 import AppUserState from "./user.state";
+import * as _ from 'lodash'
 
 export interface UserState {
     userDTO: UserDTO[],
@@ -13,7 +14,7 @@ export interface UserState {
 const initialstate: UserState = {
     userDTO: [],
     loadCouter: 0,
-    errorMessage: ""
+    errorMessage: "",
 };
 
 export const userReduser = createReducer (
@@ -34,6 +35,28 @@ export const userReduser = createReducer (
         userDTO: [...state.userDTO, ...action.users]
     })),
     on(userActions.loadUsersFail, (state, action) => ({
+        ...state,
+        errorMessage: action.message
+    })),
+    on(userActions.DeleteUserRequest, state => ({
+        ...state
+    })),
+    on(userActions.DeleteUserSuccess, (state, {userId}) => {
+        console.log(userId)
+        // const userIndes = state.userDTO.findIndex((item) => item.id === userId);
+        // const otherUsers = [...state.userDTO];
+        // otherUsers.splice(userIndes, 1);
+        // return {
+        //     ...state,
+        //     userDTO: otherUsers
+        // }
+        const otherUsers = [...state.userDTO.filter(user => user.id !== userId)];
+        return {
+            ...state,
+            userDTO: otherUsers
+        }
+    }),
+    on(userActions.DeleteUserFail, (state, action) => ({
         ...state,
         errorMessage: action.message
     }))

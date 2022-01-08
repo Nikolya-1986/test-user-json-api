@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { select, Store } from '@ngrx/store';
-import { MatTableDataSource } from '@angular/material/table';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userSelectors from '../../store/user/user.selectors';
+import * as userActions from '../../store/user/user.actions';
+import { ModalWindowService } from '../../services/modal-window.service/modal-window.servise';
 
 @Component({
   selector: 'app-description',
@@ -15,45 +16,57 @@ import * as userSelectors from '../../store/user/user.selectors';
 })
 export class DescriptionComponent implements OnInit {
 
-  public userDetail$!: Observable<UserDTO | any>
+  @ViewChild('modal', { read: ViewContainerRef, static: false })
+  private viewContainerRef!: ViewContainerRef;
+  public userDetails$!: Observable<UserDTO | any>
   public showTable!: boolean;
   public showText!: boolean;
   public currentImage: number = 0;
-  public images!: Picture[];
-  public dataSource = new MatTableDataSource();
-  public displayedColumns: string[] = ['name.title', 'name.first', 'name.last', 'dob.date', 'name.gender', 'name.status', 'location.country', 
-                                      'location.city', 'email', 'language', 'registered.date', 'phone', 'nat'];
+  public destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private store: Store<AppUserState>,
+    public modalWindowServise: ModalWindowService,
   ) { }
 
   public ngOnInit(): void {
     this.getUserDetail();
-    // this.preloadImages()
   };
 
   public getUserDetail(): void {
-    this.userDetail$ = this.activatedRoute.params.pipe(
+    this.userDetails$ = this.activatedRoute.params.pipe(
       map((userId: Params) => Number(userId['id'])),
       switchMap((id: number) => this.store.pipe(select(userSelectors.getUserSelector(id)))),
       tap(user => console.log(user))
     )
   };
 
-  public preloadImages(): void {
-    for (const image of this.images) {
-      new Image().src = image.large;
-    }
+  public onPreviousImage({ previous, images }: { previous: number, images: Picture[] }): void {
+    this.currentImage = previous < 0 ? images.length - 1 : previous 
   };
 
-  public onPreviousImage(previous: number): void {
-    // this.currentImage = previous < 0 ? this.images.length - 1 : previous 
+  public onNextImage({ next, images }: { next: number, images: Picture[] }): void {
+    this.currentImage = next === images.length ? 0 : next
   };
 
-  public onNextImage(next: number): void {
-    // this.currentImage = next === this.images.length ? 0 : next
+  public onOpenModalDeleteUser(user: UserDTO): void {
+    this.modalWindowServise.modalWindowUserDelete(
+      this.viewContainerRef, 
+      'Are you sure you want to delete the user?', 
+      "Click the 'Confirm' button if you want to delete the user, otherwise click 'Cancel'.",
+      user
+    )
+    .pipe(
+      takeUntil(this.destroy$)
+    )
+    .subscribe(() => {
+      this.store.dispatch(userActions.DeleteUserRequest({ userId: user.id }))
+    })
+  };
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
-
 }

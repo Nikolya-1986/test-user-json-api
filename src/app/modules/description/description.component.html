@@ -1,19 +1,25 @@
-<ng-container *ngIf="userDetail$ | async as userDetail">
-    <app-details
-        [userDetail]="userDetail"
-        [showTable]="showTable"
-        [showText]="showText"
+<ng-template #modal></ng-template>
+<ng-container *ngIf="userDetails$ | async as userDetails">
+    <app-slider
+        [userDetails]="userDetails"
         [currentImage]="currentImage"
-        [images]="images"
         (previousImage)="onPreviousImage($event)"
         (nextImage)="onNextImage($event)"
+        >
+    </app-slider>
+
+    <app-details
+        [userDetails]="userDetails"
+        [showTable]="showTable"
+        [showText]="showText"
+        (openModalDeleteUser)="onOpenModalDeleteUser($event)"
         >
         <h2 #contentHead>
             Detail information about user
         </h2>
         <button 
             routerLink="/home"
-            mat-raised-button color="accent"
+            mat-raised-button color="primary"
             #contentButton
             >
             Back users
@@ -30,7 +36,7 @@
         </mat-checkbox>
         <a 
             class="referense-margin"
-            [routerLink]="['/description', userDetail.id, 'extra', { appeal: userDetail.name.title }]"
+            [routerLink]="['/description', userDetails.id, 'extra', { appeal: userDetails.name.title }]" 
             mat-raised-button 
             #contentReference
             >

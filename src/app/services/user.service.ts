@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { catchError, map, retry } from 'rxjs/operators';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 
 import { UserDTO } from "../interfaces/user.interface";
 
@@ -15,6 +15,12 @@ export class UserService {
     constructor(
         private httpClient: HttpClient
     ){}
+    
+    private httpHeader = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+    };
     
     private errorsBackend(errorHttp: HttpErrorResponse) {
         let message = '';
@@ -35,8 +41,17 @@ export class UserService {
         )
     };
 
+    public deleteUser(id: number): Observable<UserDTO> {
+        console.log(id)
+        return this.httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
+            tap((item) => console.log("User delete:", item.id)),
+            catchError(this.errorsBackend)
+        )
+    };
+
     public getLanguages(): Observable<string[]> {
-        return this.httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`).pipe(
+        const users$ = this.getUsers();
+        return users$.pipe(
             map((response) => {
                 const result = response;
                 const languages = this.uniqueLanguages(result);
@@ -52,5 +67,5 @@ export class UserService {
             return uniqueLanguages;
         });
         return [...arrayLanguages];
-    }
+    };
 }

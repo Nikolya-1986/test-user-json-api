@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { Picture, UserDTO } from '../../../../interfaces/user.interface';
+import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-details',
@@ -9,26 +9,17 @@ import { Picture, UserDTO } from '../../../../interfaces/user.interface';
 })
 export class DetailsComponent implements OnInit {
 
-  @Input() public userDetail!: UserDTO;
+  @Input() public userDetails!: UserDTO;
   @Input() public showTable!: boolean;
   @Input() public showText!: boolean;
-  @Input() public currentImage!: number;
-  @Input() public images!: Picture[];
-  @Output() public previousImage = new EventEmitter<number>();
-  @Output() public nextImage = new EventEmitter<number>();
+  @Output() public openModalDeleteUser = new EventEmitter<UserDTO>();
 
-  constructor() { }
+  constructor() {}
 
   public ngOnInit(): void {
   };
 
-  public previousClick(): void {
-    const previous = this.currentImage - 1;
-    this.previousImage.emit(previous)
-  };
-
-  public nextClick(): void {
-    const next = this.currentImage + 1;
-    this.nextImage.emit(next)
-  };
+  public deleteUser(): void {
+    this.openModalDeleteUser.emit(this.userDetails)
+  }
 }
