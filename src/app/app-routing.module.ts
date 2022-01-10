@@ -10,6 +10,9 @@ const routes: Routes = [
     path: 'description/:id', loadChildren: () => import('./modules/description/description.module').then(module => module.DescriptionModule)
   },
   {
+    path: 'edit/:id', loadChildren: () => import('./modules/edit/edit.module').then(module => module.EditModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'

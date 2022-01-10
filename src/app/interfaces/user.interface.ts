@@ -48,12 +48,22 @@ export enum Appeal {
 
 export interface Location {
     street: Street,
-    city: string,
+    city: City,
     state: string,
-    country: string,
+    country: Country,
     postcode: string,
     coordinates: Coordinates,
     timezone: Timezone,
+};
+
+export interface City {
+    id: number,
+    name: string
+};
+
+export interface Country {
+    id: number,
+    name: string
 };
 
 export interface Street {
@@ -93,7 +103,9 @@ export interface Registered {
 
 export interface Picture {
     src: string,
-    // large: string,
-    // medium: string,
-    // thumbnail: string,
 };
+
+export interface SubjectLanguage {
+    name: string;
+}
+  

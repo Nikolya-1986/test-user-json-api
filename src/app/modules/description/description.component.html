@@ -1,5 +1,8 @@
 <ng-template #modal></ng-template>
 <ng-container *ngIf="userDetails$ | async as userDetails">
+    <h2>
+        Detail information about user: {{ userDetails.name.first }}
+    </h2>
     <app-slider
         [userDetails]="userDetails"
         [currentImage]="currentImage"
@@ -13,18 +16,16 @@
         [showTable]="showTable"
         [showText]="showText"
         (openModalDeleteUser)="onOpenModalDeleteUser($event)"
+        (editCurrentUser)="onEditCurrentUser($event)"
         >
-        <h2 #contentHead>
-            Detail information about user
-        </h2>
-        <button 
+        <button button-back
             routerLink="/home"
             mat-raised-button color="primary"
             #contentButton
             >
             Back users
         </button>
-        <mat-checkbox 
+        <mat-checkbox checbox-show-data
             class="example-margin" 
             [(ngModel)]="showTable"
             (change)="showText=!showText"
@@ -34,11 +35,11 @@
                 {{ showText ? 'hide details' : 'show details' }}
             </span>
         </mat-checkbox>
-        <a 
+        <a  button-extra
             class="referense-margin"
             [routerLink]="['/description', userDetails.id, 'extra', { appeal: userDetails.name.title }]" 
             mat-raised-button 
-            #contentReference
+            #contentButton
             >
             Extra
         </a>
