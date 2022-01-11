@@ -46,27 +46,27 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
     this.error$ = this.store.pipe(select(userSelectors.getFailSelector));
     this.fetchLanguages();
-    this.saveQueryParams();
+    this.fetchQueryParams();
   };
   
   public onDetailUser(id: number): void {
-    this.router.navigate(['description', id])
+    this.router.navigate(['description', id]);
   };
 
   public onCurrentSearchName(searchName: string): void {
-    this.searchUserName = searchName 
+    this.searchUserName = searchName ;
   };
 
   public onCurrentForSortValue(alfabetValue: string): void {
-    this.filterUserNameAge = alfabetValue
+    this.filterUserNameAge = alfabetValue;
   };
 
   public onCurrentGender(genderValue: string | any): void {
-    this.filterUserGender = genderValue
+    this.filterUserGender = genderValue;
   };
 
   public onCurrentSratus(statusValue: string | any): void {
-    this.fiterUserStatus = statusValue
+    this.fiterUserStatus = statusValue;
   };
 
   public onCurrentLanguage(selectedLanguage: string): void {//
@@ -79,17 +79,17 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log(this.filterUserAvailable);
   };
 
-  public saveQueryParams(): void{
+  public fetchQueryParams(): void{
     this.activateRoute.queryParamMap.pipe(
-      takeUntil(this.destroy$)
+      takeUntil(this.destroy$),
     )
     .subscribe(queryParams => {
       this.searchUserName = queryParams.get('selectedSearchName') || '';
       this.filterUserNameAge = queryParams.get('selectedForSortValue') || 'Default';
       this.filterUserGender = queryParams.get('selectedGender') as Gender || Gender.all;
       this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all;
+      this.filterUserAvailable = queryParams.get('selectedAvailable') === 'true';
       this.filterUserLanguage = queryParams.get('selectedlanguage') || this.languages[0];
-      this.filterUserAvailable = queryParams.get('selectedAvailable') as unknown as boolean || false; 
     })
   };
 
@@ -102,7 +102,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       })
     )
     .subscribe(() => {
-      this.activelanguage = this.languages[0]
+      this.activelanguage = this.languages[0];
     })
     return this.languages;
   };

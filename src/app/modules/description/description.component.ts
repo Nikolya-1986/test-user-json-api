@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 
@@ -28,6 +28,7 @@ export class DescriptionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private store: Store<AppUserState>,
     public modalWindowServise: ModalWindowService,
+    private router: Router,
   ) { }
 
   public ngOnInit(): void {
@@ -38,7 +39,7 @@ export class DescriptionComponent implements OnInit {
     this.userDetails$ = this.activatedRoute.params.pipe(
       map((userId: Params) => Number(userId['id'])),
       switchMap((id: number) => this.store.pipe(select(userSelectors.getUserSelector(id)))),
-      tap(user => console.log(user))
+      // tap(user => console.log(user)),
     )
   };
 
@@ -63,6 +64,10 @@ export class DescriptionComponent implements OnInit {
     .subscribe(() => {
       this.store.dispatch(userActions.DeleteUserRequest({ userId: user.id }))
     })
+  };
+
+  public onEditCurrentUser(id: number): void{
+    this.router.navigate(['edit', id]);
   };
 
   public ngOnDestroy(): void {

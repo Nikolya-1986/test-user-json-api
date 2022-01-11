@@ -1,15 +1,22 @@
 <div class="details__container details">
-    <ng-content select="h2"></ng-content>
 
     <div class="details__choice">
-        <ng-content select="button"></ng-content>
-        <button 
-            mat-raised-button color="accent"
-            (click)="deleteUser()"
-            >
-            Delete
-        </button>
-        <ng-content select="mat-checkbox"></ng-content>
+        <ng-content select="[button-back]"></ng-content>
+        <ng-content select="[checbox-show-data]"></ng-content>
+        <ng-container *ngIf="showTable">
+            <button 
+                mat-raised-button color="accent"
+                (click)="deleteUser()"
+                >
+                Delete
+            </button>
+            <button 
+                mat-raised-button color="warn"
+                (click)="editUser()"
+                >
+                Edit
+            </button>
+        </ng-container>
     </div>
 
     <ng-template [isVisibleOrNot]="showTable">
@@ -98,5 +105,5 @@
             </tr>
         </table>
     </ng-template>
-    <ng-content *ngIf="showTable" selcet="a"></ng-content>
+    <ng-content *ngIf="showTable" selcet="[button-extra]"></ng-content>
 </div>

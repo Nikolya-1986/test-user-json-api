@@ -29,14 +29,13 @@ export class ModalWindowService {
   }
 
   private closeModal(): void {
-    this.subject$.next('Cancel action');
     this.subject$.complete();
-    this.componentRef.destroy()
+    this.componentRef.destroy();
   };
 
   private confirm(): void {
     this.subject$.next('Confirmed action');
     this.closeModal();
-    this.subject$.unsubscribe()
+    this.subject$.unsubscribe();
   }
 }

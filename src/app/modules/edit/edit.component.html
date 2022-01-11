@@ -1,0 +1,261 @@
+<section 
+    class="edit__container edit"
+    >
+    <h1>
+        Page edit user
+    </h1>
+    <mat-sidenav-container>
+        <mat-sidenav-content>
+            <form 
+                class="edit__form" 
+                [formGroup]="formEdit" 
+                (ngSubmit)="submitForm()" 
+                novalidate>
+                <!-- Picture -->
+                <mat-form-field>
+                    <div class="edit__file-control">
+                  
+                        <mat-toolbar>
+                            <input 
+                                matInput 
+                                [(ngModel)]="uploadFileName" 
+                                readonly 
+                                name="File" 
+                            />
+                            <button 
+                                mat-flat-button 
+                                color="accent"
+                                >
+                                <i class="material-icons">file_upload</i>
+                                Load image
+                            </button>
+                        </mat-toolbar>
+                        <input 
+                            class="file-control-input" 
+                            type="file" 
+                            #uploadControl 
+                            (change)="imageChange($event)" 
+                            formControlName="picture"
+                            multiple="multiple" 
+                            accept="image/*"
+                        />
+                    </div>
+                </mat-form-field>
+                <!-- Appeal -->
+                <mat-form-field>
+                    <mat-label>
+                        Appeal
+                    </mat-label>
+                    <mat-select formControlName="appeal">
+                        <mat-option 
+                            [value]="item" 
+                            *ngFor="let item of appeal"
+                            >
+                            {{ item }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- First name -->
+                <mat-form-field class="example-full-width">
+                    <input 
+                        matInput 
+                        placeholder="First name" 
+                        formControlName="firstName"
+                        >
+                    <mat-error *ngIf="errorHandling('firstName', 'required')">
+                        You must provide a <strong>first name</strong>
+                    </mat-error>
+                </mat-form-field>
+                <!-- First name -->
+                <mat-form-field class="example-full-width">
+                    <input 
+                        matInput 
+                        placeholder="Last name" 
+                        formControlName="lastName"
+                        >
+                    <!-- error -->
+                    <mat-error *ngIf="errorHandling('lastName', 'required')">
+                        You must provide a <strong>last name</strong>
+                    </mat-error>
+                </mat-form-field>
+                <!-- Gender -->
+                <div class="misc-bottom-padding">
+                    <mat-label>
+                        Gender:
+                    </mat-label>
+                    <mat-radio-group 
+                        aria-label="Select an option" 
+                        formControlName="gender"
+                        >
+                        <mat-radio-button   
+                            [value]="item" 
+                            *ngFor="let item of gender"
+                            >
+                            {{ item }}
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <!-- Status -->
+                <mat-form-field>
+                    <mat-label>
+                        Status
+                    </mat-label>
+                    <mat-select formControlName="status">
+                        <mat-option 
+                            [value]="status" 
+                            *ngFor="let status of statuses"
+                            >
+                            {{ status }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+               <!-- Date of birth -->
+               <mat-form-field>
+                    <input 
+                        matInput 
+                        readonly 
+                        [matDatepicker]="picker" 
+                        placeholder="Date of birth" 
+                        formControlName="dob"
+                        (dateChange)="dateOfBirth($event)"
+                    />
+                    <mat-datepicker-toggle 
+                        matSuffix [for]="picker"
+                        >
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <!-- error -->
+                    <mat-error *ngIf="errorHandling('dob', 'required')">
+                        Please enter <strong>date of birth</strong>
+                    </mat-error>
+                </mat-form-field>
+                <!-- Countries -->
+                <mat-form-field>
+                    <mat-label>
+                        Countries
+                    </mat-label>
+                    <mat-select formControlName="countries">
+                        <mat-option 
+                            [value]="country.id" 
+                            *ngFor="let country of countries"
+                            >
+                            {{ country.name }} 
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- Cities -->
+                <mat-form-field>
+                    <mat-label>
+                        Cities
+                    </mat-label>
+                    <mat-select formControlName="cities">
+                        <mat-option 
+                            [value]="city.id" 
+                            *ngFor="let city of cities"
+                            >
+                            {{ city.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- Email -->
+                <mat-form-field class="example-full-width">
+                    <mat-label>
+                        Email
+                    </mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Email" 
+                        formControlName="email"
+                        >
+                    <!-- error -->
+                    <mat-error *ngIf="errorHandling('email', 'required')">
+                        You must provide a <strong>email</strong>
+                    </mat-error>
+                </mat-form-field>
+                <!-- Languages Array-->
+                <mat-form-field class="multiple-items">
+                    <mat-label>
+                        Languages
+                    </mat-label>
+                    <mat-chip-list #languageList>
+                        <mat-chip 
+                            *ngFor="let language of languages" 
+                            [selectable]="selectable" 
+                            [removable]="removable"
+                            (removed)="removeLanguage(language)"
+                            >
+                            {{ language.name }}
+                            <mat-icon 
+                                matChipRemove 
+                                *ngIf="removable"
+                                >
+                                cancel
+                            </mat-icon>
+                        </mat-chip>
+                        <input 
+                            placeholder="Add language" 
+                            [matChipInputFor]="languageList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
+                            [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="addLanguage($event)"
+                            >
+                    </mat-chip-list>
+                </mat-form-field>
+                <!-- Date registered -->
+                <mat-form-field>
+                    <mat-label>
+                        Date registred
+                    </mat-label>
+                    <input 
+                        matInput 
+                        disabled 
+                        value="Google"
+                        >
+                </mat-form-field>
+                <!-- Phone -->
+                <mat-form-field class="example-full-width">
+                    <mat-label>
+                        Phone
+                    </mat-label>
+                    <span matPrefix>+ &nbsp;</span>
+                    <input 
+                        matInput 
+                        placeholder="375-29-732-35-04"
+                        formControlName="phone"
+                    />
+                    <mat-icon matSuffix>
+                        mode_edit
+                    </mat-icon>
+                    <mat-error *ngIf="errorHandling('phone', 'required')">
+                        You must provide a <strong>phone</strong>
+                    </mat-error>
+                </mat-form-field>
+                <!-- Nationality -->
+                <mat-form-field class="example-full-width">
+                    <mat-label>
+                        Nationality
+                    </mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Nationality" 
+                        formControlName="nationality"
+                        >
+                    <!-- error -->
+                    <mat-error *ngIf="errorHandling('nationality', 'required')">
+                        You must provide a <strong>nationality</strong>
+                    </mat-error>
+                </mat-form-field>
+                <!-- Submit -->
+                <div class="button-wrapper">
+                    <button 
+                        mat-flat-button 
+                        color="primary"
+                        [disabled]="formEdit.invalid || formEdit.pending"
+                        >
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </mat-sidenav-content>
+    </mat-sidenav-container>    
+</section>
