@@ -2,12 +2,11 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Action, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { map, catchError, mergeMap, withLatestFrom, switchMap, tap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap } from 'rxjs/operators';
 
 import AppUserState from "./user.state";
 import { UserService } from "../../services/user.service";
 import * as userActions from "./user.actions";
-import * as userSelectors from './user.selectors';
 import { UserDTO } from "src/app/interfaces/user.interface";
 import { Router } from "@angular/router";
 
@@ -17,19 +16,10 @@ export class UsersEffects {
     loadUsers$: Observable<Action> = createEffect(() => this.actions$
         .pipe(
             ofType(userActions.UsersActionsType.LOAD_USERS_REQUEST),
-            mergeMap(() => this.userService.getUsers()
+            switchMap(() => this.userService.getUsers()
                 .pipe(
-                    withLatestFrom(this.store.select(userSelectors.getUsersSelector)),
-                    map(([newUsers, currentUsers]) => {
-                        if(currentUsers.length < 1){
-                            return (userActions.loadUsersSuccess({users: newUsers}))
-                        }else {
-                            return {
-                                type: 'Empty Action'
-                            }
-                        }
-                    }),
-                    catchError((error) => of(userActions.loadUsersFail(error)))
+                    map((users) => userActions.loadUsersSuccess({users})),
+                    catchError((error) => of(userActions.loadUsersFail(error))),
                 )
             )
         ),
@@ -39,14 +29,15 @@ export class UsersEffects {
     deleteUser$: Observable<Action> = createEffect(() => this.actions$
         .pipe(
             ofType(userActions.UsersActionsType.DELETE_USER_REQUEST),
-            mergeMap((action: UserDTO) => this.userService.deleteUser(action.id)
+            switchMap((action: any) => this.userService.deleteUser(action.userId)
                 .pipe(
                     tap(() => this.router.navigate(['/home'])),
-                    map(() => userActions.DeleteUserSuccess({ userId: action.id})),
-                    catchError((error) => of(userActions.DeleteUserFail(error)))
+                    map(() => userActions.DeleteUserSuccess({ userId: action.userId})),
+                    catchError((error) => of(userActions.DeleteUserFail(error))),
                 )
             )
-        )
+        ),
+        { useEffectsErrorHandler: false }
     )
 
     constructor(

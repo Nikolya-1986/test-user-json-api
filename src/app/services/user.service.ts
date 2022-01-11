@@ -13,12 +13,12 @@ export class UserService {
     private readonly BASE_URL = 'http://localhost:3000';
 
     constructor(
-        private httpClient: HttpClient
+        private httpClient: HttpClient,
     ){}
     
     private httpHeader = {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         })
     };
     
@@ -42,10 +42,9 @@ export class UserService {
     };
 
     public deleteUser(id: number): Observable<UserDTO> {
-        console.log(id)
         return this.httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
-            tap((item) => console.log("User delete:", item.id)),
-            catchError(this.errorsBackend)
+            tap(() => console.log("User delete:", id)),
+            catchError(this.errorsBackend),
         )
     };
 

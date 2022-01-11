@@ -36,14 +36,14 @@ export class EditComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.countries = this.dataService.getCountries();
-    this.cities = this.dataService.getCities()
+    this.cities = this.dataService.getCities();
   }
 
   public ngOnInit(): void {
-    this.reactiveForm()
+    this.reactiveForm();
   };
 
   public reactiveForm(): void {
@@ -60,18 +60,40 @@ export class EditComponent implements OnInit {
       email: ['', [Validators.required]],
       subjects: [this.languages],
       phone: ['', [Validators.required]],
-      nationality: ['', [Validators.required]]
+      nationality: ['', [Validators.required]],
     })
   };
 
   public imageChange(inputEvent: any): void {
+    // if (inputEvent.target.files && inputEvent.target.files[0]) {
 
+    //   this.uploadFileName = '';
+    //   Array.from(inputEvent.target.files).forEach((file: any) => {
+    //     this.uploadFileName += file.name + ',';
+    //   });
+
+    //   const fileReader = new FileReader();
+    //   fileReader.onload = (e: any) => {
+    //     const img = new Image();
+    //     img.src = e.target.result;
+    //     img.onload = res => {
+
+    //       const imgBase64Path = inputEvent.target.result;
+
+    //     };
+    //   };
+    //   fileReader.readAsDataURL(inputEvent.target.files[0]);
+
+    //   this.uploadControl.nativeElement.value = "";
+    // } else {
+    //   this.uploadFileName = 'Choose File';
+    // }
   };
 
   public dateOfBirth(inputEvent: { target: { value: string | number | Date; }; }): void {
     const convertDate = new Date(inputEvent.target.value).toISOString().substring(0, 10);
     this.formEdit.get('dob')!.setValue(convertDate, {
-      onlyself: true
+      onlyself: true,
     })
   };
 
@@ -98,6 +120,6 @@ export class EditComponent implements OnInit {
   };
 
   public submitForm():void {
-    console.log(this.formEdit.value)
+    console.log(this.formEdit.value);
   }
 }

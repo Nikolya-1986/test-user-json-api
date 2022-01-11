@@ -39,7 +39,7 @@ export class DescriptionComponent implements OnInit {
     this.userDetails$ = this.activatedRoute.params.pipe(
       map((userId: Params) => Number(userId['id'])),
       switchMap((id: number) => this.store.pipe(select(userSelectors.getUserSelector(id)))),
-      tap(user => console.log(user))
+      // tap(user => console.log(user)),
     )
   };
 

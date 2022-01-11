@@ -6,20 +6,20 @@ export const getUserFeatureSelector = createFeatureSelector<UserState>('users');
 
 export const getIsLoadingSelector = createSelector (
     getUserFeatureSelector,
-    (state: UserState) => state.loadCouter !== 0
+    (state: UserState) => state.loadCouter !== 0,
 );
 
 export const getUsersSelector = createSelector (
     getUserFeatureSelector,
-    (state: UserState) => state.userDTO
+    (state: UserState) => state.userDTO,
 );
 
 export const getUserSelector = (userId: number) => createSelector (
     getUserFeatureSelector,
-    (state: UserState) => state.userDTO.find(user => user.id === userId)
+    (state: UserState) => state.userDTO.find(user => user.id === userId),
 );
 
 export const getFailSelector = createSelector (
     getUserFeatureSelector,
-    (state: UserState) => state.errorMessage
+    (state: UserState) => state.errorMessage,
 )
