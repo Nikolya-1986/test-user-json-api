@@ -1,8 +1,9 @@
 <section 
     class="edit__container edit"
+    *ngIf="userEdit$ | async as userEdit"
     >
     <h1>
-        Page edit user
+        Page edit for user: {{ userEdit.name.first }}
     </h1>
     <mat-sidenav-container>
         <mat-sidenav-content>
@@ -72,7 +73,7 @@
                         matInput 
                         placeholder="Last name" 
                         formControlName="lastName"
-                        >
+                    />
                     <!-- error -->
                     <mat-error *ngIf="errorHandling('lastName', 'required')">
                         You must provide a <strong>last name</strong>
@@ -94,6 +95,9 @@
                             {{ item }}
                         </mat-radio-button>
                     </mat-radio-group>
+                    <mat-error *ngIf="errorHandling('gender', 'required')">
+                        Please enter <strong>gender</strong>
+                    </mat-error>
                 </div>
                 <!-- Status -->
                 <mat-form-field>
@@ -194,6 +198,7 @@
                         </mat-chip>
                         <input 
                             placeholder="Add language" 
+                            formControlName="subjects"
                             [matChipInputFor]="languageList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
                             [matChipInputAddOnBlur]="addOnBlur"
@@ -208,8 +213,8 @@
                     </mat-label>
                     <input 
                         matInput 
+                        value= "{{userEdit.registered.date | formatDate}}"
                         disabled 
-                        value="Google"
                         >
                 </mat-form-field>
                 <!-- Phone -->

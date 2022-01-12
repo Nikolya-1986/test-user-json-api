@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { EditComponent } from './edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialExampleModule } from 'src/app/material-example.module';
-import { ModalWindowModule } from 'src/app/components/modal-window/modal-window.module';
+import { MaterialExampleModule } from '../../material-example.module';
+import { ModalWindowModule } from '../../components/modal-window/modal-window.module';
 import { EditRoutingModule } from './edit-routing.module';
+import { ApplicationPipesModule } from 'src/app/pipes/application-pipes.module';
 
 @NgModule({
   declarations: [
-    EditComponent
+    EditComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +18,8 @@ import { EditRoutingModule } from './edit-routing.module';
     ReactiveFormsModule,
     MaterialExampleModule,
     EditRoutingModule,
-    ModalWindowModule
+    ModalWindowModule,
+    ApplicationPipesModule
   ]
 })
 export class EditModule { }
