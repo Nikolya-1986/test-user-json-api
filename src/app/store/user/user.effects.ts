@@ -38,7 +38,24 @@ export class UsersEffects {
             )
         ),
         { useEffectsErrorHandler: false }
-    )
+    );
+
+    editUser$: Observable<Action> = createEffect(() => this.actions$
+        .pipe(
+            ofType(userActions.UsersActionsType.EDIT_USER_REQUEST),
+            switchMap((action: any) => {
+                console.log(action);
+                return this.userService.editUser(action.userEdit)
+                    .pipe(
+                        tap(() => this.router.navigate(['/description'])),
+                        map(() => userActions.EditUserSuccess({ userEdit: action.userEdit })),
+                        catchError((error) => of(userActions.EdituserFail(error)))
+                    )
+                }
+            )
+        ),
+        { useEffectsErrorHandler: false }
+    );
 
     constructor(
         private actions$: Actions,

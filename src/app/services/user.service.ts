@@ -48,6 +48,13 @@ export class UserService {
         )
     };
 
+    public editUser(user: UserDTO): Observable<UserDTO> {
+        return this.httpClient.put<UserDTO>(`${this.BASE_URL}/results/${user.id}`, JSON.stringify(user), this.httpHeader).pipe(
+            tap(() => console.log('User edit:', user)),
+            catchError(this.errorsBackend),
+        )
+    };
+
     public getLanguages(): Observable<string[]> {
         const users$ = this.getUsers();
         return users$.pipe(
