@@ -43,7 +43,14 @@ export class UserService {
 
     public deleteUser(id: number): Observable<UserDTO> {
         return this.httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
-            tap(() => console.log("User delete:", id)),
+            tap(() => console.log('User delete:', id)),
+            catchError(this.errorsBackend),
+        )
+    };
+
+    public editUser(user: UserDTO): Observable<UserDTO> {
+        return this.httpClient.put<UserDTO>(`${this.BASE_URL}/results/${user.id}`, JSON.stringify(user), this.httpHeader).pipe(
+            tap(() => console.log('User edit:', user)),
             catchError(this.errorsBackend),
         )
     };

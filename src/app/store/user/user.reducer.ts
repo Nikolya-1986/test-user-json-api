@@ -38,10 +38,10 @@ export const userReduser = createReducer (
         ...state,
         errorMessage: action.message,
     })),
-    on(userActions.DeleteUserRequest, state => ({
+    on(userActions.DeleteUserRequest, (state, { userId} )=> ({
         ...state,
     })),
-    on(userActions.DeleteUserSuccess, (state, {userId}) => {
+    on(userActions.DeleteUserSuccess, (state, { userId} ) => {
         const userIndes = state.userDTO.findIndex((item) => item.id === userId);
         const otherUsers = [...state.userDTO];
         otherUsers.splice(userIndes, 1);
@@ -53,6 +53,22 @@ export const userReduser = createReducer (
     on(userActions.DeleteUserFail, (state, action) => ({
         ...state,
         errorMessage: action.message,
+    })),
+    on(userActions.EditUserRequest, (state, { userEdit }) => ({
+        ...state,
+    })),
+    on(userActions.EditUserSuccess, (state, { userEdit }) => {
+        const userIndexEdit = state.userDTO.findIndex(index => index.id === userEdit.id);
+        const editUser = [...state.userDTO];
+        editUser[userIndexEdit] = userEdit;
+        return {
+            ...state,
+            userDTO: editUser
+        }
+    }),
+    on(userActions.EdituserFail, (state, action) => ({
+        ...state,
+        errorMessage: action.message
     }))
 );
 

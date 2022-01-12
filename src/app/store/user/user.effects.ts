@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Action, Store } from "@ngrx/store";
+import { Action, createAction, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
 
@@ -29,12 +29,30 @@ export class UsersEffects {
     deleteUser$: Observable<Action> = createEffect(() => this.actions$
         .pipe(
             ofType(userActions.UsersActionsType.DELETE_USER_REQUEST),
-            switchMap((action: any) => this.userService.deleteUser(action.userId)
+            switchMap((action: any) => {
+                return this.userService.deleteUser(action.userId)
                 .pipe(
                     tap(() => this.router.navigate(['/home'])),
-                    map(() => userActions.DeleteUserSuccess({ userId: action.userId})),
+                    map(() => userActions.DeleteUserSuccess({ userId: action.userId })),
                     catchError((error) => of(userActions.DeleteUserFail(error))),
                 )
+            })
+        ),
+        { useEffectsErrorHandler: false }
+    );
+
+    editUser$: Observable<Action> = createEffect(() => this.actions$
+        .pipe(
+            ofType(userActions.UsersActionsType.EDIT_USER_REQUEST),
+            switchMap((action: any) => {
+                console.log(action);
+                return this.userService.editUser(action.userEdit)
+                    .pipe(
+                        tap(() => this.router.navigate(['/description'])),
+                        map(() => userActions.EditUserSuccess({ userEdit: action.userEdit })),
+                        catchError((error) => of(userActions.EdituserFail(error)))
+                    )
+                }
             )
         ),
         { useEffectsErrorHandler: false }
