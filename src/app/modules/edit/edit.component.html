@@ -10,18 +10,15 @@
             <form 
                 class="edit__form" 
                 [formGroup]="formEdit" 
-                (ngSubmit)="submitForm()" 
+                (ngSubmit)="editUser(userEdit)" 
                 novalidate>
                 <!-- Picture -->
-                <mat-form-field>
+                <mat-form-field class="example-full-width">
                     <div class="edit__file-control">
-                  
                         <mat-toolbar>
                             <input 
                                 matInput 
-                                [(ngModel)]="uploadFileName" 
-                                readonly 
-                                name="File" 
+                                placeholder="picture"
                             />
                             <button 
                                 mat-flat-button 
@@ -34,13 +31,24 @@
                         <input 
                             class="file-control-input" 
                             type="file" 
-                            #uploadControl 
                             (change)="imageChange($event)" 
                             formControlName="picture"
                             multiple="multiple" 
                             accept="image/*"
                         />
-                    </div>
+                        <mat-error *ngIf="errorHandling('picture', 'required')">
+                            You must provide a <strong>picture</strong>
+                        </mat-error>
+                        <mat-error *ngIf="errorHandling('picture', 'noFile')">
+                            Please select images for editing!
+                        </mat-error>
+                        <mat-error *ngIf="errorHandling('picture', 'fileToBig')">
+                            Image size should not be more than 1000000 bytes!
+                        </mat-error>
+                        <mat-error *ngIf="errorHandling('picture', 'onlyImage')">
+                            Only images are supported!
+                        </mat-error>
+                    </div>           
                 </mat-form-field>
                 <!-- Appeal -->
                 <mat-form-field>
@@ -67,7 +75,7 @@
                         You must provide a <strong>first name</strong>
                     </mat-error>
                 </mat-form-field>
-                <!-- First name -->
+                <!-- Last name -->
                 <mat-form-field class="example-full-width">
                     <input 
                         matInput 
@@ -198,7 +206,7 @@
                         </mat-chip>
                         <input 
                             placeholder="Add language" 
-                            formControlName="subjects"
+                            formControlName="languages"
                             [matChipInputFor]="languageList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
                             [matChipInputAddOnBlur]="addOnBlur"
@@ -207,14 +215,14 @@
                     </mat-chip-list>
                 </mat-form-field>
                 <!-- Date registered -->
-                <mat-form-field>
+                <mat-form-field formControlName="registered">
                     <mat-label>
                         Date registred
                     </mat-label>
                     <input 
                         matInput 
-                        value= "{{userEdit.registered.date | formatDate}}"
-                        disabled 
+                        value= "{{ userEdit.registered.date | formatDate }}"
+                        disabled
                         >
                 </mat-form-field>
                 <!-- Phone -->

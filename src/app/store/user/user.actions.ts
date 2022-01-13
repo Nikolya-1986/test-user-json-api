@@ -63,7 +63,7 @@ export const EditUserSuccess = createAction (
     props<({userEdit: UserDTO})>(),
 );
 
-export const EdituserFail = createAction (
+export const EditUserFail = createAction (
     UsersActionsType.EDIT_USER_FAIL,
     props<({message: string})>(),
 );
@@ -79,7 +79,7 @@ const allUserActions = union({
     DeleteUserFail,
     EditUserRequest,
     EditUserSuccess,
-    EdituserFail
+    EditUserFail,
 });
 
 export type UserActions = typeof allUserActions

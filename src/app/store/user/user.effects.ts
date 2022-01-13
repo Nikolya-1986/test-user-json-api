@@ -50,13 +50,13 @@ export class UsersEffects {
                     .pipe(
                         tap(() => this.router.navigate(['/description'])),
                         map(() => userActions.EditUserSuccess({ userEdit: action.userEdit })),
-                        catchError((error) => of(userActions.EdituserFail(error)))
+                        catchError((error) => of(userActions.EditUserFail(error)))
                     )
                 }
             )
         ),
         { useEffectsErrorHandler: false }
-    )
+    );
 
     constructor(
         private actions$: Actions,

@@ -66,7 +66,7 @@ export const userReduser = createReducer (
             userDTO: editUser
         }
     }),
-    on(userActions.EdituserFail, (state, action) => ({
+    on(userActions.EditUserFail, (state, action) => ({
         ...state,
         errorMessage: action.message
     }))

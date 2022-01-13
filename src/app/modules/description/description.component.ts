@@ -8,6 +8,7 @@ import AppUserState from '../../store/user/user.state';
 import * as userSelectors from '../../store/user/user.selectors';
 import * as userActions from '../../store/user/user.actions';
 import { ModalWindowService } from '../../services/modal-window.service/modal-window.servise';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-description',
@@ -28,6 +29,7 @@ export class DescriptionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private store: Store<AppUserState>,
     public modalWindowServise: ModalWindowService,
+    private userService: UserService,
     private router: Router,
   ) { }
 
