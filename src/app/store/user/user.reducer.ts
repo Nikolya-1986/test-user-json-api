@@ -54,21 +54,21 @@ export const userReduser = createReducer (
         ...state,
         errorMessage: action.message,
     })),
-    on(userActions.DeleteUserRequest, state => ({
+    on(userActions.EditUserRequest, (state, { userEdit }) => ({
         ...state,
     })),
-    on(userActions.DeleteUserSuccess, (state, {userId}) => {
-        const userIndes = state.userDTO.findIndex((item) => item.id === userId);
-        const otherUsers = [...state.userDTO];
-        otherUsers.splice(userIndes, 1);
+    on(userActions.EditUserSuccess, (state, { userEdit }) => {
+        const userIndexEdit = state.userDTO.findIndex(index => index.id === userEdit.id);
+        const editUser = [...state.userDTO];
+        editUser[userIndexEdit] = userEdit;
         return {
             ...state,
-            userDTO: otherUsers,
+            userDTO: editUser
         }
     }),
-    on(userActions.DeleteUserFail, (state, action) => ({
+    on(userActions.EditUserFail, (state, action) => ({
         ...state,
-        errorMessage: action.message,
+        errorMessage: action.message
     }))
 );
 

@@ -10,18 +10,15 @@
             <form 
                 class="edit__form" 
                 [formGroup]="formEdit" 
-                (ngSubmit)="submitForm()" 
+                (ngSubmit)="editUser(userEdit)" 
                 novalidate>
                 <!-- Picture -->
-                <mat-form-field>
+                <mat-form-field class="example-full-width">
                     <div class="edit__file-control">
-                  
                         <mat-toolbar>
                             <input 
                                 matInput 
-                                [(ngModel)]="uploadFileName" 
-                                readonly 
-                                name="File" 
+                                placeholder="picture"
                             />
                             <button 
                                 mat-flat-button 
@@ -34,13 +31,24 @@
                         <input 
                             class="file-control-input" 
                             type="file" 
-                            #uploadControl 
                             (change)="imageChange($event)" 
                             formControlName="picture"
                             multiple="multiple" 
                             accept="image/*"
                         />
-                    </div>
+                        <mat-error *ngIf="errorHandling('picture', 'required')">
+                            You must provide a <strong>picture</strong>
+                        </mat-error>
+                        <mat-error *ngIf="errorHandling('picture', 'noFile')">
+                            Please select images for editing!
+                        </mat-error>
+                        <mat-error *ngIf="errorHandling('picture', 'fileToBig')">
+                            Image size should not be more than 1000000 bytes!
+                        </mat-error>
+                        <mat-error *ngIf="errorHandling('picture', 'onlyImage')">
+                            Only images are supported!
+                        </mat-error>
+                    </div>           
                 </mat-form-field>
                 <!-- Appeal -->
                 <mat-form-field>
@@ -66,17 +74,22 @@
                     <mat-error *ngIf="errorHandling('firstName', 'required')">
                         You must provide a <strong>first name</strong>
                     </mat-error>
+                    <mat-error *ngIf="errorHandling('firstName', 'pattern')">
+                        You must provide only <strong>letters and numbers!</strong>
+                    </mat-error>
                 </mat-form-field>
-                <!-- First name -->
+                <!-- Last name -->
                 <mat-form-field class="example-full-width">
                     <input 
                         matInput 
                         placeholder="Last name" 
                         formControlName="lastName"
                     />
-                    <!-- error -->
                     <mat-error *ngIf="errorHandling('lastName', 'required')">
                         You must provide a <strong>last name</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('lastName', 'pattern')">
+                        You must provide only <strong>letters!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Gender -->
@@ -96,7 +109,7 @@
                         </mat-radio-button>
                     </mat-radio-group>
                     <mat-error *ngIf="errorHandling('gender', 'required')">
-                        Please enter <strong>gender</strong>
+                        Please select either <strong>gender</strong>
                     </mat-error>
                 </div>
                 <!-- Status -->
@@ -112,6 +125,9 @@
                             {{ status }}
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="errorHandling('status', 'required')">
+                        Please select either <strong>status</strong>
+                    </mat-error>
                 </mat-form-field>
                <!-- Date of birth -->
                <mat-form-field>
@@ -177,7 +193,7 @@
                     </mat-error>
                 </mat-form-field>
                 <!-- Languages Array-->
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="multiple-items">
                     <mat-label>
                         Languages
                     </mat-label>
@@ -197,28 +213,24 @@
                             </mat-icon>
                         </mat-chip>
                         <input 
-                            matInput
                             placeholder="Add language" 
-                            formControlName="subjects"
+                            formControlName="languages"
                             [matChipInputFor]="languageList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
                             [matChipInputAddOnBlur]="addOnBlur"
                             (matChipInputTokenEnd)="addLanguage($event)"
-                        />
+                            >
                     </mat-chip-list>
-                    <mat-error *ngIf="errorHandling('subjects', 'required')">
-                        You must provide a <strong>languages</strong>
-                    </mat-error>
                 </mat-form-field>
                 <!-- Date registered -->
-                <mat-form-field>
+                <mat-form-field formControlName="registered">
                     <mat-label>
                         Date registred
                     </mat-label>
                     <input 
                         matInput 
-                        value= "{{userEdit.registered.date | formatDate}}"
-                        disabled 
+                        value= "{{ userEdit.registered.date | formatDate }}"
+                        disabled
                         >
                 </mat-form-field>
                 <!-- Phone -->

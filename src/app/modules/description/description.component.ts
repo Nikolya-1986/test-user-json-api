@@ -35,12 +35,13 @@ export class DescriptionComponent implements OnInit {
     this.getUserDetail();
   };
 
-  public getUserDetail(): void {
+  public getUserDetail(): Observable<UserDTO> {
     this.userDetails$ = this.activatedRoute.params.pipe(
       map((userId: Params) => Number(userId['id'])),
       switchMap((id: number) => this.store.pipe(select(userSelectors.getUserSelector(id)))),
       // tap(user => console.log(user)),
     )
+    return this.userDetails$;
   };
 
   public onPreviousImage({ previous, images }: { previous: number, images: Picture[] }): void {

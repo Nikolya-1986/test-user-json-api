@@ -1,15 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { DataService } from '../../services/data.service';
 import { Appeal, City, Country, Gender, Status, SubjectLanguage, UserDTO } from '../../interfaces/user.interface';
-import { ActivatedRoute, Params } from '@angular/router';
 import AppUserState from '../../store/user/user.state';
+import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
+import { imageValidator } from '../../validators/image-validator';
 
 @Component({
   selector: 'app-edit',
@@ -18,12 +20,9 @@ import * as userSelectors from '../../store/user/user.selectors';
 })
 export class EditComponent implements OnInit {
 
-  @ViewChild('uploadControl') public uploadControl!: ElementRef;
-  public uploadFileName = 'Choose File';
-  
   @ViewChild('languageList', { static: true }) private languageList: any;
-
   public userEdit$!: Observable<UserDTO | any>;
+  public destroy$: Subject<boolean> = new Subject;
   public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
   public formEdit!: FormGroup;
   public gender: Gender[] = [Gender.female, Gender.male];
@@ -36,6 +35,7 @@ export class EditComponent implements OnInit {
   public selectable: boolean = true;
   public removable: boolean = true;
   public addOnBlur: boolean = true;
+  public editedImage: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
   constructor(
@@ -60,22 +60,38 @@ export class EditComponent implements OnInit {
       tap((user) => this.setFormValues(user as UserDTO),
       )
     )
-    return this.userEdit$;
+    return this.userEdit$ as unknown as Observable<UserDTO>;
   };
 
   public reactiveForm(): void {
     this.formEdit = this.formBuilder.group({
-      picture: ['',[Validators.required]],
+      picture: ['',                
+        [
+          Validators.required,
+          imageValidator
+        ]
+      ],
       appeal: [''],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', 
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z][a-zA-Z0-9]+$")
+        ]
+      ],
+      lastName: ['', 
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
+        ]
+      ],
       gender: [false, [Validators.required]],
-      status: [''],
-      dob: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+      dob: ['', [Validators.required]],//
       countries: [0],
       cities: [0],
       email: ['', [Validators.required]],
-      subjects: ['', [Validators.required]],
+      languages: [this.languages],
+      registered: [''],
       phone: ['', [Validators.required]],
       nationality: ['', [Validators.required]],
     })
@@ -84,45 +100,36 @@ export class EditComponent implements OnInit {
   private setFormValues(user: UserDTO): void {
     this.formEdit.patchValue({
       picture: [user.picture[0]],
-      appeal: user.name.title,
+      appeal: [user.name.title],
       firstName: [user.name.first],
       lastName: [user.name.last],
       gender: user.gender,
       status: user.status,
-      dob: user.dob.date,
+      dob: [user.dob.date],
       countries: user.location.country,
       cities: user.location.city,
-      email: [user.email],
-      subjects: [user.language],
-      phone: [user.phone],
-      nationality: [user.nat],
+      email: user.email,
+      languages: [user.language],
+      registered: user.registered.date,
+      phone: user.phone,
+      nationality: user.nat,
     })
   };
 
-  public imageChange(inputEvent: any): void {
-    // if (inputEvent.target.files && inputEvent.target.files[0]) {
+  public imageChange(inputEvent: Event | any): any | File {
 
-    //   this.uploadFileName = '';
-    //   Array.from(inputEvent.target.files).forEach((file: any) => {
-    //     this.uploadFileName += file.name + ',';
-    //   });
+    if(!inputEvent.target.files[0] || inputEvent.target.files[0].length == 0) {
+			return;
+		}
 
-    //   const fileReader = new FileReader();
-    //   fileReader.onload = (e: any) => {
-    //     const img = new Image();
-    //     img.src = e.target.result;
-    //     img.onload = res => {
+    const reader = new FileReader();
+		reader.readAsDataURL(inputEvent.target.files[0]);
 
-    //       const imgBase64Path = inputEvent.target.result;
-
-    //     };
-    //   };
-    //   fileReader.readAsDataURL(inputEvent.target.files[0]);
-
-    //   this.uploadControl.nativeElement.value = "";
-    // } else {
-    //   this.uploadFileName = 'Choose File';
-    // }
+		reader.onload = (_event) => {
+			this.editedImage = reader.result; 
+      console.log(this.editedImage);
+		}
+    return this.editedImage;
   };
 
   public dateOfBirth(inputEvent: { target: { value: string | number | Date; }; }): void {
@@ -154,8 +161,16 @@ export class EditComponent implements OnInit {
     return this.formEdit.controls[control].hasError(error);
   };
 
-  public submitForm():void {
-    console.log(this.formEdit.value);
+  public editUser(userEdit: UserDTO):void {
+    if(this.formEdit.valid){
+      const editedUser = this.formEdit.getRawValue();
+      const userUpdated: UserDTO = {
+        id: userEdit.id,
+        ...editedUser,
+        picture: this.editedImage
+      }
+      this.store.dispatch(userActions.EditUserRequest({ userEdit: userUpdated }));
+    }
   };
-
+  
 }
