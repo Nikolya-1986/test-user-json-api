@@ -11,7 +11,8 @@
                 class="edit__form" 
                 [formGroup]="formEdit" 
                 (ngSubmit)="editUser(userEdit)" 
-                novalidate>
+                novalidate
+                >
                 <!-- Picture -->
                 <mat-form-field class="example-full-width">
                     <div class="edit__file-control">
@@ -74,6 +75,9 @@
                     <mat-error *ngIf="errorHandling('firstName', 'required')">
                         You must provide a <strong>first name</strong>
                     </mat-error>
+                    <mat-error *ngIf="errorHandling('firstName', 'pattern')">
+                        You must provide only <strong>letters and numbers</strong>
+                    </mat-error>
                 </mat-form-field>
                 <!-- Last name -->
                 <mat-form-field class="example-full-width">
@@ -82,9 +86,11 @@
                         placeholder="Last name" 
                         formControlName="lastName"
                     />
-                    <!-- error -->
                     <mat-error *ngIf="errorHandling('lastName', 'required')">
                         You must provide a <strong>last name</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('lastName', 'pattern')">
+                        You must provide only <strong>letters</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Gender -->
@@ -121,24 +127,27 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-               <!-- Date of birth -->
-               <mat-form-field>
-                    <input 
+                <!-- Date of birth -->
+                <mat-form-field>
+                    <mat-label>
+                        Date of birth
+                    </mat-label>
+                    <input  
                         matInput 
-                        readonly 
-                        [matDatepicker]="picker" 
-                        placeholder="Date of birth" 
+                        [matDatepicker]="birthdayDatepicker" 
                         formControlName="dob"
-                        (dateChange)="dateOfBirth($event)"
                     />
                     <mat-datepicker-toggle 
-                        matSuffix [for]="picker"
+                        matSuffix 
+                        [for]="birthdayDatepicker"
                         >
                     </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <!-- error -->
+                    <mat-datepicker #birthdayDatepicker></mat-datepicker>
                     <mat-error *ngIf="errorHandling('dob', 'required')">
                         Please enter <strong>date of birth</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('dob', 'invalidDate')">
+                        Your birthday must be greater than <strong>today's date</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Countries -->
@@ -154,6 +163,9 @@
                             {{ country.name }} 
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="errorHandling('countries', 'pattern')">
+                        You must provide only <strong>letters</strong>
+                    </mat-error>
                 </mat-form-field>
                 <!-- Cities -->
                 <mat-form-field>
@@ -168,6 +180,9 @@
                             {{ city.name }}
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="errorHandling('cities', 'pattern')">
+                        You must provide only <strong>letters</strong>
+                    </mat-error>
                 </mat-form-field>
                 <!-- Email -->
                 <mat-form-field class="example-full-width">
@@ -178,10 +193,12 @@
                         matInput 
                         placeholder="Email" 
                         formControlName="email"
-                        >
-                    <!-- error -->
+                    />
                     <mat-error *ngIf="errorHandling('email', 'required')">
                         You must provide a <strong>email</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('email', 'pattern')">
+                        You must provide a <strong>valid email address</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Languages Array-->
@@ -211,8 +228,14 @@
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
                             [matChipInputAddOnBlur]="addOnBlur"
                             (matChipInputTokenEnd)="addLanguage($event)"
-                            >
+                        />
                     </mat-chip-list>
+                    <mat-error *ngIf="errorHandling('languages', 'required')">
+                        You must provide a <strong>languages</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('languages', 'pattern')">
+                        You must provide only <strong>letters</strong>
+                    </mat-error>
                 </mat-form-field>
                 <!-- Date registered -->
                 <mat-form-field formControlName="registered">
@@ -233,7 +256,7 @@
                     <span matPrefix>+ &nbsp;</span>
                     <input 
                         matInput 
-                        placeholder="375-29-732-35-04"
+                        placeholder="(XXX)-XXX-XXXX"
                         formControlName="phone"
                     />
                     <mat-icon matSuffix>
@@ -241,6 +264,9 @@
                     </mat-icon>
                     <mat-error *ngIf="errorHandling('phone', 'required')">
                         You must provide a <strong>phone</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('phone', 'pattern')">
+                        You must provide a <strong>invalid phone</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Nationality -->
@@ -252,10 +278,15 @@
                         matInput 
                         placeholder="Nationality" 
                         formControlName="nationality"
-                        >
-                    <!-- error -->
+                    />
                     <mat-error *ngIf="errorHandling('nationality', 'required')">
                         You must provide a <strong>nationality</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('nationality', 'pattern')">
+                        You must provide only <strong>capital letters</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('nationality', 'maxLength')">
+                        You must provide not more than <strong>3 capital letters</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Submit -->

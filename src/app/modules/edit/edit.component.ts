@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map, Observable, Subject, switchMap, take, tap } from 'rxjs';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { COMMA, ENTER, V } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -10,8 +10,10 @@ import { DataService } from '../../services/data.service';
 import { Appeal, City, Country, Gender, Status, SubjectLanguage, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
-import * as userSelectors from 'src/app/store/user/user.selectors';
-import { imageValidator } from 'src/app/validators/image-validator';
+import * as userSelectors from '../../store/user/user.selectors';
+import { imageValidator } from '../../validators/image.validator';
+import { dateValidator } from '../../validators/date-birthday.validator';
+import { phoneValidator } from '../../validators/phone.validator';
 
 @Component({
   selector: 'app-edit',
@@ -72,18 +74,63 @@ export class EditComponent implements OnInit {
         ]
       ],
       appeal: [''],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
+      firstName: ['', 
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z][a-zA-Z0-9]+$")
+        ]
+      ],
+      lastName: ['', 
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
+        ] 
+      ],
       gender: [false, [Validators.required]],
       status: [''],
-      dob: ['', [Validators.required]],
-      countries: [0],
-      cities: [0],
-      email: ['', [Validators.required]],
-      languages: [this.languages],
+      dob: ['', 
+        [
+          Validators.required,
+          dateValidator
+        ]
+      ],
+      countries: [0, 
+        [
+          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
+        ]
+      ],
+      cities: [0,
+        [
+          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
+        ]
+      ],
+      email: ['', 
+        [
+          Validators.required, 
+          Validators.email,
+          Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$')
+        ]
+      ],
+      languages: [this.languages,
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
+        ]
+      ],
       registered: [''],
-      phone: ['', [Validators.required]],
-      nationality: ['', [Validators.required]],
+      phone: ['', 
+        [
+          Validators.required,
+          phoneValidator
+        ]
+      ],
+      nationality: ['', 
+        [
+          Validators.required,
+          Validators.pattern("^[A-Z][A-Z]+$"),
+          Validators.maxLength(3),
+        ]
+      ],
     })
   };
 
@@ -120,13 +167,6 @@ export class EditComponent implements OnInit {
       console.log(this.editedImage);
 		}
     return this.editedImage;
-  };
-
-  public dateOfBirth(inputEvent: { target: { value: string | number | Date; }; }): void {
-    const convertDate = new Date(inputEvent.target.value).toISOString().substring(0, 10);
-    this.formEdit.get('dob')!.setValue(convertDate, {
-      onlyself: true,
-    })
   };
 
   public addLanguage(event: MatChipInputEvent): void {

@@ -11,4 +11,4 @@ import { FormatDatePipe } from './format-date.pipe';
   ],
 
 })
-export class ApplicationPipesModule { }
+export class ApplicationPipeModule { }

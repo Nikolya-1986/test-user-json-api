@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialExampleModule } from '../../material-example.module';
 import { ModalWindowModule } from '../../components/modal-window/modal-window.module';
 import { EditRoutingModule } from './edit-routing.module';
-import { ApplicationPipesModule } from 'src/app/pipes/application-pipes.module';
+import { ApplicationPipeModule } from 'src/app/pipes/application-pipe.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,7 @@ import { ApplicationPipesModule } from 'src/app/pipes/application-pipes.module';
     MaterialExampleModule,
     EditRoutingModule,
     ModalWindowModule,
-    ApplicationPipesModule
+    ApplicationPipeModule
   ]
 })
 export class EditModule { }
