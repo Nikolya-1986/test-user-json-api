@@ -16,7 +16,7 @@ export class DetailsComponent implements OnInit, AfterContentInit {
   @Input() public showTable!: boolean;
   @Input() public showText!: boolean;
   @Output() public openModalDeleteUser = new EventEmitter<UserDTO>();
-  @Output() public editCurrentUser = new EventEmitter<number>()
+  @Output() public editCurrentUser = new EventEmitter<number>();
 
   constructor() {}
 
@@ -30,10 +30,10 @@ export class DetailsComponent implements OnInit, AfterContentInit {
   }
 
   public deleteUser(): void {
-    this.openModalDeleteUser.emit(this.userDetails)
+    this.openModalDeleteUser.emit(this.userDetails);
   };
 
   public editUser(): void {
-    this.editCurrentUser.emit(this.userDetails.id)
-  }
+    this.editCurrentUser.emit(this.userDetails.id);
+  };
 }

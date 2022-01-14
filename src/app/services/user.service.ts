@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
-import { catchError, map, retry, tap } from 'rxjs/operators';
+import { catchError, delay, map, retry, tap } from 'rxjs/operators';
 
 import { UserDTO } from "../interfaces/user.interface";
 
@@ -11,6 +11,7 @@ import { UserDTO } from "../interfaces/user.interface";
 export class UserService {
 
     private readonly BASE_URL = 'http://localhost:3000';
+    private users$ = this.getUsers();
 
     constructor(
         private httpClient: HttpClient,
@@ -19,10 +20,10 @@ export class UserService {
     private httpHeader = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-        })
+        }),
     };
     
-    private errorsBackend(errorHttp: HttpErrorResponse) {
+    private errorsBackend(errorHttp: HttpErrorResponse): Observable<any> {
         let message = '';
         if(errorHttp.error instanceof ErrorEvent) {
             message = errorHttp.error.message;
@@ -56,11 +57,10 @@ export class UserService {
     };
 
     public getLanguages(): Observable<string[]> {
-        const users$ = this.getUsers();
-        return users$.pipe(
+        return this.users$.pipe(
             map((response) => {
-                const result = response;
-                const languages = this.uniqueLanguages(result);
+                const users = response;
+                const languages = this.uniqueLanguages(users);
                 return languages;
             })
         );
@@ -73,5 +73,22 @@ export class UserService {
             return uniqueLanguages;
         });
         return [...arrayLanguages];
+    };
+
+    public isTakenEmail(email: string): Observable<boolean> {
+        const isTaken = this.getEmails().pipe(
+            map((emails) => emails.includes(email))
+        )
+        return isTaken.pipe(delay(500));
+    };
+
+    public getEmails(): Observable<string[]> {
+        return this.users$.pipe(
+            map((response) => {
+                const users = response;
+                const emails = users.map(result => result.email);
+                return emails;
+            })
+        )
     };
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, Subject, switchMap, tap } from 'rxjs';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, V } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -11,7 +11,11 @@ import { Appeal, City, Country, Gender, Status, SubjectLanguage, UserDTO } from 
 import AppUserState from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
-import { imageValidator } from '../../validators/image-validator';
+import { imageValidator } from '../../validators/image.validator';
+import { dateValidator } from '../../validators/date-birthday.validator';
+import { phoneValidator } from '../../validators/phone.validator';
+import { EmailAsyncValidator } from '../../validators/email-async.validator';
+import { postCodeValidator } from '../../validators/post-code.validator';
 
 @Component({
   selector: 'app-edit',
@@ -43,6 +47,7 @@ export class EditComponent implements OnInit {
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private store: Store<AppUserState>,
+    private emailAsyncValidator: EmailAsyncValidator,
   ) {
     this.countries = this.dataService.getCountries();
     this.cities = this.dataService.getCities();
@@ -68,46 +73,92 @@ export class EditComponent implements OnInit {
       picture: ['',                
         [
           Validators.required,
-          imageValidator
+          imageValidator,
         ]
       ],
       appeal: [''],
       firstName: ['', 
         [
           Validators.required,
-          Validators.pattern("^[a-zA-Z][a-zA-Z0-9]+$")
+          Validators.pattern('^[a-zA-Z][a-zA-Z0-9]+$'),
         ]
       ],
       lastName: ['', 
         [
           Validators.required,
-          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
-        ]
+          Validators.pattern('^[a-zA-Z][a-zA-Z]+$'),
+        ] 
       ],
       gender: [false, [Validators.required]],
-      status: ['', [Validators.required]],
-      dob: ['', [Validators.required]],//
-      countries: [0],
-      cities: [0],
-      email: ['', [Validators.required]],
-      languages: [this.languages],
+      status: [''],
+      dob: ['', 
+        [
+          Validators.required,
+          dateValidator,
+        ]
+      ],
+      countries: [0, 
+        [
+          Validators.pattern('^[a-zA-Z][a-zA-Z]+$'),
+        ]
+      ],
+      cities: [0,
+        [
+          Validators.pattern('^[a-zA-Z][a-zA-Z]+$'),
+        ]
+      ],
+      postcode: ['',
+        [
+          Validators.required,
+          Validators.pattern('^[0-9]+$'),
+          postCodeValidator,
+        ]
+      ],
+      email: ['', 
+        [
+          Validators.required, 
+          Validators.email,
+          Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
+        ],
+        [
+          this.emailAsyncValidator.validate.bind(this.emailAsyncValidator),
+        ]
+      ],
+      languages: [this.languages,
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
+        ]
+      ],
       registered: [''],
-      phone: ['', [Validators.required]],
-      nationality: ['', [Validators.required]],
+      phone: ['', 
+        [
+          Validators.required,
+          phoneValidator,
+        ]
+      ],
+      nationality: ['', 
+        [
+          Validators.required,
+          Validators.pattern("^[A-Z][A-Z]+$"),
+          Validators.maxLength(3),
+        ]
+      ],
     })
   };
 
   private setFormValues(user: UserDTO): void {
     this.formEdit.patchValue({
       picture: [user.picture[0]],
-      appeal: [user.name.title],
-      firstName: [user.name.first],
-      lastName: [user.name.last],
+      appeal: user.name.title,
+      firstName: user.name.first,
+      lastName: user.name.last,
       gender: user.gender,
       status: user.status,
-      dob: [user.dob.date],
+      dob: user.dob.date,
       countries: user.location.country,
       cities: user.location.city,
+      postcode: user.location.postcode,
       email: user.email,
       languages: [user.language],
       registered: user.registered.date,
@@ -132,18 +183,11 @@ export class EditComponent implements OnInit {
     return this.editedImage;
   };
 
-  public dateOfBirth(inputEvent: { target: { value: string | number | Date; }; }): void {
-    const convertDate = new Date(inputEvent.target.value).toISOString().substring(0, 10);
-    this.formEdit.get('dob')!.setValue(convertDate, {
-      onlyself: true,
-    })
-  };
-
   public addLanguage(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
     if ((value || '').trim() && this.languages.length < 5) {
-      this.languages.push({ name: value.trim() })
+      this.languages.push({ name: value.trim() });
     }
     if (input) {
       input.value = '';
@@ -167,9 +211,10 @@ export class EditComponent implements OnInit {
       const userUpdated: UserDTO = {
         id: userEdit.id,
         ...editedUser,
-        picture: this.editedImage
+        picture: this.editedImage,
       }
       this.store.dispatch(userActions.EditUserRequest({ userEdit: userUpdated }));
+      console.log(userUpdated);
     }
   };
   

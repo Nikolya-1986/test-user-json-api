@@ -15,7 +15,7 @@ export function imageValidator(control: AbstractControl) {
         return {
             fileToBig: true,
         }
-    }
+    };
 
     // else if(control.value.match(typeFile) === null){
     //     return {
