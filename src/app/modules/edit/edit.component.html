@@ -14,7 +14,69 @@
                 novalidate
                 >
                 <!-- Picture -->
-                <mat-form-field class="example-full-width">
+                <div class="edit__images">
+                    <ng-container 
+                        *ngFor="let image of userEdit.picture; 
+                        let i = index" 
+                        >
+                        <div class="image">
+                            <img [src]="image.src">
+                            <span (click)="deleteImage(image, userEdit)">
+                                x
+                            </span>
+                        </div>
+                    </ng-container >
+                </div>
+                <mat-card>
+                    <mat-card-content>
+                        <mat-form-field>
+                            <mat-label>
+                                File matInput
+                            </mat-label>
+                            <button 
+                                mat-icon-button 
+                                matPrefix 
+                                (click)="f_input.click()"
+                                >
+                                <mat-icon>
+                                    attach_file
+                                </mat-icon>
+                            </button>
+                            <input 
+                                type="text" 
+                                readonly 
+                                matInput 
+                                [formControl]="display" 
+                            />
+                            <input
+                                type="file"
+                                multiple
+                                hidden
+                                #f_input
+                                (change)="handleFileInputChange(f_input.files!)"
+                            />
+                            <mat-error>
+                                this field is required
+                            </mat-error>
+                        </mat-form-field>
+                        <br><br>
+                    </mat-card-content>
+                
+                    <mat-divider></mat-divider>
+                
+                    <mat-card-actions align="end">
+                        <button 
+                            mat-stroked-button 
+                            color="primary" 
+                            [disabled]="display.invalid" 
+                            (click)="handleSubmit()"
+                        >
+                        Save
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+                <!-- https://stackblitz.com/edit/angular-material-file-input-with-form-field?file=src%2Fapp%2Fapp.component.html -->
+                <!-- <mat-form-field class="example-full-width">
                     <div class="edit__file-control">
                         <mat-toolbar>
                             <input 
@@ -50,7 +112,7 @@
                             Only images are supported!
                         </mat-error>
                     </div>           
-                </mat-form-field>
+                </mat-form-field> -->
                 <!-- Appeal -->
                 <mat-form-field>
                     <mat-label>
@@ -163,9 +225,9 @@
                             {{ country.name }} 
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="errorHandling('countries', 'pattern')">
+                    <!-- <mat-error *ngIf="errorHandling('countries', 'pattern')">
                         You must provide only <strong>letters</strong>
-                    </mat-error>
+                    </mat-error> -->
                 </mat-form-field>
                 <!-- Cities -->
                 <mat-form-field>
@@ -180,9 +242,9 @@
                             {{ city.name }}
                         </mat-option>
                     </mat-select>
-                    <mat-error *ngIf="errorHandling('cities', 'pattern')">
+                    <!-- <mat-error *ngIf="errorHandling('cities', 'pattern')">
                         You must provide only <strong>letters</strong>
-                    </mat-error>
+                    </mat-error> -->
                 </mat-form-field>
                 <!-- Email -->
                 <mat-form-field class="example-full-width">

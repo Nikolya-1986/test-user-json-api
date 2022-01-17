@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -41,6 +41,10 @@ export class EditComponent implements OnInit {
   public editedImage: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
 
+  display: FormControl = new FormControl("", Validators.required);
+  file_store!: FileList;
+  file_list: Array<string> = [];
+  
   constructor(
     public formBuilder: FormBuilder,
     private dataService: DataService,
@@ -60,8 +64,7 @@ export class EditComponent implements OnInit {
     this.userEdit$ = this.activatedRoute.params.pipe(
       map((userId: Params) => Number(userId['id'])),
       switchMap((id: number) => this.store.select(userSelectors.getUserSelector(id))),
-      tap((user) => this.setFormValues(user as UserDTO),
-      )
+      tap((user) => this.setFormValues(user as UserDTO))
     )
     return this.userEdit$ as unknown as Observable<UserDTO>;
   };
@@ -95,15 +98,15 @@ export class EditComponent implements OnInit {
           dateValidator
         ]
       ],
-      countries: [0, 
-        [
-          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
-        ]
+      countries: ['', 
+        // [
+        //   Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
+        // ]
       ],
-      cities: [0,
-        [
-          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
-        ]
+      cities: ['',
+        // [
+        //   Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
+        // ]
       ],
       email: ['', 
         [
@@ -143,7 +146,7 @@ export class EditComponent implements OnInit {
 
   private setFormValues(user: UserDTO): void {
     this.formEdit.patchValue({
-      picture: [user.picture[0]],
+      picture: user.picture[0],
       appeal: user.name.title,
       firstName: user.name.first,
       lastName: user.name.last,
@@ -175,6 +178,11 @@ export class EditComponent implements OnInit {
       console.log(this.editedImage);
 		}
     return this.editedImage;
+  };
+
+  public deleteImage(image: any, user: UserDTO): void {
+    const del = user.picture.filter(item => item !== image);
+    console.log(del)
   };
 
   public addLanguage(event: MatChipInputEvent): void {
@@ -211,5 +219,26 @@ export class EditComponent implements OnInit {
       console.log(userUpdated);
     }
   };
-  
+
+  handleFileInputChange(l: FileList): void {
+    this.file_store = l;
+    if (l.length) {
+      const f = l[0];
+      const count = l.length > 1 ? `(+${l.length - 1} files)` : "";
+      this.display.patchValue(`${f.name}${count}`);
+    } else {
+      this.display.patchValue("");
+    }
+  }
+
+  handleSubmit(): void {
+    var fd = new FormData();
+    this.file_list = [];
+    for (let i = 0; i < this.file_store.length; i++) {
+      fd.append("files", this.file_store[i], this.file_store[i].name);
+      this.file_list.push(this.file_store[i].name);
+    }
+
+    // do submit ajax
+  }
 }

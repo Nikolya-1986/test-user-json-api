@@ -35,8 +35,14 @@
         }
     }
 
-    &__image {
+    &__images {
+        display: flex;
         margin-bottom: 1rem;
+
+        span {
+            cursor: pointer;
+            color: var(--primary-color-1);
+        }
     }
 }
 .mat-form-field{

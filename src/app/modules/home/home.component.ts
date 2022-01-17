@@ -67,6 +67,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public onCurrentSratus(statusValue: string | any): void {
     this.fiterUserStatus = statusValue;
+    
   };
 
   public onCurrentLanguage(selectedLanguage: string): void {//
@@ -76,7 +77,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public onCurrentAvailable(selectedAvailable: boolean): void {
     this.filterUserAvailable = selectedAvailable;
-    console.log(this.filterUserAvailable);
   };
 
   public fetchQueryParams(): void{
@@ -89,7 +89,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.filterUserGender = queryParams.get('selectedGender') as Gender || Gender.all;
       this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all;
       this.filterUserAvailable = queryParams.get('selectedAvailable') === 'true';
-      this.filterUserLanguage = queryParams.get('selectedlanguage') || this.languages[0];
+      this.filterUserLanguage = queryParams.get('selectedlanguage') || this.activelanguage;
+      this.activelanguage = queryParams.get('selectedlanguage') || this.languages[0];
     })
   };
 
@@ -102,7 +103,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       })
     )
     .subscribe(() => {
-      this.activelanguage = this.languages[0];
+      if(!this.activelanguage) {
+        this.activelanguage = this.languages[0];
+      }
     })
     return this.languages;
   };
