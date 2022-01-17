@@ -69,14 +69,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.fiterUserStatus = statusValue;
   };
 
-  public onCurrentLanguage(selectedLanguage: string): void {//
-    this.filterUserLanguage = selectedLanguage;
-    this.activelanguage = selectedLanguage;
+  public onCurrentLanguage(selectedLanguage: string): void {
+    // this.filterUserLanguage = selectedLanguage;
+    // this.activelanguage = selectedLanguage;
   };
 
   public onCurrentAvailable(selectedAvailable: boolean): void {
     this.filterUserAvailable = selectedAvailable;
-    console.log(this.filterUserAvailable);
   };
 
   public fetchQueryParams(): void{
@@ -88,23 +87,26 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.filterUserNameAge = queryParams.get('selectedForSortValue') || 'Default';
       this.filterUserGender = queryParams.get('selectedGender') as Gender || Gender.all;
       this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all;
+      this.filterUserLanguage = queryParams.get('selectedlanguage') || this.activelanguage;
+      this.activelanguage = queryParams.get('selectedlanguage') as string;
       this.filterUserAvailable = queryParams.get('selectedAvailable') === 'true';
-      this.filterUserLanguage = queryParams.get('selectedlanguage') || this.languages[0];
     })
   };
 
-  public fetchLanguages(): string[] {
+  public fetchLanguages(): void {
     this.userService.getLanguages().pipe(
       takeUntil(this.destroy$),
       map((response) => {
         const nameButtonAllLanguages = 'All languages';
         this.languages = [nameButtonAllLanguages, ...response];
+        return this.languages;
       })
     )
-    .subscribe(() => {
-      this.activelanguage = this.languages[0];
+    .subscribe((result) => {
+      if(!this.activelanguage) {
+        this.activelanguage = result[0];
+      }
     })
-    return this.languages;
   };
 
   public ngOnDestroy(): void {

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, Subject, switchMap, tap } from 'rxjs';
-import { COMMA, ENTER, V } from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -16,6 +16,7 @@ import { dateValidator } from '../../validators/date-birthday.validator';
 import { phoneValidator } from '../../validators/phone.validator';
 import { EmailAsyncValidator } from '../../validators/email-async.validator';
 import { postCodeValidator } from '../../validators/post-code.validator';
+import { websiteValidator } from '../../validators/wibsite.validator';
 
 @Component({
   selector: 'app-edit',
@@ -124,6 +125,12 @@ export class EditComponent implements OnInit {
           this.emailAsyncValidator.validate.bind(this.emailAsyncValidator),
         ]
       ],
+      website: ['',
+        [
+          Validators.required,
+          websiteValidator,
+        ]
+      ],
       languages: [this.languages,
         [
           Validators.required,
@@ -160,6 +167,7 @@ export class EditComponent implements OnInit {
       cities: user.location.city,
       postcode: user.location.postcode,
       email: user.email,
+      website: user.website,
       languages: [user.language],
       registered: user.registered.date,
       phone: user.phone,
