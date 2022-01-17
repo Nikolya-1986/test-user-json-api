@@ -201,6 +201,23 @@
                         You must provide a <strong>valid email address</strong>
                     </mat-error>
                 </mat-form-field>
+                <!-- Website -->
+                <mat-form-field class="example-full-width">
+                    <mat-label>
+                        Website
+                    </mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Website" 
+                        formControlName="website"
+                    />
+                    <mat-error *ngIf="errorHandling('website', 'required')">
+                        You must provide a <strong>website</strong>
+                    </mat-error>
+                    <mat-error *ngIf="errorHandling('website', 'invlidUrl')">
+                        You must provide a <strong>valid website address</strong>
+                    </mat-error>
+                </mat-form-field>
                 <!-- Languages Array-->
                 <mat-form-field class="multiple-items">
                     <mat-label>

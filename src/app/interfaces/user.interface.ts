@@ -9,6 +9,7 @@ export interface UserDTO {
     name: Name,
     location: Location,
     email: string,
+    website: string,
     language: string[],
     available: boolean,
     login: Login,

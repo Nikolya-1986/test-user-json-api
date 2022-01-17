@@ -19,7 +19,7 @@ import { ApplicationPipeModule } from 'src/app/pipes/application-pipe.module';
     MaterialExampleModule,
     EditRoutingModule,
     ModalWindowModule,
-    ApplicationPipeModule
+    ApplicationPipeModule,
   ]
 })
 export class EditModule { }
