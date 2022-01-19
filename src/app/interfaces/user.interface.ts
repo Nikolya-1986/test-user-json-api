@@ -35,7 +35,7 @@ export enum Status {
 }
 
 export interface Name {
-    title: string,
+    title: Appeal,
     first: string,
     last: string,
 };
@@ -105,8 +105,3 @@ export interface Registered {
 export interface Picture {
     src: string,
 };
-
-export interface SubjectLanguage {
-    name: string;
-}
-  

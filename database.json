@@ -47,19 +47,18 @@
           "registered": {
               "date":"2004-08-31T23:25:00.959Z",
               "age":17
-          },
+          }, 
           "phone":"021-577-1124",
-          "cell":"081-248-8151",
           "picture": [
-              {
-                  "src": "https://randomuser.me/api/portraits/men/4.jpg"
-              },
-              {
-                  "src": "https://randomuser.me/api/portraits/med/men/4.jpg"
-              },
-              {
-                  "src": "https://randomuser.me/api/portraits/thumb/men/4.jpg"
-              }
+                {
+                    "src": "https://randomuser.me/api/portraits/men/4.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/med/men/4.jpg"
+                },
+                {
+                    "src": "https://randomuser.me/api/portraits/thumb/men/4.jpg"
+                }
           ],
           "nat":"IE"
       },
@@ -113,7 +112,6 @@
               "age":4
           },
           "phone":"643-180-9717",
-          "cell":"118-115-3471",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/95.jpg"
@@ -176,7 +174,6 @@
               "age":9
           },
           "phone":"066-45841454",
-          "cell":"0943-534-7017",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/men/42.jpg"
@@ -240,7 +237,6 @@
               "age":14
           },
           "phone":"07-7164-7941",
-          "cell":"0484-790-512",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/59.jpg"
@@ -304,7 +300,6 @@
               "age":19
           },
           "phone":"31456026",
-          "cell":"94194311",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/14.jpg"
@@ -368,7 +363,6 @@
               "age":17
           },
           "phone":"41938477",
-          "cell":"30557031",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/men/14.jpg"
@@ -432,7 +426,6 @@
               "age":13
           },
           "phone":"(477)-072-4725",
-          "cell":"(527)-340-5969",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/0.jpg"
@@ -495,7 +488,6 @@
               "age":9
           },
           "phone":"(60) 2127-5232",
-          "cell":"(02) 4337-6635",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/84.jpg"
@@ -559,7 +551,6 @@
               "age":6
           },
           "phone":"109-748-6332",
-          "cell":"277-907-6376",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/34.jpg"
@@ -623,7 +614,6 @@
               "age":18
           },
           "phone":"(989)-365-4108",
-          "cell":"(275)-425-3458",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/men/90.jpg"
@@ -684,7 +674,6 @@
               "age":2
           },
           "phone":"04-902-293",
-          "cell":"040-655-54-90",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/88.jpg"
@@ -748,7 +737,6 @@
               "age":6
           },
           "phone":"(008)-516-0314",
-          "cell":"(734)-918-8119",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/men/73.jpg"
@@ -812,7 +800,6 @@
               "age":9
           },
           "phone":"(974)-779-6105",
-          "cell":"(440)-080-0811",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/24.jpg"
@@ -876,7 +863,6 @@
               "age":1
           },
           "phone":"00-1922-5841",
-          "cell":"0441-150-761",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/20.jpg"
@@ -939,7 +925,6 @@
               "age":14
           },
           "phone":"076 543 41 31",
-          "cell":"075 667 75 73",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/men/39.jpg"
@@ -1003,7 +988,6 @@
               "age":2
           },
           "phone":"08-1209-9512",
-          "cell":"0472-569-268",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/54.jpg"

@@ -70,9 +70,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     
   };
 
-  public onCurrentLanguage(selectedLanguage: string): void {//
+  public onCurrentLanguage(selectedLanguage: string): void {
     this.filterUserLanguage = selectedLanguage;
-    this.activelanguage = selectedLanguage;
   };
 
   public onCurrentAvailable(selectedAvailable: boolean): void {
@@ -90,24 +89,24 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.fiterUserStatus = queryParams.get('selectedStatus') as Status || Status.all;
       this.filterUserAvailable = queryParams.get('selectedAvailable') === 'true';
       this.filterUserLanguage = queryParams.get('selectedlanguage') || this.activelanguage;
-      this.activelanguage = queryParams.get('selectedlanguage') || this.languages[0];
+      this.activelanguage = queryParams.get('selectedlanguage') as string;
     })
   };
 
-  public fetchLanguages(): string[] {
+  public fetchLanguages(): void {
     this.userService.getLanguages().pipe(
       takeUntil(this.destroy$),
       map((response) => {
         const nameButtonAllLanguages = 'All languages';
         this.languages = [nameButtonAllLanguages, ...response];
+        return this.languages;
       })
     )
-    .subscribe(() => {
+    .subscribe((result) => {
       if(!this.activelanguage) {
-        this.activelanguage = this.languages[0];
+        this.activelanguage = result[0];
       }
     })
-    return this.languages;
   };
 
   public ngOnDestroy(): void {

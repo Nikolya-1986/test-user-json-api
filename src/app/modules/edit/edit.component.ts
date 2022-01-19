@@ -1,20 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { DataService } from '../../services/data.service';
-import { Appeal, City, Country, Gender, Status, SubjectLanguage, UserDTO } from '../../interfaces/user.interface';
+import { Appeal, City, Country, Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { phoneValidator } from '../../validators/phone.validator';
-import { websiteValidator } from 'src/app/validators/wibsite.validator';
+import { websiteValidator } from '../../validators/wibsite.validator';
+import { lengthValidator } from '../../validators/length.validator';
 
 @Component({
   selector: 'app-edit',
@@ -23,7 +24,8 @@ import { websiteValidator } from 'src/app/validators/wibsite.validator';
 })
 export class EditComponent implements OnInit {
 
-  @ViewChild('languageList', { static: true }) private languageList: any;
+  @ViewChild('languageList') languageList!: MatChipList;
+  @ViewChild('uploadControl') public uploadControl!: ElementRef;
   public userEdit$!: Observable<UserDTO | any>;
   public destroy$: Subject<boolean> = new Subject;
   public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
@@ -34,16 +36,12 @@ export class EditComponent implements OnInit {
   public cities: City[];
   public selectedValueCountry = null;
   public selectedValueCity = null;
-  public languages: SubjectLanguage[] = [];
   public selectable: boolean = true;
   public removable: boolean = true;
   public addOnBlur: boolean = true;
   public editedImage: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-
-  display: FormControl = new FormControl("", Validators.required);
-  file_store!: FileList;
-  file_list: Array<string> = [];
+  
   
   constructor(
     public formBuilder: FormBuilder,
@@ -58,6 +56,9 @@ export class EditComponent implements OnInit {
   public ngOnInit(): void {
     this.reactiveForm();
     this.fetchUserEdit();
+    this.formEdit.get('language').statusChanges.subscribe(
+      status => this.languageList.errorState = status === 'INVALID'
+    );
   };
 
   public fetchUserEdit() {
@@ -73,46 +74,51 @@ export class EditComponent implements OnInit {
     this.formEdit = this.formBuilder.group({
       picture: ['',                
         [
-          Validators.required,
           imageValidator
         ]
       ],
-      appeal: [''],
-      firstName: ['', 
-        [
-          Validators.required,
-          Validators.pattern("^[a-zA-Z][a-zA-Z0-9]+$")
-        ]
-      ],
-      lastName: ['', 
-        [
-          Validators.required,
-          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
-        ] 
-      ],
+      name: this.formBuilder.group({
+        title: [''],
+        first: ['', 
+          [
+            Validators.required,
+            Validators.pattern("^[a-zA-Z][a-zA-Z0-9]+$"),
+          ]
+        ],
+        last: ['', 
+          [
+            Validators.required,
+            Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
+          ] 
+        ],
+      }),
       gender: [false, [Validators.required]],
       status: [''],
-      dob: ['', 
-        [
-          Validators.required,
-          dateValidator
+      dob: this.formBuilder.group({
+        date: ['', 
+          [
+            Validators.required,
+            dateValidator,
+          ]
         ]
-      ],
-      countries: ['', 
-        // [
-        //   Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
-        // ]
-      ],
-      cities: ['',
-        // [
-        //   Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
-        // ]
-      ],
+      }),
+      location: this.formBuilder.group({
+        countries: ['', 
+          [
+            Validators.required,
+          ]
+        ],
+        cities: ['',
+          [
+            Validators.required,
+          ]
+        ],
+      }),
       email: ['', 
         [
           Validators.required, 
           Validators.email,
-          Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$')
+          Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
         ]
       ],
       website: ['',
@@ -121,12 +127,15 @@ export class EditComponent implements OnInit {
           websiteValidator,
         ]
       ],
-      languages: [this.languages,
+      language: this.formBuilder.array([
+        this.formBuilder.control(''),
         [
           Validators.required,
-          Validators.pattern("^[a-zA-Z][a-zA-Z]+$")
+          Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
+          this.validateArrayNotEmpty
+          // lengthValidator,
         ]
-      ],
+      ]),
       registered: [''],
       phone: ['', 
         [
@@ -146,19 +155,35 @@ export class EditComponent implements OnInit {
 
   private setFormValues(user: UserDTO): void {
     this.formEdit.patchValue({
-      picture: user.picture[0],
-      appeal: user.name.title,
-      firstName: user.name.first,
-      lastName: user.name.last,
+      picture: 
+      [
+        {
+          src: user.picture
+        }
+      ],
+      name: 
+      {
+        title: user.name.title,
+        first: user.name.first,
+        last: user.name.last,
+      },
       gender: user.gender,
       status: user.status,
-      dob: user.dob.date,
-      countries: user.location.country,
-      cities: user.location.city,
+      dob: 
+      {
+        date: user.dob.date,
+      },
+      location: {
+        countries: user.location.country,
+        cities: user.location.city,
+      },
       email: user.email,
       website: user.website,
-      languages: [user.language],
-      registered: user.registered.date,
+      language: [user.language],
+      registered: 
+      {
+        date: user.registered.date
+      },
       phone: user.phone,
       nationality: user.nat,
     })
@@ -174,7 +199,8 @@ export class EditComponent implements OnInit {
 		reader.readAsDataURL(inputEvent.target.files[0]);
 
 		reader.onload = (_event) => {
-			this.editedImage = reader.result; 
+			this.editedImage = reader.result;  
+      this.formEdit.patchValue({picture: this.editedImage});
       console.log(this.editedImage);
 		}
     return this.editedImage;
@@ -185,27 +211,40 @@ export class EditComponent implements OnInit {
     console.log(del)
   };
 
-  public addLanguage(event: MatChipInputEvent): void {
+  initName(name: string): FormControl {
+    return this.formBuilder.control(name);
+  }
+
+  validateArrayNotEmpty(c: FormControl) {
+    if (c.value && c.value.length === 0) {
+      return {
+        validateArrayNotEmpty: { valid: false }
+      };
+    }
+    return null;
+  }
+
+  add(event: MatChipInputEvent, form: FormGroup): void {
     const input = event.input;
     const value = event.value;
-    if ((value || '').trim() && this.languages.length < 5) {
-      this.languages.push({ name: value.trim() })
+
+    // Add name
+    if ((value || '').trim()) {
+      const control = <FormArray>form.get('language');
+      control.push(this.initName(value.trim()));
+      console.log(control);
     }
+
+    // Reset the input value
     if (input) {
       input.value = '';
     }
-  };
+  }
 
-  public removeLanguage(subject: SubjectLanguage): void {
-    const index = this.languages.indexOf(subject);
-    if (index >= 0) {
-      this.languages.splice(index, 1);
-    }
-  };
-
-  public errorHandling(control: string, error: string): boolean {
-    return this.formEdit.controls[control].hasError(error);
-  };
+  remove(form: any, index: any) {
+    console.log(form);
+    form.get('language').removeAt(index);
+  }
 
   public editUser(userEdit: UserDTO):void {
     if(this.formEdit.valid){
@@ -215,30 +254,8 @@ export class EditComponent implements OnInit {
         ...editedUser,
         picture: this.editedImage
       }
-      this.store.dispatch(userActions.EditUserRequest({ userEdit: userUpdated }));
+      // this.store.dispatch(userActions.EditUserRequest({ userEdit: userUpdated }));
       console.log(userUpdated);
     }
   };
-
-  handleFileInputChange(l: FileList): void {
-    this.file_store = l;
-    if (l.length) {
-      const f = l[0];
-      const count = l.length > 1 ? `(+${l.length - 1} files)` : "";
-      this.display.patchValue(`${f.name}${count}`);
-    } else {
-      this.display.patchValue("");
-    }
-  }
-
-  handleSubmit(): void {
-    var fd = new FormData();
-    this.file_list = [];
-    for (let i = 0; i < this.file_store.length; i++) {
-      fd.append("files", this.file_store[i], this.file_store[i].name);
-      this.file_list.push(this.file_store[i].name);
-    }
-
-    // do submit ajax
-  }
 }
