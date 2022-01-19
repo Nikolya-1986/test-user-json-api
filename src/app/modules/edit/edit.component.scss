@@ -35,8 +35,28 @@
         }
     }
 
-    &__image {
+    &__wrapper-images {
+        display: flex;
+        justify-content: start;
         margin-bottom: 1rem;
+
+        .image {
+            position: relative;
+            height: 15vh;
+            margin-right: 1rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            span {
+                position: absolute;
+                cursor: pointer;
+                color: var(--primary-color-1);
+                right: 10px;
+            }
+        }
     }
 }
 .mat-form-field{
