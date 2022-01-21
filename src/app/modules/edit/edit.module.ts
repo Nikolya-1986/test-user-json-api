@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialExampleModule } from '../../material-example.module';
 import { ModalWindowModule } from '../../components/modal-window/modal-window.module';
 import { EditRoutingModule } from './edit-routing.module';
-import { ApplicationPipeModule } from 'src/app/pipes/application-pipe.module';
+import { ApplicationPipeModule } from '../../pipes/application-pipe.module';
 
 @NgModule({
   declarations: [

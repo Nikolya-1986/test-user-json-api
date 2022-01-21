@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
@@ -15,7 +15,6 @@ import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { phoneValidator } from '../../validators/phone.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
-import { lengthValidator } from '../../validators/length.validator';
 
 @Component({
   selector: 'app-edit',
@@ -42,7 +41,6 @@ export class EditComponent implements OnInit {
   public editedImage: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   
-  
   constructor(
     public formBuilder: FormBuilder,
     private dataService: DataService,
@@ -56,7 +54,7 @@ export class EditComponent implements OnInit {
   public ngOnInit(): void {
     this.reactiveForm();
     this.fetchUserEdit();
-    this.formEdit.get('language').statusChanges.subscribe(
+    this.formEdit.get('language')!.statusChanges.subscribe(
       status => this.languageList.errorState = status === 'INVALID'
     );
   };
@@ -99,8 +97,9 @@ export class EditComponent implements OnInit {
           [
             Validators.required,
             dateValidator,
-          ]
-        ]
+          ],
+        ],
+        age: [ {value: '', disabled: true} ],
       }),
       location: this.formBuilder.group({
         countries: ['', 
@@ -113,6 +112,26 @@ export class EditComponent implements OnInit {
             Validators.required,
           ]
         ],
+        postcode: ['',
+          [
+            Validators.required,
+            Validators.pattern("^[0-9]+$"),
+            Validators.minLength(4),
+            Validators.maxLength(6),
+          ]
+        ],
+        coordinates: this.formBuilder.group({
+          latitude: ['',
+            [
+              Validators.required,
+            ]
+          ],
+          longitude: ['',
+            [
+              Validators.required,
+            ]
+          ]
+        })
       }),
       email: ['', 
         [
@@ -132,15 +151,17 @@ export class EditComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-          this.validateArrayNotEmpty
-          // lengthValidator,
         ]
       ]),
-      registered: [''],
+      available: ['', [Validators.required]],
+      registered: this.formBuilder.group({
+        date: [ {value: '', disabled: true} ],
+        age: [ {value: '', disabled: true} ],
+      }),
       phone: ['', 
         [
           Validators.required,
-          phoneValidator
+          phoneValidator,
         ]
       ],
       nationality: ['', 
@@ -172,17 +193,25 @@ export class EditComponent implements OnInit {
       dob: 
       {
         date: user.dob.date,
+        age: user.dob.age,
       },
       location: {
         countries: user.location.country,
         cities: user.location.city,
+        postcode: user.location.postcode,
+        coordinates: {
+          latitude: user.location.coordinates.latitude,
+          longitude: user.location.coordinates.longitude,
+        }
       },
       email: user.email,
       website: user.website,
-      language: [user.language],
+      language: [...user.language],
+      available: user.available,
       registered: 
       {
-        date: user.registered.date
+        date: user.registered.date,
+        age: user.registered.age,
       },
       phone: user.phone,
       nationality: user.nat,
@@ -211,41 +240,31 @@ export class EditComponent implements OnInit {
     console.log(del)
   };
 
-  initName(name: string): FormControl {
-    return this.formBuilder.control(name);
-  }
+  get language(): FormArray {
+    return this.formEdit.get('language') as FormArray;
+  };
 
-  validateArrayNotEmpty(c: FormControl) {
-    if (c.value && c.value.length === 0) {
-      return {
-        validateArrayNotEmpty: { valid: false }
-      };
-    }
-    return null;
-  }
+  private initLanguage(language: string): FormControl {
+    return this.formBuilder.control(language);
+  };
 
-  add(event: MatChipInputEvent, form: FormGroup): void {
+  public addLanguage(event: MatChipInputEvent, form: FormGroup): void {
     const input = event.input;
     const value = event.value;
 
-    // Add name
     if ((value || '').trim()) {
-      const control = <FormArray>form.get('language');
-      control.push(this.initName(value.trim()));
-      console.log(control);
-    }
-
-    // Reset the input value
+      const control = form.get('language') as FormArray;
+      control.push(this.initLanguage(value.trim()));
+    };
     if (input) {
       input.value = '';
-    }
-  }
+    };
+  };
 
-  remove(form: any, index: any) {
-    console.log(form);
-    form.get('language').removeAt(index);
-  }
-
+  public deleteLanguage(index: number): void {
+    this.language.removeAt(index);
+  };
+  
   public editUser(userEdit: UserDTO):void {
     if(this.formEdit.valid){
       const editedUser = this.formEdit.getRawValue();

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DescriptionComponent } from './description.component';
 import { DescriptionRoutingModule } from './description-routing.module';
 import { DetailsComponent } from './components/details/details.component';
-import { MaterialExampleModule } from 'src/app/material-example.module';
+import { MaterialExampleModule } from '../../material-example.module';
 import { IsVisibleOrNotDirective } from './directives/is-visible.directive';
 import { CellColorDirective } from './directives/cell-color.directive';
 import { CellColorSwitcherDirective } from './directives/cell-color-switcher.directive';
