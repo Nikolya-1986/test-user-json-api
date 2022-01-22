@@ -66,7 +66,7 @@
                         </div>           
                     </mat-form-field>
                 </div>
-                <div formGroupName="name">  
+                <ng-container formGroupName="name">  
                     <!-- Appeal -->
                     <mat-form-field>
                         <mat-label>
@@ -109,7 +109,7 @@
                             You must provide only <strong>letters</strong>
                         </mat-error>
                     </mat-form-field>
-                </div>
+                </ng-container>
                 <!-- Gender -->
                 <div class="misc-bottom-padding">
                     <mat-label>
@@ -145,7 +145,8 @@
                     </mat-select>
                 </mat-form-field>
                 <!-- Date of birth -->
-                <div formGroupName="dob">
+                <ng-container formGroupName="dob"> 
+                    <!-- date -->
                     <mat-form-field>
                         <mat-label>
                             Date of birth
@@ -168,8 +169,20 @@
                             Your birthday must be greater than <strong>today's date</strong>
                         </mat-error>
                     </mat-form-field>
-                </div>
-                <div formGroupName="location">
+                    <!-- age -->
+                    <mat-form-field>
+                        <mat-label>
+                            Your age
+                        </mat-label>
+                        <input 
+                            formControlName="age"
+                            matInput 
+                            value= "{{ userEdit.registered.age }}"
+                            >
+                    </mat-form-field>
+                </ng-container>
+                <!-- location -->
+                <ng-container formGroupName="location">
                     <!-- Countries -->
                     <mat-form-field>
                         <mat-label>
@@ -204,27 +217,67 @@
                             You must provide a <strong>cities</strong>
                         </mat-error>
                     </mat-form-field>
-                    <!-- PostCode -->
+                    <!-- Postcode -->
                     <mat-form-field class="example-full-width">
                         <mat-label>
-                            Post code
+                            Postcode
                         </mat-label>
                         <input 
                             matInput 
-                            placeholder="Post code" 
+                            placeholder="Postcode"
                             formControlName="postcode"
                         />
                         <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('required')">
                             You must provide a <strong>postcode</strong>
-                        </mat-error>
+                        </mat-error>  
                         <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('pattern')">
                             You must provide only <strong>numbers</strong>
                         </mat-error>
-                        <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('postCodeInvalid')">
-                            You must provide <strong>post code from 4 to 6 sumbol</strong>
+                        <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('minlength')">
+                            You must provide not less than <strong>4 numbers</strong>
+                        </mat-error>
+                        <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('maxlength')">
+                            You must provide not more than <strong>6 numbers</strong>
                         </mat-error>
                     </mat-form-field>
-                </div>
+                    <!-- Coordinates -->
+                    <ng-container formGroupName="coordinates">
+                        <!-- Latitude -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>
+                                Coordinates latitude
+                            </mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Latitude: -/+XXX.XXXX"
+                                formControlName="latitude"
+                            />
+                            <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('latitude')?.hasError('required')">
+                                You must provide a <strong>latitude</strong>
+                            </mat-error>  
+                            <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('latitude')?.hasError('ivalidCoordinates')">
+                                You must provide only <strong>corect latitude</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <!-- Longitude -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>
+                                Coordinates longitude
+                            </mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Longitude"
+                                formControlName="longitude:-/+XXX.XXXX"
+                            />
+                            <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('required')">
+                                You must provide a <strong>longitude</strong>
+                            </mat-error>  
+                            <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('ivalidCoordinates')">
+                                You must provide only <strong>corect longitude</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </ng-container>
+                </ng-container>
                 <!-- Email -->
                 <mat-form-field class="example-full-width">
                     <mat-label>
@@ -261,43 +314,58 @@
                 </mat-form-field>
                 <!-- Languages Array-->
                 <mat-form-field class="example-chip-list">
-                    <mat-chip-list #languageList formArrayName="language">
+                    <mat-chip-list 
+                        #languageList 
+                        formArrayName="language"
+                        >
                         <mat-chip 
-                            *ngFor="let item of languages.controls; let i=index;"
+                            *ngFor="let item of language.controls; let i=index;"
                             [selectable]="selectable"
                             [removable]="removable"
-                            (removed)="remove(formEdit, i)"
+                            (removed)="deleteLanguage(i)"
                             >
                             {{item.value}}
                             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                         </mat-chip>
                         <input 
-                            formControlName="i"
                             placeholder="Languages"
                             [matChipInputFor]="languageList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="add($event, formEdit)"
-                        >isEmpty
+                            (matChipInputTokenEnd)="addLanguage($event, formEdit)">
                     </mat-chip-list>
                     <mat-error *ngIf="formEdit.get('language')?.hasError('required')">
                         You must provide a <strong>language</strong>
+                    </mat-error>  
+                    <mat-error *ngIf="formEdit.get('language')?.hasError('pattern')">
+                        You must provide only <strong>letters</strong>
                     </mat-error>
-                    <mat-error>Atleast 1 name need to be added</mat-error>
-                  </mat-form-field>       
+                </mat-form-field>
                 <!-- Date registered -->
-                <div formGroupName="registered">
-                    <mat-form-field formControlName="date">
+                <ng-container formGroupName="registered">
+                    <!-- date -->
+                    <mat-form-field>
                         <mat-label>
                             Date registred
                         </mat-label>
                         <input 
                             matInput 
-                            value= "{{ userEdit.registered.date | formatDate }}"
-                            disabled
+                            value= "{{ userEdit.registered.date  }} | formatDate"
+                            formControlName="date"
                             >
                     </mat-form-field>
-                </div>
+                    <!-- age -->
+                    <mat-form-field>
+                        <mat-label>
+                            How long ago registered
+                        </mat-label>
+                        <input 
+                            matInput 
+                            value= "{{ userEdit.registered.age }}"
+                            formControlName="age"
+                            >
+                    </mat-form-field>
+                </ng-container>
                 <!-- Phone -->
                 <mat-form-field class="example-full-width">
                     <mat-label>
@@ -315,8 +383,8 @@
                     <mat-error *ngIf="formEdit.get('phone')?.hasError('required')">
                         You must provide a <strong>phone</strong>
                     </mat-error>  
-                    <mat-error *ngIf="formEdit.get('phone')?.hasError('invalidPhones')">
-                        You must provide a <strong>invalid phone</strong>
+                    <mat-error *ngIf="formEdit.get('phone')?.hasError('invalidPhone')">
+                        You must provide a <strong>valid phone</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Nationality -->
@@ -335,7 +403,7 @@
                     <mat-error *ngIf="formEdit.get('nationality')?.hasError('pattern')">
                         You must provide only <strong>capital letters</strong>
                     </mat-error>
-                    <mat-error *ngIf="formEdit.get('nationality')?.hasError('maxLength')">
+                    <mat-error *ngIf="formEdit.get('nationality')?.hasError('maxlength')">
                         You must provide not more than <strong>3 capital letters</strong>
                     </mat-error>
                 </mat-form-field>

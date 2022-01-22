@@ -9,13 +9,14 @@ import { UsersCardsComponent } from './components/users-cards/users-cards.compon
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { UsersFiltersComponent } from './components/users-filters/users-filters.component';
 import { SearchNamePipe } from './pipes/search-name.pipe';
+import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { FilterNameAgePipe } from './pipes/filter-name-age.pipe';
 import { FilterGenderPipe } from './pipes/filter-gender.pipe';
 import { FilterStatusPipe } from './pipes/filter-status.pipe';
 import { LanguagesFilterComponent } from './components/languages-filter/languages-filter.component';
 import { FilterLaguagePipe } from './pipes/filter-laguage.pipe';
-import { FormatAgePipe } from './pipes/format-age.pipe';
 import { FilterAvailablePipe } from './pipes/filter-available.pipe';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +30,6 @@ import { FilterAvailablePipe } from './pipes/filter-available.pipe';
     FilterGenderPipe,
     FilterStatusPipe,
     FilterLaguagePipe,
-    FormatAgePipe,
     FilterAvailablePipe
   ],
   imports: [
@@ -37,7 +37,8 @@ import { FilterAvailablePipe } from './pipes/filter-available.pipe';
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialExampleModule
+    MaterialExampleModule,
+    ApplicationPipesModule,
   ]
 })
 export class HomeModule { }

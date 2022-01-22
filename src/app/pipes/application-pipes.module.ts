@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 
+import { FormatAgePipe } from './format-age.pipe';
 import { FormatDatePipe } from './format-date.pipe';
 
 @NgModule({
   declarations: [
-    FormatDatePipe
+    FormatDatePipe,
+    FormatAgePipe,
   ],
   exports: [
-    FormatDatePipe
+    FormatDatePipe,
+    FormatAgePipe,
   ],
 
 })

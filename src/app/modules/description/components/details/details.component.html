@@ -50,6 +50,12 @@
                     Post code
                 </th>
                 <th>
+                    Coordinates latitude
+                </th>
+                <th>
+                    Coordinates longitude
+                </th>
+                <th>
                     Email
                 </th>
                 <th>
@@ -95,6 +101,12 @@
                 </td>
                 <td>
                     {{ userDetails.location.postcode }}
+                </td>
+                <td>
+                    {{ userDetails.location.coordinates.latitude }}
+                </td>
+                <td>
+                    {{ userDetails.location.coordinates.longitude }}
                 </td>
                 <td>
                     {{ userDetails.email }}
