@@ -15,13 +15,13 @@ export function imageValidator(control: AbstractControl) {
         return {
             fileToBig: true,
         }
-    };
+    }
 
-    // else if(control.value.match(typeFile) === null){
-    //     return {
-    //         onlyImage: true
-    //     }
-    // }
+    else if(!typeFile.test(control.value)){
+        return {
+            onlyImage: true
+        }
+    }
     
     return null;
-}//-
+}

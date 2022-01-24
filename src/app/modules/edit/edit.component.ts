@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { combineLatest, map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -15,7 +15,9 @@ import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { phoneValidator } from '../../validators/phone.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
-import { coordinatesValidator } from 'src/app/validators/coordinates.validator';
+import { coordinatesValidator } from '../../validators/coordinates.validator';
+import { lengthValidator } from '../../validators/length.validator';
+import { EmailAsyncValidator } from '../../validators/email-async.validator';
 
 @Component({
   selector: 'app-edit',
@@ -47,6 +49,7 @@ export class EditComponent implements OnInit {
     private dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private store: Store<AppUserState>,
+    private emailAsyncValidator: EmailAsyncValidator,
   ) {
     this.countries = this.dataService.getCountries();
     this.cities = this.dataService.getCities();
@@ -55,9 +58,7 @@ export class EditComponent implements OnInit {
   public ngOnInit(): void {
     this.reactiveForm();
     this.fetchUserEdit();
-    this.formEdit.get('language')!.statusChanges.subscribe(
-      status => this.languageList.errorState = status === 'INVALID'
-    );
+    this.handleFormChanges();
   };
 
   public fetchUserEdit() {
@@ -67,6 +68,30 @@ export class EditComponent implements OnInit {
       tap((user) => this.setFormValues(user as UserDTO))
     )
     return this.userEdit$ as unknown as Observable<UserDTO>;
+  };
+
+  public handleFormChanges(){
+    combineLatest([this.formEdit.valueChanges, this.formEdit.statusChanges])
+    .subscribe((user) => {
+      if(this.formEdit.valid){
+        console.log('Form validation status: SUCESS', user);
+      }else{
+        console.log('Form validation status: ERROR', user);
+      }
+    })
+    this.updateTreeValidity(this.formEdit);
+  };
+
+  private updateTreeValidity(group: FormGroup | FormArray | any): void {
+    Object.keys(group.controls).forEach((key: string) => {
+      const control = group.controls[key];
+
+      if(control instanceof FormGroup || control instanceof FormArray){
+        this.updateTreeValidity(control)
+      }else {
+        control.updateValueAndValidity();
+      }
+    })
   };
 
   public reactiveForm(): void {
@@ -141,7 +166,8 @@ export class EditComponent implements OnInit {
           Validators.required, 
           Validators.email,
           Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
-        ]
+        ],
+        this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
       ],
       website: ['',
         [
@@ -154,7 +180,8 @@ export class EditComponent implements OnInit {
         [
           Validators.required,
           Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-        ]
+          // lengthValidator
+        ],
       ]),
       available: ['', [Validators.required]],
       registered: this.formBuilder.group({

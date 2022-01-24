@@ -266,8 +266,8 @@
                             </mat-label>
                             <input 
                                 matInput 
-                                placeholder="Longitude"
-                                formControlName="longitude:-/+XXX.XXXX"
+                                placeholder="Longitude: -/+XXX.XXXX"
+                                formControlName="longitude"
                             />
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('required')">
                                 You must provide a <strong>longitude</strong>
@@ -294,6 +294,9 @@
                     <mat-error *ngIf="formEdit.get('email')?.hasError('pattern')">
                         You must provide a <strong>valid email address</strong>
                     </mat-error> 
+                    <mat-error *ngIf="formEdit.get('email')?.hasError('emailTaken')">
+                        You must provide a <strong>unregistered email</strong>
+                    </mat-error> 
                 </mat-form-field>
                 <!-- Website -->
                 <mat-form-field class="example-full-width">
@@ -309,7 +312,7 @@
                         You must provide a <strong>website</strong>
                     </mat-error>  
                     <mat-error *ngIf="formEdit.get('website')?.hasError('invlidUrl')">
-                        Your website address must be <strong>http://</strong>
+                        Your website address must be <strong>http://*****.com</strong>
                     </mat-error>  
                 </mat-form-field>
                 <!-- Languages Array-->
@@ -332,7 +335,8 @@
                             [matChipInputFor]="languageList"
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="addLanguage($event, formEdit)">
+                            (matChipInputTokenEnd)="addLanguage($event, formEdit)"
+                        />
                     </mat-chip-list>
                     <mat-error *ngIf="formEdit.get('language')?.hasError('required')">
                         You must provide a <strong>language</strong>
