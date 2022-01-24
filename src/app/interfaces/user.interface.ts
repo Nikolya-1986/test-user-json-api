@@ -49,22 +49,12 @@ export enum Appeal {
 
 export interface Location {
     street: Street,
-    city: City,
+    city: string,
     state: string,
-    country: Country,
+    country: string,
     postcode: string,
     coordinates: Coordinates,
     timezone: Timezone,
-};
-
-export interface City {
-    id: number,
-    name: string
-};
-
-export interface Country {
-    id: number,
-    name: string
 };
 
 export interface Street {

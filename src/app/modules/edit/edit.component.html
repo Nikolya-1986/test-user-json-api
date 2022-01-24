@@ -184,38 +184,32 @@
                 <!-- location -->
                 <ng-container formGroupName="location">
                     <!-- Countries -->
-                    <mat-form-field>
-                        <mat-label>
-                            Countries
-                        </mat-label>
-                        <mat-select formControlName="countries">
-                            <mat-option 
-                                [value]="country.id" 
-                                *ngFor="let country of countries"
-                                >
-                                {{ country.name }} 
-                            </mat-option>
-                        </mat-select>
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            matInput 
+                            placeholder="Countries" 
+                            formControlName="countries"
+                        >
                         <mat-error *ngIf="formEdit.get('location')?.get('countries')?.hasError('required')">
                             You must provide a <strong>countries</strong>
-                        </mat-error>
+                        </mat-error> 
+                        <mat-error *ngIf="formEdit.get('location')?.get('countries')?.hasError('pattern')">
+                            You must provide only <strong>letters</strong>
+                        </mat-error> 
                     </mat-form-field>
                     <!-- Cities -->
-                    <mat-form-field>
-                        <mat-label>
-                            Cities
-                        </mat-label>
-                        <mat-select formControlName="cities">
-                            <mat-option 
-                                [value]="city.id" 
-                                *ngFor="let city of cities"
-                                >
-                                {{ city.name }}
-                            </mat-option>
-                        </mat-select>
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            matInput 
+                            placeholder="Cities" 
+                            formControlName="cities"
+                        >
                         <mat-error *ngIf="formEdit.get('location')?.get('cities')?.hasError('required')">
-                            You must provide a <strong>cities</strong>
-                        </mat-error>
+                            You must provide a <strong>countries</strong>
+                        </mat-error> 
+                        <mat-error *ngIf="formEdit.get('location')?.get('cities')?.hasError('pattern')">
+                            You must provide only <strong>letters</strong>
+                        </mat-error> 
                     </mat-form-field>
                     <!-- Postcode -->
                     <mat-form-field class="example-full-width">

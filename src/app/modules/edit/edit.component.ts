@@ -6,8 +6,7 @@ import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { DataService } from '../../services/data.service';
-import { Appeal, City, Country, Gender, Status, UserDTO } from '../../interfaces/user.interface';
+import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
@@ -34,8 +33,6 @@ export class EditComponent implements OnInit {
   public formEdit!: FormGroup;
   public gender: Gender[] = [Gender.female, Gender.male];
   public statuses: Status[] = [Status.divorced, Status.married, Status.single];
-  public countries: Country[];
-  public cities: City[];
   public selectedValueCountry = null;
   public selectedValueCity = null;
   public selectable: boolean = true;
@@ -46,14 +43,10 @@ export class EditComponent implements OnInit {
   
   constructor(
     public formBuilder: FormBuilder,
-    private dataService: DataService,
     private activatedRoute: ActivatedRoute,
     private store: Store<AppUserState>,
     private emailAsyncValidator: EmailAsyncValidator,
-  ) {
-    this.countries = this.dataService.getCountries();
-    this.cities = this.dataService.getCities();
-  }
+  ) { }
 
   public ngOnInit(): void {
     this.reactiveForm();
@@ -131,11 +124,13 @@ export class EditComponent implements OnInit {
         countries: ['', 
           [
             Validators.required,
+            Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
           ]
         ],
         cities: ['',
           [
             Validators.required,
+            Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
           ]
         ],
         postcode: ['',
