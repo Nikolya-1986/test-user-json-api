@@ -21,7 +21,7 @@ export class AppComponent {
 //               "last":"May"
 //           },
 //           "location": { 
-//               "city":"Laytown-Bettystown-Mornington",
+//               "city":"Laytown",
 //               "country":"Ireland",
 //               "postcode":40302,
 //               "coordinates": {
@@ -217,7 +217,7 @@ export class AppComponent {
 //           "name":{
 //               "title":"Ms",
 //               "first":"Angelina",
-//               "last":"Finnøy"
+//               "last":"Finny"
 //           },
 //           "location":{
 //               "city":"Lyngseidet",

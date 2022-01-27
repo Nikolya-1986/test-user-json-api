@@ -16,10 +16,10 @@
                 <!-- Picture -->
                 <div class="edit__images">
                     <div class="edit__wrapper-images">
-                        <div class="image" *ngFor="let image of userEdit.picture; let i = index">
+                        <div class="image" *ngFor="let image of userEdit.picture; let ind = index">
                             <img [src]="image.src">
                             <span 
-                                (click)="deleteImage(image, userEdit)"
+                                (click)="deleteImage(ind, userEdit)"
                                 >
                                 X
                             </span>
@@ -46,14 +46,11 @@
                                 class="file-control-input" 
                                 type="file" 
                                 #uploadControl 
-                                (change)="imageChange($event)" 
+                                (change)="imageChange($event, userEdit)" 
                                 formControlName="picture"
                                 multiple="multiple" 
                                 accept="image/*"
                             />
-                            <mat-error *ngIf="formEdit.get('picture')?.hasError('required')">
-                                You must provide a <strong>picture</strong>
-                            </mat-error> 
                             <mat-error *ngIf="formEdit.get('picture')?.hasError('noFile')">
                                 Please select images for editing!
                             </mat-error> 
@@ -188,12 +185,12 @@
                         <input 
                             matInput 
                             placeholder="Countries" 
-                            formControlName="countries"
+                            formControlName="country"
                         >
-                        <mat-error *ngIf="formEdit.get('location')?.get('countries')?.hasError('required')">
+                        <mat-error *ngIf="formEdit.get('location')?.get('country')?.hasError('required')">
                             You must provide a <strong>countries</strong>
                         </mat-error> 
-                        <mat-error *ngIf="formEdit.get('location')?.get('countries')?.hasError('pattern')">
+                        <mat-error *ngIf="formEdit.get('location')?.get('country')?.hasError('pattern')">
                             You must provide only <strong>letters</strong>
                         </mat-error> 
                     </mat-form-field>
@@ -202,12 +199,12 @@
                         <input 
                             matInput 
                             placeholder="Cities" 
-                            formControlName="cities"
+                            formControlName="city"
                         >
-                        <mat-error *ngIf="formEdit.get('location')?.get('cities')?.hasError('required')">
+                        <mat-error *ngIf="formEdit.get('location')?.get('city')?.hasError('required')">
                             You must provide a <strong>countries</strong>
                         </mat-error> 
-                        <mat-error *ngIf="formEdit.get('location')?.get('cities')?.hasError('pattern')">
+                        <mat-error *ngIf="formEdit.get('location')?.get('city')?.hasError('pattern')">
                             You must provide only <strong>letters</strong>
                         </mat-error> 
                     </mat-form-field>
@@ -393,15 +390,15 @@
                     <input 
                         matInput 
                         placeholder="Nationality" 
-                        formControlName="nationality"
+                        formControlName="nat"
                     />
-                    <mat-error *ngIf="formEdit.get('nationality')?.hasError('required')">
+                    <mat-error *ngIf="formEdit.get('nat')?.hasError('required')">
                         You must provide a <strong>nationality</strong>
                     </mat-error>  
-                    <mat-error *ngIf="formEdit.get('nationality')?.hasError('pattern')">
+                    <mat-error *ngIf="formEdit.get('nat')?.hasError('pattern')">
                         You must provide only <strong>capital letters</strong>
                     </mat-error>
-                    <mat-error *ngIf="formEdit.get('nationality')?.hasError('maxlength')">
+                    <mat-error *ngIf="formEdit.get('nat')?.hasError('maxlength')">
                         You must provide not more than <strong>3 capital letters</strong>
                     </mat-error>
                 </mat-form-field>

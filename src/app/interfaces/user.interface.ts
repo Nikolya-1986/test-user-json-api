@@ -95,8 +95,3 @@ export interface Registered {
 export interface Picture {
     src: string,
 };
-
-export interface SubjectLanguage {
-    name: string;
-}
-  

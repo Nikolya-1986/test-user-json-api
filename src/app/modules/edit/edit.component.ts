@@ -1,12 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { combineLatest, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { combineLatest, fromEvent, map, Observable, Subject, switchMap, tap } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
+import { Appeal, Gender, Picture, Status, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
@@ -38,7 +38,7 @@ export class EditComponent implements OnInit {
   public selectable: boolean = true;
   public removable: boolean = true;
   public addOnBlur: boolean = true;
-  public editedImage: any;
+  public editedImage!: any;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   
   constructor(
@@ -89,10 +89,8 @@ export class EditComponent implements OnInit {
 
   public reactiveForm(): void {
     this.formEdit = this.formBuilder.group({
-      picture: ['',                
-        [
-          imageValidator
-        ]
+      picture: ['',               
+        // [imageValidator]
       ],
       name: this.formBuilder.group({
         title: [''],
@@ -121,13 +119,13 @@ export class EditComponent implements OnInit {
         age: [ {value: '', disabled: true} ],
       }),
       location: this.formBuilder.group({
-        countries: ['', 
+        country: ['', 
           [
             Validators.required,
             Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
           ]
         ],
-        cities: ['',
+        city: ['',
           [
             Validators.required,
             Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
@@ -189,7 +187,7 @@ export class EditComponent implements OnInit {
           phoneValidator,
         ]
       ],
-      nationality: ['', 
+      nat: ['', 
         [
           Validators.required,
           Validators.pattern("^[A-Z][A-Z]+$"),
@@ -221,8 +219,8 @@ export class EditComponent implements OnInit {
         age: user.dob.age,
       },
       location: {
-        countries: user.location.country,
-        cities: user.location.city,
+        country: user.location.country,
+        city: user.location.city,
         postcode: user.location.postcode,
         coordinates: {
           latitude: user.location.coordinates.latitude,
@@ -239,29 +237,31 @@ export class EditComponent implements OnInit {
         age: user.registered.age,
       },
       phone: user.phone,
-      nationality: user.nat,
+      nat: user.nat,
     })
   };
 
-  public imageChange(inputEvent: Event | any): any | File {
+  public imageChange(event: Event | any, user: UserDTO): Observable<any>{
 
-    if(!inputEvent.target.files[0] || inputEvent.target.files[0].length == 0) {
-			return;
-		}
+    if (event.target.files && event.target.files[0]) {
+      let filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
 
-    const reader = new FileReader();
-		reader.readAsDataURL(inputEvent.target.files[0]);
-
-		reader.onload = (_event) => {
-			this.editedImage = reader.result;  
-      this.formEdit.patchValue({picture: this.editedImage});
-      console.log(this.editedImage);
-		}
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[i]);
+        return fromEvent(reader, 'load').pipe(
+          map((event:any) => {
+            this.editedImage = event.target.result;
+            user.picture.push({ src: this.editedImage });
+          })
+        )
+      }
+    }
     return this.editedImage;
   };
 
-  public deleteImage(image: any, user: UserDTO): void {
-    const del = user.picture.filter(item => item !== image);
+  public deleteImage(ind: number, user: UserDTO): void {
+    const del = user.picture.splice(ind,1);
     console.log(del)
   };
 
@@ -296,9 +296,8 @@ export class EditComponent implements OnInit {
       const userUpdated: UserDTO = {
         id: userEdit.id,
         ...editedUser,
-        picture: this.editedImage
       }
-      // this.store.dispatch(userActions.EditUserRequest({ userEdit: userUpdated }));
+      this.store.dispatch(userActions.EditUserRequest({ userEdit: userUpdated }));
       console.log(userUpdated);
     }
   };
