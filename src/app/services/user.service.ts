@@ -36,15 +36,19 @@ export class UserService {
 
     public getUsers(): Observable<UserDTO[]> {
         return this.httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`).pipe(
-            // tap(users => console.log("Users:", users)),
             retry(3),
+            catchError(this.errorsBackend),
+        )
+    };
+
+    public getUser(id: number): Observable<UserDTO> {
+        return this.httpClient.get<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
             catchError(this.errorsBackend),
         )
     };
 
     public deleteUser(id: number): Observable<UserDTO> {
         return this.httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
-            tap(() => console.log("User delete:", id)),
             catchError(this.errorsBackend),
         )
     };

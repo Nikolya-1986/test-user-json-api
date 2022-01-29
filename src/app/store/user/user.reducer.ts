@@ -38,6 +38,20 @@ export const userReduser = createReducer (
         ...state,
         errorMessage: action.message,
     })),
+    on(userActions.LoadUserRequest, (state, { userId }) => ({
+        ...state,
+    })),
+    on(userActions.LoadUserSuccess, (state, action) => {
+        const user = state.userDTO.filter(item => item.id !== action.user.id);
+        return {
+            ...state,
+            userDTO: user,
+        }
+    }),
+    on(userActions.LoadUserFail, (state, action) => ({
+        ...state,
+        errorMessage: action.message,
+    })),
     on(userActions.DeleteUserRequest, state => ({
         ...state,
     })),

@@ -26,6 +26,20 @@ export class UsersEffects {
         { useEffectsErrorHandler: false }
     );
 
+    loadUser$: Observable<Action> = createEffect(() => this.actions$
+        .pipe(
+            ofType(userActions.UsersActionsType.LOAD_USER_REQUEST),
+            switchMap((action: any) => this.userService.getUser(action.userId)
+                .pipe(
+                    tap((user) => console.log(user)),
+                    map(() => userActions.LoadUserSuccess({ user: action.user })),
+                    catchError((error) => of(userActions.LoadUserFail(error)))
+                )
+            )
+        ),
+        { useEffectsErrorHandler: false }                
+    );
+
     deleteUser$: Observable<Action> = createEffect(() => this.actions$
         .pipe(
             ofType(userActions.UsersActionsType.DELETE_USER_REQUEST),
