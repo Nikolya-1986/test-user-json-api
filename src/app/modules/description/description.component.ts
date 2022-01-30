@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
-import { map, mergeMap, Observable, Subject, Subscription, switchMap, takeUntil, tap } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
@@ -24,34 +24,28 @@ export class DescriptionComponent implements OnInit {
   public showText!: boolean;
   public currentImage: number = 0;
   public destroy$: Subject<boolean> = new Subject();
-  public navigationSubscription!: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private store: Store<AppUserState>,
     public modalWindowServise: ModalWindowService,
     private router: Router,
-  ) { 
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      // If it is a NavigationEnd event re-initalise the component
-      if (e instanceof NavigationEnd) {
-        this.router.navigated = false
-      }
-    });
-  }
+  ) {}
 
   public ngOnInit(): void {
-    this.getUserDetail();
+    this.fetchUserDetail();
   };
 
-  private getUserDetail(): Observable<UserDTO> {
+  private fetchUserDetail(): Observable<UserDTO> {
     this.userDetails$ = this.activatedRoute.params.pipe(
-      map((params: Params) =>  Number(params['id'])),
-      switchMap((id: number) => this.store.pipe(select(userSelectors.getUserSelector(id)))),
+      map((params: Params) =>  {
+        this.userId = Number(params['id']); 
+        this.store.dispatch(userActions.LoadUserRequest({ userId: this.userId }));
+        return this.userId;
+      }),
+      switchMap(() => this.store.select(userSelectors.getUserSelector(this.userId))),
       tap(user => console.log(user)),
-    ),
-    this.store.dispatch(userActions.LoadUserRequest({ userId: this.userId }));
-    console.log(this.userId)
+    )
     return this.userDetails$;
   };
 

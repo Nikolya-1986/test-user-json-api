@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Action, Store } from "@ngrx/store";
+import { Action, select, Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
-import { map, catchError, switchMap, tap } from 'rxjs/operators';
+import { map, catchError, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import AppUserState from "./user.state";
 import { UserService } from "../../services/user.service";
 import * as userActions from "./user.actions";
 import { UserDTO } from "src/app/interfaces/user.interface";
 import { Router } from "@angular/router";
+import { getUserSelector } from "./user.selectors";
 
 @Injectable()
 export class UsersEffects {
@@ -31,8 +32,8 @@ export class UsersEffects {
             ofType(userActions.UsersActionsType.LOAD_USER_REQUEST),
             switchMap((action: any) => this.userService.getUser(action.userId)
                 .pipe(
-                    tap((user) => console.log(user)),
-                    map(() => userActions.LoadUserSuccess({ user: action.user })),
+                    map((user) => userActions.LoadUserSuccess({ user })),
+                    tap((res) => console.log(res.user)),
                     catchError((error) => of(userActions.LoadUserFail(error)))
                 )
             )

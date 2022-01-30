@@ -56,9 +56,6 @@
                             </mat-error> 
                             <mat-error *ngIf="formEdit.get('picture')?.hasError('fileToBig')">
                                 Image size should not be more than <strong>1000000 bytes!</strong>
-                            </mat-error> 
-                            <mat-error *ngIf="formEdit.get('picture')?.hasError('onlyImage')">
-                                Only images are supported!
                             </mat-error>
                         </div>           
                     </mat-form-field>
@@ -313,13 +310,16 @@
                         formArrayName="language"
                         >
                         <mat-chip 
-                            *ngFor="let item of language.controls; let i=index;"
+                            *ngFor="let item of language.controls; let ind=index;"
+                            [formGroupName]="ind"
                             [selectable]="selectable"
                             [removable]="removable"
-                            (removed)="deleteLanguage(i)"
+                            (removed)="deleteLanguage(ind)"
                             >
-                            {{item.value}}
-                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            {{ item.value }}
+                            <mat-icon matChipRemove *ngIf="removable">
+                                cancel
+                            </mat-icon>
                         </mat-chip>
                         <input 
                             placeholder="Languages"
@@ -329,7 +329,7 @@
                             (matChipInputTokenEnd)="addLanguage($event, formEdit)"
                         />
                     </mat-chip-list>
-                    <mat-error *ngIf="formEdit.get('language')?.hasError('required')">
+                    <mat-error *ngIf="formEdit.get('language')?.hasError('isEmpty')">
                         You must provide a <strong>language</strong>
                     </mat-error>  
                     <mat-error *ngIf="formEdit.get('language')?.hasError('pattern')">

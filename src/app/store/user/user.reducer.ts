@@ -41,11 +41,12 @@ export const userReduser = createReducer (
     on(userActions.LoadUserRequest, (state, { userId }) => ({
         ...state,
     })),
-    on(userActions.LoadUserSuccess, (state, action) => {
-        const user = state.userDTO.filter(item => item.id !== action.user.id);
+    on(userActions.LoadUserSuccess, (state, { user }) => {
+        const userCurrent = state.userDTO.filter(item => item.id === user.id);
+        console.log(userCurrent)
         return {
             ...state,
-            userDTO: user,
+            userDTO: userCurrent,
         }
     }),
     on(userActions.LoadUserFail, (state, action) => ({

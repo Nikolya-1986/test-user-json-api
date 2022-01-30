@@ -6,7 +6,7 @@ import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
-import { Appeal, Gender, Picture, Status, UserDTO } from '../../interfaces/user.interface';
+import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
@@ -29,6 +29,7 @@ export class EditComponent implements OnInit {
   @ViewChild('uploadControl') public uploadControl!: ElementRef;
   public userEdit$!: Observable<UserDTO | any>;
   public destroy$: Subject<boolean> = new Subject;
+  public userId!: number;
   public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
   public formEdit!: FormGroup;
   public gender: Gender[] = [Gender.female, Gender.male];
@@ -56,8 +57,12 @@ export class EditComponent implements OnInit {
 
   public fetchUserEdit() {
     this.userEdit$ = this.activatedRoute.params.pipe(
-      map((userId: Params) => Number(userId['id'])),
-      switchMap((id: number) => this.store.select(userSelectors.getUserSelector(id))),
+      map((params: Params) =>  {
+        this.userId = Number(params['id']); 
+        this.store.dispatch(userActions.LoadUserRequest({ userId: this.userId }));
+        return this.userId;
+      }),
+      switchMap(() => this.store.select(userSelectors.getUserSelector(this.userId))),
       tap((user) => this.setFormValues(user as UserDTO))
     )
     return this.userEdit$ as unknown as Observable<UserDTO>;
@@ -90,7 +95,7 @@ export class EditComponent implements OnInit {
   public reactiveForm(): void {
     this.formEdit = this.formBuilder.group({
       picture: ['',               
-        // [imageValidator]
+        [imageValidator]
       ],
       name: this.formBuilder.group({
         title: [''],
@@ -171,9 +176,8 @@ export class EditComponent implements OnInit {
       language: this.formBuilder.array([
         this.formBuilder.control(''),
         [
-          Validators.required,
           Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-          // lengthValidator
+          lengthValidator,
         ],
       ]),
       available: ['', [Validators.required]],
