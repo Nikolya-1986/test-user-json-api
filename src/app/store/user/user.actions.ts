@@ -8,9 +8,15 @@ export enum UsersActionsType {
     LOAD_USERS_REQUEST = '[USER] Load Users Request',
     LOAD_USERS_SUCCESS = '[USER] Load Users Success',
     LOAD_USERS_FAIL = '[USER] Load Users Fail',
+    LOAD_USER_REQUEST = '[USER] Load User Request',
+    LOAD_USER_SUCCESS = '[USER] Load User Success',
+    LOAD_USER_FAIL = '[USER] Load User Fail',
     DELETE_USER_REQUEST = '[USER] Delete User Request',
     DELETE_USER_SUCCESS = '[USER] Delete User Success',
     DELETE_USER_FAIL = '[USER] Delete User Fail',
+    EDIT_USER_REQUEST = '[USER] Edit User Request',
+    EDIT_USER_SUCCESS = '[USER] Edit User Success',
+    EDIT_USER_FAIL = '[USER] Edit User Fail',
 };
 
 export const loadStart = createAction (
@@ -35,6 +41,21 @@ export const loadUsersFail = createAction (
     props<{message: string}>(),
 );
 
+export const LoadUserRequest = createAction (
+    UsersActionsType.LOAD_USER_REQUEST,
+    props<{userId: number}>(),
+);
+
+export const LoadUserSuccess = createAction (
+    UsersActionsType.LOAD_USER_SUCCESS,
+    props<{user: UserDTO}>(),
+);
+
+export const LoadUserFail = createAction (
+    UsersActionsType.LOAD_USER_FAIL,
+    props<{message: string}>(),
+);
+
 export const DeleteUserRequest = createAction (
     UsersActionsType.DELETE_USER_REQUEST,
     props<{userId: number}>(),
@@ -50,15 +71,36 @@ export const DeleteUserFail = createAction (
     props<{message: string}>(),
 );
 
+export const EditUserRequest = createAction (
+    UsersActionsType.EDIT_USER_REQUEST,
+    props<({userEdit: UserDTO})>(),
+);
+
+export const EditUserSuccess = createAction (
+    UsersActionsType.EDIT_USER_SUCCESS,
+    props<({userEdit: UserDTO})>(),
+);
+
+export const EditUserFail = createAction (
+    UsersActionsType.EDIT_USER_FAIL,
+    props<({message: string})>(),
+);
+
 const allUserActions = union({
     loadStart,
     loadEnd,
     loadUsersRequest,
     loadUsersSuccess,
     loadUsersFail,
+    LoadUserRequest,
+    LoadUserSuccess,
+    LoadUserFail,
     DeleteUserRequest,
     DeleteUserSuccess,
     DeleteUserFail,
+    EditUserRequest,
+    EditUserSuccess,
+    EditUserFail,
 });
 
 export type UserActions = typeof allUserActions

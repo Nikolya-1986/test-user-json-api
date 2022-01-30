@@ -7,7 +7,8 @@ const routes: Routes = [
     path: 'home', loadChildren: () => import('./modules/home/home.module').then(module => module.HomeModule)
   },
   {
-    path: 'description/:id', loadChildren: () => import('./modules/description/description.module').then(module => module.DescriptionModule)
+    path: 'description/:id', loadChildren: () => import('./modules/description/description.module').then(module => module.DescriptionModule),
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'edit/:id', loadChildren: () => import('./modules/edit/edit.module').then(module => module.EditModule)
@@ -22,11 +23,11 @@ const routes: Routes = [
   },
   { 
     path: '**', redirectTo: '/error'
-  }
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Gender, Status } from '../../../../interfaces/user.interface';
@@ -31,6 +31,7 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
   ) { }
 
   public ngOnInit(): void {
@@ -38,16 +39,17 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {
     this.focusInputElementRef.nativeElement.focus();
+    this.changeDetectorRef.detectChanges();
   };
 
   public inputCurrentName(): void {
     this.currentSearchName.emit(this.searchUserName);
-    this.router.navigate(['home'], { queryParams: { selectedSearchName: this.searchUserName }, queryParamsHandling: 'merge' })
+    this.router.navigate(['home'], { queryParams: { selectedSearchName: this.searchUserName }, queryParamsHandling: 'merge' });
   };
   
   public selectForSortSort(): void {
     this.currentForSortValue.emit(this.filterUserNameAge);
-    this.router.navigate(['home'], { queryParams: { selectedForSortValue: this.filterUserNameAge }, queryParamsHandling: 'merge' })
+    this.router.navigate(['home'], { queryParams: { selectedForSortValue: this.filterUserNameAge }, queryParamsHandling: 'merge' });
   };
 
   public selectGenderSort(): void {
@@ -57,18 +59,18 @@ export class UsersFiltersComponent implements OnInit, AfterViewInit {
 
   public selectStatusSort(): void {
     this.currentSratus.emit(this.fiterUserStatus);
-    this.router.navigate(['home'], { queryParams: { selectedStatus: this.fiterUserStatus }, queryParamsHandling: 'merge' })
+    this.router.navigate(['home'], { queryParams: { selectedStatus: this.fiterUserStatus }, queryParamsHandling: 'merge' });
   };
 
   public onCurrentLanguage(language: string): void {
     this.filterUserLanguage = language;
     this.currentLanguage.emit(this.filterUserLanguage);
-    this.router.navigate(['home'], { queryParams: { selectedlanguage: this.filterUserLanguage }, queryParamsHandling: 'merge' })
+    this.router.navigate(['home'], { queryParams: { selectedlanguage: this.filterUserLanguage }, queryParamsHandling: 'merge' });
   };
 
   public selectedAvailable(checkedAvailable: boolean): void {
     this.filterUserAvailable = checkedAvailable;
     this.currentAvailable.emit(this.filterUserAvailable);
-    this.router.navigate(['home'], { queryParams: { selectedAvailable: this.filterUserAvailable }, queryParamsHandling: 'merge' })
+    this.router.navigate(['home'], { queryParams: { selectedAvailable: this.filterUserAvailable }, queryParamsHandling: 'merge' });
   }
 }

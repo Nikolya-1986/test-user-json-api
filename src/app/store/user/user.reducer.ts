@@ -38,6 +38,21 @@ export const userReduser = createReducer (
         ...state,
         errorMessage: action.message,
     })),
+    on(userActions.LoadUserRequest, (state, { userId }) => ({
+        ...state,
+    })),
+    on(userActions.LoadUserSuccess, (state, { user }) => {
+        const userCurrent = state.userDTO.filter(item => item.id === user.id);
+        console.log(userCurrent)
+        return {
+            ...state,
+            userDTO: userCurrent,
+        }
+    }),
+    on(userActions.LoadUserFail, (state, action) => ({
+        ...state,
+        errorMessage: action.message,
+    })),
     on(userActions.DeleteUserRequest, state => ({
         ...state,
     })),
@@ -53,6 +68,22 @@ export const userReduser = createReducer (
     on(userActions.DeleteUserFail, (state, action) => ({
         ...state,
         errorMessage: action.message,
+    })),
+    on(userActions.EditUserRequest, (state, { userEdit }) => ({
+        ...state,
+    })),
+    on(userActions.EditUserSuccess, (state, { userEdit }) => {
+        const userIndexEdit = state.userDTO.findIndex(index => index.id === userEdit.id);
+        const editUser = [...state.userDTO];
+        editUser[userIndexEdit] = userEdit;
+        return {
+            ...state,
+            userDTO: editUser
+        }
+    }),
+    on(userActions.EditUserFail, (state, action) => ({
+        ...state,
+        errorMessage: action.message
     }))
 );
 

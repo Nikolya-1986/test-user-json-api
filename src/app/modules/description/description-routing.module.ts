@@ -6,18 +6,18 @@ import { ExtraComponent } from './components/extra/extra.component';
 
 const childRouters: Routes =[
     {
-        path: 'extra', component: ExtraComponent
+        path: 'extra', component: ExtraComponent,
     }
 ];
 
 const routes: Routes = [
     {
-        path: '', component: DescriptionComponent, children: childRouters
+        path: '', component: DescriptionComponent, children: childRouters,
     }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+    exports: [RouterModule],
 })
 export class DescriptionRoutingModule { }

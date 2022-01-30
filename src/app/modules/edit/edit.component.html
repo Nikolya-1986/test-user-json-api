@@ -1,83 +1,109 @@
 <section 
     class="edit__container edit"
+    *ngIf="userEdit$ | async as userEdit"
     >
     <h1>
-        Page edit user
+        Page edit for user: {{ userEdit.name.first }}
     </h1>
     <mat-sidenav-container>
         <mat-sidenav-content>
             <form 
                 class="edit__form" 
                 [formGroup]="formEdit" 
-                (ngSubmit)="submitForm()" 
-                novalidate>
+                (ngSubmit)="editUser(userEdit)" 
+                novalidate
+                >
                 <!-- Picture -->
-                <mat-form-field>
-                    <div class="edit__file-control">
-                  
-                        <mat-toolbar>
-                            <input 
-                                matInput 
-                                [(ngModel)]="uploadFileName" 
-                                readonly 
-                                name="File" 
-                            />
-                            <button 
-                                mat-flat-button 
-                                color="accent"
+                <div class="edit__images">
+                    <div class="edit__wrapper-images">
+                        <div class="image" *ngFor="let image of userEdit.picture; let ind = index">
+                            <img [src]="image.src">
+                            <span 
+                                (click)="deleteImage(ind, userEdit)"
                                 >
-                                <i class="material-icons">file_upload</i>
-                                Load image
-                            </button>
-                        </mat-toolbar>
-                        <input 
-                            class="file-control-input" 
-                            type="file" 
-                            #uploadControl 
-                            (change)="imageChange($event)" 
-                            formControlName="picture"
-                            multiple="multiple" 
-                            accept="image/*"
-                        />
+                                X
+                            </span>
+                        </div>
                     </div>
-                </mat-form-field>
-                <!-- Appeal -->
-                <mat-form-field>
-                    <mat-label>
-                        Appeal
-                    </mat-label>
-                    <mat-select formControlName="appeal">
-                        <mat-option 
-                            [value]="item" 
-                            *ngFor="let item of appeal"
-                            >
-                            {{ item }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- First name -->
-                <mat-form-field class="example-full-width">
-                    <input 
-                        matInput 
-                        placeholder="First name" 
-                        formControlName="firstName"
+                    <mat-form-field class="example-full-width">
+                        <div class="edit__file-control">
+                            <mat-toolbar>
+                                <input 
+                                    matInput  
+                                    readonly 
+                                    name="File" 
+                                    placeholder="picture"
+                                />
+                                <button 
+                                    mat-flat-button 
+                                    color="accent"
+                                    >
+                                    <i class="material-icons">file_upload</i>
+                                    Load image
+                                </button>
+                            </mat-toolbar>
+                            <input 
+                                class="file-control-input" 
+                                type="file" 
+                                #uploadControl 
+                                (change)="imageChange($event, userEdit)" 
+                                formControlName="picture"
+                                multiple="multiple" 
+                                accept="image/*"
+                            />
+                            <mat-error *ngIf="formEdit.get('picture')?.hasError('noFile')">
+                                Please select images for editing!
+                            </mat-error> 
+                            <mat-error *ngIf="formEdit.get('picture')?.hasError('fileToBig')">
+                                Image size should not be more than <strong>1000000 bytes!</strong>
+                            </mat-error>
+                        </div>           
+                    </mat-form-field>
+                </div>
+                <ng-container formGroupName="name">  
+                    <!-- Appeal -->
+                    <mat-form-field>
+                        <mat-label>
+                            Appeal
+                        </mat-label>
+                        <mat-select formControlName="title">
+                            <mat-option 
+                                [value]="item" 
+                                *ngFor="let item of appeal"
+                                >
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- First name -->
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            matInput 
+                            placeholder="First name" 
+                            formControlName="first"
                         >
-                    <mat-error *ngIf="errorHandling('firstName', 'required')">
-                        You must provide a <strong>first name</strong>
-                    </mat-error>
-                </mat-form-field>
-                <!-- First name -->
-                <mat-form-field class="example-full-width">
-                    <input 
-                        matInput 
-                        placeholder="Last name" 
-                        formControlName="lastName"
-                        >
-                    <!-- error -->
-                    <mat-error *ngIf="errorHandling('lastName', 'required')">
-                        You must provide a <strong>last name</strong>
-                    </mat-error>
-                </mat-form-field>
+                        <mat-error *ngIf="formEdit.get('name')?.get('first')?.hasError('required')">
+                            You must provide a <strong>first name</strong>
+                        </mat-error> 
+                        <mat-error *ngIf="formEdit.get('name')?.get('first')?.hasError('pattern')">
+                            You must provide only <strong>letters and numbers</strong>
+                        </mat-error> 
+                    </mat-form-field>
+                    <!-- Last name -->
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            matInput 
+                            placeholder="Last name" 
+                            formControlName="last"
+                        />
+                        <mat-error *ngIf="formEdit.get('name')?.get('last')?.hasError('required')">
+                            You must provide a <strong>last name</strong>
+                        </mat-error> 
+                        <mat-error *ngIf="formEdit.get('name')?.get('last')?.hasError('pattern')">
+                            You must provide only <strong>letters</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </ng-container>
                 <!-- Gender -->
                 <div class="misc-bottom-padding">
                     <mat-label>
@@ -94,6 +120,9 @@
                             {{ item }}
                         </mat-radio-button>
                     </mat-radio-group>
+                    <mat-error *ngIf="formEdit.get('gender')?.hasError('required')">
+                        You must provide a <strong>gender</strong>
+                    </mat-error>
                 </div>
                 <!-- Status -->
                 <mat-form-field>
@@ -109,54 +138,134 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-               <!-- Date of birth -->
-               <mat-form-field>
-                    <input 
-                        matInput 
-                        readonly 
-                        [matDatepicker]="picker" 
-                        placeholder="Date of birth" 
-                        formControlName="dob"
-                        (dateChange)="dateOfBirth($event)"
-                    />
-                    <mat-datepicker-toggle 
-                        matSuffix [for]="picker"
+                <!-- Date of birth -->
+                <ng-container formGroupName="dob"> 
+                    <!-- date -->
+                    <mat-form-field>
+                        <mat-label>
+                            Date of birth
+                        </mat-label>
+                        <input  
+                            matInput 
+                            [matDatepicker]="birthdayDatepicker" 
+                            formControlName="date"
+                        />
+                        <mat-datepicker-toggle 
+                            matSuffix 
+                            [for]="birthdayDatepicker"
+                            >
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #birthdayDatepicker></mat-datepicker>
+                        <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('required')">
+                            You must provide a <strong>date of birth</strong>
+                        </mat-error> 
+                        <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('invalidDate')">
+                            Your birthday must be greater than <strong>today's date</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- age -->
+                    <mat-form-field>
+                        <mat-label>
+                            Your age
+                        </mat-label>
+                        <input 
+                            formControlName="age"
+                            matInput 
+                            value= "{{ userEdit.registered.age }}"
+                            >
+                    </mat-form-field>
+                </ng-container>
+                <!-- location -->
+                <ng-container formGroupName="location">
+                    <!-- Countries -->
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            matInput 
+                            placeholder="Countries" 
+                            formControlName="country"
                         >
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <!-- error -->
-                    <mat-error *ngIf="errorHandling('dob', 'required')">
-                        Please enter <strong>date of birth</strong>
-                    </mat-error>
-                </mat-form-field>
-                <!-- Countries -->
-                <mat-form-field>
-                    <mat-label>
-                        Countries
-                    </mat-label>
-                    <mat-select formControlName="countries">
-                        <mat-option 
-                            [value]="country.id" 
-                            *ngFor="let country of countries"
-                            >
-                            {{ country.name }} 
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <!-- Cities -->
-                <mat-form-field>
-                    <mat-label>
-                        Cities
-                    </mat-label>
-                    <mat-select formControlName="cities">
-                        <mat-option 
-                            [value]="city.id" 
-                            *ngFor="let city of cities"
-                            >
-                            {{ city.name }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
+                        <mat-error *ngIf="formEdit.get('location')?.get('country')?.hasError('required')">
+                            You must provide a <strong>countries</strong>
+                        </mat-error> 
+                        <mat-error *ngIf="formEdit.get('location')?.get('country')?.hasError('pattern')">
+                            You must provide only <strong>letters</strong>
+                        </mat-error> 
+                    </mat-form-field>
+                    <!-- Cities -->
+                    <mat-form-field class="example-full-width">
+                        <input 
+                            matInput 
+                            placeholder="Cities" 
+                            formControlName="city"
+                        >
+                        <mat-error *ngIf="formEdit.get('location')?.get('city')?.hasError('required')">
+                            You must provide a <strong>countries</strong>
+                        </mat-error> 
+                        <mat-error *ngIf="formEdit.get('location')?.get('city')?.hasError('pattern')">
+                            You must provide only <strong>letters</strong>
+                        </mat-error> 
+                    </mat-form-field>
+                    <!-- Postcode -->
+                    <mat-form-field class="example-full-width">
+                        <mat-label>
+                            Postcode
+                        </mat-label>
+                        <input 
+                            matInput 
+                            placeholder="Postcode"
+                            formControlName="postcode"
+                        />
+                        <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('required')">
+                            You must provide a <strong>postcode</strong>
+                        </mat-error>  
+                        <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('pattern')">
+                            You must provide only <strong>numbers</strong>
+                        </mat-error>
+                        <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('minlength')">
+                            You must provide not less than <strong>4 numbers</strong>
+                        </mat-error>
+                        <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('maxlength')">
+                            You must provide not more than <strong>6 numbers</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <!-- Coordinates -->
+                    <ng-container formGroupName="coordinates">
+                        <!-- Latitude -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>
+                                Coordinates latitude
+                            </mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Latitude: -/+XXX.XXXX"
+                                formControlName="latitude"
+                            />
+                            <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('latitude')?.hasError('required')">
+                                You must provide a <strong>latitude</strong>
+                            </mat-error>  
+                            <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('latitude')?.hasError('ivalidCoordinates')">
+                                You must provide only <strong>corect latitude</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <!-- Longitude -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>
+                                Coordinates longitude
+                            </mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Longitude: -/+XXX.XXXX"
+                                formControlName="longitude"
+                            />
+                            <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('required')">
+                                You must provide a <strong>longitude</strong>
+                            </mat-error>  
+                            <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('ivalidCoordinates')">
+                                You must provide only <strong>corect longitude</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </ng-container>
+                </ng-container>
                 <!-- Email -->
                 <mat-form-field class="example-full-width">
                     <mat-label>
@@ -166,52 +275,92 @@
                         matInput 
                         placeholder="Email" 
                         formControlName="email"
-                        >
-                    <!-- error -->
-                    <mat-error *ngIf="errorHandling('email', 'required')">
+                    />
+                    <mat-error *ngIf="formEdit.get('email')?.hasError('required')">
                         You must provide a <strong>email</strong>
-                    </mat-error>
+                    </mat-error>  
+                    <mat-error *ngIf="formEdit.get('email')?.hasError('pattern')">
+                        You must provide a <strong>valid email address</strong>
+                    </mat-error> 
+                    <mat-error *ngIf="formEdit.get('email')?.hasError('emailTaken')">
+                        You must provide a <strong>unregistered email</strong>
+                    </mat-error> 
+                </mat-form-field>
+                <!-- Website -->
+                <mat-form-field class="example-full-width">
+                    <mat-label>
+                        Website
+                    </mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Website" 
+                        formControlName="website"
+                    />
+                    <mat-error *ngIf="formEdit.get('website')?.hasError('required')">
+                        You must provide a <strong>website</strong>
+                    </mat-error>  
+                    <mat-error *ngIf="formEdit.get('website')?.hasError('invlidUrl')">
+                        Your website address must be <strong>http://*****.com</strong>
+                    </mat-error>  
                 </mat-form-field>
                 <!-- Languages Array-->
-                <mat-form-field class="multiple-items">
-                    <mat-label>
-                        Languages
-                    </mat-label>
-                    <mat-chip-list #languageList>
+                <mat-form-field class="example-chip-list">
+                    <mat-chip-list 
+                        #languageList 
+                        formArrayName="language"
+                        >
                         <mat-chip 
-                            *ngFor="let language of languages" 
-                            [selectable]="selectable" 
+                            *ngFor="let item of language.controls; let ind=index;"
+                            [formGroupName]="ind"
+                            [selectable]="selectable"
                             [removable]="removable"
-                            (removed)="removeLanguage(language)"
+                            (removed)="deleteLanguage(ind)"
                             >
-                            {{ language.name }}
-                            <mat-icon 
-                                matChipRemove 
-                                *ngIf="removable"
-                                >
+                            {{ item.value }}
+                            <mat-icon matChipRemove *ngIf="removable">
                                 cancel
                             </mat-icon>
                         </mat-chip>
                         <input 
-                            placeholder="Add language" 
+                            placeholder="Languages"
                             [matChipInputFor]="languageList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" 
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlur"
-                            (matChipInputTokenEnd)="addLanguage($event)"
-                            >
+                            (matChipInputTokenEnd)="addLanguage($event, formEdit)"
+                        />
                     </mat-chip-list>
+                    <mat-error *ngIf="formEdit.get('language')?.hasError('isEmpty')">
+                        You must provide a <strong>language</strong>
+                    </mat-error>  
+                    <mat-error *ngIf="formEdit.get('language')?.hasError('pattern')">
+                        You must provide only <strong>letters</strong>
+                    </mat-error>
                 </mat-form-field>
                 <!-- Date registered -->
-                <mat-form-field>
-                    <mat-label>
-                        Date registred
-                    </mat-label>
-                    <input 
-                        matInput 
-                        disabled 
-                        value="Google"
-                        >
-                </mat-form-field>
+                <ng-container formGroupName="registered">
+                    <!-- date -->
+                    <mat-form-field>
+                        <mat-label>
+                            Date registred
+                        </mat-label>
+                        <input 
+                            matInput 
+                            value= "{{ userEdit.registered.date  }} | formatDate"
+                            formControlName="date"
+                            >
+                    </mat-form-field>
+                    <!-- age -->
+                    <mat-form-field>
+                        <mat-label>
+                            How long ago registered
+                        </mat-label>
+                        <input 
+                            matInput 
+                            value= "{{ userEdit.registered.age }}"
+                            formControlName="age"
+                            >
+                    </mat-form-field>
+                </ng-container>
                 <!-- Phone -->
                 <mat-form-field class="example-full-width">
                     <mat-label>
@@ -220,14 +369,17 @@
                     <span matPrefix>+ &nbsp;</span>
                     <input 
                         matInput 
-                        placeholder="375-29-732-35-04"
+                        placeholder="(XXX)-XXX-XXXX"
                         formControlName="phone"
                     />
                     <mat-icon matSuffix>
                         mode_edit
                     </mat-icon>
-                    <mat-error *ngIf="errorHandling('phone', 'required')">
+                    <mat-error *ngIf="formEdit.get('phone')?.hasError('required')">
                         You must provide a <strong>phone</strong>
+                    </mat-error>  
+                    <mat-error *ngIf="formEdit.get('phone')?.hasError('invalidPhone')">
+                        You must provide a <strong>valid phone</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Nationality -->
@@ -238,11 +390,16 @@
                     <input 
                         matInput 
                         placeholder="Nationality" 
-                        formControlName="nationality"
-                        >
-                    <!-- error -->
-                    <mat-error *ngIf="errorHandling('nationality', 'required')">
+                        formControlName="nat"
+                    />
+                    <mat-error *ngIf="formEdit.get('nat')?.hasError('required')">
                         You must provide a <strong>nationality</strong>
+                    </mat-error>  
+                    <mat-error *ngIf="formEdit.get('nat')?.hasError('pattern')">
+                        You must provide only <strong>capital letters</strong>
+                    </mat-error>
+                    <mat-error *ngIf="formEdit.get('nat')?.hasError('maxlength')">
+                        You must provide not more than <strong>3 capital letters</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Submit -->

@@ -47,7 +47,19 @@
                     City
                 </th>
                 <th>
+                    Post code
+                </th>
+                <th>
+                    Coordinates latitude
+                </th>
+                <th>
+                    Coordinates longitude
+                </th>
+                <th>
                     Email
+                </th>
+                <th>
+                    Website
                 </th>
                 <th>
                     Languages
@@ -88,7 +100,19 @@
                     {{ userDetails.location.city }}
                 </td>
                 <td>
+                    {{ userDetails.location.postcode }}
+                </td>
+                <td>
+                    {{ userDetails.location.coordinates.latitude }}
+                </td>
+                <td>
+                    {{ userDetails.location.coordinates.longitude }}
+                </td>
+                <td>
                     {{ userDetails.email }}
+                </td>
+                <td>
+                    {{ userDetails.website }}
                 </td>
                 <td>
                     {{ userDetails.language }}

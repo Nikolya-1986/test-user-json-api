@@ -9,6 +9,7 @@ export interface UserDTO {
     name: Name,
     location: Location,
     email: string,
+    website: string,
     language: string[],
     available: boolean,
     login: Login,
@@ -48,22 +49,12 @@ export enum Appeal {
 
 export interface Location {
     street: Street,
-    city: City,
+    city: string,
     state: string,
-    country: Country,
+    country: string,
     postcode: string,
     coordinates: Coordinates,
     timezone: Timezone,
-};
-
-export interface City {
-    id: number,
-    name: string
-};
-
-export interface Country {
-    id: number,
-    name: string
 };
 
 export interface Street {
@@ -104,8 +95,3 @@ export interface Registered {
 export interface Picture {
     src: string,
 };
-
-export interface SubjectLanguage {
-    name: string;
-}
-  
