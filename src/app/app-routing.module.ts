@@ -14,6 +14,9 @@ const routes: Routes = [
     path: 'edit/:id', loadChildren: () => import('./modules/edit/edit.module').then(module => module.EditModule)
   },
   {
+    path: 'create', loadChildren: () => import('./modules/create/create.module').then(module => module.CreateModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
