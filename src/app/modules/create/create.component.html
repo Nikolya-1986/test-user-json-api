@@ -1,1 +1,626 @@
-<p>create works!</p>
+<section class="create__user create">
+    <form class="create__form"
+        [formGroup]="formCreate" 
+        >
+        <!-- Picture -->
+        <div class="create__pictures" 
+            *ngFor="let image of picture; let ind=index"
+            >
+            <div class="images">
+                <img [src]="image.src">
+                <span (click)="deleteImage(ind)">
+                    X
+                </span>
+            </div>
+        </div>
+        <div class="create__form-group">
+            <label for="picture">
+                Upload File:
+            </label>
+            <input 
+                (change)="addPicture($event)" 
+                type="file"
+                formControlName="picture"
+            />
+            <div class="validation"
+                *ngIf="formCreate.controls['picture'].invalid && formCreate.controls['picture'].touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('picture')?.hasError('noFile')"
+                    >
+                    Please select <strong>images for editing!</strong> 
+                </small>
+                <small class="error"
+                    *ngIf="formCreate.get('picture')?.hasError('fileToBig')"
+                    >
+                    Image size should not be more than <strong>1000000 bytes!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Name -->
+        <ng-container formGroupName="name">
+            <!-- title -->
+            <div class="create__form-group">
+                <label for="title">
+                    Appeal
+                </label>
+                <select formControlName="title">
+                    <option
+                        [value]="item" 
+                        *ngFor="let item of appeal"
+                        >
+                        {{ item }}
+                    </option>
+                </select>
+                <div class="validation"
+                    *ngIf="formCreate.get('name')?.get('title')?.invalid && formCreate.get('name')?.get('title')?.touched"
+                    >
+                    <small class="error"
+                        *ngIf="formCreate.get('name')?.get('title')?.hasError('required')"
+                        >
+                        You must provide a <strong>select!</strong>
+                    </small>
+                </div>
+            </div>
+            <!-- First name -->
+            <div class="create__form-group">
+                <label for="first">
+                    First name
+                </label>
+                <input id="first" 
+                    type="text"  
+                    placeholder="Enter first name..." 
+                    formControlName="first"
+                    autocomplete="off"
+                />
+                <div class="validation"
+                    *ngIf="formCreate.get('name')?.get('first')?.invalid && formCreate.get('name')?.get('first')?.touched"
+                    >
+                    <small class="error"
+                        *ngIf="formCreate.get('name')?.get('first')?.hasError('required')"
+                        >
+                        You must provide a <strong>first name!</strong>
+                    </small>
+                        <small class="error"
+                        *ngIf="formCreate.get('name')?.get('first')?.hasError('pattern')"
+                        >
+                        You must provide only <strong>letters and numbers!</strong>
+                    </small>
+                </div>
+            </div>
+            <!-- Last name -->
+            <div class="create__form-group">
+                <label for="last">
+                    Last name
+                </label>
+                <input id="first" 
+                    type="text"  
+                    placeholder="Enter last name..." 
+                    formControlName="last"
+                    autocomplete="off"
+                />
+                <div class="validation"
+                    *ngIf="formCreate.get('name')?.get('last')?.invalid && formCreate.get('name')?.get('last')?.touched"
+                    >
+                    <small class="error"
+                        *ngIf="formCreate.get('name')?.get('last')?.hasError('required')"
+                        >
+                        You must provide a <strong>last name!</strong>
+                    </small>
+                        <small class="error"
+                        *ngIf="formCreate.get('name')?.get('last')?.hasError('pattern')"
+                        >
+                        You must provide only <strong>letters!</strong>
+                    </small>
+                </div>
+            </div>
+        </ng-container>
+        <!-- Gender -->
+        <div class="create__form-checkbox">
+            <label for="gender">
+                Gender:
+            </label>
+            <ng-container>
+                <input id="male" 
+                    type="radio" 
+                    value="male" 
+                    name="gender" 
+                    formControlName="gender"
+                />
+                <label for="male">
+                    Male
+                </label>
+            </ng-container>
+            <ng-container>
+                <input id="female" 
+                    type="radio" 
+                    value="female" 
+                    name="gender" 
+                    formControlName="gender"
+                />
+                <label for="female">
+                    Female
+                </label>
+            </ng-container>
+            <div class="validation"
+                *ngIf="formCreate.get('gender')?.invalid && formCreate.get('gender')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('gender')?.hasError('required')"
+                    >
+                    You must provide a <strong>gender!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Status -->
+        <div class="create__form-checkbox">
+            <label for="status">
+                Status:
+            </label>
+            <ng-container>
+                <input id="divorced" 
+                    type="radio" 
+                    value="divorced" 
+                    name="status" 
+                    formControlName="status"
+                />
+                <label for="divorced">
+                    Divorced
+                </label>
+            </ng-container>
+            <ng-container>
+                <input id="married" 
+                    type="radio" 
+                    value="married" 
+                    name="status" 
+                    formControlName="status"
+                />
+                <label for="married">
+                    Married
+                </label>
+            </ng-container>
+            <ng-container>
+                <input id="single" 
+                    type="radio" 
+                    value="single" 
+                    name="status" 
+                    formControlName="status"
+                />
+                <label for="single">
+                    Single
+                </label>
+            </ng-container>
+            <div class="validation"
+                *ngIf="formCreate.get('status')?.invalid && formCreate.get('status')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('status')?.hasError('required')"
+                    >
+                    You must provide a <strong>status!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Date of birth -->
+        <ng-container formGroupName="dob">
+            <!-- date -->
+            <div class="create__form-group">
+                <label for="date">
+                    Date of birth
+                </label>
+                <input id="date" 
+                    [valueAsDate]="currentDate" 
+                    (change)="updateDate($event)" 
+                    type="date" 
+                    formControlName="date" 
+                />
+                <div class="validation"
+                    *ngIf="formCreate.get('dob')?.get('date')?.invalid && formCreate.get('dob')?.get('date')?.touched"
+                    >
+                    <small class="error"
+                        *ngIf="formCreate.get('dob')?.get('date')?.hasError('required')"
+                        >
+                        You must provide a <strong>date of birth!</strong>
+                    </small>
+                        <small class="error"
+                        *ngIf="formCreate.get('dob')?.get('date')?.hasError('invalidDate')"
+                        >
+                        Your birthday must be greater than <strong>today's date!</strong>
+                    </small>
+                </div>
+            </div>
+            <!-- age -->
+            <div class="create__form-group">
+                <label for="age">
+                    Age
+                </label>
+                <input id="age" 
+                    type="text" 
+                    formControlName="age"
+                    [value]="formCreate.get('dob')?.get('date')"
+                />
+            </div>
+        </ng-container>
+        <!-- location -->
+        <ng-container formGroupName="location">
+            <!-- Country -->
+            <div class="create__form-group">
+                <label for="country">
+                    Country
+                </label>
+                <input id="country" 
+                    type="text"  
+                    placeholder="Enter your country..." 
+                    formControlName="country"
+                    autocomplete="off"
+                />
+                <div class="validation"
+                    *ngIf="formCreate.get('location')?.get('country')?.invalid && formCreate.get('location')?.get('country')?.touched"
+                    >
+                    <small class="error"
+                        *ngIf="formCreate.get('location')?.get('country')?.hasError('required')"
+                        >
+                        You must provide a <strong>country!</strong>
+                    </small>
+                        <small class="error"
+                        *ngIf="formCreate.get('location')?.get('country')?.hasError('pattern')"
+                        >
+                        You must provide only <strong>letters!</strong>
+                    </small>
+                </div>
+            </div>
+            <!-- City -->
+            <div class="create__form-group">
+                <label for="city">
+                    City
+                </label>
+                <input id="city" 
+                    type="text"  
+                    placeholder="Enter your city..." 
+                    formControlName="city"
+                    autocomplete="off"
+                />
+                <div class="validation"
+                    *ngIf="formCreate.get('location')?.get('city')?.invalid && formCreate.get('location')?.get('city')?.touched"
+                    >
+                    <small class="error"
+                        *ngIf="formCreate.get('location')?.get('city')?.hasError('required')"
+                        >
+                        You must provide a <strong>city!</strong>
+                    </small>
+                        <small class="error"
+                        *ngIf="formCreate.get('location')?.get('city')?.hasError('pattern')"
+                        >
+                        You must provide only <strong>letters!</strong>
+                    </small>
+                </div>
+            </div>
+            <!-- Postcode -->
+            <div class="create__form-group">
+                <label for="postcode">
+                    Postcode
+                </label>
+                <input id="postcode"
+                    type="text" 
+                    placeholder="Enter your postcode..." 
+                    formControlName="postcode"
+                    autocomplete="off"
+                />
+                <div class="validation"
+                    *ngIf="formCreate.get('location')?.get('postcode')?.invalid && formCreate.get('location')?.get('postcode')?.touched"
+                    >
+                    <small class="error"
+                        *ngIf="formCreate.get('location')?.get('postcode')?.hasError('required')"
+                        >
+                        You must provide a <strong>postcode!</strong>
+                    </small>
+                    <small class="error"
+                        *ngIf="formCreate.get('location')?.get('postcode')?.hasError('pattern')"
+                        >
+                        You must provide only <strong>numbers!</strong>
+                    </small>
+                    <small class="error"
+                        *ngIf="formCreate.get('location')?.get('postcode')?.hasError('minlength')"
+                        >
+                        You must provide not less than <strong>4 numbers!</strong>
+                    </small>
+                    <small class="error"
+                        *ngIf="formCreate.get('location')?.get('postcode')?.hasError('maxlength')"
+                        >
+                        You must provide not more than <strong>6 numbers!</strong>
+                    </small>
+                </div>
+            </div>
+            <!-- Coordinates -->
+            <ng-container formGroupName="coordinates">
+                <!-- Latitude -->
+                <div class="create__form-group">
+                    <label for="latitude">
+                        Coordinates latitude
+                    </label>
+                    <input id="latitude"
+                        type="text" 
+                        placeholder="Latitude has next format: -/+XXX.XXXX"
+                        formControlName="latitude"
+                        autocomplete="off"
+                    />
+                    <div class="validation"
+                        *ngIf="formCreate.get('location')?.get('coordinates')?.get('latitude')?.invalid 
+                            && formCreate.get('location')?.get('coordinates')?.get('latitude')?.touched"
+                        >
+                        <small class="error"
+                            *ngIf="formCreate.get('location')?.get('coordinates')?.get('latitude')?.hasError('required')"
+                            >
+                            You must provide a <strong>coordinates latitude!</strong>
+                        </small>
+                        <small class="error"
+                            *ngIf="formCreate.get('location')?.get('coordinates')?.get('latitude')?.hasError('ivalidCoordinates')"
+                            >
+                            You must provide only <strong>coordinates latitude!</strong>
+                        </small>
+                    </div>
+                </div>
+                <!-- Longitude -->
+                <div class="create__form-group">
+                    <label for="longitude">
+                        Coordinates longitude
+                    </label>
+                    <input id="longitude"
+                        type="text" 
+                        placeholder="Longitude has next format: -/+XXX.XXXX"
+                        formControlName="longitude"
+                        autocomplete="off"
+                    />
+                    <div class="validation"
+                        *ngIf="formCreate.get('location')?.get('coordinates')?.get('longitude')?.invalid 
+                            && formCreate.get('location')?.get('coordinates')?.get('longitude')?.touched"
+                        >
+                        <small class="error"
+                            *ngIf="formCreate.get('location')?.get('coordinates')?.get('longitude')?.hasError('required')"
+                            >
+                            You must provide a <strong>coordinates longitude!</strong>
+                        </small>
+                        <small class="error"
+                            *ngIf="formCreate.get('location')?.get('coordinates')?.get('longitude')?.hasError('ivalidCoordinates')"
+                            >
+                            You must provide only <strong>corect longitude!</strong>
+                        </small>
+                    </div>
+                </div>
+            </ng-container>
+        </ng-container>
+        <!-- Email -->
+        <div class="create__form-group">
+            <label for="email">
+                Email
+            </label>
+            <input id="email"
+                type="text"  
+                placeholder="Enter your email..."
+                formControlName="email"
+                autocomplete="off"
+            />
+            <div class="validation"
+                *ngIf="formCreate.get('email')?.invalid && formCreate.get('email')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('email')?.hasError('required')"
+                    >
+                    You must provide a <strong>email!</strong>
+                </small>
+                <small class="error"
+                    *ngIf="formCreate.get('email')?.hasError('pattern')"
+                    >
+                    You must provide a <strong>valid email address!</strong>
+                </small>
+                <small class="error"
+                    *ngIf="formCreate.get('email')?.hasError('emailTaken')"
+                    >
+                    You must provide a <strong>unregistered email!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Website -->
+        <div class="create__form-group">
+            <label for="website">
+                Website
+            </label>
+            <input id="website"
+                type="url" 
+                placeholder="Enter website..." 
+                formControlName="website" 
+                autocomplete="off"
+            />
+            <div class="validation"
+                *ngIf="formCreate.get('website')?.invalid && formCreate.get('website')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('website')?.hasError('required')"
+                    >
+                    You must provide a <strong>website!</strong>
+                </small>
+                <small class="error"
+                    *ngIf="formCreate.get('website')?.hasError('invlidUrl')"
+                    >
+                    Your website address must be <strong>http://*****.com!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Languages Array-->
+        <div class="create__form-group"
+            formArrayName="language"
+            >
+            <label for="language">
+                Add languages
+            </label>
+            <button 
+                type="button" 
+                (click)="addLanguage()"
+                >
+                Add language
+            </button>
+            <table>
+                <tr 
+                    *ngFor="let item of language.controls; let ind = index;"
+                    >
+                    <td>
+                        <input class="form-control"
+                            id="language"
+                            type="text"  
+                            [formControlName]="ind"
+                        />
+                    </td>             
+                    <td>
+                        <button
+                            type="button" 
+                            (click)="deleteLanguage(ind)"
+                            >
+                            Delete
+                        </button>
+                    </td>
+                
+                </tr>            
+            </table>
+            <div class="validation"
+                *ngIf="formCreate.get('language')?.get('ind')?.invalid && formCreate.get('language')?.get('ind')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('language')?.get('ind')?.hasError('isEmpty')"
+                    >
+                    You must provide a <strong>language!</strong>
+                </small>
+                <small class="error"
+                    *ngIf="formCreate.get('language')?.get('ind')?.hasError('pattern')"
+                    >
+                    You must provide only <strong>letters!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Available -->
+        <div class="create__form-checkbox">
+            <label for="available">
+                Available:
+            </label>
+            <ng-container>
+                <input id="true" 
+                    type="radio" 
+                    value="true" 
+                    name="available" 
+                    formControlName="available"
+                />
+                <label for="true">
+                    True
+                </label>
+            </ng-container>
+            <ng-container>
+                <input id="false" 
+                    type="radio" 
+                    value="false" 
+                    name="available" 
+                    formControlName="available"
+                />
+                <label for="false">
+                    False
+                </label>
+            </ng-container>
+            <div class="validation"
+                *ngIf="formCreate.get('available')?.invalid && formCreate.get('available')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('available')?.hasError('required')"
+                    >
+                    You must provide a <strong>available!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Date registered -->
+        <ng-container formGroupName="registered">
+            <!-- date -->
+            <div class="create__form-group">
+                <label for="date">
+                    Date of registered
+                </label>
+                <input id="date"
+                    type="text" 
+                    formControlName="date" 
+                />
+                {{ registeredDate | localTime }}
+            </div>
+            <!-- age -->
+            <div class="create__form-group">
+                <label for="age">
+                    How long ago registered
+                </label>
+                <input id="age" 
+                    type="text" 
+                    formControlName="age"
+                />
+                {{ registeredDate | formatAge }}
+            </div>
+        </ng-container>
+        <!-- Phone -->
+        <div class="create__form-group">
+            <label for="phone">
+                Phone
+            </label>
+            <input id="phone"
+                type="tel" 
+                placeholder="Enter phone next format: 989-365-4108..." 
+                formControlName="phone" 
+                autocomplete="off"
+            />
+            <div class="validation"
+                *ngIf="formCreate.get('phone')?.invalid && formCreate.get('phone')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('phone')?.hasError('required')"
+                    >
+                    You must provide a <strong>phone!</strong>
+                </small>
+                    <small class="error"
+                    *ngIf="formCreate.get('phone')?.hasError('invalidPhone')"
+                    >
+                    You must provide a <strong>valid phone!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Nationality -->
+        <div class="create__form-group">
+            <label for="nat">
+                Nationality
+            </label>
+            <input id="nat"
+                type="text" 
+                placeholder="Enter your nationality..." 
+                formControlName="nat" 
+                autocomplete="off"
+            />
+            <div class="validation"
+                *ngIf="formCreate.get('nat')?.invalid && formCreate.get('nat')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('nat')?.hasError('required')"
+                    >
+                    You must provide a <strong>nat!</strong>
+                </small>
+                <small class="error"
+                    *ngIf="formCreate.get('nat')?.hasError('pattern')"
+                    >
+                    You must provide only <strong>capital letters!</strong>
+                </small>
+                <small class="error"
+                    *ngIf="formCreate.get('nat')?.hasError('maxlength')"
+                    >
+                    You must provide not more than <strong>3 capital letters!</strong>
+                </small>
+            </div>
+        </div>
+        <!-- Submit -->
+        <div class="create__form-group">
+            <button 
+                [disabled]="formCreate.invalid || formCreate.pending"
+                >
+                Save user
+            </button>
+        </div>
+    </form>
+</section>

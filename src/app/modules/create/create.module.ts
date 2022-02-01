@@ -1,21 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialExampleModule } from '../../material-example.module';
 
 import { CreateRoutingModule } from './create-routing';
 import { CreateComponent } from './create.component';
+import { CountriesComponent } from './components/countries/countries.component';
+import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 
 @NgModule({
   declarations: [
-    CreateComponent
+    CreateComponent,
+    CountriesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialExampleModule,
     CreateRoutingModule,
+    ApplicationPipesModule
   ]
 })
 export class CreateModule { }
