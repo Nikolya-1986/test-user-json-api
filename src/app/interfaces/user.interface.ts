@@ -13,8 +13,8 @@ export interface UserDTO {
     language: string[],
     available: boolean,
     login: Login,
-    dob: Dob,
-    registered: Registered,
+    dob: string,
+    registered: string,
     phone: string,
     cell: string,
     picture: Picture[],
@@ -80,16 +80,6 @@ export interface Login {
     md5: string,
     sha1: string,
     sha256: string,
-};
-
-export interface Dob {
-    date: string,
-    age: number,
-};
-
-export interface Registered {
-    date: string;
-    age: number,
 };
 
 export interface Picture {

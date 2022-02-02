@@ -201,45 +201,31 @@
             </div>
         </div>
         <!-- Date of birth -->
-        <ng-container formGroupName="dob">
-            <!-- date -->
-            <div class="create__form-group">
-                <label for="date">
-                    Date of birth
-                </label>
-                <input id="date" 
-                    [valueAsDate]="currentDate" 
-                    (change)="updateDate($event)" 
-                    type="date" 
-                    formControlName="date" 
-                />
-                <div class="validation"
-                    *ngIf="formCreate.get('dob')?.get('date')?.invalid && formCreate.get('dob')?.get('date')?.touched"
+        <div class="create__form-group">
+            <label for="date">
+                Date of birth
+            </label>
+            <input id="date" 
+                [valueAsDate]="currentDate" 
+                (change)="updateDate($event)" 
+                type="date" 
+                formControlName="dob" 
+            />
+            <div class="validation"
+                *ngIf="formCreate.get('dob')?.invalid && formCreate.get('dob')?.touched"
+                >
+                <small class="error"
+                    *ngIf="formCreate.get('dob')?.hasError('required')"
                     >
+                    You must provide a <strong>date of birth!</strong>
+                </small>
                     <small class="error"
-                        *ngIf="formCreate.get('dob')?.get('date')?.hasError('required')"
-                        >
-                        You must provide a <strong>date of birth!</strong>
-                    </small>
-                        <small class="error"
-                        *ngIf="formCreate.get('dob')?.get('date')?.hasError('invalidDate')"
-                        >
-                        Your birthday must be greater than <strong>today's date!</strong>
-                    </small>
-                </div>
+                    *ngIf="formCreate.get('dob')?.hasError('invalidDate')"
+                    >
+                    Your birthday must be greater than <strong>today's date!</strong>
+                </small>
             </div>
-            <!-- age -->
-            <div class="create__form-group">
-                <label for="age">
-                    Age
-                </label>
-                <input id="age" 
-                    type="text" 
-                    formControlName="age"
-                    [value]="formCreate.get('dob')?.get('date')"
-                />
-            </div>
-        </ng-container>
+        </div>
         <!-- location -->
         <ng-container formGroupName="location">
             <!-- Country -->
@@ -533,30 +519,16 @@
             </div>
         </div>
         <!-- Date registered -->
-        <ng-container formGroupName="registered">
-            <!-- date -->
-            <div class="create__form-group">
-                <label for="date">
-                    Date of registered
-                </label>
-                <input id="date"
-                    type="text" 
-                    formControlName="date" 
-                />
-                {{ registeredDate | localTime }}
-            </div>
-            <!-- age -->
-            <div class="create__form-group">
-                <label for="age">
-                    How long ago registered
-                </label>
-                <input id="age" 
-                    type="text" 
-                    formControlName="age"
-                />
-                {{ registeredDate | formatAge }}
-            </div>
-        </ng-container>
+        <div class="create__form-group">
+            <label for="date">
+                Date of registered
+            </label>
+            <input id="date"
+                type="text" 
+                formControlName="registered" 
+            />
+            {{ registeredDate | localTime }}
+        </div>
         <!-- Phone -->
         <div class="create__form-group">
             <label for="phone">

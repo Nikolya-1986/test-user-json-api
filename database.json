@@ -27,14 +27,8 @@
               "username":"happyleopard772",
               "password":"tarpon"
           },
-          "dob": {
-              "date":"1997-05-06T22:14:49.869Z",
-              "age":24
-          },
-          "registered": {
-              "date":"2004-08-31T23:25:00.959Z",
-              "age":17
-          }, 
+          "dob": "1997-05-06T22:14:49.869Z",
+          "registered":"2004-08-31T23:25:00.959Z",
           "phone":"021-577-1124",
           "picture": [
                   {
@@ -77,14 +71,8 @@
               "username":"sadpeacock534",
               "password":"wolverine"
           },
-          "dob":{
-              "date":"1998-06-17T16:33:36.322Z",
-              "age":23
-          },
-          "registered":{
-              "date":"2017-07-27T00:25:58.185Z",
-              "age":4
-          },
+          "dob":"1998-06-17T16:33:36.322Z",
+          "registered":"2017-07-27T00:25:58.185Z",
           "phone":"643-180-9717",
           "picture": [
               {
@@ -126,14 +114,8 @@
               "username":"organickoala659",
               "password":"andre"
           },
-          "dob":{
-              "date":"2003-06-12T13:35:31.130Z",
-              "age":18
-          },
-          "registered":{
-              "date":"2012-11-20T01:55:43.489Z",
-              "age":9
-          },
+          "dob":"2003-06-12T13:35:31.130Z",
+          "registered":"2012-11-20T01:55:43.489Z",
           "phone":"066-45841454",
           "picture": [
               {
@@ -176,14 +158,8 @@
               "username":"brownbutterfly168",
               "password":"kristi"
           },
-          "dob":{
-              "date":"1993-03-16T01:09:46.708Z",
-              "age":28
-          },
-          "registered":{
-              "date":"2007-09-28T19:45:22.153Z",
-              "age":14
-          },
+          "dob":"1993-03-16T01:09:46.708Z",
+          "registered":"2007-09-28T19:45:22.153Z",
           "phone":"07-7164-7941",
           "picture": [
               {
@@ -226,14 +202,8 @@
               "username":"ticklishelephant976",
               "password":"salem"
           },
-          "dob":{
-              "date":"1986-09-07T08:35:39.070Z",
-              "age":35
-          },
-          "registered":{
-              "date":"2002-12-16T15:11:37.407Z",
-              "age":19
-          },
+          "dob":"1986-09-07T08:35:39.070Z",
+          "registered":"2002-12-16T15:11:37.407Z",
           "phone":"31456026",
           "picture": [
               {
@@ -276,14 +246,8 @@
               "username":"brownrabbit199",
               "password":"lizard"
           },
-          "dob":{
-              "date":"1995-09-11T17:21:16.817Z",
-              "age":26
-          },
-          "registered":{
-              "date":"2004-08-02T18:07:52.236Z",
-              "age":17
-          },
+          "dob":"1995-09-11T17:21:16.817Z",
+          "registered":"2004-08-02T18:07:52.236Z",
           "phone":"41938477",
           "picture": [
               {
@@ -326,14 +290,8 @@
               "username":"blackrabbit163",
               "password":"sahara"
           },
-          "dob":{
-              "date":"1981-10-03T21:32:04.725Z",
-              "age":40
-          },
-          "registered":{
-              "date":"2008-03-26T18:35:13.741Z",
-              "age":13
-          },
+          "dob":"1981-10-03T21:32:04.725Z",
+          "registered":"2008-03-26T18:35:13.741Z",
           "phone":"(477)-072-4725",
           "picture": [
               {
@@ -376,14 +334,8 @@
               "username":"crazyfrog729",
               "password":"passport"
           },
-          "dob":{
-              "date":"2000-04-18T17:52:07.406Z",
-              "age":21
-          },
-          "registered":{
-              "date":"2002-06-23T14:48:14.285Z",
-              "age":9
-          },
+          "dob":"2000-04-18T17:52:07.406Z",
+          "registered":"2002-06-23T14:48:14.285Z",
           "phone":"(60) 2127-5232",
           "picture": [
               {
@@ -426,14 +378,8 @@
               "username":"organicfrog651",
               "password":"megan1"
           },
-          "dob":{
-              "date":"2000-08-06T01:48:18.006Z",
-              "age":21
-          },
-          "registered":{
-              "date":"2015-11-21T08:52:58.302Z",
-              "age":6
-          },
+          "dob":"2000-08-06T01:48:18.006Z",
+          "registered":"2015-11-21T08:52:58.302Z",
           "phone":"109-748-6332",
           "picture": [
               {
@@ -476,14 +422,8 @@
               "username":"beautifulmouse564",
               "password":"kodiak"
           },
-          "dob":{
-              "date":"1986-07-25T20:50:52.882Z",
-              "age":35
-          },
-          "registered":{
-              "date":"2003-03-12T21:40:20.015Z",
-              "age":18
-          },
+          "dob":"1986-07-25T20:50:52.882Z",
+          "registered":"2003-03-12T21:40:20.015Z",
           "phone":"(989)-365-4108",
           "picture": [
               {
@@ -525,13 +465,9 @@
               "uuid":"30a0ab91-fe2f-4625-a278-51bfe5e133f5",
               "username":"orangefrog202",
               "password":"jackjack"
-          },"dob":{
-              "date":"1984-06-06T06:08:51.588Z",
-              "age":37
-          },"registered":{
-              "date":"2019-09-17T14:33:05.745Z",
-              "age":2
           },
+          "dob":"1984-06-06T06:08:51.588Z",
+          "registered":"2019-09-17T14:33:05.745Z",
           "phone":"04-902-293",
           "picture": [
               {
@@ -574,14 +510,8 @@
               "username":"ticklishsnake337",
               "password":"aardvark"
           },
-          "dob":{
-              "date":"1979-08-28T20:22:24.675Z",
-              "age":42
-          },
-          "registered":{
-              "date":"2015-11-18T04:41:25.142Z",
-              "age":6
-          },
+          "dob":"1979-08-28T20:22:24.675Z",
+          "registered":"2015-11-18T04:41:25.142Z",
           "phone":"(008)-516-0314",
           "picture": [
               {
@@ -624,14 +554,8 @@
               "username":"tinybird680",
               "password":"ramrod"
           },
-          "dob":{
-              "date":"1987-10-30T01:13:32.595Z",
-              "age":34
-          },
-          "registered":{
-              "date":"2012-05-14T18:19:09.854Z",
-              "age":9
-          },
+          "dob":"1987-10-30T01:13:32.595Z",
+          "registered":"2012-05-14T18:19:09.854Z",
           "phone":"(974)-779-6105",
           "picture": [
               {
@@ -674,14 +598,8 @@
               "username":"tinyelephant879",
               "password":"dadada"
           },
-          "dob":{
-              "date":"1985-03-05T18:45:26.225Z",
-              "age":36
-          },
-          "registered":{
-              "date":"2008-07-03T22:38:30.345Z",
-              "age":1
-          },
+          "dob":"1985-03-05T18:45:26.225Z",
+          "registered":"2008-07-03T22:38:30.345Z",
           "phone":"00-1922-5841",
           "picture": [
               {
@@ -700,6 +618,7 @@
       {
           "id": 15,
           "gender":"male",
+          "status": "married",
           "name":{
               "title":"Monsieur",
               "first":"Kay",
@@ -723,14 +642,8 @@
               "username":"greencat290",
               "password":"freedom1"
           },
-          "dob":{
-              "date":"1983-04-12T10:54:33.720Z",
-              "age":38
-          },
-          "registered":{
-              "date":"2007-11-30T13:50:07.306Z",
-              "age":14
-          },
+          "dob":"1983-04-12T10:54:33.720Z",
+          "registered":"2007-11-30T13:50:07.306Z",
           "phone":"076 543 41 31",
           "picture": [
               {
@@ -773,15 +686,9 @@
               "username":"bluelion424",
               "password":"celtics"
           },
-          "dob":{
-              "date":"1992-09-01T03:00:45.915Z",
-              "age":29
-          },
-          "registered":{
-              "date":"2019-01-21T03:54:15.420Z",
-              "age":2
-          },
-          "phone":"08-1209-9512",
+          "dob":"1992-09-01T03:00:45.915Z",
+          "registered":"2019-01-21T03:54:15.420Z",
+          "phone":"087-120-9512",
           "picture": [
               {
                   "src": "https://randomuser.me/api/portraits/women/54.jpg"

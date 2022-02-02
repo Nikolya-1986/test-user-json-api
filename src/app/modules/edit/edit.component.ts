@@ -114,15 +114,12 @@ export class EditComponent implements OnInit {
       }),
       gender: [false, [Validators.required]],
       status: [''],
-      dob: this.formBuilder.group({
-        date: ['', 
-          [
-            Validators.required,
-            dateValidator,
-          ],
+      dob: ['', 
+        [
+          Validators.required,
+          dateValidator,
         ],
-        age: [ {value: '', disabled: true} ],
-      }),
+      ],
       location: this.formBuilder.group({
         country: ['', 
           [
@@ -181,10 +178,7 @@ export class EditComponent implements OnInit {
         ],
       ]),
       available: ['', [Validators.required]],
-      registered: this.formBuilder.group({
-        date: [ {value: '', disabled: true} ],
-        age: [ {value: '', disabled: true} ],
-      }),
+      registered: [ {value: '', disabled: true} ],
       phone: ['', 
         [
           Validators.required,
@@ -217,11 +211,7 @@ export class EditComponent implements OnInit {
       },
       gender: user.gender,
       status: user.status,
-      dob: 
-      {
-        date: user.dob.date,
-        age: user.dob.age,
-      },
+      dob: user.dob,
       location: {
         country: user.location.country,
         city: user.location.city,
@@ -235,11 +225,7 @@ export class EditComponent implements OnInit {
       website: user.website,
       language: [...user.language],
       available: user.available,
-      registered: 
-      {
-        date: user.registered.date,
-        age: user.registered.age,
-      },
+      registered: user.registered,
       phone: user.phone,
       nat: user.nat,
     })

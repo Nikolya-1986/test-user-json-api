@@ -139,42 +139,28 @@
                     </mat-select>
                 </mat-form-field>
                 <!-- Date of birth -->
-                <ng-container formGroupName="dob"> 
-                    <!-- date -->
-                    <mat-form-field>
-                        <mat-label>
-                            Date of birth
-                        </mat-label>
-                        <input  
-                            matInput 
-                            [matDatepicker]="birthdayDatepicker" 
-                            formControlName="date"
-                        />
-                        <mat-datepicker-toggle 
-                            matSuffix 
-                            [for]="birthdayDatepicker"
-                            >
-                        </mat-datepicker-toggle>
-                        <mat-datepicker #birthdayDatepicker></mat-datepicker>
-                        <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('required')">
-                            You must provide a <strong>date of birth!</strong>
-                        </mat-error> 
-                        <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('invalidDate')">
-                            Your birthday must be greater than <strong>today's date!</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <!-- age -->
-                    <mat-form-field>
-                        <mat-label>
-                            Your age
-                        </mat-label>
-                        <input 
-                            formControlName="age"
-                            matInput 
-                            value= "{{ userEdit.dob.age }}"
-                            >
-                    </mat-form-field>
-                </ng-container>
+                <mat-form-field>
+                    <mat-label>
+                        Date of birth
+                    </mat-label>
+                    <input  
+                        matInput 
+                        [matDatepicker]="birthdayDatepicker" 
+                        formControlName="dob"
+                    />
+                    <mat-datepicker-toggle 
+                        matSuffix 
+                        [for]="birthdayDatepicker"
+                        >
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #birthdayDatepicker></mat-datepicker>
+                    <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('required')">
+                        You must provide a <strong>date of birth!</strong>
+                    </mat-error> 
+                    <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('invalidDate')">
+                        Your birthday must be greater than <strong>today's date!</strong>
+                    </mat-error>
+                </mat-form-field>
                 <!-- location -->
                 <ng-container formGroupName="location">
                     <!-- Countries -->
@@ -337,30 +323,16 @@
                     </mat-error>
                 </mat-form-field>
                 <!-- Date registered -->
-                <ng-container formGroupName="registered">
-                    <!-- date -->
-                    <mat-form-field>
-                        <mat-label>
-                            Date registred
-                        </mat-label>
-                        <input 
-                            matInput 
-                            value= "{{ userEdit.registered.date  }} | formatDate"
-                            formControlName="date"
-                        />
-                    </mat-form-field>
-                    <!-- age -->
-                    <mat-form-field>
-                        <mat-label>
-                            How long ago registered
-                        </mat-label>
-                        <input 
-                            matInput 
-                            value= "{{ userEdit.registered.age }}"
-                            formControlName="age"
-                            >
-                    </mat-form-field>
-                </ng-container>
+                <mat-form-field>
+                    <mat-label>
+                        Date registred
+                    </mat-label>
+                    <input 
+                        matInput 
+                        value= "{{ userEdit.registered  }} | formatDate"
+                        formControlName="registered"
+                    />
+                </mat-form-field>
                 <!-- Phone -->
                 <mat-form-field class="example-full-width">
                     <mat-label>

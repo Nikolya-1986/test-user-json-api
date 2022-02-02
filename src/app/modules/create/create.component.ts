@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { filter, fromEvent, map, Observable, take } from 'rxjs';
+import { filter, fromEvent, map, Observable, Subscription, take } from 'rxjs';
 import { Appeal, Gender, Status } from '../../interfaces/user.interface';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
@@ -18,6 +18,7 @@ import { phoneValidator } from 'src/app/validators/phone.validator';
 export class CreateComponent implements OnInit {
 
   public formCreate!: FormGroup;
+  private subscription: Subscription[] = [];
   public picture: Array<{ src: string }> = [];
   public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
   public gender: Gender[] = [Gender.female, Gender.male];
@@ -32,7 +33,7 @@ export class CreateComponent implements OnInit {
 
   public ngOnInit(): void {
     this.reactiveFormCreate()
-  }
+  };
 
   public reactiveFormCreate(): void {
     this.formCreate = this.formBuilder.group({
@@ -58,15 +59,12 @@ export class CreateComponent implements OnInit {
       }),
       gender: [false, [Validators.required]],
       status: [false, [Validators.required]],
-      dob: this.formBuilder.group({
-        date: ['', 
-          [
-            Validators.required,
-            dateValidator,
-          ],
+      dob: ['', 
+        [
+          Validators.required,
+          dateValidator,
         ],
-        age: [ {value: '', disabled: true} ],
-      }),
+      ],
       location: this.formBuilder.group({
         country: ['', 
           [
@@ -119,10 +117,7 @@ export class CreateComponent implements OnInit {
       ],
       language: this.formBuilder.array([this.createElementLanguage()]),
       available: [false, [Validators.required]],
-      registered: this.formBuilder.group({
-        date: [{ value: this.registeredDate, disabled: true }],
-        age: [{ value: this.registeredDate, disabled: true }],
-      }),
+      registered: [{ value: this.registeredDate, disabled: true }],
       phone: ['', 
         [
           Validators.required,
@@ -137,7 +132,12 @@ export class CreateComponent implements OnInit {
         ]
       ],
     });
-    this.formCreate.valueChanges.subscribe(console.info);
+    this.handleFormChanges();
+  };
+
+  private handleFormChanges(): void {
+    this.subscription.push(this.formCreate.valueChanges.subscribe(value => console.log('ValueChanges:', value)));
+    this.subscription.push(this.formCreate.statusChanges.subscribe(status => console.log('StatusChanges:', status)))
   };
 
   public addPicture(inputEvent: Event): Observable<{ src: string }[]> | any {
@@ -190,5 +190,13 @@ export class CreateComponent implements OnInit {
       this.language.removeAt(ind)
     }
   };
+
+  public ngOnDestroy(): void {
+    this.subscription.forEach((sub) => {
+      sub.unsubscribe();
+  });
+
+
+}
 
 }
