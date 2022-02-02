@@ -60,6 +60,13 @@ export class UserService {
         )
     };
 
+    public createUser(user: UserDTO): Observable<UserDTO> {
+        return this.httpClient.post<UserDTO>(`${this.BASE_URL}/results`, JSON.stringify(user), this.httpHeader).pipe(
+            tap(() => console.log('User create:', user)),
+            catchError(this.errorsBackend),
+        )
+    };
+
     public getLanguages(): Observable<string[]> {
         return this.users$.pipe(
             map((response) => {

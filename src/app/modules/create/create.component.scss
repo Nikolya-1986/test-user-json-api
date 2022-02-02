@@ -1,0 +1,99 @@
+.create {
+    display: flex;
+    justify-content: center;
+
+    &__form {
+        width: 36%;
+
+        .validation {
+            width: 100%;
+            color: var(--primary-color-1);
+    
+            .errors {
+                position: relative;
+                display: inline-block;
+                border-radius: 5px;
+                padding: 5px;
+                background: var(--primary-color-1);
+                color: var(--light-color-1);
+        
+                &::before {
+                    content: '';
+                    position: absolute;
+                    left: 20px;
+                    top: -10px;
+                    width: 0px;
+                    height: 0px;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 10px solid var(--primary-color-1);
+                }
+            }
+        }
+    }
+
+    &__form-group {
+        margin-bottom: 1rem;
+        
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: .5rem;
+        }
+
+        input, select, textarea {
+            display: block;
+            width: 100%;
+            padding: 0.4rem;
+            font-size: 1.2rem;
+            border: 1px solid var(--dark-color-2);
+        }
+
+        table {
+            width: 100%;
+        }
+
+        input {
+        
+            &.ng-invalid.ng-touched {
+                border: 2px solid var(--primary-color-1);
+            }
+        
+            &.ng-valid.ng-touched {
+                border: 2px solid var(--primary-color-4);
+            }
+        }
+    }
+
+    &__form-checkbox {
+        margin-bottom: 1rem;
+
+        label {
+            font-size: 1rem;
+        }
+    }
+
+    &__pictures {
+        display: inline-block;
+        margin-bottom: 1rem;
+
+        .images {
+            position: relative;
+            width: 15vh;
+            height: 15vh;
+            margin-right: 1rem;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            span {
+                position: absolute;
+                cursor: pointer;
+                color: var(--primary-color-1);
+                right: 10px;
+            }
+        }
+    }
+}

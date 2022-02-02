@@ -52,7 +52,7 @@
                                 accept="image/*"
                             />
                             <mat-error *ngIf="formEdit.get('picture')?.hasError('noFile')">
-                                Please select images for editing!
+                                Please select <strong>images for editing!</strong> 
                             </mat-error> 
                             <mat-error *ngIf="formEdit.get('picture')?.hasError('fileToBig')">
                                 Image size should not be more than <strong>1000000 bytes!</strong>
@@ -83,10 +83,10 @@
                             formControlName="first"
                         >
                         <mat-error *ngIf="formEdit.get('name')?.get('first')?.hasError('required')">
-                            You must provide a <strong>first name</strong>
+                            You must provide a <strong>first name!</strong>
                         </mat-error> 
                         <mat-error *ngIf="formEdit.get('name')?.get('first')?.hasError('pattern')">
-                            You must provide only <strong>letters and numbers</strong>
+                            You must provide only <strong>letters and numbers!</strong>
                         </mat-error> 
                     </mat-form-field>
                     <!-- Last name -->
@@ -97,10 +97,10 @@
                             formControlName="last"
                         />
                         <mat-error *ngIf="formEdit.get('name')?.get('last')?.hasError('required')">
-                            You must provide a <strong>last name</strong>
+                            You must provide a <strong>last name!</strong>
                         </mat-error> 
                         <mat-error *ngIf="formEdit.get('name')?.get('last')?.hasError('pattern')">
-                            You must provide only <strong>letters</strong>
+                            You must provide only <strong>letters!</strong>
                         </mat-error>
                     </mat-form-field>
                 </ng-container>
@@ -121,7 +121,7 @@
                         </mat-radio-button>
                     </mat-radio-group>
                     <mat-error *ngIf="formEdit.get('gender')?.hasError('required')">
-                        You must provide a <strong>gender</strong>
+                        You must provide a <strong>gender!</strong>
                     </mat-error>
                 </div>
                 <!-- Status -->
@@ -139,42 +139,28 @@
                     </mat-select>
                 </mat-form-field>
                 <!-- Date of birth -->
-                <ng-container formGroupName="dob"> 
-                    <!-- date -->
-                    <mat-form-field>
-                        <mat-label>
-                            Date of birth
-                        </mat-label>
-                        <input  
-                            matInput 
-                            [matDatepicker]="birthdayDatepicker" 
-                            formControlName="date"
-                        />
-                        <mat-datepicker-toggle 
-                            matSuffix 
-                            [for]="birthdayDatepicker"
-                            >
-                        </mat-datepicker-toggle>
-                        <mat-datepicker #birthdayDatepicker></mat-datepicker>
-                        <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('required')">
-                            You must provide a <strong>date of birth</strong>
-                        </mat-error> 
-                        <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('invalidDate')">
-                            Your birthday must be greater than <strong>today's date</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <!-- age -->
-                    <mat-form-field>
-                        <mat-label>
-                            Your age
-                        </mat-label>
-                        <input 
-                            formControlName="age"
-                            matInput 
-                            value= "{{ userEdit.registered.age }}"
-                            >
-                    </mat-form-field>
-                </ng-container>
+                <mat-form-field>
+                    <mat-label>
+                        Date of birth
+                    </mat-label>
+                    <input  
+                        matInput 
+                        [matDatepicker]="birthdayDatepicker" 
+                        formControlName="dob"
+                    />
+                    <mat-datepicker-toggle 
+                        matSuffix 
+                        [for]="birthdayDatepicker"
+                        >
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #birthdayDatepicker></mat-datepicker>
+                    <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('required')">
+                        You must provide a <strong>date of birth!</strong>
+                    </mat-error> 
+                    <mat-error *ngIf="formEdit.get('dob')?.get('date')?.hasError('invalidDate')">
+                        Your birthday must be greater than <strong>today's date!</strong>
+                    </mat-error>
+                </mat-form-field>
                 <!-- location -->
                 <ng-container formGroupName="location">
                     <!-- Countries -->
@@ -185,24 +171,24 @@
                             formControlName="country"
                         >
                         <mat-error *ngIf="formEdit.get('location')?.get('country')?.hasError('required')">
-                            You must provide a <strong>countries</strong>
+                            You must provide a <strong>countries!</strong>
                         </mat-error> 
                         <mat-error *ngIf="formEdit.get('location')?.get('country')?.hasError('pattern')">
-                            You must provide only <strong>letters</strong>
+                            You must provide only <strong>letters!</strong>
                         </mat-error> 
                     </mat-form-field>
                     <!-- Cities -->
                     <mat-form-field class="example-full-width">
                         <input 
                             matInput 
-                            placeholder="Cities" 
+                            placeholder="City" 
                             formControlName="city"
                         >
                         <mat-error *ngIf="formEdit.get('location')?.get('city')?.hasError('required')">
-                            You must provide a <strong>countries</strong>
+                            You must provide a <strong>countries!</strong>
                         </mat-error> 
                         <mat-error *ngIf="formEdit.get('location')?.get('city')?.hasError('pattern')">
-                            You must provide only <strong>letters</strong>
+                            You must provide only <strong>letters!</strong>
                         </mat-error> 
                     </mat-form-field>
                     <!-- Postcode -->
@@ -216,16 +202,16 @@
                             formControlName="postcode"
                         />
                         <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('required')">
-                            You must provide a <strong>postcode</strong>
+                            You must provide a <strong>postcode!</strong>
                         </mat-error>  
                         <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('pattern')">
-                            You must provide only <strong>numbers</strong>
+                            You must provide only <strong>numbers!</strong>
                         </mat-error>
                         <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('minlength')">
-                            You must provide not less than <strong>4 numbers</strong>
+                            You must provide not less than <strong>4 numbers!</strong>
                         </mat-error>
                         <mat-error *ngIf="formEdit.get('location')?.get('postcode')?.hasError('maxlength')">
-                            You must provide not more than <strong>6 numbers</strong>
+                            You must provide not more than <strong>6 numbers!</strong>
                         </mat-error>
                     </mat-form-field>
                     <!-- Coordinates -->
@@ -241,10 +227,10 @@
                                 formControlName="latitude"
                             />
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('latitude')?.hasError('required')">
-                                You must provide a <strong>latitude</strong>
+                                You must provide a <strong>latitude!</strong>
                             </mat-error>  
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('latitude')?.hasError('ivalidCoordinates')">
-                                You must provide only <strong>corect latitude</strong>
+                                You must provide only <strong>corect latitude!</strong>
                             </mat-error>
                         </mat-form-field>
                         <!-- Longitude -->
@@ -258,10 +244,10 @@
                                 formControlName="longitude"
                             />
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('required')">
-                                You must provide a <strong>longitude</strong>
+                                You must provide a <strong>longitude!</strong>
                             </mat-error>  
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('ivalidCoordinates')">
-                                You must provide only <strong>corect longitude</strong>
+                                You must provide only <strong>corect longitude!</strong>
                             </mat-error>
                         </mat-form-field>
                     </ng-container>
@@ -277,13 +263,13 @@
                         formControlName="email"
                     />
                     <mat-error *ngIf="formEdit.get('email')?.hasError('required')">
-                        You must provide a <strong>email</strong>
+                        You must provide a <strong>email!</strong>
                     </mat-error>  
                     <mat-error *ngIf="formEdit.get('email')?.hasError('pattern')">
-                        You must provide a <strong>valid email address</strong>
+                        You must provide a <strong>valid email address!</strong>
                     </mat-error> 
                     <mat-error *ngIf="formEdit.get('email')?.hasError('emailTaken')">
-                        You must provide a <strong>unregistered email</strong>
+                        You must provide a <strong>unregistered email!</strong>
                     </mat-error> 
                 </mat-form-field>
                 <!-- Website -->
@@ -297,10 +283,10 @@
                         formControlName="website"
                     />
                     <mat-error *ngIf="formEdit.get('website')?.hasError('required')">
-                        You must provide a <strong>website</strong>
+                        You must provide a <strong>website!</strong>
                     </mat-error>  
                     <mat-error *ngIf="formEdit.get('website')?.hasError('invlidUrl')">
-                        Your website address must be <strong>http://*****.com</strong>
+                        Your website address must be <strong>http://*****.com!</strong>
                     </mat-error>  
                 </mat-form-field>
                 <!-- Languages Array-->
@@ -330,37 +316,23 @@
                         />
                     </mat-chip-list>
                     <mat-error *ngIf="formEdit.get('language')?.hasError('isEmpty')">
-                        You must provide a <strong>language</strong>
+                        You must provide a <strong>language!</strong>
                     </mat-error>  
                     <mat-error *ngIf="formEdit.get('language')?.hasError('pattern')">
-                        You must provide only <strong>letters</strong>
+                        You must provide only <strong>letters!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Date registered -->
-                <ng-container formGroupName="registered">
-                    <!-- date -->
-                    <mat-form-field>
-                        <mat-label>
-                            Date registred
-                        </mat-label>
-                        <input 
-                            matInput 
-                            value= "{{ userEdit.registered.date  }} | formatDate"
-                            formControlName="date"
-                            >
-                    </mat-form-field>
-                    <!-- age -->
-                    <mat-form-field>
-                        <mat-label>
-                            How long ago registered
-                        </mat-label>
-                        <input 
-                            matInput 
-                            value= "{{ userEdit.registered.age }}"
-                            formControlName="age"
-                            >
-                    </mat-form-field>
-                </ng-container>
+                <mat-form-field>
+                    <mat-label>
+                        Date registred
+                    </mat-label>
+                    <input 
+                        matInput 
+                        value= "{{ userEdit.registered  }} | formatDate"
+                        formControlName="registered"
+                    />
+                </mat-form-field>
                 <!-- Phone -->
                 <mat-form-field class="example-full-width">
                     <mat-label>
@@ -376,10 +348,10 @@
                         mode_edit
                     </mat-icon>
                     <mat-error *ngIf="formEdit.get('phone')?.hasError('required')">
-                        You must provide a <strong>phone</strong>
+                        You must provide a <strong>phone!</strong>
                     </mat-error>  
                     <mat-error *ngIf="formEdit.get('phone')?.hasError('invalidPhone')">
-                        You must provide a <strong>valid phone</strong>
+                        You must provide a <strong>valid phone!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Nationality -->
@@ -393,13 +365,13 @@
                         formControlName="nat"
                     />
                     <mat-error *ngIf="formEdit.get('nat')?.hasError('required')">
-                        You must provide a <strong>nationality</strong>
+                        You must provide a <strong>nationality!</strong>
                     </mat-error>  
                     <mat-error *ngIf="formEdit.get('nat')?.hasError('pattern')">
-                        You must provide only <strong>capital letters</strong>
+                        You must provide only <strong>capital letters!</strong>
                     </mat-error>
                     <mat-error *ngIf="formEdit.get('nat')?.hasError('maxlength')">
-                        You must provide not more than <strong>3 capital letters</strong>
+                        You must provide not more than <strong>3 capital letters!</strong>
                     </mat-error>
                 </mat-form-field>
                 <!-- Submit -->
