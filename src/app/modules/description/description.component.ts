@@ -38,13 +38,13 @@ export class DescriptionComponent implements OnInit {
 
   private fetchUserDetail(): Observable<UserDTO> {
     this.userDetails$ = this.activatedRoute.params.pipe(
-      map((params: Params) =>  {
+      map((params: Params) => {
         this.userId = Number(params['id']); 
-        this.store.dispatch(userActions.LoadUserRequest({ userId: this.userId }));
+        this.store.dispatch(userActions.loadUserRequest({ userId: this.userId }));
         return this.userId;
       }),
-      switchMap(() => this.store.select(userSelectors.getUserSelector(this.userId))),
-      tap(user => console.log(user)),
+      switchMap(() => this.store.select(userSelectors.getUserSelector)),
+      // tap(user => console.log(user)),
     )
     return this.userDetails$;
   };
@@ -68,7 +68,7 @@ export class DescriptionComponent implements OnInit {
       takeUntil(this.destroy$),
     )
     .subscribe(() => {
-      this.store.dispatch(userActions.DeleteUserRequest({ userId: user.id }));
+      this.store.dispatch(userActions.deleteUserRequest({ userId: user.id }));
     })
   };
 

@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter, fromEvent, map, Observable, Subscription, take } from 'rxjs';
-import { Appeal, Gender, Status } from '../../interfaces/user.interface';
+import { Store } from '@ngrx/store';
+
+import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { EmailAsyncValidator } from '../../validators/email-async.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
 import { lengthValidator } from '../../validators/length.validator';
-import { phoneValidator } from 'src/app/validators/phone.validator';
+import { phoneValidator } from '../../validators/phone.validator';
+import AppUserState from '../../store/user/user.state';
+import * as userActions from 'src/app/store/user/user.actions';
+
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
-export class CreateComponent implements OnInit {
+export class CreateComponent implements OnInit, OnDestroy {
 
   public formCreate!: FormGroup;
   private subscription: Subscription[] = [];
@@ -29,6 +34,7 @@ export class CreateComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private emailAsyncValidator: EmailAsyncValidator,
+    private store: Store<AppUserState>,
   ) { }
 
   public ngOnInit(): void {
@@ -37,13 +43,9 @@ export class CreateComponent implements OnInit {
 
   public reactiveFormCreate(): void {
     this.formCreate = this.formBuilder.group({
-      picture: ['',               
-        [imageValidator]
-      ],
+      picture: [this.picture, [imageValidator]],
       name: this.formBuilder.group({
-        title: ['', 
-          [Validators.required]
-        ],
+        title: ['', [Validators.required]],
         first: ['', 
           [
             Validators.required,
@@ -133,11 +135,24 @@ export class CreateComponent implements OnInit {
       ],
     });
     this.handleFormChanges();
+    this.updateTreeValidity(this.formCreate);
   };
 
   private handleFormChanges(): void {
     this.subscription.push(this.formCreate.valueChanges.subscribe(value => console.log('ValueChanges:', value)));
     this.subscription.push(this.formCreate.statusChanges.subscribe(status => console.log('StatusChanges:', status)))
+  };
+
+  private updateTreeValidity(group: FormGroup | FormArray | FormControl | any): void {
+    Object.keys(group.controls).forEach((key: string) => {
+      const control = group.controls[key];
+
+      if(control instanceof FormGroup || control instanceof FormArray || control instanceof FormControl){
+        this.updateTreeValidity(control)
+      }else {
+        control.updateValueAndValidity();
+      }
+    })
   };
 
   public addPicture(inputEvent: Event): Observable<{ src: string }[]> | any {
@@ -191,12 +206,24 @@ export class CreateComponent implements OnInit {
     }
   };
 
+  public createUser(): void {
+    if(this.formCreate.valid){
+      const newUser = this.formCreate.getRawValue();
+      const id = Math.random();
+      const userCreate: UserDTO = {
+        ...newUser,
+        id: id,
+        picture: this.picture,
+      }
+      this.store.dispatch(userActions.createUserRequest({ userCreate: userCreate }));
+      console.log(userCreate)
+    }
+  };
+
   public ngOnDestroy(): void {
     this.subscription.forEach((sub) => {
       sub.unsubscribe();
-  });
-
-
-}
+    });
+  }
 
 }

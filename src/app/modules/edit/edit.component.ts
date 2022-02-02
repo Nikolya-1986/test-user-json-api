@@ -59,10 +59,10 @@ export class EditComponent implements OnInit {
     this.userEdit$ = this.activatedRoute.params.pipe(
       map((params: Params) =>  {
         this.userId = Number(params['id']); 
-        this.store.dispatch(userActions.LoadUserRequest({ userId: this.userId }));
+        this.store.dispatch(userActions.loadUserRequest({ userId: this.userId }));
         return this.userId;
       }),
-      switchMap(() => this.store.select(userSelectors.getUserSelector(this.userId))),
+      switchMap(() => this.store.select(userSelectors.getUserSelector)),
       tap((user) => this.setFormValues(user as UserDTO))
     )
     return this.userEdit$ as unknown as Observable<UserDTO>;
@@ -287,7 +287,7 @@ export class EditComponent implements OnInit {
         id: userEdit.id,
         ...editedUser,
       }
-      this.store.dispatch(userActions.EditUserRequest({ userEdit: userUpdated }));
+      this.store.dispatch(userActions.editUserRequest({ userEdit: userUpdated }));
       console.log(userUpdated);
     }
   };

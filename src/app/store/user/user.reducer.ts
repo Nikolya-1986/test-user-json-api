@@ -3,10 +3,10 @@ import { ActionReducerMap, createReducer, on } from "@ngrx/store";
 import { UserDTO } from "src/app/interfaces/user.interface";
 import * as userActions from "./user.actions";
 import AppUserState from "./user.state";
-import * as _ from 'lodash';
 
 export interface UserState {
     userDTO: UserDTO[],
+    userSelected?: UserDTO,
     loadCouter: number,
     errorMessage: string,
 };
@@ -15,6 +15,7 @@ const initialstate: UserState = {
     userDTO: [],
     loadCouter: 0,
     errorMessage: "",
+    userSelected: undefined,
 };
 
 export const userReduser = createReducer (
@@ -27,6 +28,10 @@ export const userReduser = createReducer (
         ...state,
         loadCouter: state.loadCouter - 1,
     })),
+    on(userActions.getFail, (state, action) => ({
+        ...state,
+        errorMessage: action.message,
+    })),
     on(userActions.loadUsersRequest, state => ({
         ...state
     })),
@@ -34,29 +39,17 @@ export const userReduser = createReducer (
         ...state,
         userDTO: [...action.users],
     })),
-    on(userActions.loadUsersFail, (state, action) => ({
-        ...state,
-        errorMessage: action.message,
-    })),
-    on(userActions.LoadUserRequest, (state, { userId }) => ({
+    on(userActions.loadUserRequest, (state, { userId }) => ({
         ...state,
     })),
-    on(userActions.LoadUserSuccess, (state, { user }) => {
-        const userCurrent = state.userDTO.filter(item => item.id === user.id);
-        console.log(userCurrent)
-        return {
-            ...state,
-            userDTO: userCurrent,
-        }
-    }),
-    on(userActions.LoadUserFail, (state, action) => ({
+    on(userActions.loadUserSuccess, (state, { user }) => ({
         ...state,
-        errorMessage: action.message,
+        userSelected: user,
     })),
-    on(userActions.DeleteUserRequest, state => ({
+    on(userActions.deleteUserRequest, state => ({
         ...state,
     })),
-    on(userActions.DeleteUserSuccess, (state, {userId}) => {
+    on(userActions.deleteUserSuccess, (state, {userId}) => {
         const userIndes = state.userDTO.findIndex((item) => item.id === userId);
         const otherUsers = [...state.userDTO];
         otherUsers.splice(userIndes, 1);
@@ -65,14 +58,10 @@ export const userReduser = createReducer (
             userDTO: otherUsers,
         }
     }),
-    on(userActions.DeleteUserFail, (state, action) => ({
-        ...state,
-        errorMessage: action.message,
-    })),
-    on(userActions.EditUserRequest, (state, { userEdit }) => ({
+    on(userActions.editUserRequest, (state, { userEdit }) => ({
         ...state,
     })),
-    on(userActions.EditUserSuccess, (state, { userEdit }) => {
+    on(userActions.editUserSuccess, (state, { userEdit }) => {
         const userIndexEdit = state.userDTO.findIndex(index => index.id === userEdit.id);
         const editUser = [...state.userDTO];
         editUser[userIndexEdit] = userEdit;
@@ -81,10 +70,13 @@ export const userReduser = createReducer (
             userDTO: editUser
         }
     }),
-    on(userActions.EditUserFail, (state, action) => ({
+    on(userActions.createUserRequest, (state, { userCreate }) => ({
         ...state,
-        errorMessage: action.message
-    }))
+    })),
+    on(userActions.createUserSuccess, (state, { userCreate }) => ({
+        ...state,
+        userDTO: [userCreate, ...state.userDTO]
+    })),
 );
 
 export const reduserUser: ActionReducerMap<AppUserState> = {
