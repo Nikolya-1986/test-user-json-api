@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateRoutingModule } from './create-routing';
 import { CreateComponent } from './create.component';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
+import { CountryAccessorModule } from '../controlValueAccessor/country/country-accessor.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
     FormsModule,
     ReactiveFormsModule,
     CreateRoutingModule,
-    ApplicationPipesModule
+    ApplicationPipesModule,
+    CountryAccessorModule
   ]
 })
 export class CreateModule { }
