@@ -415,31 +415,7 @@
         </div>
         <!-- Available -->
         <div class="create__form-checkbox">
-            <label for="available">
-                Available:
-            </label>
-            <ng-container>
-                <input id="true" 
-                    type="radio" 
-                    value="true" 
-                    name="available" 
-                    formControlName="available"
-                />
-                <label for="true">
-                    True
-                </label>
-            </ng-container>
-            <ng-container>
-                <input id="false" 
-                    type="radio" 
-                    value="false" 
-                    name="available" 
-                    formControlName="available"
-                />
-                <label for="false">
-                    False
-                </label>
-            </ng-container>
+            <app-available-accessor formControlName="available"></app-available-accessor>
             <div class="validation"
                 *ngIf="formCreate.get('available')?.invalid && formCreate.get('available')?.touched"
                 >

@@ -25,7 +25,6 @@ const COUNTRY_CONTROL_VALUE_ACCESSOR: Provider = {
 
 export class CountryAccessorComponent implements ControlValueAccessor  {
 
-  @Input() public formCreate!: FormGroup;
   public countries = [
     { code: 'RU', name: 'Russia' },
     { code: 'IN', name: 'India' },

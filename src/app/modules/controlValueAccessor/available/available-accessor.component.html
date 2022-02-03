@@ -1,0 +1,13 @@
+<div class="available__container available">
+    <label for="available">
+        Available:
+    </label><br>
+    <ng-container *ngFor="let picture of pictures">
+        <button class="available__item"
+            (click)="selectedAvailable(picture.name)"
+            [class.active]="available === picture.name"
+            >
+            <img [src]="picture.src">
+        </button>
+    </ng-container>
+</div>

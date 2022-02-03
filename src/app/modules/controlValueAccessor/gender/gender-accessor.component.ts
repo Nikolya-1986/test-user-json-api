@@ -21,7 +21,7 @@ export class GenderAccessorComponent implements ControlValueAccessor {
   private onTouched!: Function; 
 
   constructor() {
-    this.onChange = (_: any) => {};
+    this.onChange = () => {};
     this.onTouched = () => {};
     this.disabled = false; 
   };
