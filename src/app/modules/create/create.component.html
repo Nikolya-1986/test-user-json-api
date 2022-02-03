@@ -131,42 +131,7 @@
         </div>
         <!-- Status -->
         <div class="create__form-checkbox">
-            <label for="status">
-                Status:
-            </label>
-            <ng-container>
-                <input id="divorced" 
-                    type="radio" 
-                    value="divorced" 
-                    name="status" 
-                    formControlName="status"
-                />
-                <label for="divorced">
-                    Divorced
-                </label>
-            </ng-container>
-            <ng-container>
-                <input id="married" 
-                    type="radio" 
-                    value="married" 
-                    name="status" 
-                    formControlName="status"
-                />
-                <label for="married">
-                    Married
-                </label>
-            </ng-container>
-            <ng-container>
-                <input id="single" 
-                    type="radio" 
-                    value="single" 
-                    name="status" 
-                    formControlName="status"
-                />
-                <label for="single">
-                    Single
-                </label>
-            </ng-container>
+            <app-status-accessor formControlName="status"></app-status-accessor>
             <div class="validation"
                 *ngIf="formCreate.get('status')?.invalid && formCreate.get('status')?.touched"
                 >

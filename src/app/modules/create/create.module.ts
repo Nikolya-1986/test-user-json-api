@@ -7,6 +7,7 @@ import { CreateComponent } from './create.component';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { CountryAccessorModule } from '../controlValueAccessor/country/country-accessor.module';
 import { GenderAccessorModule } from '../controlValueAccessor/gender/gender-accessor.module';
+import { StatusAccessorModule } from '../controlValueAccessor/status/status-accessor.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { GenderAccessorModule } from '../controlValueAccessor/gender/gender-acce
     CreateRoutingModule,
     ApplicationPipesModule,
     CountryAccessorModule,
-    GenderAccessorModule
+    GenderAccessorModule,
+    StatusAccessorModule
   ]
 })
 export class CreateModule { }
