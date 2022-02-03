@@ -9,7 +9,7 @@ const COUNTRY_CONTROL_VALUE_ACCESSOR: Provider = {
 };
 
 @Component({
-  selector: 'app-countries',
+  selector: 'app-countries-accessor',
   templateUrl: './country-accessor.component.html',
   styleUrls: ['./country-accessor.component.scss'],
   providers: [COUNTRY_CONTROL_VALUE_ACCESSOR],

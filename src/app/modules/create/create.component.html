@@ -118,31 +118,7 @@
         </ng-container>
         <!-- Gender -->
         <div class="create__form-checkbox">
-            <label for="gender">
-                Gender:
-            </label>
-            <ng-container>
-                <input id="male" 
-                    type="radio" 
-                    value="male" 
-                    name="gender" 
-                    formControlName="gender"
-                />
-                <label for="male">
-                    Male
-                </label>
-            </ng-container>
-            <ng-container>
-                <input id="female" 
-                    type="radio" 
-                    value="female" 
-                    name="gender" 
-                    formControlName="gender"
-                />
-                <label for="female">
-                    Female
-                </label>
-            </ng-container>
+            <app-gender-accessor formControlName="gender"></app-gender-accessor>
             <div class="validation"
                 *ngIf="formCreate.get('gender')?.invalid && formCreate.get('gender')?.touched"
                 >
@@ -234,7 +210,7 @@
                 <label for="country">
                     Country
                 </label>
-                <app-countries formControlName="country"></app-countries>
+                <app-countries-accessor formControlName="country"></app-countries-accessor>
                 <div class="validation"
                     *ngIf="formCreate.get('location')?.get('country')?.invalid && formCreate.get('location')?.get('country')?.touched"
                     >

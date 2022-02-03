@@ -130,7 +130,6 @@ export class CreateComponent implements OnInit, OnDestroy {
       ],
     });
     this.handleFormChanges();
-    this.updateTreeValidity(this.formCreate);
   };
 
   private handleFormChanges(): void {
@@ -138,11 +137,10 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.subscription.push(this.formCreate.statusChanges.subscribe(status => console.log('StatusChanges:', status)))
   };
 
-  private updateTreeValidity(group: FormGroup | FormArray | FormControl | any): void {
+  private updateTreeValidity(group: FormGroup | FormArray | any): void {
     Object.keys(group.controls).forEach((key: string) => {
       const control = group.controls[key];
-
-      if(control instanceof FormGroup || control instanceof FormArray || control instanceof FormControl){
+      if(control instanceof FormGroup || control instanceof FormArray){
         this.updateTreeValidity(control)
       }else {
         control.updateValueAndValidity();
@@ -211,7 +209,8 @@ export class CreateComponent implements OnInit, OnDestroy {
         picture: this.picture,
       }
       this.store.dispatch(userActions.createUserRequest({ userCreate: userCreate }));
-      console.log(userCreate)
+      console.log(userCreate);
+      this.updateTreeValidity(userCreate);
     }
   };
 
