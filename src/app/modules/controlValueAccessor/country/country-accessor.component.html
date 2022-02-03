@@ -1,1 +1,39 @@
-<p>countries works!</p>
+<div class="country__container country">
+    <ng-container *ngFor="let country of countries">
+        <button class="country__item"
+            [attr.tabindex]="selected === country.code ? -1 : 0"
+            (click)="selectCountry(country.code)"
+            [class.selected]="selected === country.code"
+            >
+            <ng-container *ngIf="selected === country.code">
+                <svg class="country__svg"
+                    @selected
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    >
+                    <path 
+                        fill="none" 
+                        d="M0 0h24v24H0z" 
+                    />
+                    <path
+                        fill="var(--primary)"
+                        d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-.997-6l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z"
+                    />
+                    <path 
+                        fill="#fff"
+                        d="M11.003 16l7.07-7.071-1.414-1.414-5.656 5.657-2.829-2.829-1.414 1.414L11.003 16z" 
+                    />
+                </svg>
+            </ng-container>
+            <img
+                [src]="'https://raw.githubusercontent.com/Yummygum/flagpack-core/main/svg/l/' + country.code + '.svg'"
+                [alt]="country.name"
+            />
+            <p class="text-xs text-gray-700 mt-1">
+                {{ country?.name }}
+            </p>
+        </button>
+    </ng-container>
+</div>

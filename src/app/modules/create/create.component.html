@@ -234,12 +234,7 @@
                 <label for="country">
                     Country
                 </label>
-                <input id="country" 
-                    type="text"  
-                    placeholder="Enter your country..." 
-                    formControlName="country"
-                    autocomplete="off"
-                />
+                <app-countries formControlName="country"></app-countries>
                 <div class="validation"
                     *ngIf="formCreate.get('location')?.get('country')?.invalid && formCreate.get('location')?.get('country')?.touched"
                     >
@@ -247,11 +242,6 @@
                         *ngIf="formCreate.get('location')?.get('country')?.hasError('required')"
                         >
                         You must provide a <strong>country!</strong>
-                    </small>
-                        <small class="error"
-                        *ngIf="formCreate.get('location')?.get('country')?.hasError('pattern')"
-                        >
-                        You must provide only <strong>letters!</strong>
                     </small>
                 </div>
             </div>

@@ -68,12 +68,7 @@ export class CreateComponent implements OnInit, OnDestroy {
         ],
       ],
       location: this.formBuilder.group({
-        country: ['', 
-          [
-            Validators.required,
-            Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-          ]
-        ],
+        country: ['RU', [Validators.required,]],
         city: ['',
           [
             Validators.required,
