@@ -1,44 +1,16 @@
-<ng-container>
+<div class="status__container status checkbox-accessor">
     <label for="status">
-        Status:
-    </label>
-    <ng-container>
-        <input id="divorced" 
-            type="radio" 
-            value="divorced" 
-            name="status" 
-            [class.active]="isActive('divorced')"
-            [disabled]="disabled"
-            (change)="setLevel('divorced')"
-        />
-        <label for="divorced">
-            Divorced
-        </label>
+        Status
+    </label><br>
+    <ng-container *ngFor="let picture of pictures">
+        <button class="status__item checkbox-accessor__item"
+            (click)="selectedStatus(picture.name)"
+            [class.active]="status === picture.name"
+            >
+            <img 
+                [src]="picture.src" 
+                [alt]="picture.name"
+            />
+        </button>
     </ng-container>
-    <ng-container>
-        <input id="married" 
-            type="radio" 
-            value="married" 
-            name="status" 
-            [class.active]="isActive('married')"
-            [disabled]="disabled"
-            (change)="setLevel('married')"
-        />
-        <label for="married">
-            Married
-        </label>
-    </ng-container>
-    <ng-container>
-        <input id="single" 
-            type="radio" 
-            value="single" 
-            name="status"             
-            [class.active]="isActive('single')"
-            [disabled]="disabled"
-            (change)="setLevel('single')"
-        />
-        <label for="single">
-            Single
-        </label>
-    </ng-container>
-</ng-container>
+</div>

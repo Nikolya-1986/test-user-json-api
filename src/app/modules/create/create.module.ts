@@ -23,7 +23,7 @@ import { AvailableAccessorModule } from '../controlValueAccessor/available/avail
     CountryAccessorModule,
     GenderAccessorModule,
     StatusAccessorModule,
-    AvailableAccessorModule
+    AvailableAccessorModule,
   ]
 })
 export class CreateModule { }

@@ -20,11 +20,7 @@ export class GenderAccessorComponent implements ControlValueAccessor {
   private onChange!: Function; 
   private onTouched!: Function; 
 
-  constructor() {
-    this.onChange = () => {};
-    this.onTouched = () => {};
-    this.disabled = false; 
-  };
+  constructor() {};
 
   public isActive(value: string): boolean {
     return value === this.level; 

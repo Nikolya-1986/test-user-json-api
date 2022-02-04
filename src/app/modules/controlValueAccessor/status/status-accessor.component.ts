@@ -15,14 +15,19 @@ export const STATUS_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class StatusAccessorComponent implements ControlValueAccessor {
 
+  public pictures = [
+    { src: './assets/images/single.jpg', name: 'sinle' },
+    { src: './assets/images/married.jpg', name: 'married' },
+    { src: './assets/images/divorced.jpg', name: 'divorced' },
+  ];
   private onChange!: Function; //функция обратного вызова при изменение пользовательского интерфейса
   private onTouch!: Function; //функция обратного вызова для регистрации касания элемента
-  private status!: string; //это обновлённое значение к которому обращается класс
+  public status!: string; //это обновлённое значение к которому обращается класс
   public disabled!: boolean;
 
   constructor() { }
 
-  public setLevel(value: string): void { //устанавливает значениея используемое ngModel элемента
+  public selectedStatus(value: string): void { //устанавливает значениея используемое ngModel элемента
     this.status = value;
     this.onChange(this.status);
     this.onTouch(this.status);
@@ -42,9 +47,5 @@ export class StatusAccessorComponent implements ControlValueAccessor {
 
   public setDisabledState(value: boolean): void { //меняет состояния true <=> false
     this.disabled = value;
-  };
-
-  public isActive(value: string): boolean {
-    return value === this.status;
   };
 }

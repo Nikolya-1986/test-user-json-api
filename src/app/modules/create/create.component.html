@@ -1,5 +1,5 @@
 <section class="create__user create">
-    <form class="create__form"
+    <form class="create__form form"
         [formGroup]="formCreate" 
         (ngSubmit)="createUser()" 
         >
@@ -14,7 +14,7 @@
                 </span>
             </div>
         </div>
-        <div class="create__form-group">
+        <div class="create__form-group form-group">
             <label for="picture">
                 Upload File:
             </label>
@@ -41,7 +41,7 @@
         <!-- Name -->
         <ng-container formGroupName="name">
             <!-- title -->
-            <div class="create__form-group">
+            <div class="create__form-group form-group">
                 <label for="title">
                     Appeal
                 </label>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <!-- First name -->
-            <div class="create__form-group">
+            <div class="create__form-group form-group">
                 <label for="first">
                     First name
                 </label>
@@ -90,7 +90,7 @@
                 </div>
             </div>
             <!-- Last name -->
-            <div class="create__form-group">
+            <div class="create__form-group form-group">
                 <label for="last">
                     Last name
                 </label>
@@ -143,15 +143,13 @@
             </div>
         </div>
         <!-- Date of birth -->
-        <div class="create__form-group">
+        <div class="create__form-group form-group">
             <label for="date">
                 Date of birth
             </label>
-            <input id="date" 
-                [valueAsDate]="currentDate" 
-                (change)="updateDate($event)" 
-                type="date" 
-                formControlName="dob" 
+            <input id="date"
+                type="date"
+                formControlName="dob"
             />
             <div class="validation"
                 *ngIf="formCreate.get('dob')?.invalid && formCreate.get('dob')?.touched"
@@ -171,10 +169,7 @@
         <!-- location -->
         <ng-container formGroupName="location">
             <!-- Country -->
-            <div class="create__form-group">
-                <label for="country">
-                    Country
-                </label>
+            <div class="create__form-group form-group">
                 <app-countries-accessor formControlName="country"></app-countries-accessor>
                 <div class="validation"
                     *ngIf="formCreate.get('location')?.get('country')?.invalid && formCreate.get('location')?.get('country')?.touched"
@@ -187,7 +182,7 @@
                 </div>
             </div>
             <!-- City -->
-            <div class="create__form-group">
+            <div class="create__form-group form-group">
                 <label for="city">
                     City
                 </label>
@@ -213,7 +208,7 @@
                 </div>
             </div>
             <!-- Postcode -->
-            <div class="create__form-group">
+            <div class="create__form-group form-group">
                 <label for="postcode">
                     Postcode
                 </label>
@@ -251,7 +246,7 @@
             <!-- Coordinates -->
             <ng-container formGroupName="coordinates">
                 <!-- Latitude -->
-                <div class="create__form-group">
+                <div class="create__form-group form-group">
                     <label for="latitude">
                         Coordinates latitude
                     </label>
@@ -278,7 +273,7 @@
                     </div>
                 </div>
                 <!-- Longitude -->
-                <div class="create__form-group">
+                <div class="create__form-group form-group">
                     <label for="longitude">
                         Coordinates longitude
                     </label>
@@ -307,7 +302,7 @@
             </ng-container>
         </ng-container>
         <!-- Email -->
-        <div class="create__form-group">
+        <div class="create__form-group form-group">
             <label for="email">
                 Email
             </label>
@@ -338,7 +333,7 @@
             </div>
         </div>
         <!-- Website -->
-        <div class="create__form-group">
+        <div class="create__form-group form-group">
             <label for="website">
                 Website
             </label>
@@ -364,7 +359,7 @@
             </div>
         </div>
         <!-- Languages Array-->
-        <div class="create__form-group"
+        <div class="create__form-group form-group"
             formArrayName="language"
             >
             <label for="language">
@@ -414,7 +409,7 @@
             </div>
         </div>
         <!-- Available -->
-        <div class="create__form-checkbox">
+        <div class="create__form-checkbox form-group">
             <app-available-accessor formControlName="available"></app-available-accessor>
             <div class="validation"
                 *ngIf="formCreate.get('available')?.invalid && formCreate.get('available')?.touched"
@@ -427,7 +422,7 @@
             </div>
         </div>
         <!-- Date registered -->
-        <div class="create__form-group">
+        <div class="create__form-group form-group">
             <label for="date">
                 Date of registered
             </label>
@@ -438,7 +433,7 @@
             {{ registeredDate | localTime }}
         </div>
         <!-- Phone -->
-        <div class="create__form-group">
+        <div class="create__form-group form-group">
             <label for="phone">
                 Phone
             </label>
@@ -464,7 +459,7 @@
             </div>
         </div>
         <!-- Nationality -->
-        <div class="create__form-group">
+        <div class="create__form-group form-group">
             <label for="nat">
                 Nationality
             </label>
@@ -495,7 +490,7 @@
             </div>
         </div>
         <!-- Submit -->
-        <div class="create__form-group">
+        <div class="create__form-group form-group">
             <button 
                 [disabled]="formCreate.invalid || formCreate.pending"
                 >

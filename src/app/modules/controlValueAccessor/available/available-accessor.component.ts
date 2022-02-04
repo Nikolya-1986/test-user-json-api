@@ -29,10 +29,6 @@ export class AvailableAccessorComponent implements ControlValueAccessor {
     this.onChanged(src);
   };
 
-  public isActive(value: string): boolean {
-    return value === this.available; 
-  }; 
-
   public writeValue(value: string): void {
     this.available = value;
   };
@@ -44,5 +40,4 @@ export class AvailableAccessorComponent implements ControlValueAccessor {
   public registerOnTouched(value: Function): void {
     this.onTouched = value
   };
-
 }
