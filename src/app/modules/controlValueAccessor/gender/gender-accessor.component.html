@@ -1,31 +1,16 @@
-<ng-container>
+<div class="gender__container gender checkbox-accessor">
     <label for="gender">
-        Gender:
-    </label>
-    <ng-container>
-        <input id="male" 
-            type="radio" 
-            value="male" 
-            name="gender" 
-            [class.active]="isActive('male')"
-            [disabled]="disabled"
-            (change)="setLevel('male')"
-        />
-        <label for="male">
-            Male
-        </label>
+        Gender
+    </label><br>
+    <ng-container *ngFor="let picture of pictures">
+        <button class="gender__item checkbox-accessor__item"
+            (click)="selectedGender(picture.name)"
+            [class.active]="gender === picture.name"
+            >
+            <img 
+                [src]="picture.src" 
+                [alt]="picture.name"
+            />
+        </button>
     </ng-container>
-    <ng-container>
-        <input id="female" 
-            type="radio" 
-            value="female" 
-            name="gender" 
-            [class.active]="isActive('female')"
-            [disabled]="disabled"
-            (click)="setLevel('female')"
-        />
-        <label for="female">
-            Female
-        </label>
-    </ng-container>
-</ng-container>
+</div>

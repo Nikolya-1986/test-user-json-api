@@ -16,24 +16,26 @@ export const GENDER_CONTROL_VALUE_ACCESSOR: any = {
 export class GenderAccessorComponent implements ControlValueAccessor {
 
   public disabled!: boolean;
-  private level!: string;
+  public gender!: string | any;
   private onChange!: Function; 
   private onTouched!: Function; 
 
   constructor() {};
 
-  public isActive(value: string): boolean {
-    return value === this.level; 
+  public pictures = [
+    { src: './assets/images/female.jpg', name: 'female' },
+    { src: './assets/images/male.jpg', name: 'male' },
+    { src: './assets/images/intersex.jpg', name: 'intersex' },
+  ];
+
+  public selectedGender(value: string): void {
+    this.gender = value;
+    this.onChange(this.gender);
+    this.onTouched(this.gender); 
   }; 
 
-  public setLevel(value: string): void {
-    this.level = value;
-    this.onChange(this.level);
-    this.onTouched(); 
-  }; 
-
-  public writeValue(obj: string): void {
-    this.level = obj; 
+  public writeValue(value: string): void {
+    this.gender = value; 
   }; 
 
   public registerOnChange(fn: Function): void{
