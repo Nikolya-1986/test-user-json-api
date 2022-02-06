@@ -7,7 +7,7 @@ import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
-import { EmailAsyncValidator } from '../../validators/email-async.validator';
+// import { EmailAsyncValidator } from '../../validators/email-async.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
 import { lengthValidator } from '../../validators/length.validator';
 import { phoneValidator } from '../../validators/phone.validator';
@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private emailAsyncValidator: EmailAsyncValidator,
+    // private emailAsyncValidator: EmailAsyncValidator,
     private store: Store<AppUserState>,
   ) { }
 
@@ -99,12 +99,12 @@ export class CreateComponent implements OnInit, OnDestroy {
         })
       }),
       email: ['', 
-        [
-          Validators.required, 
-          Validators.email,
-          Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
-        ],
-        this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
+        // [
+        //   Validators.required, 
+        //   Validators.email,
+        //   Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
+        // ],
+        // this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
       ],
       website: ['',
         [
@@ -218,6 +218,6 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.subscription.forEach((sub) => {
       sub.unsubscribe();
     });
-  }
+  };
 
 }

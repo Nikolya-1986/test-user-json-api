@@ -9,6 +9,7 @@ import { CountryAccessorModule } from '../controlValueAccessor/country/country-a
 import { GenderAccessorModule } from '../controlValueAccessor/gender/gender-accessor.module';
 import { StatusAccessorModule } from '../controlValueAccessor/status/status-accessor.module';
 import { AvailableAccessorModule } from '../controlValueAccessor/available/available-accessor.module';
+import { EmailAccessorModule } from '../controlValueAccessor/email/email-accessor.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { AvailableAccessorModule } from '../controlValueAccessor/available/avail
     GenderAccessorModule,
     StatusAccessorModule,
     AvailableAccessorModule,
+    EmailAccessorModule
   ]
 })
 export class CreateModule { }

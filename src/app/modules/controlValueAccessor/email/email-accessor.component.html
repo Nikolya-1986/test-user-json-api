@@ -1,0 +1,33 @@
+<div class="form-label-group">
+    <label for="email">
+        {{ label }}
+    </label>
+    <input class="form-control" 
+        [type]="type" 
+        (input)="onChange($event.target)" 
+        (blur)="onTouched()"
+        [disabled]="disabled" 
+        [placeholder]="placeholder"
+    />
+    
+    <div class="validation"
+        *ngIf="controlDir.control?.invalid && controlDir.control?.touched"
+        >
+        <small class="error"
+            *ngIf="isRequired"
+            >
+            You must provide a <strong>email!</strong>
+        </small>
+        <small class="error"
+            *ngIf="pattern"
+            >
+            You must provide a <strong>valid email address!</strong>
+        </small>
+        <small class="error"
+            *ngIf="emailAsyncValidator"
+            >
+            You must provide a <strong>unregistered email!</strong>
+        </small>
+    </div>
+
+</div>
