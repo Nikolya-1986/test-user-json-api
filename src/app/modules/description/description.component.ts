@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { map, Observable, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';

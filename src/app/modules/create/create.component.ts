@@ -7,7 +7,7 @@ import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
-import { EmailAsyncValidator } from '../../validators/email-async.validator';
+// import { EmailAsyncValidator } from '../../validators/email-async.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
 import { lengthValidator } from '../../validators/length.validator';
 import { phoneValidator } from '../../validators/phone.validator';
@@ -33,7 +33,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private emailAsyncValidator: EmailAsyncValidator,
+    // private emailAsyncValidator: EmailAsyncValidator,
     private store: Store<AppUserState>,
   ) { }
 
@@ -68,12 +68,7 @@ export class CreateComponent implements OnInit, OnDestroy {
         ],
       ],
       location: this.formBuilder.group({
-        country: ['', 
-          [
-            Validators.required,
-            Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-          ]
-        ],
+        country: ['RU', [Validators.required,]],
         city: ['',
           [
             Validators.required,
@@ -104,12 +99,12 @@ export class CreateComponent implements OnInit, OnDestroy {
         })
       }),
       email: ['', 
-        [
-          Validators.required, 
-          Validators.email,
-          Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
-        ],
-        this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
+        // [
+        //   Validators.required, 
+        //   Validators.email,
+        //   Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
+        // ],
+        // this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
       ],
       website: ['',
         [
@@ -135,7 +130,6 @@ export class CreateComponent implements OnInit, OnDestroy {
       ],
     });
     this.handleFormChanges();
-    this.updateTreeValidity(this.formCreate);
   };
 
   private handleFormChanges(): void {
@@ -143,11 +137,10 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.subscription.push(this.formCreate.statusChanges.subscribe(status => console.log('StatusChanges:', status)))
   };
 
-  private updateTreeValidity(group: FormGroup | FormArray | FormControl | any): void {
+  private updateTreeValidity(group: FormGroup | FormArray | any): void {
     Object.keys(group.controls).forEach((key: string) => {
       const control = group.controls[key];
-
-      if(control instanceof FormGroup || control instanceof FormArray || control instanceof FormControl){
+      if(control instanceof FormGroup || control instanceof FormArray){
         this.updateTreeValidity(control)
       }else {
         control.updateValueAndValidity();
@@ -216,7 +209,8 @@ export class CreateComponent implements OnInit, OnDestroy {
         picture: this.picture,
       }
       this.store.dispatch(userActions.createUserRequest({ userCreate: userCreate }));
-      console.log(userCreate)
+      console.log(userCreate);
+      this.updateTreeValidity(userCreate);
     }
   };
 
@@ -224,6 +218,6 @@ export class CreateComponent implements OnInit, OnDestroy {
     this.subscription.forEach((sub) => {
       sub.unsubscribe();
     });
-  }
+  };
 
 }

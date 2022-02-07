@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 import { UserDTO } from 'src/app/interfaces/user.interface';
 
@@ -10,11 +9,9 @@ import { UserDTO } from 'src/app/interfaces/user.interface';
 })
 export class ExtraComponent implements OnInit {
 
-  @Input() public data!: UserDTO;
+  public user!: UserDTO;
   
-  constructor(
-    private params: ActivatedRoute
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
 

@@ -1,0 +1,16 @@
+<div class="status__container status checkbox-accessor">
+    <label for="status">
+        Status
+    </label><br>
+    <ng-container *ngFor="let picture of pictures">
+        <button class="status__item checkbox-accessor__item"
+            (click)="selectedStatus(picture.name)"
+            [class.active]="status === picture.name"
+            >
+            <img 
+                [src]="picture.src" 
+                [alt]="picture.name"
+            />
+        </button>
+    </ng-container>
+</div>
