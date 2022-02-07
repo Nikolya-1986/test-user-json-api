@@ -13,6 +13,7 @@ import { ExtraComponent } from './components/extra/extra.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { ModalWindowModule } from 'src/app/components/modal-window/modal-window.module';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
+import { ExtraDescriptionResolver } from './resolvers/extra-description.resolver';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,9 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
     MaterialExampleModule,
     ModalWindowModule,
     ApplicationPipesModule,
+  ],
+  providers: [
+    ExtraDescriptionResolver
   ]
 })
 export class DescriptionModule { }

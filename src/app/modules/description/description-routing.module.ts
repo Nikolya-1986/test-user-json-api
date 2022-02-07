@@ -3,16 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DescriptionComponent } from './description.component';
 import { ExtraComponent } from './components/extra/extra.component';
-
-const childRouters: Routes =[
-    {
-        path: 'extra', component: ExtraComponent,
-    }
-];
+import { ExtraDescriptionResolver } from './resolvers/extra-description.resolver';
 
 const routes: Routes = [
     {
-        path: '', component: DescriptionComponent, children: childRouters,
+        path: '', 
+        component: DescriptionComponent, 
+        children: [
+            { path: 'extra', component: ExtraComponent, resolve: { extraDescription: ExtraDescriptionResolver } }
+        ],
     }
 ];
 
