@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { map, Observable } from 'rxjs';
 
-import { UserDTO } from 'src/app/interfaces/user.interface';
+import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
   selector: 'app-extra',
@@ -9,12 +11,21 @@ import { UserDTO } from 'src/app/interfaces/user.interface';
 })
 export class ExtraComponent implements OnInit {
 
-  public user!: UserDTO;
-  
-  constructor() { }
+  @Input() public userExtra$!: Observable<UserDTO>;
 
-  ngOnInit(): void {
+  constructor(
+     private activatedRoute: ActivatedRoute,
+  ) { }
 
-  }
+  public ngOnInit(): void {
+    this.fetchUserExtra();
+  };
+
+  private fetchUserExtra(): Observable<UserDTO> {
+    this.userExtra$ = this.activatedRoute.data.pipe(
+      map((data) => data['extraDescription'])
+    );
+    return this.userExtra$;
+  };
 
 }

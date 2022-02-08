@@ -1,4 +1,9 @@
 .footer {
+    padding: 1rem 0;
     text-align: center;
     color: var(--light-color-1);
+
+    p {
+         margin: 0;
+    }
 }

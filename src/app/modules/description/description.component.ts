@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
+import { first, map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
@@ -38,6 +38,7 @@ export class DescriptionComponent implements OnInit {
 
   private fetchUserDetail(): Observable<UserDTO> {
     this.userDetails$ = this.activatedRoute.params.pipe(
+      first(),
       map((params: Params) => {
         this.userId = Number(params['id']); 
         this.store.dispatch(userActions.loadUserRequest({ userId: this.userId }));
@@ -81,3 +82,6 @@ export class DescriptionComponent implements OnInit {
     this.destroy$.complete();
   };
 }
+
+//first - Если он вызывается без параметра, то emit-ит первое значение Observable и завершается. Если он вызывается с функцией предиката, 
+//то emit-ит первое значение исходного Observable, которое соответствует условию функции предиката, и завершается.
