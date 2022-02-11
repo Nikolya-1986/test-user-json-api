@@ -1,16 +1,15 @@
-import { Component, forwardRef, Inject, Injector, INJECTOR, Input, OnInit, Provider } from '@angular/core';
+import { Component, ElementRef, forwardRef, Injector, Input, OnInit, Provider, ViewChild } from '@angular/core';
 import { 
   AbstractControl, 
   ControlValueAccessor, 
   NgControl, 
+  NG_ASYNC_VALIDATORS, 
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR, 
-  ValidationErrors, 
   Validator, 
   ValidatorFn, 
-  Validators 
 } from '@angular/forms';
-import { EmailAsyncValidator } from 'src/app/validators/email-async.validator';
+import { EmailAsyncValidator } from '../../../validators/email-async.validator';
 
 export const EMAIL_CONTROL_VALUE_ACCESSOR: Provider = {
   provide: NG_VALUE_ACCESSOR,
@@ -18,9 +17,15 @@ export const EMAIL_CONTROL_VALUE_ACCESSOR: Provider = {
   multi: true,
 };
 
-export const EMAIL_CONTROL_VALIDATORS: Provider = {
+export const CONTROL_VALIDATORS: Provider = {
   provide: NG_VALIDATORS,
   useExisting: forwardRef(() => EmailAccessorComponent),
+  multi: true,
+};
+
+export const ASYNC_CONTROL_VALIDATORS: Provider = {
+  provide: NG_ASYNC_VALIDATORS,
+  useExisting: forwardRef(() => EmailAsyncValidator),
   multi: true,
 };
 
@@ -30,32 +35,40 @@ export const EMAIL_CONTROL_VALIDATORS: Provider = {
   styleUrls: ['./email-accessor.component.scss'],
   providers: [
     EMAIL_CONTROL_VALUE_ACCESSOR, 
-    EMAIL_CONTROL_VALIDATORS
+    ASYNC_CONTROL_VALIDATORS,
+    CONTROL_VALIDATORS,
   ],
 })
 export class EmailAccessorComponent implements ControlValueAccessor, Validator, OnInit  {
 
+  @ViewChild('inputEmail', { read: NgControl }) public inputEmail!: ElementRef;
   @Input() public type = 'text';
-  @Input() public isRequired: boolean = false;
-  @Input() public pattern: string = '';
+  @Input() public isRequired!: boolean;
+  @Input() public emailPattern!: string;
   @Input() public label: string = '';
   @Input() public placeholder!: string;
-
-  public disabled!: any;
-  public email!: string;
+  public disabled!: boolean;
   public controlDir!: NgControl;
 
   constructor(
-    @Inject(INJECTOR) private injector: Injector,
+    private injector: Injector,
     public emailAsyncValidator: EmailAsyncValidator,
   ) { }
 
   public ngOnInit(): void {
     this.controlDir = this.injector.get(NgControl);
+    this.controlDir.control?.setValidators([this.validate.bind(this)]);
+    this.controlDir.control?.updateValueAndValidity();
   };
+  
+  public onChange(event: any) { };
+
+  public onTouched() { };
 
   public writeValue(value: string): void {
-    this.email = value;
+    if(this.inputEmail){
+      this.inputEmail.nativeElement.value = value;
+    }
   };;
 
   public registerOnChange(value: any): void {
@@ -70,21 +83,17 @@ export class EmailAccessorComponent implements ControlValueAccessor, Validator, 
     this.disabled = isDisabled;
   };
 
-  public onChange(event: any) { }
-
-  public onTouched() { }
-
-  validate(abstractControl: AbstractControl): ValidationErrors {
-    const validators: ValidatorFn[] = this.controlDir?.validator ? [this.controlDir.validator] : [];
-    if (this.isRequired) {
-      validators.push(Validators.required);
-    }
-    if (this.pattern) {
-      validators.push(Validators.pattern(this.pattern));
-    }
-    if(this.emailAsyncValidator) {
-      validators.push(this.emailAsyncValidator.validate.bind(this.emailAsyncValidator))
-    }
+  public validate(abstractControl: AbstractControl): { [key: string]: any } {
+    const validators: ValidatorFn[] = [];
+    // if (this.isRequired) {
+    //   validators.push(Validators.required);
+    // }
+    // if (this.emailPattern) {
+    //   validators.push(Validators.pattern(this.emailPattern));
+    // }
+    // if (this.emailAsyncValidator) {
+    //   validators.push(this.emailAsyncValidator.validate.bind(this.emailAsyncValidator));
+    // }
 
     return validators;
   }
