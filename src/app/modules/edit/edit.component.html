@@ -267,10 +267,7 @@
                     </mat-error>  
                     <mat-error *ngIf="formEdit.get('email')?.hasError('pattern')">
                         You must provide a <strong>valid email address!</strong>
-                    </mat-error> 
-                    <mat-error *ngIf="formEdit.get('email')?.hasError('emailTaken')">
-                        You must provide a <strong>unregistered email!</strong>
-                    </mat-error> 
+                    </mat-error>
                 </mat-form-field>
                 <!-- Website -->
                 <mat-form-field class="example-full-width">

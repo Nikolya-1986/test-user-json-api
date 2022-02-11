@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, fromEvent, map, Observable, Subscription, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -7,13 +7,12 @@ import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
-// import { EmailAsyncValidator } from '../../validators/email-async.validator';
+import { EmailAsyncValidator } from '../../validators/email-async.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
 import { lengthValidator } from '../../validators/length.validator';
 import { phoneValidator } from '../../validators/phone.validator';
 import AppUserState from '../../store/user/user.state';
 import * as userActions from 'src/app/store/user/user.actions';
-
 
 @Component({
   selector: 'app-create',
@@ -33,7 +32,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    // private emailAsyncValidator: EmailAsyncValidator,
+    private emailAsyncValidator: EmailAsyncValidator,
     private store: Store<AppUserState>,
   ) { }
 
@@ -98,14 +97,15 @@ export class CreateComponent implements OnInit, OnDestroy {
           ]
         })
       }),
-      email: ['', 
-        // [
-        //   Validators.required, 
-        //   Validators.email,
-        //   Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
-        // ],
-        // this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
-      ],
+      email: [''],
+      // [
+      //   '', 
+      //   [
+      //     Validators.required, 
+      //     Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'),
+      //   ],
+      //   this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
+      // ],
       website: ['',
         [
           Validators.required,
@@ -221,3 +221,4 @@ export class CreateComponent implements OnInit, OnDestroy {
   };
 
 }
+// https://www.digitalocean.com/community/tutorials/angular-custom-form-control

@@ -16,7 +16,6 @@ import { phoneValidator } from '../../validators/phone.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { lengthValidator } from '../../validators/length.validator';
-import { EmailAsyncValidator } from '../../validators/email-async.validator';
 
 @Component({
   selector: 'app-edit',
@@ -46,7 +45,6 @@ export class EditComponent implements OnInit {
     public formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private store: Store<AppUserState>,
-    private emailAsyncValidator: EmailAsyncValidator,
   ) { }
 
   public ngOnInit(): void {
@@ -161,8 +159,7 @@ export class EditComponent implements OnInit {
           Validators.required, 
           Validators.email,
           Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
-        ],
-        this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
+        ]
       ],
       website: ['',
         [
