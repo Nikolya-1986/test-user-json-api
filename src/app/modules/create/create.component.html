@@ -1,4 +1,4 @@
-<section class="create__user create">
+<section class="create create__user">
     <form class="create__form form"
         [formGroup]="formCreate" 
         (ngSubmit)="createUser()" 
@@ -74,67 +74,23 @@
                 </div>
             </div>
             <!-- First name -->
-            <div class="create__form-group form-group">
-                <label for="first">
-                    First name
-                </label>
-                <input id="first" 
-                    type="text"  
-                    placeholder="Enter first name..." 
-                    formControlName="first"
-                    autocomplete="off"
-                />
-                <div class="validation">
-                    <ng-container *ngIf="formCreate.get('name')?.get('first')?.invalid && formCreate.get('name')?.get('first')?.touched">
-                        <small class="error"
-                            *ngIf="formCreate.get('name')?.get('first')?.hasError('required')"
-                            >
-                            🚫 &nbsp; You must provide a <strong>first name!</strong>
-                        </small>
-                        <small class="error"
-                            *ngIf="formCreate.get('name')?.get('first')?.hasError('pattern')"
-                            >
-                            🚫 &nbsp; You must provide only <strong>letters and numbers!</strong>
-                        </small>
-                    </ng-container>
-                    <ng-container *ngIf="formCreate.get('name')?.get('first')?.dirty && formCreate.get('name')?.get('first')?.valid">
-                        <small class="available">
-                            ✅ &nbsp;Hurray, first name valid!
-                        </small>
-                    </ng-container>
-                </div>
-            </div>
+            <app-input-accessor 
+                formControlName="first"
+                [placeholder]="'Enter your first name...'"
+                [isRequired]="true"
+                [label] = "'First name'"
+                [patternLettersNumbers]="'^[a-zA-Z][a-zA-Z0-9]+$'"
+                >
+            </app-input-accessor>
             <!-- Last name -->
-            <div class="create__form-group form-group">
-                <label for="last">
-                    Last name
-                </label>
-                <input id="first" 
-                    type="text"  
-                    placeholder="Enter last name..." 
-                    formControlName="last"
-                    autocomplete="off"
-                />
-                <div class="validation">
-                    <ng-container *ngIf="formCreate.get('name')?.get('last')?.invalid && formCreate.get('name')?.get('last')?.touched">
-                        <small class="error"
-                            *ngIf="formCreate.get('name')?.get('last')?.hasError('required')"
-                            >
-                            🚫 &nbsp; You must provide a <strong>last name!</strong>
-                        </small>
-                            <small class="error"
-                            *ngIf="formCreate.get('name')?.get('last')?.hasError('pattern')"
-                            >
-                            🚫 &nbsp; You must provide only <strong>letters!</strong>
-                        </small>
-                    </ng-container>
-                    <ng-container *ngIf="formCreate.get('name')?.get('last')?.dirty && formCreate.get('name')?.get('last')?.valid">
-                        <small class="available">
-                            ✅ &nbsp;Hurray, last name valid!
-                        </small>
-                    </ng-container>
-                </div>
-            </div>
+            <app-input-accessor
+                formControlName="last"
+                [placeholder]="'Enter your last name...'"
+                [isRequired]="true"
+                [label] = "'Last name'"
+                [patternLetters]="'^[a-zA-Z][a-zA-Z]+$'"
+                >
+            </app-input-accessor>
         </ng-container>
         <!-- Gender -->
         <div class="create__form-checkbox">
@@ -212,78 +168,25 @@
                 </div>
             </div>
             <!-- City -->
-            <div class="create__form-group form-group">
-                <label for="city">
-                    City
-                </label>
-                <input id="city" 
-                    type="text"  
-                    placeholder="Enter your city..." 
-                    formControlName="city"
-                    autocomplete="off"
-                />
-                <div class="validation">
-                    <ng-container *ngIf="formCreate.get('location')?.get('city')?.invalid && formCreate.get('location')?.get('city')?.touched">
-                        <small class="error"
-                            *ngIf="formCreate.get('location')?.get('city')?.hasError('required')"
-                            >
-                            🚫 &nbsp; You must provide a <strong>city!</strong>
-                        </small>
-                            <small class="error"
-                            *ngIf="formCreate.get('location')?.get('city')?.hasError('pattern')"
-                            >
-                            🚫 &nbsp; You must provide only <strong>letters!</strong>
-                        </small>
-                    </ng-container>
-                    <ng-container *ngIf="formCreate.get('location')?.get('city')?.dirty && formCreate.get('location')?.get('city')?.valid">
-                        <small class="available">
-                            ✅ &nbsp;Hurray, city valid!
-                        </small>
-                    </ng-container>
-                </div>
-
-            </div>
+            <app-input-accessor
+                formControlName="city"
+                [placeholder]="'Enter your city...'"
+                [isRequired]="true"
+                [label] = "'City'"
+                [patternLetters]="'^[a-zA-Z][a-zA-Z]+$'"
+                >
+            </app-input-accessor>
             <!-- Postcode -->
-            <div class="create__form-group form-group">
-                <label for="postcode">
-                    Postcode
-                </label>
-                <input id="postcode"
-                    type="text" 
-                    placeholder="Enter your postcode..." 
-                    formControlName="postcode"
-                    autocomplete="off"
-                />
-                <div class="validation">
-                    <ng-container *ngIf="formCreate.get('location')?.get('postcode')?.invalid && formCreate.get('location')?.get('postcode')?.touched">
-                        <small class="error"
-                            *ngIf="formCreate.get('location')?.get('postcode')?.hasError('required')"
-                            >
-                            🚫 &nbsp; You must provide a <strong>postcode!</strong>
-                        </small>
-                        <small class="error"
-                            *ngIf="formCreate.get('location')?.get('postcode')?.hasError('pattern')"
-                            >
-                            🚫 &nbsp; You must provide only <strong>numbers!</strong>
-                        </small>
-                        <small class="error"
-                            *ngIf="formCreate.get('location')?.get('postcode')?.hasError('minlength')"
-                            >
-                            🚫 &nbsp; You must provide not less than <strong>4 numbers!</strong>
-                        </small>
-                        <small class="error"
-                            *ngIf="formCreate.get('location')?.get('postcode')?.hasError('maxlength')"
-                            >
-                            🚫 &nbsp; You must provide not more than <strong>6 numbers!</strong>
-                        </small>
-                    </ng-container>
-                    <ng-container *ngIf="formCreate.get('location')?.get('postcode')?.dirty && formCreate.get('location')?.get('postcode')?.valid">
-                        <small class="available">
-                            ✅ &nbsp;Hurray, postcode valid!
-                        </small>
-                    </ng-container>
-                </div>
-            </div>
+            <app-input-accessor
+                formControlName="postcode"
+                [placeholder]="'Enter your postcode...'"
+                [isRequired]="true"
+                [label] = "'Postcode'"
+                [patternNumbers]="'^[0-9]+$'"
+                [patternMinLength]="4"
+                [patternMaxLength]="6"
+                >
+            </app-input-accessor>
             <!-- Coordinates -->
             <ng-container formGroupName="coordinates">
                 <!-- Latitude -->
@@ -322,7 +225,6 @@
                             </small>
                         </ng-container>
                     </div>
-         
                 </div>
                 <!-- Longitude -->
                 <div class="create__form-group form-group">
@@ -512,41 +414,15 @@
             </div>
         </div>
         <!-- Nationality -->
-        <div class="create__form-group form-group">
-            <label for="nat">
-                Nationality
-            </label>
-            <input id="nat"
-                type="text" 
-                placeholder="Enter your nationality..." 
-                formControlName="nat" 
-                autocomplete="off"
-            />
-            <div class="validation">
-                <ng-container *ngIf="formCreate.get('nat')?.touched && formCreate.get('nat')?.invalid">
-                    <small class="error"
-                        *ngIf="formCreate.get('nat')?.hasError('required')"
-                        >
-                        🚫 &nbsp; You must provide a <strong>nat!</strong>
-                    </small>
-                    <small class="error"
-                        *ngIf="formCreate.get('nat')?.hasError('pattern')"
-                        >
-                        🚫 &nbsp; You must provide only <strong>capital letters!</strong>
-                    </small>
-                    <small class="error"
-                        *ngIf="formCreate.get('nat')?.hasError('maxlength')"
-                        >
-                        🚫 &nbsp; You must provide not more than <strong>3 capital letters!</strong>
-                    </small>
-                </ng-container>
-                <ng-container *ngIf="formCreate.get('nat')?.dirty && formCreate.get('nat')?.valid">
-                    <small class="available">
-                        ✅ &nbsp; Hurray, coordinates nationality valid!
-                    </small>
-                </ng-container>
-            </div>
-        </div>
+        <app-input-accessor
+            formControlName="nat"
+            [placeholder]="'Enter your nationality...'"
+            [isRequired]="true"
+            [label] = "'Nationality'"
+            [patternCapitalLetters]="'^[A-Z][A-Z]+$'"
+            [patternMaxLength]="3"
+            >
+        </app-input-accessor>
         <!-- Submit -->
         <div class="create__form-group form-group">
             <button 

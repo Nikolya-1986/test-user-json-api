@@ -45,18 +45,8 @@ export class CreateComponent implements OnInit, OnDestroy {
       picture: [this.picture, [imageValidator]],
       name: this.formBuilder.group({
         title: ['', [Validators.required]],
-        first: ['', 
-          [
-            Validators.required,
-            Validators.pattern("^[a-zA-Z][a-zA-Z0-9]+$"),
-          ]
-        ],
-        last: ['', 
-          [
-            Validators.required,
-            Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-          ] 
-        ],
+        first: [''],
+        last: [''],
       }),
       gender: [false, [Validators.required]],
       status: [false, [Validators.required]],
@@ -68,20 +58,8 @@ export class CreateComponent implements OnInit, OnDestroy {
       ],
       location: this.formBuilder.group({
         country: ['RU', [Validators.required,]],
-        city: ['',
-          [
-            Validators.required,
-            Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-          ]
-        ],
-        postcode: ['',
-          [
-            Validators.required,
-            Validators.pattern("^[0-9]+$"),
-            Validators.minLength(4),
-            Validators.maxLength(6),
-          ]
-        ],
+        city: [''],
+        postcode: [''],
         coordinates: this.formBuilder.group({
           latitude: ['',
             [

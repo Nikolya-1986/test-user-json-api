@@ -69,7 +69,7 @@ export class EmailAccessorComponent implements ControlValueAccessor, Validator, 
     if(this.inputEmail){
       this.inputEmail.nativeElement.value = value;
     }
-  };;
+  };
 
   public registerOnChange(value: any): void {
     this.onChange = value;
