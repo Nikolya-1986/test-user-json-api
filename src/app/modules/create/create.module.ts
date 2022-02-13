@@ -6,10 +6,8 @@ import { CreateRoutingModule } from './create-routing.module';
 import { CreateComponent } from './create.component';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { CountryAccessorModule } from '../controlValueAccessor/country/country-accessor.module';
-import { GenderAccessorModule } from '../controlValueAccessor/gender/gender-accessor.module';
-import { StatusAccessorModule } from '../controlValueAccessor/status/status-accessor.module';
-import { AvailableAccessorModule } from '../controlValueAccessor/available/available-accessor.module';
-import { EmailAccessorModule } from '../controlValueAccessor/email/email-accessor.module';
+import { InputAccessorModule } from '../controlValueAccessor/input/input-accessor.module';
+import { CheckboxAccessorModule } from '../controlValueAccessor/checkbox/checkbox-accessor.module';
 
 @NgModule({
   declarations: [
@@ -22,10 +20,8 @@ import { EmailAccessorModule } from '../controlValueAccessor/email/email-accesso
     CreateRoutingModule,
     ApplicationPipesModule,
     CountryAccessorModule,
-    GenderAccessorModule,
-    StatusAccessorModule,
-    AvailableAccessorModule,
-    EmailAccessorModule
+    CheckboxAccessorModule,
+    InputAccessorModule,
   ]
 })
 export class CreateModule { }

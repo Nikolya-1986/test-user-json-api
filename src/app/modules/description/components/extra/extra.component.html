@@ -1,3 +1,27 @@
-<p>
-    Hello extra
-</p>
+<section class="extra__container extra" 
+    *ngIf="userExtra$ | async as user; else loading"
+    >
+    <h2>
+        Your secret key: {{ user.id }}
+    </h2>
+    <ul>
+        <li>
+            Website: {{ user.website }}
+        </li>
+        <li>
+            Phone: {{ user.phone }}
+        </li>
+        <li>
+            Nationality: {{ user.nat }}
+        </li>
+        <li>
+            Email: {{ user.email }}
+        </li>
+    </ul>
+</section>
+<ng-template #loading>
+    <span>
+        Loading
+    </span>
+    <mat-progress-bar mode="buffer"></mat-progress-bar>
+</ng-template>

@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { StatusAccessorComponent } from './status-accessor.component';
+import { CheckboxAccessorComponent } from './checkbox-accessor.component';
 
 @NgModule({
   declarations: [
-    StatusAccessorComponent,
+    CheckboxAccessorComponent,
   ],
   imports: [
     CommonModule,
   ],
   exports: [
-    StatusAccessorComponent,
+    CheckboxAccessorComponent,
   ]
 })
-export class StatusAccessorModule { }
+export class CheckboxAccessorModule { }

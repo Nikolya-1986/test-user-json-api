@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { GenderAccessorComponent } from './gender-accessor.component';
+import { InputAccessorComponent } from './input-accessor.component';
 
 @NgModule({
   declarations: [
-    GenderAccessorComponent,
+    InputAccessorComponent,
   ],
   imports: [
     CommonModule,
   ],
   exports: [
-    GenderAccessorComponent,
-  ]
+    InputAccessorComponent,
+  ],
 })
-export class GenderAccessorModule { }
+export class InputAccessorModule { }

@@ -1,10 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --light-color-1: #ffffff;
+    --light-color-2: #e0e0e0;
     --primary-color-1: #ff0019;
     --primary-color-2:turquoise ;
     --primary-color-3: #F2906B;
     --primary-color-4: #0d9700;
+    --primary-color-5: #ffee00;
     --dark-color-1: #452F21;
     --dark-color-2: #575757;
     --dark-color-3: #262626;
@@ -91,25 +93,16 @@ a {
         width: 100%;
         color: var(--primary-color-1);
 
-        .errors {
-            position: relative;
-            display: inline-block;
-            border-radius: 5px;
-            padding: 5px;
-            background: var(--primary-color-1);
-            color: var(--light-color-1);
+        .error {
+            color: var(--primary-color-1);
+        }
+
+        .waiting {
+            color: var(--primary-color-5);
+        }
     
-            &::before {
-                content: '';
-                position: absolute;
-                left: 20px;
-                top: -10px;
-                width: 0px;
-                height: 0px;
-                border-left: 10px solid transparent;
-                border-right: 10px solid transparent;
-                border-bottom: 10px solid var(--primary-color-1);
-            }
+        .available {
+            color: var(--primary-color-4);
         }
     }
 }
