@@ -46,32 +46,14 @@
         <!-- Name -->
         <ng-container formGroupName="name">
             <!-- title -->
-            <div class="create__form-group form-group">
-                <label for="title">
-                    Appeal
-                </label>
-                <select formControlName="title">
-                    <option
-                        [value]="item" 
-                        *ngFor="let item of appeal"
-                        >
-                        {{ item }}
-                    </option>
-                </select>
-                <div class="validation">
-                    <ng-container *ngIf="formCreate.get('name')?.get('title')?.touched && formCreate.get('name')?.get('title')?.invalid">
-                        <small class="error"
-                            *ngIf="formCreate.get('name')?.get('title')?.hasError('required')"
-                            >
-                            🚫 &nbsp; You must provide a <strong>select!</strong>
-                        </small>
-                    </ng-container>
-                    <ng-container *ngIf="formCreate.get('name')?.get('title')?.dirty && formCreate.get('name')?.get('title')?.valid">
-                        <small class="available">
-                            ✅ &nbsp;Hurray, appeal valid!
-                        </small>
-                    </ng-container>
-                </div>
+            <div class="create__form-checkbox">
+                <app-checkbox-accessor
+                    formControlName="title"
+                    [isRequired]="true"
+                    [label]="'Appeal'"
+                    [isAppeal]="true"
+                    >
+                </app-checkbox-accessor>
             </div>
             <!-- First name -->
             <app-input-accessor 
@@ -94,29 +76,23 @@
         </ng-container>
         <!-- Gender -->
         <div class="create__form-checkbox">
-            <app-gender-accessor formControlName="gender"></app-gender-accessor>
-            <div class="validation"
-                *ngIf="formCreate.get('gender')?.invalid && formCreate.get('gender')?.touched"
+            <app-checkbox-accessor 
+                formControlName="gender"
+                [isRequired]="true"
+                [label]="'Gender'"
+                [isGender]="true"
                 >
-                <small class="error"
-                    *ngIf="formCreate.get('gender')?.hasError('required')"
-                    >
-                    🚫 &nbsp; You must provide a <strong>gender!</strong>
-                </small>
-            </div>
+            </app-checkbox-accessor>
         </div>
         <!-- Status -->
         <div class="create__form-checkbox">
-            <app-status-accessor formControlName="status"></app-status-accessor>
-            <div class="validation"
-                *ngIf="formCreate.get('status')?.invalid && formCreate.get('status')?.touched"
+            <app-checkbox-accessor
+                formControlName="status"
+                [isRequired]="true"
+                [label]="'Status'"
+                [isStatus]="true"
                 >
-                <small class="error"
-                    *ngIf="formCreate.get('status')?.hasError('required')"
-                    >
-                    🚫 &nbsp; You must provide a <strong>status!</strong>
-                </small>
-            </div>
+            </app-checkbox-accessor>
         </div>
         <!-- Date of birth -->
         <div class="create__form-group form-group">
@@ -266,12 +242,14 @@
             </ng-container>
         </ng-container>
         <!-- Email -->
-        <app-email-accessor
+        <app-input-accessor
+            formControlName="email"
+            [isRequired]="true"
             [placeholder]="'Enter your email...'"
             [label] = "'Email'"
-            formControlName="email"
+            [emailPattern]="'[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'"
             >
-        </app-email-accessor>
+        </app-input-accessor>
         <!-- Website -->
         <div class="create__form-group form-group">
             <label for="website">
@@ -354,17 +332,14 @@
             </div>
         </div>
         <!-- Available -->
-        <div class="create__form-checkbox form-group">
-            <app-available-accessor formControlName="available"></app-available-accessor>
-            <div class="validation"
-                *ngIf="formCreate.get('available')?.invalid && formCreate.get('available')?.touched"
+        <div class="create__form-checkbox">
+            <app-checkbox-accessor
+                formControlName="available"
+                [isRequired]="true"
+                [label]="'Available'"
+                [isAvailable]="true"
                 >
-                <small class="error"
-                    *ngIf="formCreate.get('available')?.hasError('required')"
-                    >
-                    🚫 &nbsp; You must provide a <strong>available!</strong>
-                </small>
-            </div>
+            </app-checkbox-accessor>
         </div>
         <!-- Date registered -->
         <div class="create__form-group form-group">
@@ -406,11 +381,6 @@
                         ✅ &nbsp; Hurray, coordinates phone valid!
                     </small>
                 </ng-container>
-            </div>
-            <div class="validation"
-                *ngIf="formCreate.get('phone')?.invalid && formCreate.get('phone')?.touched"
-                >
-
             </div>
         </div>
         <!-- Nationality -->

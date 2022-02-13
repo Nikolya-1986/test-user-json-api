@@ -1,6 +1,8 @@
 import { Component, ElementRef, Input, OnInit, Self, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NgControl, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 
+import { EmailAsyncValidator } from '../../../validators/email-async.validator';
+
 // export const NAME_CONTROL_VALUE_ACCESSOR: Provider = {
 //   provide: NG_VALUE_ACCESSOR,
 //   useExisting: forwardRef(() => NameAccessorComponent),
@@ -13,6 +15,12 @@ import { ControlValueAccessor, NgControl, ValidationErrors, Validator, Validator
 //   multi: true,
 // };
 
+// export const ASYNC_CONTROL_VALIDATORS: Provider = {
+//   provide: NG_ASYNC_VALIDATORS,
+//   useExisting: forwardRef(() => EmailAsyncValidator),
+//   multi: true,
+// };
+
 @Component({
   selector: 'app-input-accessor',
   templateUrl: './input-accessor.component.html',
@@ -20,6 +28,7 @@ import { ControlValueAccessor, NgControl, ValidationErrors, Validator, Validator
   // providers: [
   //   NAME_CONTROL_VALUE_ACCESSOR,
   //   CONTROL_VALIDATORS,
+  //   ASYNC_CONTROL_VALIDATORS
   // ]
 })
 export class InputAccessorComponent implements ControlValueAccessor, Validator, OnInit {
@@ -30,6 +39,7 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   @Input() public patternLettersNumbers!: string;
   @Input() public patternLetters!: string;
   @Input() public patternCapitalLetters!: string;
+  @Input() public emailPattern!: string;
   @Input() public patternNumbers!: string;
   @Input() public patternMinLength!: number;
   @Input() public patternMaxLength!: number;
@@ -39,6 +49,7 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   
   constructor(
     @Self() public controlDir: NgControl,
+    public emailAsyncValidator: EmailAsyncValidator,
   ) {
     this.controlDir.valueAccessor = this;
   }
@@ -88,6 +99,12 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
     if(this.patternMinLength) {
       validators.push(Validators.minLength(this.patternMinLength));
     }
+    if(this.emailPattern) {
+      validators.push(Validators.pattern(this.emailPattern));
+    }
+    // if (this.emailAsyncValidator) {
+    //   validators.push(this.emailAsyncValidator.validate.bind(this.emailAsyncValidator));
+    // }
     if(this.patternMaxLength) {
       validators.push(Validators.maxLength(this.patternMaxLength));
     }

@@ -1,0 +1,116 @@
+<div class="checkbox__container checkbox checkbox-accessor">
+    <label for="checkbox">
+        {{ label }}
+    </label><br>
+    <ng-container *ngIf="!isGender && !isStatus && !isAvailable">
+        <ng-container *ngFor="let picture of picturesAppeal">
+            <button class="checkbox__item checkbox-accessor__item"
+                (click)="selectedValue(picture.name)"
+                [class.active]="valueCurrent === picture.name"
+                >
+                <img 
+                    [src]="picture.src" 
+                    [alt]="picture.name"
+                />
+            </button>
+        </ng-container>
+        <div class="validation">
+            <ng-container *ngIf="isRequired && controlDir && controlDir.control?.touched && controlDir.control?.invalid">
+                <small class="error"
+                    *ngIf="isRequired"
+                    >
+                    🚫 &nbsp; You must provide a <strong> {{ controlDir.name }}! </strong>
+                </small>
+            </ng-container>
+            <ng-container *ngIf="controlDir.control?.dirty && controlDir.control?.valid">
+                <small class="available">
+                    ✅ &nbsp; Hurray, <strong> {{ controlDir.name }}</strong> valid!
+                </small>
+            </ng-container>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="!isAppeal && !isStatus && !isAvailable">
+        <ng-container *ngFor="let picture of picturesGender">
+            <button class="checkbox__item checkbox-accessor__item"
+                (click)="selectedValue(picture.name)"
+                [class.active]="valueCurrent === picture.name"
+                >
+                <img 
+                    [src]="picture.src" 
+                    [alt]="picture.name"
+                />
+            </button>
+        </ng-container>
+        <div class="validation">
+            <ng-container *ngIf="isRequired && controlDir && controlDir.control?.touched && controlDir.control?.invalid">
+                <small class="error"
+                    *ngIf="isRequired"
+                    >
+                    🚫 &nbsp; You must provide a <strong> {{ controlDir.name }}! </strong>
+                </small>
+            </ng-container>
+            <ng-container *ngIf="controlDir.control?.dirty && controlDir.control?.valid">
+                <small class="available">
+                    ✅ &nbsp; Hurray, <strong> {{ controlDir.name }}</strong> valid!
+                </small>
+            </ng-container>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="!isAppeal && !isGender && !isAvailable">
+        <ng-container *ngFor="let picture of picturesStatus">
+            <button class="status__item checkbox-accessor__item"
+                (click)="selectedValue(picture.name)"
+                [class.active]="valueCurrent === picture.name"
+                >
+                <img 
+                    [src]="picture.src" 
+                    [alt]="picture.name"
+                />
+            </button>
+        </ng-container>
+        <div class="validation">
+            <ng-container *ngIf="isRequired && controlDir && controlDir.control?.touched && controlDir.control?.invalid">
+                <small class="error"
+                    *ngIf="isRequired"
+                    >
+                    🚫 &nbsp; You must provide a <strong> {{ controlDir.name }}! </strong>
+                </small>
+            </ng-container>
+            <ng-container *ngIf="controlDir.control?.dirty && controlDir.control?.valid">
+                <small class="available">
+                    ✅ &nbsp; Hurray, <strong> {{ controlDir.name }}</strong> valid!
+                </small>
+            </ng-container>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="!isGender && !isStatus && !isAppeal">
+        <ng-container *ngFor="let picture of picturesAvailable">
+            <button class="checkbox__item checkbox-accessor__item"
+                (click)="selectedValue(picture.name)"
+                [class.active]="valueCurrent === picture.name"
+                >
+                <img 
+                    [src]="picture.src" 
+                    [alt]="picture.name"
+                />
+            </button>
+        </ng-container>
+        <div class="validation">
+            <ng-container *ngIf="isRequired && controlDir && controlDir.control?.touched && controlDir.control?.invalid">
+                <small class="error"
+                    *ngIf="isRequired"
+                    >
+                    🚫 &nbsp; You must provide a <strong> {{ controlDir.name }}! </strong>
+                </small>
+            </ng-container>
+            <ng-container *ngIf="controlDir.control?.dirty && controlDir.control?.valid">
+                <small class="available">
+                    ✅ &nbsp; Hurray, <strong> {{ controlDir.name }}</strong> valid!
+                </small>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
