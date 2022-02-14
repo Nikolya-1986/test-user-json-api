@@ -4,12 +4,19 @@
     </label>
     <input [type]="type" 
         (input)="onChange(inputName.value)" 
+        (change)="onChange(inputName.value)" 
         (blur)="onTouched()"
         [disabled]="disabled" 
         [placeholder]="placeholder"
+        [class.has-error]="controlDir.control?.touched && controlDir.control?.invalid"
+        [class.has-success]="controlDir.control?.dirty && controlDir.control?.valid"
         #inputName 
+        ngDefaultControl
     />
-    <div class="validation">
+
+    <div class="validation" 
+        [@visibilityChanged]="controlDir.control?.touched && controlDir.control?.invalid"
+        >
         <ng-container *ngIf="isRequired && controlDir && controlDir.control?.touched && controlDir.control?.invalid">
             <small class="error"
                 *ngIf="isRequired"
@@ -74,30 +81,3 @@
         </ng-container>
     </div>
 </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-    NgControl уже предоставляет NG_VALUE_ACCESSOR, NG_VALIDATOR и NG_ASYNC_VALIDATORS.
-    ОБЯЗАТЕЛЬНО удаляем их, чтобы не возникла циклическая зависимость!!!
- -->

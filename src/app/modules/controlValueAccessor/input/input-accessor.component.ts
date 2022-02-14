@@ -1,39 +1,28 @@
-import { Component, ElementRef, Input, OnInit, Self, ViewChild } from '@angular/core';
-import { ControlValueAccessor, NgControl, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Optional, Self, ViewChild } from '@angular/core';
+import { ControlValueAccessor, DefaultValueAccessor, NgControl, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
+import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 
 import { EmailAsyncValidator } from '../../../validators/email-async.validator';
-
-// export const NAME_CONTROL_VALUE_ACCESSOR: Provider = {
-//   provide: NG_VALUE_ACCESSOR,
-//   useExisting: forwardRef(() => NameAccessorComponent),
-//   multi: true,
-// };
-
-// export const CONTROL_VALIDATORS: Provider = {
-//   provide: NG_VALIDATORS,
-//   useExisting: forwardRef(() => NameAccessorComponent),
-//   multi: true,
-// };
-
-// export const ASYNC_CONTROL_VALIDATORS: Provider = {
-//   provide: NG_ASYNC_VALIDATORS,
-//   useExisting: forwardRef(() => EmailAsyncValidator),
-//   multi: true,
-// };
 
 @Component({
   selector: 'app-input-accessor',
   templateUrl: './input-accessor.component.html',
   styleUrls: ['./input-accessor.component.scss'],
-  // providers: [
-  //   NAME_CONTROL_VALUE_ACCESSOR,
-  //   CONTROL_VALIDATORS,
-  //   ASYNC_CONTROL_VALIDATORS
-  // ]
+  animations: [
+    trigger(
+      'visibilityChanged', [
+        state('true', style({'height': '*', 'padding-top': '4px'})),
+        state('true', style({'height': '30px', 'padding-top': '0px', 'margin-bottom': '5px'})),
+        transition('*=>*', animate('1000ms')),
+      ]
+    )
+  ]
 })
-export class InputAccessorComponent implements ControlValueAccessor, Validator, OnInit {
+export class InputAccessorComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('inputName') inputName!: ElementRef;
+  @ViewChild(DefaultValueAccessor) defaultValueAccessor!: DefaultValueAccessor;
   @Input() public type = 'text';
   @Input() public isRequired!: boolean;
   @Input() public patternLettersNumbers!: string;
@@ -45,35 +34,43 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   @Input() public patternMaxLength!: number;
   @Input() public label!: string;
   @Input() public placeholder!: string;
+  public destroy$: Subject<boolean> = new Subject;
   public disabled!: boolean;
+  private delegatedReplaySubject = new ReplaySubject<(_: ControlValueAccessor) => void>();
   
   constructor(
-    @Self() public controlDir: NgControl,
+    @Self() @Optional() public controlDir: NgControl,
     public emailAsyncValidator: EmailAsyncValidator,
   ) {
     this.controlDir.valueAccessor = this;
-  }
+  };
 
   public ngOnInit(): void {
     this.validate();
   };
 
+  public ngAfterViewInit(): void {
+    this.delegatedReplaySubject.pipe(
+      takeUntil(this.destroy$),
+    ).subscribe(res => res(this.defaultValueAccessor))
+  };
+
   public writeValue(value: string): void {
     if(this.inputName){
-      this.inputName.nativeElement.value = value;
+      this.delegatedReplaySubject.next(valueAccessor => valueAccessor.writeValue(this.inputName.nativeElement.value))
     }
   };
 
-  public registerOnChange(value: any): void {
-    this.onChange = value;
+  public registerOnChange(value: (_: any) => void): void {
+    this.delegatedReplaySubject.next(() => this.onChange = value)
   };
 
-  public registerOnTouched(value: any): void {
-    this.onTouched = value;
+  public registerOnTouched(value: () => void): void {
+    this.delegatedReplaySubject.next(() => this.onTouched = value)
   };
 
   public setDisabledState?(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.delegatedReplaySubject.next(() => this.disabled = isDisabled)
   };
 
   public onChange(event: any) { };
@@ -117,4 +114,16 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
 
     return validators;
   };
+
+  public ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  };
 }
+
+
+
+
+
+
+//NgControl уже предоставляет NG_VALUE_ACCESSOR, NG_VALIDATOR и NG_ASYNC_VALIDATORS. ОБЯЗАТЕЛЬНО удаляем их, чтобы не возникла циклическая зависимость!!!

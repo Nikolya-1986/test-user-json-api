@@ -87,10 +87,11 @@ a {
 }
 
 .form {
-    width: 36%;
+    width: 42%;
 
     .validation {
         width: 100%;
+        height: 0px;
         color: var(--primary-color-1);
 
         .error {
@@ -130,11 +131,11 @@ a {
 
     input {
     
-        &.ng-invalid.ng-touched {
+        &.ng-pristine.ng-invalid.ng-touched {
             border: 2px solid var(--primary-color-1);
         }
     
-        &.ng-valid.ng-touched {
+        &.ng-touched.ng-dirty.ng-valid {
             border: 2px solid var(--primary-color-4);
         }
     }
