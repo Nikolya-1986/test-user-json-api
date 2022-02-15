@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, fromEvent, map, Observable, Subscription, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
+import { UserDTO } from '../../interfaces/user.interface';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
@@ -23,17 +23,8 @@ export class CreateComponent implements OnInit, OnDestroy {
   public formCreate!: FormGroup;
   private subscription: Subscription[] = [];
   public picture: Array<{ src: string }> = [];
-  public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
-  public gender: Gender[] = [Gender.female, Gender.male];
-  public statuses: Status[] = [Status.divorced, Status.married, Status.single];
   public currentDate = new Date();
   public registeredDate = new Date() as unknown as string;
-  public picturesGender = [
-    { src: './assets/images/Mr.jpg', name: 'Mr' },
-    { src: './assets/images/Miss.jpg', name: 'Miss' },
-    { src: './assets/images/Ms.jpg', name: 'Ms' },
-    { src: './assets/images/Mrs.jpg', name: 'Mrs' },
-  ];
 
   constructor(
     private formBuilder: FormBuilder,

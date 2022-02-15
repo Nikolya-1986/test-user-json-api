@@ -29,6 +29,7 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   @Input() public patternLetters!: string;
   @Input() public patternCapitalLetters!: string;
   @Input() public emailPattern!: string;
+  @Input() public passwordPattern!: string;
   @Input() public patternNumbers!: string;
   @Input() public patternMinLength!: number;
   @Input() public patternMaxLength!: number;
@@ -52,25 +53,26 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   public ngAfterViewInit(): void {
     this.delegatedReplaySubject.pipe(
       takeUntil(this.destroy$),
-    ).subscribe(res => res(this.defaultValueAccessor))
+    ).subscribe(res => res(this.defaultValueAccessor));
   };
 
   public writeValue(value: string): void {
     if(this.inputName){
-      this.delegatedReplaySubject.next(valueAccessor => valueAccessor.writeValue(this.inputName.nativeElement.value))
+      this.delegatedReplaySubject.next(valueAccessor => valueAccessor.writeValue(this.inputName.nativeElement.value));
     }
   };
 
   public registerOnChange(value: (_: any) => void): void {
-    this.delegatedReplaySubject.next(() => this.onChange = value)
+    this.delegatedReplaySubject.next(() => this.onChange = value);
   };
 
+
   public registerOnTouched(value: () => void): void {
-    this.delegatedReplaySubject.next(() => this.onTouched = value)
+    this.delegatedReplaySubject.next(() => this.onTouched = value);
   };
 
   public setDisabledState?(isDisabled: boolean): void {
-    this.delegatedReplaySubject.next(() => this.disabled = isDisabled)
+    this.delegatedReplaySubject.next(() => this.disabled = isDisabled);
   };
 
   public onChange(event: any) { };
@@ -102,6 +104,9 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
     // if (this.emailAsyncValidator) {
     //   validators.push(this.emailAsyncValidator.validate.bind(this.emailAsyncValidator));
     // }
+    if(this.passwordPattern) {
+      validators.push(Validators.pattern(this.passwordPattern));
+    }
     if(this.patternMaxLength) {
       validators.push(Validators.maxLength(this.patternMaxLength));
     }
@@ -120,10 +125,4 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
     this.destroy$.complete();
   };
 }
-
-
-
-
-
-
 //NgControl уже предоставляет NG_VALUE_ACCESSOR, NG_VALIDATOR и NG_ASYNC_VALIDATORS. ОБЯЗАТЕЛЬНО удаляем их, чтобы не возникла циклическая зависимость!!!

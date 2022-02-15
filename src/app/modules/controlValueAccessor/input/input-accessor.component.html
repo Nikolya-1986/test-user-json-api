@@ -6,7 +6,7 @@
         (input)="onChange(inputName.value)" 
         (change)="onChange(inputName.value)" 
         (blur)="onTouched()"
-        [disabled]="disabled" 
+        [disabled]="disabled"
         [placeholder]="placeholder"
         [class.has-error]="controlDir.control?.touched && controlDir.control?.invalid"
         [class.has-success]="controlDir.control?.dirty && controlDir.control?.valid"
@@ -53,6 +53,11 @@
                 >
                 🚫 &nbsp; You must provide a <strong>unregistered {{ controlDir.name }}!</strong>
             </small> -->
+            <small class="error"
+                *ngIf="passwordPattern"
+                >
+                🚫 &nbsp; You must provide <strong>valid {{ controlDir.name }}!</strong>
+            </small>
             <small class="error"
                 *ngIf="patternMinLength"
                 >
