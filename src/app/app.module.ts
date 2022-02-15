@@ -19,6 +19,7 @@ import { reduserUser } from './store/user/user.reducer';
 import { UsersEffects } from './store/user/user.effects';
 import { IsLoadingInterceptor } from './interseptors/isLoading.interceptor';
 import { MaterialExampleModule } from './material-example.module';
+import { AdminEffect } from './store/admin/admin.effects';
 
 const ISLOADING_INTERSEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,

@@ -1,9 +1,9 @@
-<section class="sing-up sing-up__container">
+<section class="sign-up sign-up__container">
     <h1>
         Sign up
     </h1>
     <hr><br>
-    <form class="sing-up__form form"
+    <form class="sign-up__form form"
         [formGroup]="formAdmin"  
         (ngSubmit)="createAdmin()" 
         ngNativeValidate
@@ -53,15 +53,17 @@
             [passwordPattern]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}'"
             >
         </app-input-accessor>
-        <div class="sing-up__submit form-group">
-            <button type="submit">
+        <div class="sign-up__submit form-group">
+            <button 
+                [disabled]="formAdmin.invalid && formAdmin.pending"
+                >
                 Submit
             </button>
-            <button
+            <!-- <button
                 [routerLink]="['/']"
                 >
                 Cancel
-            </button>
+            </button> -->
         </div>
     </form>
 

@@ -17,7 +17,7 @@ const routes: Routes = [
     path: 'create', loadChildren: () => import('./modules/create/create.module').then(module => module.CreateModule)
   },
   {
-    path: 'sing-up', loadChildren: () => import('./modules/sing-up/sing-up.module').then(module => module.SingUpModule)
+    path: 'sign-up', loadChildren: () => import('./modules/sign-up/sign-up.module').then(module => module.SignUpModule)
   },
   {
     path: '',
