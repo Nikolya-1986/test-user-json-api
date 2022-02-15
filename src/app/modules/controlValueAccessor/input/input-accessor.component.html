@@ -54,6 +54,11 @@
                 🚫 &nbsp; You must provide a <strong>unregistered {{ controlDir.name }}!</strong>
             </small> -->
             <small class="error"
+                *ngIf="passwordPattern"
+                >
+                🚫 &nbsp; You must provide <strong>valid {{ controlDir.name }}!</strong>
+            </small>
+            <small class="error"
                 *ngIf="patternMinLength"
                 >
                 🚫 &nbsp; You must provide not less than <strong>{{ this.patternMinLength }} symbols!</strong>

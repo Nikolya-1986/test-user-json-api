@@ -30,6 +30,7 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   @Input() public patternCapitalLetters!: string;
   @Input() public emailPattern!: string;
   @Input() public patternNumbers!: string;
+  @Input() public passwordPattern!: string;
   @Input() public patternMinLength!: number;
   @Input() public patternMaxLength!: number;
   @Input() public label!: string;

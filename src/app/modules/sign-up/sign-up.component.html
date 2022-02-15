@@ -1,0 +1,88 @@
+<section class="sign-up sign-up__container">
+    <h1>
+        Sign up
+    </h1>
+    <hr><br>
+    <form class="sign-up__form form"
+        [formGroup]="formAdmin"  
+        (ngSubmit)="createAdmin()"
+        ngNativeValidate
+        >
+        <app-input-accessor
+            formControlName="firstName"
+            [type]="'text'"
+            [placeholder]="'Enter your first name...'"
+            [isRequired]="true"
+            [label]="'First name'"
+            [patternLettersNumbers]="'^[a-zA-Z][a-zA-Z0-9]+$'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="lastName"
+            [type]="'type'"
+            [placeholder]="'Enter your last name...'"
+            [isRequired]="true"
+            [label]="'Last name'"
+            [patternLetters]="'^[a-zA-Z][a-zA-Z]+$'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="email"
+            [type]="'email'"
+            [placeholder]="'Enter your email...'"
+            [isRequired]="true"
+            [label]="'Email'"
+            [emailPattern]="'[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="password"
+            [type]="'password'"
+            [placeholder]="'At least: one number, letter in lower and upper case, 6 sumbols!'"
+            [isRequired]="true"
+            [label]="'Password'"
+            [passwordPattern]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="confirmPassword"
+            [type]="'password'"
+            [placeholder]="'Repeat your password...'"
+            [isRequired]="true"
+            [label]="'Confirm password'"
+            [passwordPattern]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}'"
+            >
+        </app-input-accessor>
+        <div class="sign-up__submit form-group">
+            <button 
+                [disabled]="formAdmin.invalid || formAdmin.pending"
+                >
+                Submit
+            </button>
+            <button
+                [routerLink]="['/']"
+                >
+                Cancel
+            </button>
+        </div>
+    </form>
+
+    <div>
+        <ng-container *ngTemplateOutlet="greet"></ng-container>
+        <hr>
+        <ng-container *ngTemplateOutlet="eng; context: myContext"></ng-container>
+        <hr>
+        <ng-container *ngTemplateOutlet="svk; context: myContext"></ng-container>
+        <hr>
+            
+        <ng-template #greet>
+            <span>Hello</span>
+        </ng-template>
+        <ng-template #eng let-name>
+            <span>Hello {{name}}!</span>
+        </ng-template>
+        <ng-template #svk let-person="localSk">
+            <span>Ahoj {{person}}!</span>
+        </ng-template>
+    </div>
+</section>
