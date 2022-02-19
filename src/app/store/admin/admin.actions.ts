@@ -1,5 +1,5 @@
 import { createAction, props, union } from "@ngrx/store";
-import { Admin } from "src/app/interfaces/admin.interface";
+import { Admin } from "../../interfaces/admin.interface";
 
 export enum AuthActionTypes {
     GET_FAIL = '[ERROR] Get Fail',

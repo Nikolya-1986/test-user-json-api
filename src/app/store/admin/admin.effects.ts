@@ -13,12 +13,14 @@ export class AdminEffect {
     signUpAdmin$: Observable<Action> = createEffect(() => this.actions$
         .pipe(
             ofType(adminActions.AuthActionTypes.SIGNUP_REQUEST),
-            switchMap((admin: any) => this.adminService.signUp(admin.lastname, admin.firstName, admin.emal, admin.password)
+            switchMap(admin => { 
+                const { id, lastName, firstName, email, password, token } = admin;
+                return this.adminService.signUp(lastName, firstName, email, password)
                 .pipe(
                     map((admin) => adminActions.createAdminSuccess({ signUpAdmin: admin })),
-                    catchError((error) => of(adminActions.getFail(error))),
-                )
-            )
+                    catchError((error) => of(adminActions.getFail(error)))
+                );
+            })
         ),
         { useEffectsErrorHandler: false }
     );

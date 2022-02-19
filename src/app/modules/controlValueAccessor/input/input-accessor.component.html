@@ -39,22 +39,17 @@
                 🚫 &nbsp; You must provide only <strong>numbers!</strong>
             </small>
             <small class="error"
-                *ngIf="emailPattern"
+                *ngIf="patternEmail"
                 >
                 🚫 &nbsp; You must provide a <strong>valid {{ controlDir.name }}!</strong>
             </small>
             <small class="error"
-                *ngIf="emailAsyncValidator"
-                >
-                🚫 &nbsp; You must provide a <strong>unregistered {{ controlDir.name }}!</strong>
-            </small>
-            <!-- <small class="error"
                 *ngIf="controlDir.getError('emailTaken')"
                 >
                 🚫 &nbsp; You must provide a <strong>unregistered {{ controlDir.name }}!</strong>
-            </small> -->
+            </small>
             <small class="error"
-                *ngIf="passwordPattern"
+                *ngIf="patternPassword"
                 >
                 🚫 &nbsp; You must provide <strong>valid {{ controlDir.name }}!</strong>
             </small>

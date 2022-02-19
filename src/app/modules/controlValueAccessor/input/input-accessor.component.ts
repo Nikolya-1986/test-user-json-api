@@ -28,9 +28,9 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   @Input() public patternLettersNumbers!: string;
   @Input() public patternLetters!: string;
   @Input() public patternCapitalLetters!: string;
-  @Input() public emailPattern!: string;
+  @Input() public patternEmail!: string;
   @Input() public patternNumbers!: string;
-  @Input() public passwordPattern!: string;
+  @Input() public patternPassword!: string;
   @Input() public patternMinLength!: number;
   @Input() public patternMaxLength!: number;
   @Input() public label!: string;
@@ -97,8 +97,11 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
     if(this.patternMinLength) {
       validators.push(Validators.minLength(this.patternMinLength));
     }
-    if(this.emailPattern) {
-      validators.push(Validators.pattern(this.emailPattern));
+    if(this.patternEmail) {
+      validators.push(Validators.pattern(this.patternEmail));
+    }
+    if(this.patternPassword) {
+      validators.push(Validators.pattern(this.patternPassword));
     }
     // if (this.emailAsyncValidator) {
     //   validators.push(this.emailAsyncValidator.validate.bind(this.emailAsyncValidator));

@@ -1,8 +1,8 @@
 export interface Admin {
-    id: string;
+    id: number;
     email: string;
-    lastname: string;
-    firstname: string;
+    lastName: string;
+    firstName: string;
     password: string;
     token: string;
 }

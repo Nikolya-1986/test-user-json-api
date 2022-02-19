@@ -22,15 +22,19 @@ export const adminReduser = createReducer (
         ...state,
         errorMessage: action.message,
     })),
-    on(adminActions.createAdminRequest, state => ({
+    on(adminActions.createAdminRequest, (state, { signUpAdmin }) => ({
         ...state,
+        admin: signUpAdmin
     })),
-    on(adminActions.createAdminSuccess, (state, action) => ({
-        ...state,
-        isAuthenticated: true,
-        admin: action.signUpAdmin,
-        errorMessage: null,
-    }))
+    on(adminActions.createAdminSuccess, (state, { signUpAdmin }) => {
+        console.log(signUpAdmin);
+        return {
+            ...state,
+            isAuthenticated: true,
+            admin: signUpAdmin,
+            errorMessage: null,
+        }
+    })
 
 );
 

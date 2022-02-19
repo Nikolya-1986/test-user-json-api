@@ -28,8 +28,8 @@ private readonly BASE_URL = 'http://localhost:3000';
     return throwError(errorHttp);
   };
   
-  public signUp(lastName: string, firstname: string, email: string, password: string): Observable<Admin> {
-    return this.http.post<Admin>(`${this.BASE_URL}/admin`, { lastName, firstname, email, password })
+  public signUp(lastName: string, firstName: string, email: string, password: string): Observable<Admin> {
+    return this.http.post<Admin>(`${this.BASE_URL}/admin`, { lastName, firstName, email, password })
       .pipe(
         catchError(this.errorsBackend.bind(this)),
       )

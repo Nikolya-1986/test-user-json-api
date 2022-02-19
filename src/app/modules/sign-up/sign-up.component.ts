@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { Admin } from '../../interfaces/admin.interface';
 import AppUserState from '../../store/user/user.state';
 import * as adminActions from '../../store/admin/admin.actions';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
+import * as validators from '../../validators/password-validator';
 
 @Component({
   selector: 'app-sing-up',
@@ -15,7 +16,6 @@ import { Subscription } from 'rxjs';
 export class SignUpComponent implements OnInit, OnDestroy {
 
   public formAdmin!: FormGroup;
-  public myContext = { $implicit: 'World', localSk: 'Svet' };
   private subscription: Subscription[] = [];
   
   constructor(
@@ -34,14 +34,24 @@ export class SignUpComponent implements OnInit, OnDestroy {
       email: [''],
       password: [''],
       confirmPassword: [''],
-    });
-    this.updateTreeValidity(this.formAdmin);
+    },
+    {
+      validator: validators.PasswordValidator.passwordMatchValidator
+    }
+    );
     this.handleFormChanges();
   };
 
   private handleFormChanges(): void {
-    this.subscription.push(this.formAdmin.valueChanges.subscribe(value => console.log('ValueChanges:', value)));
-    this.subscription.push(this.formAdmin.statusChanges.subscribe(status => console.log('StatusChanges:', status)))
+    combineLatest([this.formAdmin.valueChanges, this.formAdmin.statusChanges])
+    .subscribe((admin) => {
+      if(this.formAdmin.valid) {
+        console.log('Form validation status: SUCESS', admin)
+      }else {
+        console.log('Form validation status: ERROR', admin);
+      }
+    })
+    this.updateTreeValidity(this.formAdmin);
   };
 
   public createAdmin(): void {
@@ -75,7 +85,4 @@ export class SignUpComponent implements OnInit, OnDestroy {
       sub.unsubscribe();
     });
   };
-
 }
-// https://mherman.org/blog/authentication-in-angular-with-ngrx/
-//https://morioh.com/p/d34b29a3033d

@@ -10,7 +10,7 @@
         >
         <app-input-accessor
             formControlName="firstName"
-            [type]="'text'"
+            [type]="'type'"
             [placeholder]="'Enter your first name...'"
             [isRequired]="true"
             [label]="'First name'"
@@ -28,20 +28,20 @@
         </app-input-accessor>
         <app-input-accessor
             formControlName="email"
-            [type]="'email'"
+            [type]="'type'"
             [placeholder]="'Enter your email...'"
             [isRequired]="true"
             [label]="'Email'"
-            [emailPattern]="'[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'"
+            [patternEmail]="'[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'"
             >
         </app-input-accessor>
         <app-input-accessor
             formControlName="password"
-            [type]="'password'"
-            [placeholder]="'At least: one number, letter in lower and upper case, 6 sumbols!'"
+            [type]="'type'"
+            [placeholder]="'one number, letter in lower and upper case, min 8 sumbols!'"
             [isRequired]="true"
             [label]="'Password'"
-            [passwordPattern]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}'"
+            [patternPassword]="'(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'"
             >
         </app-input-accessor>
         <app-input-accessor
@@ -50,39 +50,57 @@
             [placeholder]="'Repeat your password...'"
             [isRequired]="true"
             [label]="'Confirm password'"
-            [passwordPattern]="'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}'"
+            [patternPassword]="'(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'"
             >
         </app-input-accessor>
+        <div class="validation">
+            <small class="error"
+                *ngIf="formAdmin.controls['confirmPassword'].hasError('NoPassswordMatch')"
+                >
+                🚫 &nbsp; <strong>Password do not match! </strong>
+            </small>
+        </div>
         <div class="sign-up__submit form-group">
             <button 
                 [disabled]="formAdmin.invalid || formAdmin.pending"
                 >
                 Submit
             </button>
-            <button
-                [routerLink]="['/']"
+            <p>
+                <span>
+                    Already have an account?&nbsp;
+                </span>
+                <a [routerLink]="['/log-in']">
+                    Log in!
+                </a>
+            </p>
+        </div>
+        <div>
+            <ng-template 
+                #testTemplate 
+                let-name="name"
+                let-age="age"
                 >
-                Cancel
-            </button>
+                <div>
+                    My name is {{ name }}, i'm {{ age }}.
+                </div>
+            </ng-template>
+              
+            <ng-container 
+                *ngTemplateOutlet="testTemplate; 
+                context: { name: 'Nikolai', age: 36 }"
+                >
+            </ng-container>
+            <ng-container 
+                *ngTemplateOutlet="testTemplate; 
+                context: { name: 'Mariana', age: 6 }"
+                >
+            </ng-container>
+            <ng-container 
+                *ngTemplateOutlet="testTemplate; 
+                context: { name: 'Marat', age: 0 }"
+                >
+            </ng-container>
         </div>
     </form>
-
-    <div>
-        <ng-container *ngTemplateOutlet="greet"></ng-container>
-        <hr>
-        <ng-container *ngTemplateOutlet="eng; context: myContext"></ng-container>
-        <hr>
-        <ng-container *ngTemplateOutlet="svk; context: myContext"></ng-container>
-        <hr>
-            
-        <ng-template #greet>
-            <span>Hello</span>
-        </ng-template>
-        <ng-template #eng let-name>
-            <span>Hello {{name}}!</span>
-        </ng-template>
-        <ng-template #svk let-person="localSk">
-            <span>Ahoj {{person}}!</span>
-        </ng-template>
-    </div>
 </section>
