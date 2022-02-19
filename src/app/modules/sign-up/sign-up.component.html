@@ -1,0 +1,106 @@
+<section class="sign-up sign-up__container">
+    <h1>
+        Sign up
+    </h1>
+    <hr><br>
+    <form class="sign-up__form form"
+        [formGroup]="formAdmin"  
+        (ngSubmit)="createAdmin()"
+        ngNativeValidate
+        >
+        <app-input-accessor
+            formControlName="firstName"
+            [type]="'type'"
+            [placeholder]="'Enter your first name...'"
+            [isRequired]="true"
+            [label]="'First name'"
+            [patternLettersNumbers]="'^[a-zA-Z][a-zA-Z0-9]+$'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="lastName"
+            [type]="'type'"
+            [placeholder]="'Enter your last name...'"
+            [isRequired]="true"
+            [label]="'Last name'"
+            [patternLetters]="'^[a-zA-Z][a-zA-Z]+$'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="email"
+            [type]="'type'"
+            [placeholder]="'Enter your email...'"
+            [isRequired]="true"
+            [label]="'Email'"
+            [patternEmail]="'[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="password"
+            [type]="'type'"
+            [placeholder]="'one number, letter in lower and upper case, min 8 sumbols!'"
+            [isRequired]="true"
+            [label]="'Password'"
+            [patternPassword]="'(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="confirmPassword"
+            [type]="'password'"
+            [placeholder]="'Repeat your password...'"
+            [isRequired]="true"
+            [label]="'Confirm password'"
+            [patternPassword]="'(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'"
+            >
+        </app-input-accessor>
+        <div class="validation">
+            <small class="error"
+                *ngIf="formAdmin.controls['confirmPassword'].hasError('NoPassswordMatch')"
+                >
+                🚫 &nbsp; <strong>Password do not match! </strong>
+            </small>
+        </div>
+        <div class="sign-up__submit form-group">
+            <button 
+                [disabled]="formAdmin.invalid || formAdmin.pending"
+                >
+                Submit
+            </button>
+            <p>
+                <span>
+                    Already have an account?&nbsp;
+                </span>
+                <a [routerLink]="['/log-in']">
+                    Log in!
+                </a>
+            </p>
+        </div>
+        <div>
+            <ng-template 
+                #testTemplate 
+                let-name="name"
+                let-age="age"
+                >
+                <div>
+                    My name is {{ name }}, i'm {{ age }}.
+                </div>
+            </ng-template>
+              
+            <ng-container 
+                *ngTemplateOutlet="testTemplate; 
+                context: { name: 'Nikolai', age: 36 }"
+                >
+            </ng-container>
+            <ng-container 
+                *ngTemplateOutlet="testTemplate; 
+                context: { name: 'Mariana', age: 6 }"
+                >
+            </ng-container>
+            <ng-container 
+                *ngTemplateOutlet="testTemplate; 
+                context: { name: 'Marat', age: 0 }"
+                >
+            </ng-container>
+        </div>
+    </form>
+</section>

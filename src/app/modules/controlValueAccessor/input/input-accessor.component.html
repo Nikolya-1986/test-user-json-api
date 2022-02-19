@@ -2,14 +2,21 @@
     <label for="first">
         {{ label }}
     </label>
-    <input [type]="type" 
+    <input [type]="type"
         (input)="onChange(inputName.value)" 
+        (change)="onChange(inputName.value)" 
         (blur)="onTouched()"
         [disabled]="disabled" 
         [placeholder]="placeholder"
+        [class.has-error]="controlDir.control?.touched && controlDir.control?.invalid"
+        [class.has-success]="controlDir.control?.dirty && controlDir.control?.valid"
         #inputName 
+        ngDefaultControl
     />
-    <div class="validation">
+
+    <div class="validation" 
+        [@visibilityChanged]="controlDir.control?.touched && controlDir.control?.invalid"
+        >
         <ng-container *ngIf="isRequired && controlDir && controlDir.control?.touched && controlDir.control?.invalid">
             <small class="error"
                 *ngIf="isRequired"
@@ -32,20 +39,20 @@
                 🚫 &nbsp; You must provide only <strong>numbers!</strong>
             </small>
             <small class="error"
-                *ngIf="emailPattern"
+                *ngIf="patternEmail"
                 >
                 🚫 &nbsp; You must provide a <strong>valid {{ controlDir.name }}!</strong>
             </small>
             <small class="error"
-                *ngIf="emailAsyncValidator"
-                >
-                🚫 &nbsp; You must provide a <strong>unregistered {{ controlDir.name }}!</strong>
-            </small>
-            <!-- <small class="error"
                 *ngIf="controlDir.getError('emailTaken')"
                 >
                 🚫 &nbsp; You must provide a <strong>unregistered {{ controlDir.name }}!</strong>
-            </small> -->
+            </small>
+            <small class="error"
+                *ngIf="patternPassword"
+                >
+                🚫 &nbsp; You must provide <strong>valid {{ controlDir.name }}!</strong>
+            </small>
             <small class="error"
                 *ngIf="patternMinLength"
                 >
@@ -74,30 +81,3 @@
         </ng-container>
     </div>
 </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-    NgControl уже предоставляет NG_VALUE_ACCESSOR, NG_VALIDATOR и NG_ASYNC_VALIDATORS.
-    ОБЯЗАТЕЛЬНО удаляем их, чтобы не возникла циклическая зависимость!!!
- -->
