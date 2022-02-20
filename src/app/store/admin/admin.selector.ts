@@ -1,10 +1,11 @@
 import { createFeatureSelector } from "@ngrx/store";
-import { adminReduser } from "./admin.reducer";
+
+import *as reduser from "./admin.reducer";
 import AppAdminState from "./admin.state";
 
-export const selectAuthState = createFeatureSelector<AppAdminState>('admin');
+export const selectAuthState = createFeatureSelector<AppAdminState>('auth');
 
-export const getAdminSelector = {
+export const getAuthSelector = {
     selectAuthState,
-    admin: adminReduser,
-}
+    auth: reduser.adminReduser,
+};

@@ -1,10 +1,10 @@
-<section class="sign-up sign-up__container">
+<section class="admin admin__container">
     <h1>
         Sign up
     </h1>
     <hr><br>
-    <form class="sign-up__form form"
-        [formGroup]="formAdmin"  
+    <form class="admin__form form"
+        [formGroup]="formSignUp"  
         (ngSubmit)="createAdmin()"
         ngNativeValidate
         >
@@ -55,15 +55,14 @@
         </app-input-accessor>
         <div class="validation">
             <small class="error"
-                *ngIf="formAdmin.controls['confirmPassword'].hasError('NoPassswordMatch')"
+                *ngIf="formSignUp.controls['confirmPassword'].hasError('NoPassswordMatch')"
                 >
                 🚫 &nbsp; <strong>Password do not match! </strong>
             </small>
         </div>
-        <div class="sign-up__submit form-group">
-            <button 
-                [disabled]="formAdmin.invalid || formAdmin.pending"
-                >
+        <div class="admin__submit form-group">
+            <button class="admin__success"
+                [disabled]="formSignUp.invalid || formSignUp.pending">
                 Submit
             </button>
             <p>

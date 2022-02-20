@@ -1,1 +1,45 @@
-<p>log-in works!</p>
+<section class="admin admin__container">
+    <h1>
+        Log in
+    </h1>
+    <hr><br>
+    <form class="admin__form form"
+        [formGroup]="formLogIn"  
+        (ngSubmit)="logIn()" 
+        ngNativeValidate
+        >
+        <app-input-accessor
+            formControlName="email"
+            [type]="'type'"
+            [placeholder]="'Enter your email...'"
+            [isRequired]="true"
+            [label]="'Email'"
+            [patternEmail]="'[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'"
+            >
+        </app-input-accessor>
+        <app-input-accessor
+            formControlName="password"
+            [type]="'type'"
+            [placeholder]="'one number, letter in lower and upper case, min 8 sumbols!'"
+            [isRequired]="true"
+            [label]="'Password'"
+            [patternPassword]="'(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'"
+            >
+        </app-input-accessor>
+        <div class="admin__submit form-group">
+            <button class="admin__success"
+                [disabled]="formLogIn.invalid || formLogIn.pending"
+                >
+                Submit
+            </button>
+            <p>
+                <span>
+                    Don't have an account?&nbsp;
+                </span>
+                <a [routerLink]="['/sign-up']">
+                    Sign up!
+                </a>
+              <p>
+        </div>
+    </form>
+</section>

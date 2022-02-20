@@ -1,3 +1,4 @@
+import { state } from "@angular/animations";
 import { ActionReducerMap, createReducer, on } from "@ngrx/store";
 
 import { Admin } from "../../interfaces/admin.interface";
@@ -18,15 +19,7 @@ const initialState: AdminState = {
 
 export const adminReduser = createReducer (
     initialState,
-    on(adminActions.getFail, (state, action) => ({
-        ...state,
-        errorMessage: action.message,
-    })),
-    on(adminActions.createAdminRequest, (state, { signUpAdmin }) => ({
-        ...state,
-        admin: signUpAdmin
-    })),
-    on(adminActions.createAdminSuccess, (state, { signUpAdmin }) => {
+    on(adminActions.signUpSuccess, (state, { signUpAdmin }) => {
         console.log(signUpAdmin);
         return {
             ...state,
@@ -34,7 +27,25 @@ export const adminReduser = createReducer (
             admin: signUpAdmin,
             errorMessage: null,
         }
-    })
+    }),
+    on(adminActions.getFail, (state, action) => ({
+        ...state,
+        errorMessage: 'That email is already in use.',
+    })),
+
+    on(adminActions.logInSuccess, (state, { logInAdmin }) => {
+        console.log(logInAdmin);
+        return {
+            ...state,
+            isAuthenticated: true,
+            admin: logInAdmin,
+            errorMessage: null,
+        }
+    }),
+    on(adminActions.getFail, (state, action) => ({
+        ...state,
+        errorMessage: 'Incorrect email and/or password.',
+    })),
 
 );
 

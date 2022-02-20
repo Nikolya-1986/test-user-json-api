@@ -20,7 +20,7 @@ import { AdminEffect } from '../../store/admin/admin.effects';
     ReactiveFormsModule,
     SignUpRoutingModule,
     InputAccessorModule,
-    StoreModule.forFeature('admin', reduserAdmin),
+    StoreModule.forFeature('auth', reduserAdmin),
     EffectsModule.forFeature([AdminEffect]),
   ]
 })

@@ -1,5 +1,5 @@
-import { AdminState } from "./admin.reducer";
+import *as admin from "./admin.reducer";
 
 export default interface AppAdminState {
-    admin: AdminState,
+    admin: admin.AdminState,
 }
