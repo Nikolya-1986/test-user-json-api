@@ -1,23 +1,9 @@
-import { state } from "@angular/animations";
-import { ActionReducerMap, createReducer, on } from "@ngrx/store";
+import { Action, createReducer, on } from "@ngrx/store";
 
-import { Admin } from "../../interfaces/admin.interface";
-import * as adminActions from "./admin.actions";
-import AppAdminState from "./admin.state";
+import * as adminActions from "./auth.actions";
+import { AuthState, initialState } from "./auth.state";
 
-export interface AdminState {
-    isAuthenticated: boolean; // is a user authenticated?
-    admin: Admin | null; // if authenticated, there should be a user object
-    errorMessage: string | null; // error message
-};
-
-const initialState: AdminState = {
-    isAuthenticated: false,
-    admin: null,
-    errorMessage: null,
-};
-
-export const adminReduser = createReducer (
+const _authReducer = createReducer (
     initialState,
     on(adminActions.signUpSuccess, (state, { signUpAdmin }) => {
         console.log(signUpAdmin);
@@ -49,6 +35,6 @@ export const adminReduser = createReducer (
 
 );
 
-export const reduserAdmin: ActionReducerMap<AppAdminState> = {
-    admin: adminReduser,
-};
+export function AuthReducer(state: AuthState | undefined, action: Action) {
+    return _authReducer(state, action);
+}

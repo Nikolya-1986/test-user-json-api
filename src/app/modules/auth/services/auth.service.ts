@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import { Admin } from '../interfaces/admin.interface';
+import { Auth } from '../../../interfaces/auth.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class AuthService {
 
 private readonly BASE_URL = 'http://localhost:3000';
   public error$: Subject<string> = new Subject<string>()
@@ -28,15 +28,15 @@ private readonly BASE_URL = 'http://localhost:3000';
     return throwError(errorHttp);
   };
   
-  public signUp(id: number, lastName: string, firstName: string, email: string, password: string): Observable<Admin> {
-    return this.http.post<Admin>(`${this.BASE_URL}/admin`, { id, lastName, firstName, email, password })
+  public signUp(id: number, lastName: string, firstName: string, email: string, password: string): Observable<Auth> {
+    return this.http.post<Auth>(`${this.BASE_URL}/admin`, { id, lastName, firstName, email, password })
       .pipe(
         catchError(this.errorsBackend.bind(this)),
       )
   };
 
-  public logIn(email: string, password: string, ): Observable<Admin> {
-    return this.http.post<Admin>(`${this.BASE_URL}/login`, { email, password }, { withCredentials: true })
+  public logIn(email: string, password: string, ): Observable<Auth> {
+    return this.http.post<Auth>(`${this.BASE_URL}/login`, { email, password }, { withCredentials: true })
       .pipe(
         tap((admin) => console.log(admin)),
         catchError(this.errorsBackend.bind(this)),

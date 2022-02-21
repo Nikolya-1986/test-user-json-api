@@ -1,5 +1,5 @@
 import { createAction, props, union } from "@ngrx/store";
-import { Admin } from "../../interfaces/admin.interface";
+import { Auth } from "../../interfaces/auth.interface";
 
 export enum AuthActionTypes {
     GET_FAIL = '[ERROR] Get Fail',
@@ -21,7 +21,7 @@ export const signUpRequest = createAction (
 
 export const signUpSuccess = createAction (
     AuthActionTypes.SIGNUP_SUCCESS,
-    props<{ signUpAdmin: Admin }>(),
+    props<{ signUpAdmin: Auth }>(),
 );
 
 export const logInRequest = createAction (
@@ -31,7 +31,7 @@ export const logInRequest = createAction (
 
 export const logInSuccess = createAction (
     AuthActionTypes.LOGIN_SUCCESS,
-    props<{logInAdmin: Admin}>(),
+    props<{logInAdmin: Auth}>(),
 );
 
 const allAdminActions = union({

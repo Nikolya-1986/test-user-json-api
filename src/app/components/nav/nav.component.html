@@ -22,13 +22,13 @@
         </ul>
         <ul>
             <li routerLinkActive="active">
-                <a routerLink="/sign-up">
-                    Sign-up
+                <a [routerLink]="['/auth/log-in']">
+                    Log-in
                 </a>
             </li>
             <li routerLinkActive="active">
-                <a routerLink="/log-in">
-                    Log-in
+                <a [routerLink]="['/auth/sign-up']">
+                    Sign-up
                 </a>
             </li>
         </ul>

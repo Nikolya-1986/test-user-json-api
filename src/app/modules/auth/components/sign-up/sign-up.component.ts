@@ -3,10 +3,10 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { combineLatest, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { Admin } from '../../interfaces/admin.interface';
-import AppUserState from '../../store/user/user.state';
-import * as adminActions from '../../store/admin/admin.actions';
-import * as validators from '../../validators/password-validator';
+import { Auth } from '../../../../interfaces/auth.interface';
+import AppUserState from '../../../../store/user/user.state';
+import * as adminActions from '../../../../store/auth/auth.actions';
+import * as validators from '../../../../validators/password-validator';
 
 @Component({
   selector: 'app-sing-up',
@@ -58,7 +58,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     if(this.formSignUp.valid){
       const newAdmin = this.formSignUp.getRawValue();
       const id = Math.random();
-      const createAdmin: Admin = {
+      const createAdmin: Auth = {
         ...newAdmin,
         id: id,
       };

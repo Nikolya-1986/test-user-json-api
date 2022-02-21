@@ -3,24 +3,24 @@ import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { catchError, map, Observable, of, switchMap, tap } from "rxjs";
-import { Admin } from "src/app/interfaces/admin.interface";
+import { Auth } from "src/app/interfaces/auth.interface";
 
-import { AdminService } from "../../services/admin.service";
-import * as adminActions from "../admin/admin.actions"
+import { AuthService } from "../../modules/auth/services/auth.service";
+import * as authActions from "./auth.actions"
 
 @Injectable()
-export class AdminEffect {
+export class AuthEffect {
 
     signUpAdmin$: Observable<Action> = createEffect(() => this.actions$
         .pipe(
-            ofType(adminActions.AuthActionTypes.SIGNUP_REQUEST),
+            ofType(authActions.AuthActionTypes.SIGNUP_REQUEST),
             switchMap(admin => { 
                 const { id, lastName, firstName, email, password } = admin;
-                return this.adminService.signUp(id, lastName, firstName, email, password)
+                return this.authService.signUp(id, lastName, firstName, email, password)
                 .pipe(
-                    map((admin) => adminActions.signUpSuccess({ signUpAdmin: admin })),
+                    map((admin) => authActions.signUpSuccess({ signUpAdmin: admin })),
                     tap(() => this.router.navigateByUrl('/log-in')),
-                    catchError((error) => of(adminActions.getFail(error)))
+                    catchError((error) => of(authActions.getFail(error)))
                 );
             })
         ),
@@ -29,21 +29,21 @@ export class AdminEffect {
 
     logInAdmin$: Observable<Action> = createEffect(() => this.actions$ 
         .pipe(
-            ofType(adminActions.AuthActionTypes.LOGIN_REQUEST),
-            switchMap((admin: Admin) => {
+            ofType(authActions.AuthActionTypes.LOGIN_REQUEST),
+            switchMap((admin: Auth) => {
                 const { email, password } = admin;
                 console.log(admin)
-                return this.adminService.logIn(email, password)
+                return this.authService.logIn(email, password)
                 .pipe(
                     map((admin) => {
                         console.log(admin)
-                        return adminActions.logInSuccess({ logInAdmin: admin })
+                        return authActions.logInSuccess({ logInAdmin: admin })
                     }),
                     tap((adminToken) => {
                         localStorage.setItem('token', adminToken.logInAdmin.token),
                         this.router.navigateByUrl('/');
                     }),
-                    catchError((error) => of(adminActions.getFail(error)))
+                    catchError((error) => of(authActions.getFail(error)))
                 )
             })
         ),
@@ -52,7 +52,7 @@ export class AdminEffect {
 
     constructor(
         private actions$: Actions,
-        private adminService: AdminService,
+        private authService: AuthService,
         private router: Router
     ){ }
 }
