@@ -17,6 +17,19 @@ private readonly BASE_URL = 'http://localhost:3000';
     private http: HttpClient
   ) { }
 
+  public getErrorMessage(message: string) {
+    switch (message) {
+      case 'EMAIL_NOT_FOUND':
+        return 'Email Not Found';
+      case 'INVALID_PASSWORD':
+        return 'Invalid Password';
+      case 'EMAIL_EXISTS':
+        return 'Email already exists';
+      default:
+        return 'Unknown error occurred. Please try again';
+    }
+  };
+
   private errorsBackend(errorHttp: HttpErrorResponse): Observable<any> {
     let message = '';
     if(errorHttp.error instanceof ErrorEvent) {
@@ -35,10 +48,9 @@ private readonly BASE_URL = 'http://localhost:3000';
       )
   };
 
-  public logIn(email: string, password: string, ): Observable<Auth> {
-    return this.http.post<Auth>(`${this.BASE_URL}/login`, { email, password }, { withCredentials: true })
+  public logIn(email: string, password: string, token: string ): Observable<Auth> {
+    return this.http.post<Auth>(`${this.BASE_URL}/login`, { email, password, token, returnSecureToken: true }, { withCredentials: true })
       .pipe(
-        tap((admin) => console.log(admin)),
         catchError(this.errorsBackend.bind(this)),
       )
   };

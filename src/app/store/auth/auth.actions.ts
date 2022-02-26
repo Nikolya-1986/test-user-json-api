@@ -16,22 +16,22 @@ export const getFail = createAction (
 
 export const signUpRequest = createAction (
     AuthActionTypes.SIGNUP_REQUEST,
-    props<{ signUpAdmin: any }>(),
+    props<{ lastName: string, firstName: string, email: string; password: string }>(),
 );
 
 export const signUpSuccess = createAction (
     AuthActionTypes.SIGNUP_SUCCESS,
-    props<{ signUpAdmin: Auth }>(),
+    props<{ signUp: Auth, redirect: boolean }>(),
 );
 
 export const logInRequest = createAction (
     AuthActionTypes.LOGIN_REQUEST,
-    props<{ logInAdmin: any }>(),
+    props<{ email: string; password: string }>(), 
 );
 
 export const logInSuccess = createAction (
     AuthActionTypes.LOGIN_SUCCESS,
-    props<{logInAdmin: Auth}>(),
+    props<{ logIn: Auth, redirect: boolean }>(),
 );
 
 const allAdminActions = union({

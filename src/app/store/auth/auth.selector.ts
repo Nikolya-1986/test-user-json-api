@@ -12,9 +12,9 @@ export const getAuthSelector = {
 };
 
 export const isAuthenticated = createSelector(getAuthState, (state) => {
-    return state.admin ? true : false;
+    return state.auth ? true : false;
 });
 
 export const getToken = createSelector(getAuthState, (state) => {
-    return state.admin ? state.admin.token : null;
+    return state.auth ? state.auth.token : null;
 });

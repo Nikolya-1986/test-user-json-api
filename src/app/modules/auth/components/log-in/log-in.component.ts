@@ -34,13 +34,8 @@ export class LogInComponent implements OnInit {
   public logIn(): void {
     if(this.formLogIn.valid){
       const currentAuth = this.formLogIn.getRawValue();
-      const token = String(Math.floor(Math.random() * 100) + 1);
-      const successAuth: Auth = {
-        ...currentAuth,
-        token: token,
-      };
-      this.store.dispatch(adminActions.logInRequest({ logInAdmin: successAuth }));
-      console.log(successAuth);
+      const { email, password }: Auth = currentAuth;
+      this.store.dispatch(adminActions.logInRequest({ email, password }));
     }
   };
 

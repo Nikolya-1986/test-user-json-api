@@ -5,32 +5,31 @@ import { AuthState, initialState } from "./auth.state";
 
 const _authReducer = createReducer (
     initialState,
-    on(adminActions.signUpSuccess, (state, { signUpAdmin }) => {
-        console.log(signUpAdmin);
-        return {
-            ...state,
-            isAuthenticated: true,
-            admin: signUpAdmin,
-            errorMessage: null,
-        }
-    }),
+    on(adminActions.signUpSuccess, (state, action) => ({
+        ...state,
+        isAuthenticated: true,
+        auth: action.signUp,
+        errorMessage: null,
+    })),
     on(adminActions.getFail, (state, action) => ({
         ...state,
-        errorMessage: 'That email is already in use.',
+        // errorMessage: 'That email is already in use.',
+        errorMessage: action.message,
     })),
 
-    on(adminActions.logInSuccess, (state, { logInAdmin }) => {
-        console.log(logInAdmin);
+    on(adminActions.logInSuccess, (state, action) => {
+        console.log(action.logIn);
         return {
             ...state,
             isAuthenticated: true,
-            admin: logInAdmin,
+            auth: action.logIn,
             errorMessage: null,
         }
     }),
     on(adminActions.getFail, (state, action) => ({
         ...state,
-        errorMessage: 'Incorrect email and/or password.',
+        errorMessage: action.message,
+        // errorMessage: 'Incorrect email and/or password.',
     })),
 
 );

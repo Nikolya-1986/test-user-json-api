@@ -57,13 +57,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
   public createAdmin(): void {
     if(this.formSignUp.valid){
       const newAdmin = this.formSignUp.getRawValue();
-      const id = Math.random();
-      const createAdmin: Auth = {
-        ...newAdmin,
-        id: id,
-      };
-      this.store.dispatch(adminActions.signUpRequest({ signUpAdmin: createAdmin }));
-      console.log(createAdmin);
+      const { lastName, firstName, email, password }: Auth = newAdmin
+      this.store.dispatch(adminActions.signUpRequest({ lastName, firstName, email, password }));
     }
   };
 
