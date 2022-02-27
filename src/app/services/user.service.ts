@@ -11,7 +11,6 @@ import { UserDTO } from "../interfaces/user.interface";
 export class UserService {
 
     private readonly BASE_URL = 'http://localhost:3000';
-    private users$ = this.getUsers();
 
     constructor(
         private httpClient: HttpClient,
@@ -68,7 +67,7 @@ export class UserService {
     };
 
     public getLanguages(): Observable<string[]> {
-        return this.users$.pipe(
+        return this.getUsers().pipe(
             map((response) => {
                 const users = response;
                 const languages = this.uniqueLanguages(users);
@@ -88,16 +87,15 @@ export class UserService {
 
     public isTakenEmail(email: string): Observable<boolean> {
         const isTaken = this.getEmails().pipe(
-            map((emails) => emails.includes(email))
+            map((emails) => emails.includes(email)),
         )
         return isTaken.pipe(delay(500));
     };
 
     public getEmails(): Observable<string[]> {
-        return this.users$.pipe(
+        return this.getUsers().pipe(
             map((response) => {
-                const users = response;
-                const emails = users.map(result => result.email);
+                const emails = response.map(result => result.email);
                 return emails;
             })
         )

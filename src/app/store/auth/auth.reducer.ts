@@ -17,15 +17,12 @@ const _authReducer = createReducer (
         errorMessage: action.message,
     })),
 
-    on(adminActions.logInSuccess, (state, action) => {
-        console.log(action.logIn);
-        return {
-            ...state,
-            isAuthenticated: true,
-            auth: action.logIn,
-            errorMessage: null,
-        }
-    }),
+    on(adminActions.logInSuccess, (state, action) => ({
+        ...state,
+        isAuthenticated: true,
+        auth: action.logIn,
+        errorMessage: null,
+    })),
     on(adminActions.getFail, (state, action) => ({
         ...state,
         errorMessage: action.message,

@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, delay, map } from 'rxjs/operators';
 
 import { Auth } from '../../../interfaces/auth.interface';
 
@@ -11,8 +11,8 @@ import { Auth } from '../../../interfaces/auth.interface';
 export class AuthService {
 
 private readonly BASE_URL = 'http://localhost:3000';
-  public error$: Subject<string> = new Subject<string>()
-  
+  public error$: Subject<string> = new Subject<string>();
+
   constructor(
     private http: HttpClient
   ) { }
@@ -54,4 +54,43 @@ private readonly BASE_URL = 'http://localhost:3000';
         catchError(this.errorsBackend.bind(this)),
       )
   };
+
+  public getAdmins(): Observable<Auth[]> {
+    return this.http.get<Auth>(`${this.BASE_URL}/admin`).pipe(
+      catchError(this.errorsBackend.bind(this)),
+    )
+  };
+
+  private getAdminEmail(): Observable<string[]> {
+    return this.getAdmins().pipe(
+      map((response) => {
+        const emails = response.map(res => res.email);
+        return emails;
+      }),
+    ); 
+  };
+
+  public isExistAdminEmail(email: string): Observable<boolean> {
+    const isExistEmail = this.getAdminEmail().pipe(
+      map((emails) => !emails.includes(email)),
+    );
+    return isExistEmail.pipe(delay(1000));
+  };
+
+  private getAdminPassword(): Observable<string[]> {
+    return this.getAdmins().pipe(
+      map((response) => {
+        const passwords = response.map(result => result.password);
+        return passwords;
+      })
+    )
+  };
+
+  public isExistAdminPassword(password: string):  Observable<boolean> {
+    const isExistPassword = this.getAdminPassword().pipe(
+      map((passwords) => !passwords.includes(password)),
+    );
+    return isExistPassword.pipe(delay(1000));
+  };
+  
 }
