@@ -3,7 +3,7 @@ import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/form
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { UserService } from '../services/user.service';
+import { AuthService } from '../../modules/auth/services/auth.service';
 
 @Injectable({ 
     providedIn: 'root' 
@@ -12,12 +12,12 @@ import { UserService } from '../services/user.service';
 export class EmailAsyncValidator implements AsyncValidator{
 
     constructor(
-        private userService: UserService
+        private authService: AuthService
     ) {}
 
     validate(control: AbstractControl): Observable<ValidationErrors | null> {
-        return this.userService.isTakenEmail(control.value).pipe(
-            map(result => (result ? { emailTaken: true } : null)),
+        return this.authService.isExistAdminEmail(control.value).pipe(
+            map(result => (result ? { existingEmail: true } : null)),
             catchError(()=> of(null)),
         );
     };

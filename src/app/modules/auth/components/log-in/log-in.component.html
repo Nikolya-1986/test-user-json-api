@@ -8,7 +8,7 @@
         (ngSubmit)="logIn()" 
         ngNativeValidate
         >
-        <app-input-accessor
+        <!-- <app-input-accessor
             formControlName="email"
             [type]="'type'"
             [placeholder]="'Enter your email...'"
@@ -16,7 +16,50 @@
             [label]="'Email'"
             [patternEmail]="'[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'"
             >
-        </app-input-accessor>
+        </app-input-accessor> -->
+        <div class="admin__form-group form-group">
+            <label for="email">
+                Email
+            </label>
+            <input id="email"
+                type="text" 
+                placeholder="Enter your email..."
+                formControlName="email"
+            />
+            <div class="validation">
+                <ng-container 
+                    *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                    >
+                    <small class="error"
+                        *ngIf="email?.hasError('required')"
+                        >
+                        🚫 &nbsp; You must provide a <strong>email!</strong>
+                    </small>
+                    <small class="error"
+                        *ngIf="email?.hasError('pattern')"
+                        >
+                        🚫 &nbsp; You must provide valid <strong>email!</strong>
+                    </small>
+                    <small class="error"
+                        *ngIf="email?.hasError('existingEmail')"
+                        >
+                        🚫 &nbsp; User with this email is <strong>not registered!</strong>
+                    </small>
+                </ng-container>
+                <ng-container *ngIf="email?.dirty && email?.pending">
+                    <small class="waiting">
+                        🙇 &nbsp; Checking email...
+                    </small>
+                </ng-container>
+                <ng-container 
+                    *ngIf="email?.valid && (email?.dirty || email?.touched)"
+                    >
+                    <small class="available">
+                        ✅ &nbsp; Hurray, email valid!
+                    </small>
+                </ng-container>
+            </div>
+        </div>
         <app-input-accessor
             formControlName="password"
             [type]="'type'"

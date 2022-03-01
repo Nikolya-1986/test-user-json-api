@@ -16,7 +16,7 @@ import { phoneValidator } from '../../validators/phone.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { lengthValidator } from '../../validators/length.validator';
-import { EmailAsyncValidator } from '../../validators/email-async.validator';
+import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
 
 @Component({
   selector: 'app-edit',

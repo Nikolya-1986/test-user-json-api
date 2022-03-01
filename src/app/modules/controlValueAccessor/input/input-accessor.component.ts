@@ -3,7 +3,7 @@ import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Optiona
 import { ControlValueAccessor, DefaultValueAccessor, NgControl, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 
-import { EmailAsyncValidator } from '../../../validators/email-async.validator';
+import { EmailAsyncValidator } from '../../../validators/async/email-async.validator';
 
 @Component({
   selector: 'app-input-accessor',
