@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Auth } from '../../../../interfaces/auth.interface';
 import AppUserState from '../../../../store/user/user.state';
 import * as adminActions from '../../../../store/auth/auth.actions';
-import * as validators from '../../../../validators/password-validator';
+import * as validators from '../../../../validators/password-match.validator';
 
 @Component({
   selector: 'app-sing-up',
@@ -35,9 +35,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       password: [''],
       confirmPassword: [''],
     },
-    {
-      validator: validators.PasswordValidator.passwordMatchValidator
-    }
+    { validator: validators.PasswordMatchValidator.passwordMatchValidator }
     );
     this.handleFormChanges();
   };

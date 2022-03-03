@@ -17,11 +17,20 @@
             [patternEmail]="'[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}'"
             >
         </app-input-accessor> -->
+        <!-- <app-input-accessor
+            formControlName="password"
+            [type]="'type'"
+            [placeholder]="'one number, letter in lower and upper case, min 8 sumbols!'"
+            [isRequired]="true"
+            [label]="'Password'"
+            [patternPassword]="'(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'"
+            >
+        </app-input-accessor> -->
         <div class="admin__form-group form-group">
-            <label for="email">
+            <label for="loginEmail">
                 Email
             </label>
-            <input id="email"
+            <input id="loginEmail"
                 type="text" 
                 placeholder="Enter your email..."
                 formControlName="email"
@@ -60,15 +69,49 @@
                 </ng-container>
             </div>
         </div>
-        <app-input-accessor
-            formControlName="password"
-            [type]="'type'"
-            [placeholder]="'one number, letter in lower and upper case, min 8 sumbols!'"
-            [isRequired]="true"
-            [label]="'Password'"
-            [patternPassword]="'(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'"
-            >
-        </app-input-accessor>
+        <div class="admin__form-group form-group">
+            <label for="loginPassword">
+                Passwod
+            </label>
+            <input id="loginPassword"
+                type="text" 
+                placeholder="Enter your passwod..."
+                formControlName="password"
+            />
+            <div class="validation">
+                <ng-container 
+                    *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+                    >
+                    <small class="error"
+                        *ngIf="password?.hasError('required')"
+                        >
+                        🚫 &nbsp; You must provide a <strong>password!</strong>
+                    </small>
+                    <small class="error"
+                        *ngIf="password?.hasError('pattern')"
+                        >
+                        🚫 &nbsp; You must provide valid <strong>password!</strong>
+                    </small>
+                    <small class="error"
+                        *ngIf="password?.hasError('existingPassword')"
+                        >
+                        🚫 &nbsp; You entered the <strong>wrong password!</strong>
+                    </small>
+                </ng-container>
+                <ng-container *ngIf="password?.dirty && password?.pending">
+                    <small class="waiting">
+                        🙇 &nbsp; Checking password...
+                    </small>
+                </ng-container>
+                <ng-container 
+                    *ngIf="password?.valid && (password?.dirty || password?.touched)"
+                    >
+                    <small class="available">
+                        ✅ &nbsp; Hurray, password valid!
+                    </small>
+                </ng-container>
+            </div>
+        </div>
         <div class="admin__submit form-group">
             <button class="admin__success"
                 [disabled]="formLogIn.invalid || formLogIn.pending"

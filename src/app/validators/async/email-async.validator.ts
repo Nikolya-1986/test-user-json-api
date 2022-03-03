@@ -5,14 +5,12 @@ import { catchError, map } from 'rxjs/operators';
 
 import { AuthService } from '../../modules/auth/services/auth.service';
 
-@Injectable({ 
-    providedIn: 'root' 
-})
+@Injectable()
 
-export class EmailAsyncValidator implements AsyncValidator{
+export class EmailAsyncValidator implements AsyncValidator {
 
     constructor(
-        private authService: AuthService
+        private authService: AuthService,
     ) {}
 
     validate(control: AbstractControl): Observable<ValidationErrors | null> {

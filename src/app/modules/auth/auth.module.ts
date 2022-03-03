@@ -11,6 +11,8 @@ import { AuthEffect } from '../../store/auth/auth.effects';
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from 'src/app/store/app.state';
 import { AuthReducer } from 'src/app/store/auth/auth.reducer';
+import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
+import { PasswordAsyncValidator } from 'src/app/validators/async/password-async.validator';
 
 @NgModule({
   declarations: [
@@ -26,5 +28,9 @@ import { AuthReducer } from 'src/app/store/auth/auth.reducer';
     StoreModule.forFeature('auth', AuthReducer),
     EffectsModule.forFeature([AuthEffect]),
   ],
+  providers: [
+    EmailAsyncValidator,
+    PasswordAsyncValidator,
+  ]
 })
 export class AuthModule {}

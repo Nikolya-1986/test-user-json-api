@@ -6,6 +6,7 @@ import { Auth } from '../../../../interfaces/auth.interface';
 import AppUserState from '../../../../store/user/user.state';
 import * as adminActions from '../../../../store/auth/auth.actions';
 import { EmailAsyncValidator } from '../../../../validators/async/email-async.validator';
+import { PasswordAsyncValidator } from '../../../../validators/async/password-async.validator';
 
 @Component({
   selector: 'app-log-in',
@@ -19,7 +20,8 @@ export class LogInComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<AppUserState>,
-    private emailAsyncValidator: EmailAsyncValidator
+    private emailAsyncValidator: EmailAsyncValidator,
+    public passwordAsyncValidator: PasswordAsyncValidator,
   ) { }
 
   public ngOnInit(): void {
@@ -40,7 +42,10 @@ export class LogInComponent implements OnInit {
         [ Validators.required, Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+.[a-z]{2,3}') ],
         [ this.emailAsyncValidator.validate.bind(this.emailAsyncValidator) ]
       ],
-      password: [''],
+      password: ['',
+        [ Validators.required, Validators.pattern('(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$') ],
+        [ this.passwordAsyncValidator.validate.bind(this.passwordAsyncValidator) ]
+      ],
     });
   };
 

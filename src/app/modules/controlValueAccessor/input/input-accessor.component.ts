@@ -1,9 +1,16 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Optional, Self, ViewChild } from '@angular/core';
-import { ControlValueAccessor, DefaultValueAccessor, NgControl, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
+import { ControlValueAccessor, DefaultValueAccessor, NgControl, NG_ASYNC_VALIDATORS, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 
+import { PasswordAsyncValidator } from '../../../validators/async/password-async.validator';
 import { EmailAsyncValidator } from '../../../validators/async/email-async.validator';
+
+const ASYNC_VALIDATORS = {
+  provide: NG_ASYNC_VALIDATORS,
+  useExisting: PasswordAsyncValidator,
+  multi: true,
+}
 
 @Component({
   selector: 'app-input-accessor',
@@ -17,6 +24,9 @@ import { EmailAsyncValidator } from '../../../validators/async/email-async.valid
         transition('*=>*', animate('1000ms')),
       ]
     )
+  ],
+  providers: [
+    ASYNC_VALIDATORS,
   ]
 })
 export class InputAccessorComponent implements ControlValueAccessor, Validator, OnInit, AfterViewInit, OnDestroy {
@@ -42,6 +52,7 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   constructor(
     @Self() @Optional() public controlDir: NgControl,
     public emailAsyncValidator: EmailAsyncValidator,
+    public passwordAsyncValidator: PasswordAsyncValidator,
   ) {
     this.controlDir.valueAccessor = this;
   };
@@ -106,6 +117,9 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
     // if (this.emailAsyncValidator) {
     //   validators.push(this.emailAsyncValidator.validate.bind(this.emailAsyncValidator));
     // }
+    // if(this.passwordAsyncValidator) {
+    //   validators.push(this.passwordAsyncValidator.validate.bind(this.passwordAsyncValidator));
+    // }
     if(this.patternMaxLength) {
       validators.push(Validators.maxLength(this.patternMaxLength));
     }
@@ -124,4 +138,4 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
     this.destroy$.complete();
   };
 }
-//NgControl уже предоставляет NG_VALUE_ACCESSOR, NG_VALIDATOR и NG_ASYNC_VALIDATORS. ОБЯЗАТЕЛЬНО удаляем их, чтобы не возникла циклическая зависимость!!!
+//NgControl уже предоставляет NG_VALUE_ACCESSOR, NG_VALIDATOR. ОБЯЗАТЕЛЬНО удаляем их, чтобы не возникла циклическая зависимость!!!
