@@ -68,6 +68,16 @@
                 >
                 🚫 &nbsp; You must provide only <strong>capital letters!</strong>
             </small>
+            <!-- <small class="error"
+                *ngIf="emailAsyncValidator"
+                >
+                🚫 &nbsp; User with this email is <strong>not registered!</strong>
+            </small>
+            <small class="error"
+                *ngIf="passwordAsyncValidator"
+                >
+                🚫 &nbsp; You entered the <strong>wrong password!</strong>
+            </small> -->
         </ng-container>
         <ng-container *ngIf="controlDir.control?.dirty && controlDir.control?.pending">
             <small class="waiting">

@@ -1,6 +1,28 @@
 {
   "admin": [
-
+    {
+      "lastName": "Amosov",
+      "firstName": "Nikolai",
+      "email": "nikolai_sergeevich@mail.ru",
+      "password": "Admin:26.02.22",
+      "id": 1
+    },
+    {
+      "lastName": "Amosova",
+      "firstName": "Maryana",
+      "email": "maryana_nikolaevna@mail.ru",
+      "password": "Admin:14.02.16",
+      "id": 2
+    }
+  ],
+  "login": [
+    {
+      "email": "nikolai_sergeevich@mail.ru",
+      "password": "Admin:26.02.22",
+      "token": "16",
+      "returnSecureToken": true,
+      "id": 1
+    }
   ],
   "results": [
     {

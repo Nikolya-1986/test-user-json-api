@@ -18,7 +18,7 @@ const initialstate: UserState = {
     userSelected: undefined,
 };
 
-export const userReduser = createReducer (
+const _userReduser = createReducer (
     initialstate,
     on(userActions.loadStart, state => ({
         ...state,
@@ -79,6 +79,6 @@ export const userReduser = createReducer (
     })),
 );
 
-export const reduserUser: ActionReducerMap<AppUserState> = {
-    users: userReduser,
+export const UserReducer: ActionReducerMap<AppUserState> = {
+    user: _userReduser,
 }

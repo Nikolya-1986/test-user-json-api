@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { combineLatest, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { Admin } from '../../interfaces/admin.interface';
-import AppUserState from '../../store/user/user.state';
-import * as adminActions from '../../store/admin/admin.actions';
-import { combineLatest, Subscription } from 'rxjs';
-import * as validators from '../../validators/password-validator';
+import { Auth } from '../../../../interfaces/auth.interface';
+import AppUserState from '../../../../store/user/user.state';
+import * as adminActions from '../../../../store/auth/auth.actions';
+import * as validators from '../../../../validators/password-match.validator';
 
 @Component({
   selector: 'app-sing-up',
@@ -15,7 +15,7 @@ import * as validators from '../../validators/password-validator';
 })
 export class SignUpComponent implements OnInit, OnDestroy {
 
-  public formAdmin!: FormGroup;
+  public formSignUp!: FormGroup;
   private subscription: Subscription[] = [];
   
   constructor(
@@ -28,44 +28,35 @@ export class SignUpComponent implements OnInit, OnDestroy {
   };
 
   public reactiveFormAdmin(): void {
-    this.formAdmin = this.formBuilder.group({
+    this.formSignUp = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
       email: [''],
       password: [''],
       confirmPassword: [''],
     },
-    {
-      validator: validators.PasswordValidator.passwordMatchValidator
-    }
+    { validator: validators.PasswordMatchValidator.passwordMatchValidator }
     );
     this.handleFormChanges();
   };
 
   private handleFormChanges(): void {
-    combineLatest([this.formAdmin.valueChanges, this.formAdmin.statusChanges])
+    combineLatest([this.formSignUp.valueChanges, this.formSignUp.statusChanges])
     .subscribe((admin) => {
-      if(this.formAdmin.valid) {
+      if(this.formSignUp.valid) {
         console.log('Form validation status: SUCESS', admin)
       }else {
         console.log('Form validation status: ERROR', admin);
       }
-    })
-    this.updateTreeValidity(this.formAdmin);
+    }),
+    this.updateTreeValidity(this.formSignUp);
   };
 
   public createAdmin(): void {
-    if(this.formAdmin.valid){
-      const newAdmin = this.formAdmin.getRawValue();
-      const id = Math.random();
-      const token = String(Math.floor(Math.random() * 100) + 1);
-      const createAdmin: Admin = {
-        ...newAdmin,
-        id: id,
-        token: token,
-      }
-      this.store.dispatch(adminActions.createAdminRequest({ signUpAdmin: createAdmin }));
-      console.log(createAdmin);
+    if(this.formSignUp.valid){
+      const newAdmin = this.formSignUp.getRawValue();
+      const { lastName, firstName, email, password }: Auth = newAdmin
+      this.store.dispatch(adminActions.signUpRequest({ lastName, firstName, email, password }));
     }
   };
 

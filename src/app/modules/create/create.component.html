@@ -128,20 +128,6 @@
             <!-- Country -->
             <div class="create__form-group form-group">
                 <app-countries-accessor formControlName="country"></app-countries-accessor>
-                <div class="validation">
-                    <ng-container *ngIf="formCreate.get('location')?.get('country')?.invalid && formCreate.get('location')?.get('country')?.touched">
-                        <small class="error"
-                            *ngIf="formCreate.get('location')?.get('country')?.hasError('required')"
-                            >
-                            🚫 &nbsp; You must provide a <strong>country!</strong>
-                        </small>
-                    </ng-container>
-                    <ng-container *ngIf="formCreate.get('location')?.get('country')?.dirty && formCreate.get('location')?.get('country')?.valid">
-                        <small class="available">
-                            ✅ &nbsp;Hurray, country valid!
-                        </small>
-                    </ng-container>
-                </div>
             </div>
             <!-- City -->
             <app-input-accessor
