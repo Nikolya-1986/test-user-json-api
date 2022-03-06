@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Actions, createEffect, Effect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { catchError, map, Observable, of, switchMap, tap } from "rxjs";
 
@@ -42,28 +42,29 @@ export class AuthEffect {
             }),
         );
     });
-    // logInAdmin$: Observable<Action> = createEffect(() => this.actions$ 
-    //     .pipe(
-    //         ofType(authActions.AuthActionTypes.LOGIN_REQUEST),
-    //         switchMap((admin: Auth) => {
-    //             const { email, password } = admin;
-    //             console.log(admin)
-    //             return this.authService.logIn(email, password)
-    //             .pipe(
-    //                 map((admin) => {
-    //                     console.log(admin)
-    //                     return authActions.logInSuccess({ logInAdmin: admin })
-    //                 }),
-    //                 tap((adminToken) => {
-    //                     localStorage.setItem('token', adminToken.logInAdmin.token),
-    //                     this.router.navigateByUrl('/');
-    //                 }),
-    //                 catchError((error) => of(authActions.getFail(error)))
-    //             )
+
+    // logOut$: Observable<Action> = createEffect(() => {
+    //     return this.actions$.pipe(
+    //         ofType(authActions.AuthActionTypes.LOGOUT),
+    //         map((action) => {
+    //             this.authService.logout();
+    //             this.router.navigate(['auth']);
     //         })
-    //     ),
-    //     { useEffectsErrorHandler: false }
-    // );
+    //     ), { dispatch: false };
+        
+    // }, { useEffectsErrorHandler: false });
+
+    logOut$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(authActions.AuthActionTypes.LOGOUT),
+            map((action) => {
+              this.authService.logout();
+              this.router.navigate(['auth']);
+            })
+          );
+        },
+        { dispatch: false }
+    );
 
     constructor(
         private actions$: Actions,
