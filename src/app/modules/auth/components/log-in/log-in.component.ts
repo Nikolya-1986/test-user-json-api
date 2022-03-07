@@ -3,10 +3,11 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Store } from '@ngrx/store';
 
 import { Auth } from '../../../../interfaces/auth.interface';
-import AppUserState from '../../../../store/user/user.state';
+import AppAuthState from '../../../../store/auth/auth.state';
 import * as adminActions from '../../../../store/auth/auth.actions';
-import { EmailAsyncValidator } from '../../../../validators/async/email-async.validator';
+import { EmailAsyncValidator } from '../../../../validators/async/email-async.validator'
 import { PasswordAsyncValidator } from '../../../../validators/async/password-async.validator';
+
 
 @Component({
   selector: 'app-log-in',
@@ -19,8 +20,8 @@ export class LogInComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppUserState>,
-    private emailAsyncValidator: EmailAsyncValidator,
+    private store: Store<AppAuthState>,
+    public emailAsyncValidator: EmailAsyncValidator,
     public passwordAsyncValidator: PasswordAsyncValidator,
   ) { }
 

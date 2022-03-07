@@ -8,19 +8,9 @@
         </a>
     </div>
     <nav class="nav__navigation">
-        <ul>
-            <li routerLinkActive="active">
-                <a routerLink="/home">
-                    Home
-                </a>
-            </li>
-            <li routerLinkActive="active">
-                <a routerLink="/create">
-                    Create
-                </a>
-            </li>
-        </ul>
-        <ul>
+        <ul class="nav__authenticated" 
+            *ngIf="!isAuthenticated"
+            >
             <li routerLinkActive="active">
                 <a [routerLink]="['/auth/log-in']">
                     Log-in
@@ -31,7 +21,22 @@
                     Sign-up
                 </a>
             </li>
+        </ul>
+        <ul class="nav__admin" 
+            *ngIf="isAuthenticated"
+            >
             <li routerLinkActive="active">
+                <a routerLink="/home">
+                    Home
+                </a>
+            </li>
+            <li routerLinkActive="active">
+                <a routerLink="/create">
+                    Create
+                </a>
+            </li>
+            <li routerLinkActive="active"
+                >
                 <a 
                     routerLink="/login" 
                     (click)="logout($event)"

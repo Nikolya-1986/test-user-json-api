@@ -36,7 +36,10 @@ export class AuthEffect {
                     map((logIn) => {
                         return authActions.logInSuccess({ logIn, redirect: true })
                     }),
-                    tap(() => this.router.navigateByUrl('/home')),
+                    tap((auth) =>  {
+                        localStorage.setItem('token', auth.logIn.token)
+                        this.router.navigateByUrl('/home');
+                    }),
                     catchError((error) => of(authActions.getFail(error))),
                 );
             }),

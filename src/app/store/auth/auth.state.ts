@@ -13,5 +13,5 @@ export const initialState: AuthState = {
 };
 
 export default interface AppAuthState {
-    auth: AuthState,
-}
+    authState: AuthState,
+};

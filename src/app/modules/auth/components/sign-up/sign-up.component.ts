@@ -4,7 +4,7 @@ import { combineLatest, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Auth } from '../../../../interfaces/auth.interface';
-import AppUserState from '../../../../store/user/user.state';
+import AppAuthState from '../../../../store/auth/auth.state';
 import * as adminActions from '../../../../store/auth/auth.actions';
 import * as validators from '../../../../validators/password-match.validator';
 
@@ -20,7 +20,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
   
   constructor(
     private formBuilder: FormBuilder,
-    private store: Store<AppUserState>,
+    private store: Store<AppAuthState>,
   ) { }
 
   public ngOnInit(): void {

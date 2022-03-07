@@ -56,7 +56,7 @@ private readonly BASE_URL = 'http://localhost:3000';
   };
 
   public logout(): void {
-    localStorage.removeItem("authToken");
+    localStorage.removeItem('token');
   };
 
   public getAdmins(): Observable<Auth[]> {
