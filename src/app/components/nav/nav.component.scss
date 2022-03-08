@@ -29,6 +29,12 @@
                 a {
                     cursor: pointer;
                 }
+
+                span {
+                    display: block;
+                    font-size: .86rem;
+                    color: var(--light-color-1);
+                }
             }
         }
     }
@@ -40,8 +46,12 @@
     &__admin {
         width: 100%;
 
-        li:last-child {
+        li:nth-child(3) {
             margin-left: auto;
-        }
+        };
+
+        // li:last-child {
+        //     margin-left: auto;
+        // }
     }
 }

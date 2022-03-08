@@ -9,7 +9,7 @@
     </div>
     <nav class="nav__navigation">
         <ul class="nav__authenticated" 
-            *ngIf="!isAuthenticated"
+            *ngIf="!isAuthenticated; else homeBlock"
             >
             <li routerLinkActive="active">
                 <a [routerLink]="['/auth/log-in']">
@@ -22,28 +22,39 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav__admin" 
-            *ngIf="isAuthenticated"
-            >
-            <li routerLinkActive="active">
-                <a routerLink="/home">
-                    Home
-                </a>
-            </li>
-            <li routerLinkActive="active">
-                <a routerLink="/create">
-                    Create
-                </a>
-            </li>
-            <li routerLinkActive="active"
+        <ng-template #homeBlock>
+            <ul class="nav__admin" 
                 >
-                <a 
-                    routerLink="/login" 
-                    (click)="logout($event)"
-                    >
-                    Logout
-                </a>    
-            </li>
-        </ul>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/home']">
+                        Home
+                    </a>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/create']">
+                        Create
+                    </a>
+                </li>
+                <li>
+                    <span>
+                        <strong>isAuthenticated</strong> - {{ isAuthenticated }}
+                    </span>
+                    <!-- <span>
+                        <strong>auth.email</strong> - {{ auth.email || 'null'}}
+                    </span>
+                    <span>
+                        <strong>auth.token</strong> - {{ auth?.token || 'null'}}
+                    </span> -->
+                    <span *ngIf="errorMessage">
+                        <strong>errorMessage</strong> - {{ errorMessage || 'null'}}
+                    </span>
+                </li>
+                <li routerLinkActive="active">
+                    <a (click)="logout($event)">
+                        Logout
+                    </a>    
+                </li>
+            </ul>
+        </ng-template>
     </nav>
 </section>

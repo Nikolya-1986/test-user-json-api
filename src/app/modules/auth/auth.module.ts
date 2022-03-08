@@ -9,7 +9,6 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { InputAccessorModule } from '../controlValueAccessor/input/input-accessor.module';
 import { AuthEffect } from '../../store/auth/auth.effects';
 import { StoreModule } from '@ngrx/store';
-import { appReducer } from 'src/app/store/app.state';
 import { AuthReducer } from 'src/app/store/auth/auth.reducer';
 import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
 import { PasswordAsyncValidator } from 'src/app/validators/async/password-async.validator';
@@ -17,7 +16,7 @@ import { PasswordAsyncValidator } from 'src/app/validators/async/password-async.
 @NgModule({
   declarations: [
     LogInComponent, 
-    SignUpComponent,
+    SignUpComponent, 
 ],
   imports: [
     CommonModule,

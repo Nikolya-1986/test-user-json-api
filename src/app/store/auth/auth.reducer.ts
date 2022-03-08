@@ -24,12 +24,11 @@ const _authReducer = createReducer (
         errorMessage: action.message,
     })),
 
-    on(authActions.logOut, (state) => ({
-        ...state,
-        auth: null,
-    })),
+    on(authActions.logOut, () => {
+        return initialState;
+    }),
 
-    on(authActions.getStatus, state => ({
+    on(authActions.getStatus, (state) => ({
         ...state,
     })),
 

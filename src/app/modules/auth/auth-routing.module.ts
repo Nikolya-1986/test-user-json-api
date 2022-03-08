@@ -14,11 +14,11 @@ const routes: Routes = [
             },
             { 
                 path: 'log-in', 
-                component: LogInComponent 
+                component: LogInComponent ,
             },
             { 
                 path: 'sign-up', 
-                component: SignUpComponent 
+                component: SignUpComponent ,
             },
         ],
     },

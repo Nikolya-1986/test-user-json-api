@@ -4,7 +4,7 @@ import { combineLatest, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Auth } from '../../../../interfaces/auth.interface';
-import AppAuthState from '../../../../store/auth/auth.state';
+import { AppAuthState } from '../../../../store/auth/auth.state';
 import * as adminActions from '../../../../store/auth/auth.actions';
 import * as validators from '../../../../validators/password-match.validator';
 

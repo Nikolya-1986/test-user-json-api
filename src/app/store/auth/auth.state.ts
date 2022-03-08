@@ -12,6 +12,6 @@ export const initialState: AuthState = {
     errorMessage: null,
 };
 
-export default interface AppAuthState {
+export interface AppAuthState {
     authState: AuthState,
 };

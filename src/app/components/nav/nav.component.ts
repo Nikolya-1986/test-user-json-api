@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Auth } from '../../interfaces/auth.interface';
 import { logOut } from '../../store/auth/auth.actions';
-import AppAuthState from '../../store/auth/auth.state';
+import { AppAuthState } from '../../store/auth/auth.state';
 import { getAuthState } from '../../store/auth/auth.selector';
 
 @Component({
@@ -12,26 +12,29 @@ import { getAuthState } from '../../store/auth/auth.selector';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
 
   public logo: string = 'assets/images/logo.png';
   public getState: Observable<Auth | any>;
-  public isAuthenticated!: boolean;
+  public isAuthenticated: boolean = false;
   public auth = null;
   public errorMessage = null;
+  private _destroy$: Subject<boolean> = new Subject();
   
   constructor(
-    private store: Store<AppAuthState>,
+    private _store: Store<AppAuthState>,
   ) { 
-    this.getState = this.store.select(getAuthState);
+    this.getState = this._store.select(getAuthState);
   }
 
   public ngOnInit(): void {
-    this.fetchState();
+    this._fetchState();
   };
 
-  private fetchState(): Observable<Auth | any> {
-    this.getState.subscribe((state: any) => {
+  private _fetchState(): Observable<Auth | any> {
+    this.getState.pipe(
+      takeUntil(this._destroy$),
+    ).subscribe((state: Auth | any) => {
       this.isAuthenticated = state.isAuthenticated;
       this.auth = state.auth;
       this.errorMessage = state.errorMessage;
@@ -41,7 +44,12 @@ export class NavComponent implements OnInit {
 
   public logout(event: Event): void {
     event.preventDefault();
-    this.store.dispatch(logOut())
+    this._store.dispatch(logOut());
+  };
+
+  public ngOnDestroy(): void {
+    this._destroy$.next(true);
+    this._destroy$.complete();
   };
 
 }

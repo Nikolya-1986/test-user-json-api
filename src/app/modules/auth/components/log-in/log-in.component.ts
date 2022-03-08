@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Store } from '@ngrx/store';
 
 import { Auth } from '../../../../interfaces/auth.interface';
-import AppAuthState from '../../../../store/auth/auth.state';
+import { AppAuthState } from '../../../../store/auth/auth.state';
 import * as adminActions from '../../../../store/auth/auth.actions';
 import { EmailAsyncValidator } from '../../../../validators/async/email-async.validator'
 import { PasswordAsyncValidator } from '../../../../validators/async/password-async.validator';
