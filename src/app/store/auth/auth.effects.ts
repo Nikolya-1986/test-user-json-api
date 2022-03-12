@@ -58,14 +58,6 @@ export class AuthEffect {
         { dispatch: false }
     );
 
-    getStatus$: Observable<Action | any> = createEffect(() => {
-        return this._actions$.pipe(
-            ofType(authActions.AuthActionTypes.GET_STATUS),
-            switchMap(() => this._authService.getStatus()),
-        )}, 
-        { dispatch: false }
-    );
-
     constructor(
         private _actions$: Actions,
         private _authService: AuthService,

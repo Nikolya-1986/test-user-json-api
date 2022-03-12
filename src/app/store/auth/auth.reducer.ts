@@ -28,10 +28,6 @@ const _authReducer = createReducer (
         return initialState;
     }),
 
-    on(authActions.getStatus, (state) => ({
-        ...state,
-    })),
-
 );
 
 export function AuthReducer(state: AuthState | undefined, action: Action) {

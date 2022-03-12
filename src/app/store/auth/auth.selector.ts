@@ -10,3 +10,4 @@ export const getAuthSelector = {
     getAuthState,
     auth: reduser.AuthReducer,
 };
+

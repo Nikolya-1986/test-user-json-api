@@ -8,6 +8,7 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { CountryAccessorModule } from '../controlValueAccessor/country/country-accessor.module';
 import { InputAccessorModule } from '../controlValueAccessor/input/input-accessor.module';
 import { CheckboxAccessorModule } from '../controlValueAccessor/checkbox/checkbox-accessor.module';
+import { ApplicationDirectivesModule } from 'src/app/directives/aplication-directives.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CheckboxAccessorModule } from '../controlValueAccessor/checkbox/checkbo
     ReactiveFormsModule,
     CreateRoutingModule,
     ApplicationPipesModule,
+    ApplicationDirectivesModule,
     CountryAccessorModule,
     CheckboxAccessorModule,
     InputAccessorModule,

@@ -7,6 +7,7 @@ import { MaterialExampleModule } from '../../material-example.module';
 import { ModalWindowModule } from '../../components/modal-window/modal-window.module';
 import { EditRoutingModule } from './edit-routing.module';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
+import { ApplicationDirectivesModule } from 'src/app/directives/aplication-directives.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
     EditRoutingModule,
     ModalWindowModule,
     ApplicationPipesModule,
+    ApplicationDirectivesModule,
   ]
 })
 export class EditModule { }

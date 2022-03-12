@@ -4,7 +4,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 
 import { Auth } from '../../interfaces/auth.interface';
 import { logOut } from '../../store/auth/auth.actions';
-import { AppAuthState } from '../../store/auth/auth.state';
+import { AuthState } from '../../store/auth/auth.state';
 import { getAuthState } from '../../store/auth/auth.selector';
 
 @Component({
@@ -22,7 +22,7 @@ export class NavComponent implements OnInit, OnDestroy {
   private _destroy$: Subject<boolean> = new Subject();
   
   constructor(
-    private _store: Store<AppAuthState>,
+    private _store: Store<AuthState>,
   ) { 
     this.getState = this._store.select(getAuthState);
   }
@@ -43,7 +43,7 @@ export class NavComponent implements OnInit, OnDestroy {
   };
 
   public logout(event: Event): void {
-    event.preventDefault();
+    // event.preventDefault();
     this._store.dispatch(logOut());
   };
 

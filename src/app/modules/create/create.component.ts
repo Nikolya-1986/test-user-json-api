@@ -158,7 +158,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     }
   };
 
-  public createUser(): void {
+  public onSubmit(): void {
     if(this.formCreate.valid){
       const newUser = this.formCreate.getRawValue();
       const id = Math.random();

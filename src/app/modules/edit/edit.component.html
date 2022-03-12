@@ -10,7 +10,7 @@
             <form 
                 class="edit__form" 
                 [formGroup]="formEdit" 
-                (ngSubmit)="editUser(userEdit)" 
+                (ngSubmit)="onSubmit(userEdit)" 
                 novalidate
                 >
                 <!-- Picture -->
@@ -378,6 +378,7 @@
                 <div class="button-wrapper">
                     <button 
                         mat-flat-button 
+                        type="submit"
                         color="primary"
                         [disabled]="formEdit.invalid || formEdit.pending"
                         >

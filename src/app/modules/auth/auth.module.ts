@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { AuthReducer } from 'src/app/store/auth/auth.reducer';
 import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
 import { PasswordAsyncValidator } from 'src/app/validators/async/password-async.validator';
+import { ApplicationDirectivesModule } from 'src/app/directives/aplication-directives.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PasswordAsyncValidator } from 'src/app/validators/async/password-async.
     ReactiveFormsModule,
     AuthRoutingModule,
     InputAccessorModule,
+    ApplicationDirectivesModule,
     StoreModule.forFeature('auth', AuthReducer),
     EffectsModule.forFeature([AuthEffect]),
   ],

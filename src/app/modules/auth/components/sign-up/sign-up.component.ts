@@ -52,7 +52,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     this.updateTreeValidity(this.formSignUp);
   };
 
-  public createAdmin(): void {
+  public onSubmit(): void {
     if(this.formSignUp.valid){
       const newAdmin = this.formSignUp.getRawValue();
       const { lastName, firstName, email, password }: Auth = newAdmin

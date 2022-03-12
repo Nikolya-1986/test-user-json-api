@@ -8,7 +8,6 @@ export enum AuthActionTypes {
     LOGIN_REQUEST = '[Auth] Login Request',
     LOGIN_SUCCESS = '[Auth] Login Success',
     LOGOUT = '[Auth] Logout',
-    GET_STATUS = '[Auth] GetStatus'
 };
 
 export const getFail = createAction (
@@ -40,10 +39,6 @@ export const logOut = createAction (
     AuthActionTypes.LOGOUT,
 );
 
-export const getStatus = createAction (
-    AuthActionTypes.GET_STATUS,
-);
-
 const allAdminActions = union({
     getFail,
     signUpRequest,
@@ -51,7 +46,6 @@ const allAdminActions = union({
     logInRequest,
     logInSuccess,
     logOut,
-    getStatus,
 });
 
 export type AdminActions = typeof allAdminActions

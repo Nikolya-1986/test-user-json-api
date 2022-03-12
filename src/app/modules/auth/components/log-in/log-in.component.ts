@@ -50,7 +50,7 @@ export class LogInComponent implements OnInit {
     });
   };
 
-  public logIn(): void {
+  public onSubmit(): void {
     if(this.formLogIn.valid){
       const currentAuth = this.formLogIn.getRawValue();
       const { email, password }: Auth = currentAuth;
