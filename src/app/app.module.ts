@@ -22,7 +22,7 @@ import { MaterialExampleModule } from './material-example.module';
 import { CustomSerializer } from './store/router/custom-serializer';
 import { AuthGuardService as AuthGuard } from './modules/auth/services/auth-guard.service';
 import { AuthInterceptor } from './interseptors/auth.interceptor';
-import { ErrorInterceptor } from './interseptors/error.Interceptor';
+import { ErrorInterceptor } from './interseptors/error.interceptor';
 
 const ISLOADING_INTERSEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,

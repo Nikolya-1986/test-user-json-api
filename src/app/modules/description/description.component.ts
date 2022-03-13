@@ -7,7 +7,7 @@ import { Picture, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userSelectors from '../../store/user/user.selectors';
 import * as userActions from '../../store/user/user.actions';
-import { ModalWindowService } from '../../services/modal-window.service/modal-window.servise';
+import { ModalWindowService } from '../../services/modal-window.servise';
 
 @Component({
   selector: 'app-description',

@@ -1,8 +1,8 @@
 import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 
-import { ModalWindowComponent } from '../../components/modal-window/modal-window.component';
-import { UserDTO } from '../../interfaces/user.interface';
+import { ModalWindowComponent } from '../components/modal-window/modal-window.component';
+import { UserDTO } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'

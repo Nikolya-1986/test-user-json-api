@@ -9,14 +9,15 @@ import AppUserState from "./user.state";
 import { UserService } from "../../services/user.service";
 import * as userActions from "./user.actions";
 import { getUsersSelector } from "./user.selectors";
+import { FacadeService } from "src/app/services/facades/facade.service";
 
 @Injectable()
 export class UsersEffects {
 
-    loadUsers$: Observable<Action> = createEffect(() => this.actions$
+    loadUsers$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
             ofType(userActions.UsersActionsType.LOAD_USERS_REQUEST),
-            switchMap(() => this.userService.getUsers()
+            switchMap(() => this._facadeService.getUsers()
                 .pipe(
                     map((users) => userActions.loadUsersSuccess({users})),
                     catchError((error) => of(userActions.getFail(error))),
@@ -26,13 +27,13 @@ export class UsersEffects {
         { useEffectsErrorHandler: false }
     );
 
-    loadUser$: Observable<Action> = createEffect(() => this.actions$
+    loadUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
             ofType(userActions.UsersActionsType.LOAD_USER_REQUEST),
-            switchMap((action: any) => this.userService.getUser(action.userId)
+            switchMap((action: any) => this._facadeService.getUser(action.userId)
                 .pipe(
                     withLatestFrom(
-                        this.store.select(getUsersSelector),
+                        this._store.select(getUsersSelector),
                     ),
                     map(([user, users]) => {
                         if (users) {
@@ -48,12 +49,12 @@ export class UsersEffects {
         { useEffectsErrorHandler: false }    
     );
 
-    deleteUser$: Observable<Action> = createEffect(() => this.actions$
+    deleteUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
             ofType(userActions.UsersActionsType.DELETE_USER_REQUEST),
-            switchMap((action: any) => this.userService.deleteUser(action.userId)
+            switchMap((action: any) => this._facadeService.deleteUser(action.userId)
                 .pipe(
-                    tap(() => this.router.navigate(['/home'])),
+                    tap(() => this._router.navigate(['/home'])),
                     map(() => userActions.deleteUserSuccess({ userId: action.userId})),
                     catchError((error) => of(userActions.getFail(error))),
                 )
@@ -62,14 +63,14 @@ export class UsersEffects {
         { useEffectsErrorHandler: false }
     );
 
-    editUser$: Observable<Action> = createEffect(() => this.actions$
+    editUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
             ofType(userActions.UsersActionsType.EDIT_USER_REQUEST),
             switchMap((action: any) => {
                 console.log(action);
-                return this.userService.editUser(action.userEdit)
+                return this._facadeService.editUser(action.userEdit)
                     .pipe(
-                        tap(() => this.router.navigate(['/description'])),
+                        tap(() => this._router.navigate(['/description'])),
                         map(() => userActions.editUserSuccess({ userEdit: action.userEdit })),
                         catchError((error) => of(userActions.getFail(error)))
                     )
@@ -79,14 +80,14 @@ export class UsersEffects {
         { useEffectsErrorHandler: false }
     );
 
-    createUser$: Observable<Action> = createEffect(() => this.actions$
+    createUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
             ofType(userActions.UsersActionsType.CREATE_USER_REQUEST),
             switchMap((action: any) => {
                 console.log(action);
-                return this.userService.createUser(action.userCreate)
+                return this._facadeService.createUser(action.userCreate)
                     .pipe(
-                        tap(() => this.router.navigate(['/home'])),
+                        tap(() => this._router.navigate(['/home'])),
                         map(() => userActions.createUserSuccess({ userCreate: action.userCreate })),
                         catchError((error) => of(userActions.getFail(error)))
                     )
@@ -96,9 +97,9 @@ export class UsersEffects {
     );
 
     constructor(
-        private actions$: Actions,
-        private userService: UserService,
-        private store: Store<AppUserState>,
-        private router: Router
+        private _actions$: Actions,
+        private _facadeService: FacadeService,
+        private _store: Store<AppUserState>,
+        private _router: Router
     ){ }
 } 

@@ -4,11 +4,11 @@ import { map, Observable, Subject } from 'rxjs';
 import { takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { UserService } from '../../services/user.service';
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
 import AppUserState from '../../store/user/user.state';
+import { FacadeService } from 'src/app/services/facades/facade.service';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppUserState>,
-    private userService: UserService,
+    private _facadeService: FacadeService,
     private activateRoute: ActivatedRoute,
     private router: Router,
   ) {}
@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   public fetchLanguages(): void {
-    this.userService.getLanguages().pipe(
+    this._facadeService.getLanguages().pipe(
       takeUntil(this.destroy$),
       map((response) => {
         const nameButtonAllLanguages = 'All languages';
