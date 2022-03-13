@@ -5,7 +5,7 @@
     <hr><br>
     <form class="admin__form form"
         [formGroup]="formSignUp"  
-        (ngSubmit)="createAdmin()"
+        (ngSubmit)="onSubmit()"
         ngNativeValidate
         >
         <app-input-accessor
@@ -62,6 +62,7 @@
         </div>
         <div class="admin__submit form-group">
             <button class="admin__success"
+                type="submit"
                 [disabled]="formSignUp.invalid || formSignUp.pending">
                 Submit
             </button>
@@ -69,7 +70,7 @@
                 <span>
                     Already have an account?&nbsp;
                 </span>
-                <a [routerLink]="['/log-in']">
+                <a [routerLink]="['/auth/log-in']">
                     Log in!
                 </a>
             </p>

@@ -1,7 +1,7 @@
 <section class="create create__user">
     <form class="create__form form"
         [formGroup]="formCreate" 
-        (ngSubmit)="createUser()" 
+        (ngSubmit)="onSubmit()" 
         >
         <!-- Picture -->
         <div class="create__pictures" 
@@ -382,6 +382,7 @@
         <!-- Submit -->
         <div class="create__form-group form-group">
             <button 
+                type="submit"
                 [disabled]="formCreate.invalid || formCreate.pending"
                 >
                 Create user

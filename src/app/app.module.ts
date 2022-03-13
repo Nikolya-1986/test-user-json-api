@@ -20,11 +20,26 @@ import { UsersEffects } from './store/user/user.effects';
 import { IsLoadingInterceptor } from './interseptors/isLoading.interceptor';
 import { MaterialExampleModule } from './material-example.module';
 import { CustomSerializer } from './store/router/custom-serializer';
+import { AuthGuardService as AuthGuard } from './modules/auth/services/auth-guard.service';
+import { AuthInterceptor } from './interseptors/auth.interceptor';
+import { ErrorInterceptor } from './interseptors/error.Interceptor';
 
 const ISLOADING_INTERSEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,
   multi: true,
-  useClass: IsLoadingInterceptor
+  useClass: IsLoadingInterceptor,
+};
+
+const AUTH_INTERSEPTOR: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor,
+};
+
+const ERROR_INTERSEPTOR: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: ErrorInterceptor,
 };
 
 @NgModule({
@@ -51,7 +66,12 @@ const ISLOADING_INTERSEPTOR: Provider = {
       serializer: CustomSerializer,
     }),
   ],
-  providers: [ISLOADING_INTERSEPTOR],
+  providers: [
+    AuthGuard,
+    AUTH_INTERSEPTOR,
+    ISLOADING_INTERSEPTOR,
+    ERROR_INTERSEPTOR,
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

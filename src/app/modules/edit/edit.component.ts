@@ -280,7 +280,7 @@ export class EditComponent implements OnInit {
     this.language.removeAt(index);
   };
   
-  public editUser(userEdit: UserDTO):void {
+  public onSubmit(userEdit: UserDTO):void {
     if(this.formEdit.valid){
       const editedUser = this.formEdit.getRawValue();
       const userUpdated: UserDTO = {

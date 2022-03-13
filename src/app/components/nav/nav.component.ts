@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { logOut } from '../../store/auth/auth.actions';
+import { AuthState } from '../../store/auth/auth.state';
+import { selectIsAuthenticated } from '../../store/auth/auth.selector';
 
 @Component({
   selector: 'app-nav',
@@ -8,10 +14,26 @@ import { Component, OnInit } from '@angular/core';
 export class NavComponent implements OnInit {
 
   public logo: string = 'assets/images/logo.png';
+  public isAuthenticated$!: Observable<boolean>;
   
-  constructor() { }
+  constructor(
+    private _store: Store<AuthState>,
+  ) { }
 
   public ngOnInit(): void {
-  }
+    this._fetchIsAuthenticated();
+  };
+
+  private _fetchIsAuthenticated(): Observable<boolean> {
+    this.isAuthenticated$ = this._store.pipe(select(selectIsAuthenticated));
+    
+    return this.isAuthenticated$;
+  };
+
+  public logout(): void {
+    this._store.dispatch(logOut());
+  };
 
 }
+
+

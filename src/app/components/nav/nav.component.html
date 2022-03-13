@@ -8,29 +8,38 @@
         </a>
     </div>
     <nav class="nav__navigation">
-        <ul>
+        <ul class="nav__admin" 
+            *ngIf="isAuthenticated$ | async as isAuthenticated; else noAuthBlock"
+            >
             <li routerLinkActive="active">
-                <a routerLink="/home">
+                <a [routerLink]="['/home']">
                     Home
                 </a>
             </li>
             <li routerLinkActive="active">
-                <a routerLink="/create">
+                <a [routerLink]="['/create']">
                     Create
                 </a>
             </li>
-        </ul>
-        <ul>
             <li routerLinkActive="active">
-                <a [routerLink]="['/auth/log-in']">
-                    Log-in
-                </a>
-            </li>
-            <li routerLinkActive="active">
-                <a [routerLink]="['/auth/sign-up']">
-                    Sign-up
-                </a>
+                <a (click)="logout()">
+                    Logout
+                </a>    
             </li>
         </ul>
+        <ng-template #noAuthBlock>
+            <ul class="nav__authenticated">
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/auth/log-in']">
+                        Log-in
+                    </a>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="['/auth/sign-up']">
+                        Sign-up
+                    </a>
+                </li>
+            </ul>
+        </ng-template>
     </nav>
 </section>

@@ -16,13 +16,11 @@
 
     &__navigation {
         width: 100%;
-        display: flex;
-        justify-content: space-between;
+        margin: auto;
 
         ul {
             display: flex;
             align-items: center;
-            margin: 0;
 
             li {
                 padding: 0 .6rem;
@@ -31,7 +29,29 @@
                 a {
                     cursor: pointer;
                 }
+
+                span {
+                    display: block;
+                    font-size: .86rem;
+                    color: var(--light-color-1);
+                }
             }
         }
+    }
+    
+    &__authenticated {
+        justify-content: end;
+    }
+
+    &__admin {
+        width: 100%;
+
+        li:nth-child(3) {
+            margin-left: auto;
+        };
+
+        // li:last-child {
+        //     margin-left: auto;
+        // }
     }
 }

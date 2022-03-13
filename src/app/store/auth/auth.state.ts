@@ -6,12 +6,12 @@ export interface AuthState {
     errorMessage: string | null; // error message
 };
 
-export const initialState: AuthState = {
+export const initialAuthState: AuthState = {
     isAuthenticated: false,
     auth: null,
     errorMessage: null,
 };
 
 export default interface AppAuthState {
-    auth: AuthState,
-}
+    authState: AuthState,
+};

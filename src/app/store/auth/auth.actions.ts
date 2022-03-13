@@ -7,6 +7,7 @@ export enum AuthActionTypes {
     SIGNUP_SUCCESS = '[Auth] Signup Success',
     LOGIN_REQUEST = '[Auth] Login Request',
     LOGIN_SUCCESS = '[Auth] Login Success',
+    LOGOUT = '[Auth] Logout',
 };
 
 export const getFail = createAction (
@@ -21,7 +22,7 @@ export const signUpRequest = createAction (
 
 export const signUpSuccess = createAction (
     AuthActionTypes.SIGNUP_SUCCESS,
-    props<{ signUp: Auth, redirect: boolean }>(),
+    props<{ signUp: Auth }>(),
 );
 
 export const logInRequest = createAction (
@@ -31,7 +32,11 @@ export const logInRequest = createAction (
 
 export const logInSuccess = createAction (
     AuthActionTypes.LOGIN_SUCCESS,
-    props<{ logIn: Auth, redirect: boolean }>(),
+    props<{ logIn: Auth }>(),
+);
+
+export const logOut = createAction (
+    AuthActionTypes.LOGOUT,
 );
 
 const allAdminActions = union({
@@ -40,6 +45,7 @@ const allAdminActions = union({
     signUpSuccess,
     logInRequest,
     logInSuccess,
+    logOut,
 });
 
 export type AdminActions = typeof allAdminActions

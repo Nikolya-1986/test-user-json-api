@@ -9,15 +9,15 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { InputAccessorModule } from '../controlValueAccessor/input/input-accessor.module';
 import { AuthEffect } from '../../store/auth/auth.effects';
 import { StoreModule } from '@ngrx/store';
-import { appReducer } from 'src/app/store/app.state';
-import { AuthReducer } from 'src/app/store/auth/auth.reducer';
+import { authReducer } from 'src/app/store/auth/auth.reducer';
 import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
 import { PasswordAsyncValidator } from 'src/app/validators/async/password-async.validator';
+import { ApplicationDirectivesModule } from 'src/app/directives/aplication-directives.module';
 
 @NgModule({
   declarations: [
     LogInComponent, 
-    SignUpComponent,
+    SignUpComponent, 
 ],
   imports: [
     CommonModule,
@@ -25,7 +25,8 @@ import { PasswordAsyncValidator } from 'src/app/validators/async/password-async.
     ReactiveFormsModule,
     AuthRoutingModule,
     InputAccessorModule,
-    StoreModule.forFeature('auth', AuthReducer),
+    ApplicationDirectivesModule,
+    StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffect]),
   ],
   providers: [
