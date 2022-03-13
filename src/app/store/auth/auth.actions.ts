@@ -22,7 +22,7 @@ export const signUpRequest = createAction (
 
 export const signUpSuccess = createAction (
     AuthActionTypes.SIGNUP_SUCCESS,
-    props<{ signUp: Auth, redirect: boolean }>(),
+    props<{ signUp: Auth }>(),
 );
 
 export const logInRequest = createAction (
@@ -32,7 +32,7 @@ export const logInRequest = createAction (
 
 export const logInSuccess = createAction (
     AuthActionTypes.LOGIN_SUCCESS,
-    props<{ logIn: Auth, redirect: boolean }>(),
+    props<{ logIn: Auth }>(),
 );
 
 export const logOut = createAction (

@@ -16,7 +16,7 @@ private readonly BASE_URL = 'http://localhost:3000';
   constructor(
     private http: HttpClient
   ) { }
-
+  
   public getErrorMessage(message: string) {
     switch (message) {
       case 'EMAIL_NOT_FOUND':

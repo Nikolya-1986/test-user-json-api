@@ -8,51 +8,36 @@
         </a>
     </div>
     <nav class="nav__navigation">
-        <ul class="nav__authenticated" 
-            *ngIf="!isAuthenticated; else homeBlock"
+        <ul class="nav__admin" 
+            *ngIf="isAuthenticated$ | async as isAuthenticated; else noAuthBlock"
             >
             <li routerLinkActive="active">
-                <a [routerLink]="['/auth/log-in']">
-                    Log-in
+                <a [routerLink]="['/home']">
+                    Home
                 </a>
             </li>
             <li routerLinkActive="active">
-                <a [routerLink]="['/auth/sign-up']">
-                    Sign-up
+                <a [routerLink]="['/create']">
+                    Create
                 </a>
             </li>
+            <li routerLinkActive="active">
+                <a (click)="logout()">
+                    Logout
+                </a>    
+            </li>
         </ul>
-        <ng-template #homeBlock>
-            <ul class="nav__admin" 
-                >
+        <ng-template #noAuthBlock>
+            <ul class="nav__authenticated">
                 <li routerLinkActive="active">
-                    <a [routerLink]="['/home']">
-                        Home
+                    <a [routerLink]="['/auth/log-in']">
+                        Log-in
                     </a>
                 </li>
                 <li routerLinkActive="active">
-                    <a [routerLink]="['/create']">
-                        Create
+                    <a [routerLink]="['/auth/sign-up']">
+                        Sign-up
                     </a>
-                </li>
-                <li>
-                    <span>
-                        <strong>isAuthenticated</strong> - {{ isAuthenticated }}
-                    </span>
-                    <!-- <span>
-                        <strong>auth.email</strong> - {{ auth.email || 'null'}}
-                    </span>
-                    <span>
-                        <strong>auth.token</strong> - {{ auth?.token || 'null'}}
-                    </span> -->
-                    <span *ngIf="errorMessage">
-                        <strong>errorMessage</strong> - {{ errorMessage || 'null'}}
-                    </span>
-                </li>
-                <li routerLinkActive="active">
-                    <a (click)="logout($event)">
-                        Logout
-                    </a>    
                 </li>
             </ul>
         </ng-template>

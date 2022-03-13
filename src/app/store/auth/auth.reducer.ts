@@ -1,35 +1,38 @@
 import { Action, createReducer, on } from "@ngrx/store";
 
-import * as authActions from "./auth.actions";
-import { AuthState, initialState } from "./auth.state";
+import * as fromAuthActions from "./auth.actions";
+import { AuthState, initialAuthState } from "./auth.state";
 
-const _authReducer = createReducer (
-    initialState,
-    on(authActions.signUpSuccess, (state, action) => ({
+const _authReducerInternal  = createReducer (
+    initialAuthState,
+    on(fromAuthActions.signUpSuccess, (state, action) => ({
         ...state,
         isAuthenticated: true,
         auth: action.signUp,
         errorMessage: null,
     })),
 
-    on(authActions.logInSuccess, (state, action) => ({
+    on(fromAuthActions.logInSuccess, (state, action) => ({
         ...state,
         isAuthenticated: true,
         auth: action.logIn,
         errorMessage: null,
     })),
 
-    on(authActions.getFail, (state, action) => ({
+    on(fromAuthActions.getFail, (state, action) => ({
         ...state,
+        isAuthenticated: false,
+        auth: null,
         errorMessage: action.message,
     })),
 
-    on(authActions.logOut, () => {
-        return initialState;
-    }),
+    on(fromAuthActions.logOut, (state, {}) => ({
+       ...state,
+       initialAuthState,
+    })),
 
 );
 
-export function AuthReducer(state: AuthState | undefined, action: Action) {
-    return _authReducer(state, action);
+export function authReducer(state: AuthState | undefined, action: Action) {
+    return _authReducerInternal (state, action);
 }
