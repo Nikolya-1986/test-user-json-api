@@ -35,7 +35,7 @@ import { ExtraDescriptionResolver } from './resolvers/extra-description.resolver
     ApplicationPipesModule,
   ],
   providers: [
-    ExtraDescriptionResolver
+    ExtraDescriptionResolver,
   ]
 })
 export class DescriptionModule { }

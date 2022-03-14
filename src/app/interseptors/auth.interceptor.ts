@@ -2,17 +2,17 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/c
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
-import { AuthService } from "../modules/auth/services/auth.service";
+import { FacadeService } from "../services/facades/facade.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
     constructor(
-        private _authService: AuthService,
+        private _facadeService: FacadeService,
     ){}
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = this._authService.getToken();
+        const token = this._facadeService.getToken();
         const autRequest = request.clone({
             setHeaders: {
                 'Authorization': `Bearer ${token}`,
