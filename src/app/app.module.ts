@@ -23,6 +23,7 @@ import { CustomSerializer } from './store/router/custom-serializer';
 import { AuthGuardService as AuthGuard } from './modules/auth/services/auth-guard.service';
 import { AuthInterceptor } from './interseptors/auth.interceptor';
 import { ErrorInterceptor } from './interseptors/error.interceptor';
+import { AuthService } from './modules/auth/services/auth.service';
 
 const ISLOADING_INTERSEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -67,6 +68,7 @@ const ERROR_INTERSEPTOR: Provider = {
     }),
   ],
   providers: [
+    AuthService,
     AuthGuard,
     AUTH_INTERSEPTOR,
     ISLOADING_INTERSEPTOR,

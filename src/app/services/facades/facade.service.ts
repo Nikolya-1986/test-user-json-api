@@ -1,11 +1,12 @@
 import { Injectable, Injector, ViewContainerRef } from "@angular/core";
-import { Observable } from "rxjs";
+import { catchError, Observable, retry, tap } from "rxjs";
 
 import { Auth } from "../../interfaces/auth.interface";
 import { UserDTO } from "../../interfaces/user.interface";
 import { AuthService } from "../../modules/auth/services/auth.service";
 import { UserService } from "../user.service";
 import { ModalWindowService } from "../modal-window.servise";
+import { ErrorService } from "../error.service";
 
 @Injectable({
     providedIn: 'root',
@@ -36,6 +37,14 @@ export class FacadeService {
         return this._modalWindowService;
     };
 
+    private _errorService!: ErrorService;
+    public get errorService(): ErrorService {
+        if(!this._errorService) {
+            this._errorService = this.injector.get(ErrorService);
+        }
+        return this._errorService;
+    };
+
     constructor(
         private injector: Injector,
     ){}
@@ -48,16 +57,22 @@ export class FacadeService {
         return this.authService.sendToken(token);
     };
 
-    public get isAuthenticated(): boolean {
-        return this.authService.isAuthenticated;
-    };
-
     public signUp(id: number, lastName: string, firstName: string, email: string, password: string): Observable<Auth> {
-        return this.authService.signUp(id, lastName, firstName, email, password);
+        return this.authService.signUp(id, lastName, firstName, email, password).pipe(
+            catchError(this.errorService.errorsBackend.bind(this)),
+        );
     };
 
     public logIn(email: string, password: string, token: string): Observable<Auth> {
-        return this.authService.logIn(email, password, token);
+        return this.authService.logIn(email, password, token).pipe(
+            catchError(this.errorService.errorsBackend.bind(this)),
+        );
+    };
+
+    public getAdmins(): Observable<Auth[]> {
+        return this.authService.getAdmins().pipe(
+            catchError(this.errorService.errorsBackend.bind(this)),
+        );
     };
 
     public logout(): void {
@@ -73,23 +88,36 @@ export class FacadeService {
     };
 
     public getUsers(): Observable<UserDTO[]> {
-        return this.userService.getUsers();
+        return this.userService.getUsers().pipe(
+            retry(3),
+            catchError(this.errorService.errorsBackend.bind(this)),
+        );
     };
 
     public getUser(id: number): Observable<UserDTO> {
-        return this.userService.getUser(id);
+        return this.userService.getUser(id).pipe(
+            catchError(this.errorService.errorsBackend.bind(this)),
+        );
     };
 
     public deleteUser(id: number): Observable<UserDTO> {
-        return this.userService.deleteUser(id);
+        return this.userService.deleteUser(id).pipe(
+            catchError(this.errorService.errorsBackend.bind(this)),
+        );
     };
 
     public editUser(user: UserDTO): Observable<UserDTO> {
-        return this.userService.editUser(user);
+        return this.userService.editUser(user).pipe(
+            tap(() => console.log('User edit:', user)),
+            catchError(this.errorService.errorsBackend.bind(this)),
+        );
     };
 
     public createUser(user: UserDTO): Observable<UserDTO> {
-        return this.userService.createUser(user);
+        return this.userService.createUser(user).pipe(
+            tap(() => console.log('User create:', user)),
+            catchError(this.errorService.errorsBackend.bind(this)),
+        );
     };
 
     public getLanguages(): Observable<string[]> {

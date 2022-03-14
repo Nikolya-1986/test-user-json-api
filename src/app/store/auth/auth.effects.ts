@@ -5,7 +5,6 @@ import { Action } from "@ngrx/store";
 import { catchError, map, Observable, of, switchMap, tap } from "rxjs";
 import { FacadeService } from "src/app/services/facades/facade.service";
 
-import { AuthService } from "../../modules/auth/services/auth.service";
 import * as fromAuthActions from "./auth.actions"
 
 @Injectable()

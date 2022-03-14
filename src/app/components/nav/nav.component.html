@@ -22,7 +22,9 @@
                 </a>
             </li>
             <li routerLinkActive="active">
-                <a (click)="logout()">
+                <a (click)="logout()" 
+                    [routerLink]="['/auth/log-in']"
+                    >
                     Logout
                 </a>    
             </li>

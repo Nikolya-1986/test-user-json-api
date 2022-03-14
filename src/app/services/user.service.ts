@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, throwError } from "rxjs";
-import { catchError, delay, map, retry, tap } from 'rxjs/operators';
+import { Observable } from "rxjs";
+import { delay, map } from 'rxjs/operators';
 
 import { UserDTO } from "../interfaces/user.interface";
 
@@ -21,49 +21,25 @@ export class UserService {
           'Content-Type': 'application/json',
         }),
     };
-    
-    private errorsBackend(errorHttp: HttpErrorResponse): Observable<any> {
-        let message = '';
-        if(errorHttp.error instanceof ErrorEvent) {
-            message = errorHttp.error.message;
-        }else {
-            message = `Error Ccode: ${errorHttp.status}\nMessage: ${errorHttp.message}`;
-        };
-        console.log("Error:", errorHttp);
-        return throwError(errorHttp);
-    };
 
     public getUsers(): Observable<UserDTO[]> {
-        return this._httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`).pipe(
-            retry(3),
-            catchError(this.errorsBackend),
-        )
+        return this._httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`);
     };
 
     public getUser(id: number): Observable<UserDTO> {
-        return this._httpClient.get<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
-            catchError(this.errorsBackend),
-        )
+        return this._httpClient.get<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader)
     };
 
     public deleteUser(id: number): Observable<UserDTO> {
-        return this._httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
-            catchError(this.errorsBackend),
-        )
+        return this._httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader)
     };
 
     public editUser(user: UserDTO): Observable<UserDTO> {
-        return this._httpClient.put<UserDTO>(`${this.BASE_URL}/results/${user.id}`, JSON.stringify(user), this.httpHeader).pipe(
-            tap(() => console.log('User edit:', user)),
-            catchError(this.errorsBackend),
-        )
+        return this._httpClient.put<UserDTO>(`${this.BASE_URL}/results/${user.id}`, JSON.stringify(user), this.httpHeader)
     };
 
     public createUser(user: UserDTO): Observable<UserDTO> {
-        return this._httpClient.post<UserDTO>(`${this.BASE_URL}/results`, JSON.stringify(user), this.httpHeader).pipe(
-            tap(() => console.log('User create:', user)),
-            catchError(this.errorsBackend),
-        )
+        return this._httpClient.post<UserDTO>(`${this.BASE_URL}/results`, JSON.stringify(user), this.httpHeader);
     };
 
     public getLanguages(): Observable<string[]> {
