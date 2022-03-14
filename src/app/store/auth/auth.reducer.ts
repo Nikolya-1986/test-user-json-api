@@ -1,7 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 
-import * as fromAuthActions from "./auth.actions";
 import { AuthState, initialAuthState } from "./auth.state";
+import * as fromAuthActions from "./auth.actions";
 
 const _authReducerInternal  = createReducer (
     initialAuthState,

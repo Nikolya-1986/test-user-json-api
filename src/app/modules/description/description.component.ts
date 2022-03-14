@@ -5,9 +5,10 @@ import { Store } from '@ngrx/store';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
-import * as userSelectors from '../../store/user/user.selectors';
-import * as userActions from '../../store/user/user.actions';
-import { ModalWindowService } from '../../services/modal-window.servise';
+import { FacadeService } from '../../services/facades/facade.service';
+import * as fromUserSelectors from '../../store/user/user.selectors';
+import * as fromUserActions from '../../store/user/user.actions';
+
 
 @Component({
   selector: 'app-description',
@@ -26,10 +27,10 @@ export class DescriptionComponent implements OnInit {
   public destroy$: Subject<boolean> = new Subject();
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private store: Store<AppUserState>,
-    public modalWindowServise: ModalWindowService,
-    private router: Router,
+    private _activatedRoute: ActivatedRoute,
+    private _store: Store<AppUserState>,
+    public _facadeService: FacadeService,
+    private _router: Router,
   ) {}
 
   public ngOnInit(): void {
@@ -37,13 +38,13 @@ export class DescriptionComponent implements OnInit {
   };
 
   private fetchUserDetail(): Observable<UserDTO> {
-    this.userDetails$ = this.activatedRoute.params.pipe(
+    this.userDetails$ = this._activatedRoute.params.pipe(
       map((params: Params) => {
         this.userId = Number(params['id']); 
-        this.store.dispatch(userActions.loadUserRequest({ userId: this.userId }));
+        this._store.dispatch(fromUserActions.loadUserRequest({ userId: this.userId }));
         return this.userId;
       }),
-      switchMap(() => this.store.select(userSelectors.getUserSelector)),
+      switchMap(() => this._store.select(fromUserSelectors.getUserSelector)),
       // tap(user => console.log(user)),
     )
     return this.userDetails$;
@@ -58,7 +59,7 @@ export class DescriptionComponent implements OnInit {
   };
 
   public onOpenModalDeleteUser(user: UserDTO): void {
-    this.modalWindowServise.modalWindowUserDelete(
+    this._facadeService.modalWindowUserDelete(
       this.viewContainerRef, 
       'Are you sure you want to delete the user?', 
       "Click the 'Confirm' button if you want to delete the user, otherwise click 'Cancel'.",
@@ -68,12 +69,12 @@ export class DescriptionComponent implements OnInit {
       takeUntil(this.destroy$),
     )
     .subscribe(() => {
-      this.store.dispatch(userActions.deleteUserRequest({ userId: user.id }));
+      this._store.dispatch(fromUserActions.deleteUserRequest({ userId: user.id }));
     })
   };
 
   public onEditCurrentUser(id: number): void{
-    this.router.navigate(['edit', id]);
+    this._router.navigate(['edit', id]);
   };
 
   public ngOnDestroy(): void {

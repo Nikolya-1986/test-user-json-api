@@ -13,7 +13,7 @@ export class UserService {
     private readonly BASE_URL = 'http://localhost:3000';
 
     constructor(
-        private httpClient: HttpClient,
+        private _httpClient: HttpClient,
     ){}
     
     private httpHeader = {
@@ -34,33 +34,33 @@ export class UserService {
     };
 
     public getUsers(): Observable<UserDTO[]> {
-        return this.httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`).pipe(
+        return this._httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`).pipe(
             retry(3),
             catchError(this.errorsBackend),
         )
     };
 
     public getUser(id: number): Observable<UserDTO> {
-        return this.httpClient.get<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
+        return this._httpClient.get<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
             catchError(this.errorsBackend),
         )
     };
 
     public deleteUser(id: number): Observable<UserDTO> {
-        return this.httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
+        return this._httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader).pipe(
             catchError(this.errorsBackend),
         )
     };
 
     public editUser(user: UserDTO): Observable<UserDTO> {
-        return this.httpClient.put<UserDTO>(`${this.BASE_URL}/results/${user.id}`, JSON.stringify(user), this.httpHeader).pipe(
+        return this._httpClient.put<UserDTO>(`${this.BASE_URL}/results/${user.id}`, JSON.stringify(user), this.httpHeader).pipe(
             tap(() => console.log('User edit:', user)),
             catchError(this.errorsBackend),
         )
     };
 
     public createUser(user: UserDTO): Observable<UserDTO> {
-        return this.httpClient.post<UserDTO>(`${this.BASE_URL}/results`, JSON.stringify(user), this.httpHeader).pipe(
+        return this._httpClient.post<UserDTO>(`${this.BASE_URL}/results`, JSON.stringify(user), this.httpHeader).pipe(
             tap(() => console.log('User create:', user)),
             catchError(this.errorsBackend),
         )

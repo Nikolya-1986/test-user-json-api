@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { Action } from "@ngrx/store";
 import { catchError, map, Observable, of, switchMap, tap } from "rxjs";
+import { FacadeService } from "src/app/services/facades/facade.service";
 
 import { AuthService } from "../../modules/auth/services/auth.service";
 import * as fromAuthActions from "./auth.actions"
@@ -15,7 +16,7 @@ export class AuthEffect {
             ofType(fromAuthActions.AuthActionTypes.SIGNUP_REQUEST),
             switchMap((action: any) => {
                 const { id, lastName, firstName, email, password } = action;
-                return this._authService.signUp(id, lastName, firstName, email, password).pipe(
+                return this._facadeService.signUp(id, lastName, firstName, email, password).pipe(
                     map((signUp) => {
                         return fromAuthActions.signUpSuccess({ signUp });
                     }),
@@ -32,7 +33,7 @@ export class AuthEffect {
             switchMap((action: any) => {
                 const { email, password } = action;
                 const token = String(Math.floor(Math.random() * 100) + 1);
-                return this._authService.logIn(email, password, token).pipe(
+                return this._facadeService.logIn(email, password, token).pipe(
                     map((logIn) => {
                         return fromAuthActions.logInSuccess({ logIn })
                     }),
@@ -50,7 +51,7 @@ export class AuthEffect {
         return this._actions$.pipe(
             ofType(fromAuthActions.AuthActionTypes.LOGOUT),
             tap(() => {
-              this._authService.logout();
+              this._facadeService.logout();
               this._router.navigateByUrl('/auth/log-in');
             })
           );
@@ -60,7 +61,7 @@ export class AuthEffect {
 
     constructor(
         private _actions$: Actions,
-        private _authService: AuthService,
+        private _facadeService: FacadeService,
         private _router: Router
     ){ }
 }

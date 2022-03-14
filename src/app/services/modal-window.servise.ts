@@ -9,33 +9,34 @@ import { UserDTO } from '../interfaces/user.interface';
 })
 export class ModalWindowService {
 
-  private componentRef!: ComponentRef<ModalWindowComponent>;
-  private subject$!: Subject<string>;
+  private _componentRef!: ComponentRef<ModalWindowComponent>;
+  private _subject$!: Subject<string>;
 
   constructor(
-    private resolver: ComponentFactoryResolver,
+    private _resolver: ComponentFactoryResolver,
   ){}
 
   public modalWindowUserDelete(viewContainerRef: ViewContainerRef, modalTitle: string, modalBody: string, user: UserDTO): Observable<string>{
-    const modalFactory  = this.resolver.resolveComponentFactory(ModalWindowComponent);
-    this.componentRef = viewContainerRef.createComponent(modalFactory);
-    this.componentRef.instance.title = modalTitle;
-    this.componentRef.instance.body = modalBody;
-    this.componentRef.instance.name = user.name.first;
-    this.componentRef.instance.cancelAction.subscribe(() => this.closeModal());
-    this.componentRef.instance.confirmAction.subscribe(() => this.confirm());
-    this.subject$ = new Subject<string>();
-    return this.subject$.asObservable();
-  }
-
-  private closeModal(): void {
-    this.subject$.complete();
-    this.componentRef.destroy();
+    const modalFactory  = this._resolver.resolveComponentFactory(ModalWindowComponent);
+    this._componentRef = viewContainerRef.createComponent(modalFactory);
+    this._componentRef.instance.title = modalTitle;
+    this._componentRef.instance.body = modalBody;
+    this._componentRef.instance.name = user.name.first;
+    this._componentRef.instance.cancelAction.subscribe(() => this._closeModal());
+    this._componentRef.instance.confirmAction.subscribe(() => this._confirm());
+    this._subject$ = new Subject<string>();
+    return this._subject$.asObservable();
   };
 
-  private confirm(): void {
-    this.subject$.next('Confirmed action');
-    this.closeModal();
-    this.subject$.unsubscribe();
-  }
+  private _closeModal(): void {
+    this._subject$.complete();
+    this._componentRef.destroy();
+  };
+
+  private _confirm(): void {
+    this._subject$.next('Confirmed action');
+    this._closeModal();
+    this._subject$.unsubscribe();
+  };
+  
 }
