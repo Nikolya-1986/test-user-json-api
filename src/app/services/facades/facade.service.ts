@@ -7,6 +7,8 @@ import { AuthService } from "../../modules/auth/services/auth.service";
 import { UserService } from "../user.service";
 import { ModalWindowService } from "../modal-window.servise";
 import { ErrorService } from "../error.service";
+import { EpisodeService } from "../episode.service";
+import { EpisodeDTO } from "src/app/interfaces/episode.interface";
 
 @Injectable({
     providedIn: 'root',
@@ -19,6 +21,14 @@ export class FacadeService {
             this._authService = this.injector.get(AuthService);
         }
         return this._authService;
+    };
+
+    private _episodeService!: EpisodeService;
+    public get episodeService(): EpisodeService {
+        if(!this._episodeService) {
+            this._episodeService = this.injector.get(EpisodeService);
+        }
+        return this._episodeService;
     };
 
     private _userService!: UserService;
@@ -85,6 +95,12 @@ export class FacadeService {
 
     public getAdminPassword(): Observable<string[]> {
         return this.authService.getAdminPassword();
+    };
+
+    public getEpisodes(): Observable<EpisodeDTO[]> {
+        return this.episodeService.getEpisodes().pipe(
+            catchError(this.errorService.errorsBackend.bind(this)),
+        )
     };
 
     public getUsers(): Observable<UserDTO[]> {

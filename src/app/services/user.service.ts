@@ -23,23 +23,23 @@ export class UserService {
     };
 
     public getUsers(): Observable<UserDTO[]> {
-        return this._httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`);
+        return this._httpClient.get<UserDTO[]>(`${this.BASE_URL}/users`);
     };
 
     public getUser(id: number): Observable<UserDTO> {
-        return this._httpClient.get<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader)
+        return this._httpClient.get<UserDTO>(`${this.BASE_URL}/users/${id}`, this.httpHeader)
     };
 
     public deleteUser(id: number): Observable<UserDTO> {
-        return this._httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader)
+        return this._httpClient.delete<UserDTO>(`${this.BASE_URL}/users/${id}`, this.httpHeader)
     };
 
     public editUser(user: UserDTO): Observable<UserDTO> {
-        return this._httpClient.put<UserDTO>(`${this.BASE_URL}/results/${user.id}`, JSON.stringify(user), this.httpHeader)
+        return this._httpClient.put<UserDTO>(`${this.BASE_URL}/users/${user.id}`, JSON.stringify(user), this.httpHeader)
     };
 
     public createUser(user: UserDTO): Observable<UserDTO> {
-        return this._httpClient.post<UserDTO>(`${this.BASE_URL}/results`, JSON.stringify(user), this.httpHeader);
+        return this._httpClient.post<UserDTO>(`${this.BASE_URL}/users`, JSON.stringify(user), this.httpHeader);
     };
 
     public getLanguages(): Observable<string[]> {

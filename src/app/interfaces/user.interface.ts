@@ -1,3 +1,5 @@
+import { EpisodeDTO } from "./episode.interface";
+
 export interface UsersDTO {
     results: UserDTO[],
 };
@@ -7,6 +9,7 @@ export interface UserDTO {
     gender: Gender,
     status: Status,
     name: Name,
+    episode: EpisodeDTO,
     location: Location,
     email: string,
     website: string,
