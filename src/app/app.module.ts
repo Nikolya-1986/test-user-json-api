@@ -24,6 +24,7 @@ import { AuthGuardService as AuthGuard } from './modules/auth/services/auth-guar
 import { AuthInterceptor } from './interseptors/auth.interceptor';
 import { ErrorInterceptor } from './interseptors/error.interceptor';
 import { AuthService } from './modules/auth/services/auth.service';
+import { EpisodeEffects } from './store/episode/episode.effects';
 
 const ISLOADING_INTERSEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -62,7 +63,7 @@ const ERROR_INTERSEPTOR: Provider = {
       maxAge: 25, 
       logOnly: environment.production 
     }),
-    EffectsModule.forRoot([UsersEffects]),
+    EffectsModule.forRoot([UsersEffects, EpisodeEffects]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
     }),

@@ -6,7 +6,6 @@ import { map, catchError, switchMap, tap, withLatestFrom } from 'rxjs/operators'
 import { Router } from "@angular/router";
 
 import AppUserState from "./user.state";
-import { UserService } from "../../services/user.service";
 import * as userActions from "./user.actions";
 import { getUsersSelector } from "./user.selectors";
 import { FacadeService } from "src/app/services/facades/facade.service";

@@ -24,100 +24,110 @@
       "id": 1
     }
   ],
-  "episodes": [
-    {
-      "id":1,
-      "name":"Pilot",
-      "episode":"S01E01",
-      "users": [
-        "https://http://localhost:3000/users/1",
-        "https://http://localhost:3000/users/4",
-        "https://http://localhost:3000/users/9",
-        "https://http://localhost:3000/users/11",
-        "https://http://localhost:3000/users/13",
-        "https://http://localhost:3000/users/14",
-        "https://http://localhost:3000/users/16",
-        "https://http://localhost:3000/users/2",
-        "https://http://localhost:3000/users/3",
-        "https://http://localhost:3000/users/5"
-      ],
-      "url":"https://http://localhost:3000/episodes/1",
-      "created":"2017-11-10T08:16:33.798Z"
+  "episodes": 
+  {
+    "info": {
+      "count": 6,
+      "pages": 1,
+      "next": null,
+      "prev": null
     },
-    {
-      "id":2,
-      "name":"Lawnmower Dog",
-      "episode":"S02E01",
-      "users": [
-        "https://http://localhost:3000/users/2",
-        "https://http://localhost:3000/users/5",
-        "https://http://localhost:3000/users/10",
-        "https://http://localhost:3000/users/12",
-        "https://http://localhost:3000/users/13",
-        "https://http://localhost:3000/users/1",
-        "https://http://localhost:3000/users/9"
-      ],
-      "url":"https://http://localhost:3000/episodes/2",
-      "created":"2017-11-10T10:16:45.022Z"
-    },
-    {
-      "id":3,
-      "name":"Anatomy Park",
-      "episode":"S02E02",
-      "users": [
-        "https://http://localhost:3000/users/3",
-        "https://http://localhost:3000/users/6",
-        "https://http://localhost:3000/users/2",
-        "https://http://localhost:3000/users/9",
-        "https://http://localhost:3000/users/7"
-      ],
-      "url":"https://http://localhost:3000/episodes/3",
-      "created":"2017-11-10T11:02:12.916Z"
-    },
-    {
-      "id":4,
-      "name":"Meeseeks and Destroy",
-      "episode":"S03E01",
-      "users": [
-        "https://http://localhost:3000/users/8",
-        "https://http://localhost:3000/users/12",
-        "https://http://localhost:3000/users/1",
-        "https://http://localhost:3000/users/16"
-      ],
-      "url":"https://http://localhost:3000/episodes/4",
-      "created":"2017-11-10T12:16:12.236Z"
-    },
-    {
-      "id":5,
-      "name":"Rick Potion",
-      "episode":"S03E02",
-      "users": [
-        "https://http://localhost:3000/users/2",
-        "https://http://localhost:3000/users/13",
-        "https://http://localhost:3000/users/11",
-        "https://http://localhost:3000/users/1",
-        "https://http://localhost:3000/users/4",
-        "https://http://localhost:3000/users/6",
-        "https://http://localhost:3000/users/2"
-      ],
-      "url":"https://http://localhost:3000/episodes/5",
-      "created":"2017-11-10T14:38:31.339Z"
-    },
-    {
-      "id":6,
-      "name":"Raising Gazorpazorp",
-      "episode":"S03E03",
-      "users": [
-        "https://http://localhost:3000/users/7",
-        "https://http://localhost:3000/users/8",
-        "https://http://localhost:3000/users/16",
-        "https://http://localhost:3000/users/3",
-        "https://http://localhost:3000/users/4"
-      ],
-      "url":"https://http://localhost:3000/episodes/6",
-      "created":"2017-11-10T16:02:55.441Z"
-    }
-  ],
+    "results":[
+      {
+        "id":1,
+        "name":"Pilot",
+        "episode":"S01E01",
+        "users": [
+          "https://http://localhost:3000/users/1",
+          "https://http://localhost:3000/users/4",
+          "https://http://localhost:3000/users/9",
+          "https://http://localhost:3000/users/11",
+          "https://http://localhost:3000/users/13",
+          "https://http://localhost:3000/users/14",
+          "https://http://localhost:3000/users/16",
+          "https://http://localhost:3000/users/2",
+          "https://http://localhost:3000/users/3",
+          "https://http://localhost:3000/users/5"
+        ],
+        "url":"https://http://localhost:3000/episodes/1",
+        "created":"2017-11-10T08:16:33.798Z"
+      },
+      {
+        "id":2,
+        "name":"Lawnmower Dog",
+        "episode":"S02E01",
+        "users": [
+          "https://http://localhost:3000/users/2",
+          "https://http://localhost:3000/users/5",
+          "https://http://localhost:3000/users/10",
+          "https://http://localhost:3000/users/12",
+          "https://http://localhost:3000/users/13",
+          "https://http://localhost:3000/users/1",
+          "https://http://localhost:3000/users/9"
+        ],
+        "url":"https://http://localhost:3000/episodes/2",
+        "created":"2017-11-10T10:16:45.022Z"
+      },
+      {
+        "id":3,
+        "name":"Anatomy Park",
+        "episode":"S02E02",
+        "users": [
+          "https://http://localhost:3000/users/3",
+          "https://http://localhost:3000/users/6",
+          "https://http://localhost:3000/users/2",
+          "https://http://localhost:3000/users/9",
+          "https://http://localhost:3000/users/7"
+        ],
+        "url":"https://http://localhost:3000/episodes/3",
+        "created":"2017-11-10T11:02:12.916Z"
+      },
+      {
+        "id":4,
+        "name":"Meeseeks and Destroy",
+        "episode":"S03E01",
+        "users": [
+          "https://http://localhost:3000/users/8",
+          "https://http://localhost:3000/users/12",
+          "https://http://localhost:3000/users/1",
+          "https://http://localhost:3000/users/16"
+        ],
+        "url":"https://http://localhost:3000/episodes/4",
+        "created":"2017-11-10T12:16:12.236Z"
+      },
+      {
+        "id":5,
+        "name":"Rick Potion",
+        "episode":"S03E02",
+        "users": [
+          "https://http://localhost:3000/users/2",
+          "https://http://localhost:3000/users/13",
+          "https://http://localhost:3000/users/11",
+          "https://http://localhost:3000/users/1",
+          "https://http://localhost:3000/users/4",
+          "https://http://localhost:3000/users/6",
+          "https://http://localhost:3000/users/2"
+        ],
+        "url":"https://http://localhost:3000/episodes/5",
+        "created":"2017-11-10T14:38:31.339Z"
+      },
+      {
+        "id":6,
+        "name":"Raising Gazorpazorp",
+        "episode":"S03E03",
+        "users": [
+          "https://http://localhost:3000/users/7",
+          "https://http://localhost:3000/users/8",
+          "https://http://localhost:3000/users/16",
+          "https://http://localhost:3000/users/3",
+          "https://http://localhost:3000/users/4"
+        ],
+        "url":"https://http://localhost:3000/episodes/6",
+        "created":"2017-11-10T16:02:55.441Z"
+      }
+    ]
+  },
+
   "users": [
     {
       "id": 1,
