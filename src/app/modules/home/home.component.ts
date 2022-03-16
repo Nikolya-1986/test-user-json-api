@@ -41,12 +41,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
+    this._downloadDataUser();
+    this.fetchLanguages();
+    this.fetchQueryParams();
+  };
+
+  private _downloadDataUser(): void {
     this.store.dispatch(userActions.loadUsersRequest());
     this.isLoading$ = this.store.pipe(select(userSelectors.getIsLoadingSelector));
     this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
     this.error$ = this.store.pipe(select(userSelectors.getFailSelector));
-    this.fetchLanguages();
-    this.fetchQueryParams();
   };
   
   public onDetailUser(id: number): void {

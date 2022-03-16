@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { logOut } from '../../store/auth/auth.actions';
 import { AuthState } from '../../store/auth/auth.state';
-import { selectIsAuthenticated } from '../../store/auth/auth.selector';
+import { selectIsAuthenticated } from '../../store/auth/auth.selectors';
 import { FacadeService } from 'src/app/services/facades/facade.service';
 
 @Component({
