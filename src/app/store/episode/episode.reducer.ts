@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import * as fromEpisodeActions from "./episode.actons";
+import * as fromEpisodeActions from "./episode.actions";
 import { EpisodeState, initialEpisodeState } from "./episode.state";
 
 const _episodeReducerInternal = createReducer (

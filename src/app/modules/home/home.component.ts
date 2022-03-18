@@ -5,10 +5,14 @@ import { takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
+import { FacadeService } from '../../services/facades/facade.service';
+import { EpisodeDTO } from '../../interfaces/episode.interface';
+import { EpisodeState } from '../../store/episode/episode.state';
+import { UserState } from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
-import AppUserState from '../../store/user/user.state';
-import { FacadeService } from 'src/app/services/facades/facade.service';
+import * as fromEpisodeSelectors from '../../store/episode/episode.selectors';
+import * as fromEpisodeActions from '../../store/episode/episode.actions';
 
 @Component({
   selector: 'app-home',
@@ -18,8 +22,10 @@ import { FacadeService } from 'src/app/services/facades/facade.service';
 export class HomeComponent implements OnInit, OnDestroy {
 
   public users$!: Observable<UserDTO[]>;
+  public episodes$!: Observable<EpisodeDTO[]>;
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
+  public errorEpisodes$!: Observable<string | null>;
   public destroy$: Subject<boolean> = new Subject();
   public searchUserName: string = '';
   public filterUserNameAge: string = 'Default';
@@ -34,7 +40,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   public filterUserAvailable!: boolean;
 
   constructor(
-    private store: Store<AppUserState>,
+    private _storeUser: Store<UserState>,
+    private _storeEpisode: Store<EpisodeState>,
     private _facadeService: FacadeService,
     private activateRoute: ActivatedRoute,
     private router: Router,
@@ -42,15 +49,22 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this._downloadDataUser();
+    this._downloadDataEpisodes();
     this.fetchLanguages();
     this.fetchQueryParams();
   };
 
   private _downloadDataUser(): void {
-    this.store.dispatch(userActions.loadUsersRequest());
-    this.isLoading$ = this.store.pipe(select(userSelectors.getIsLoadingSelector));
-    this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
-    this.error$ = this.store.pipe(select(userSelectors.getFailSelector));
+    this._storeUser.dispatch(userActions.loadUsersRequest());
+    this.isLoading$ = this._storeUser.pipe(select(userSelectors.getIsLoadingSelector));
+    this.users$ = this._storeUser.pipe(select(userSelectors.getUsersSelector));
+    this.error$ = this._storeUser.pipe(select(userSelectors.getFailSelector));
+  };
+
+  private _downloadDataEpisodes(): void {
+    this._storeEpisode.dispatch(fromEpisodeActions.loadEpisodesRequest());
+    this.episodes$ = this._storeEpisode.pipe(select(fromEpisodeSelectors.getEpisodesSelector));
+    this.errorEpisodes$ = this._storeEpisode.pipe(select(fromEpisodeSelectors.getFailSelector))
   };
   
   public onDetailUser(id: number): void {

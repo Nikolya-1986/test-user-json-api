@@ -22,4 +22,4 @@ export const getUserSelector = createSelector (
 export const getFailSelector = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.errorMessage,
-)
+);

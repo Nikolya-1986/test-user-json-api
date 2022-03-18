@@ -1,17 +1,13 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import AppUserState from '../../store/user/user.state';
 import { FacadeService } from '../../services/facades/facade.service';
 import * as fromUserSelectors from '../../store/user/user.selectors';
 import * as fromUserActions from '../../store/user/user.actions';
-import { EpisodeState } from 'src/app/store/episode/episode.state';
-import { EpisodeDTO } from 'src/app/interfaces/episode.interface';
-import * as fromEpisodeSelectors from 'src/app/store/episode/episode.selectors';
-import * as fromEpisodeActions from 'src/app/store/episode/episode.actons';
 
 @Component({
   selector: 'app-description',
@@ -23,8 +19,6 @@ export class DescriptionComponent implements OnInit {
   @ViewChild('modal', { read: ViewContainerRef, static: false })
   private viewContainerRef!: ViewContainerRef;
   public userDetails$!: Observable<UserDTO | any>;
-  public episodes$!: Observable<EpisodeDTO[]>;
-  public errorEpisodes$!: Observable<string | null>;
   public userId!: number;
   public showTable!: boolean;
   public showText!: boolean;
@@ -34,14 +28,12 @@ export class DescriptionComponent implements OnInit {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private _store: Store<AppUserState>,
-    private _storeEpisode: Store<EpisodeState>,
     private _facadeService: FacadeService,
     private _router: Router,
   ) {}
 
   public ngOnInit(): void {
     this.fetchUserDetail();
-    this._fetchEpisodes();
   };
 
   private fetchUserDetail(): Observable<UserDTO> {
@@ -56,12 +48,6 @@ export class DescriptionComponent implements OnInit {
     )
     return this.userDetails$;
   };
-
-  private _fetchEpisodes(): void {
-    this._storeEpisode.dispatch(fromEpisodeActions.loadEpisodesRequest());
-    this.episodes$ = this._storeEpisode.pipe(select(fromEpisodeSelectors.getEpisodesSelector));
-    this.errorEpisodes$ = this._storeEpisode.pipe(select(fromEpisodeSelectors.getFailSelector))
-  }
 
   public onPreviousImage({ previous, images }: { previous: number, images: Picture[] }): void {
     this.currentImage = previous < 0 ? images.length - 1 : previous;

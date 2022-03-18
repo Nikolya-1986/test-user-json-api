@@ -15,7 +15,6 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { ErrorComponent } from './components/error/error.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { userReducer } from './store/user/user.reducer';
 import { UsersEffects } from './store/user/user.effects';
 import { IsLoadingInterceptor } from './interseptors/isLoading.interceptor';
 import { MaterialExampleModule } from './material-example.module';
@@ -24,6 +23,8 @@ import { AuthGuardService as AuthGuard } from './modules/auth/services/auth-guar
 import { AuthInterceptor } from './interseptors/auth.interceptor';
 import { ErrorInterceptor } from './interseptors/error.interceptor';
 import { AuthService } from './modules/auth/services/auth.service';
+import { appReducer } from './store/app.state';
+import { EpisodeEffects } from './store/episode/episode.effects';
 
 const ISLOADING_INTERSEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -57,12 +58,12 @@ const ERROR_INTERSEPTOR: Provider = {
     MatNativeDateModule,
     HttpClientModule,
     MaterialExampleModule,
-    StoreModule.forRoot(userReducer),
+    StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({ 
       maxAge: 25, 
       logOnly: environment.production 
     }),
-    EffectsModule.forRoot([UsersEffects]),
+    EffectsModule.forRoot([UsersEffects, EpisodeEffects]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
     }),

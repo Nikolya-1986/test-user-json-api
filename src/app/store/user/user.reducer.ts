@@ -1,10 +1,10 @@
-import { ActionReducerMap, createReducer, on } from "@ngrx/store";
+import { Action, createReducer, on } from "@ngrx/store";
 
+import * as fromUserState from "./user.state";
 import * as fromUserActions from "./user.actions";
-import AppUserState, {initialUserState} from "./user.state";
 
 const _userReduserInternal = createReducer (
-    initialUserState,
+    fromUserState.initialUserState,
     on(fromUserActions.loadStart, state => ({
         ...state,
         loadCouter: state.loadCouter + 1,
@@ -64,6 +64,6 @@ const _userReduserInternal = createReducer (
     })),
 );
 
-export const userReducer: ActionReducerMap<AppUserState> = {
-    user: _userReduserInternal,
-}
+export function userReducer(state: fromUserState.UserState | undefined, action: Action) {
+    return _userReduserInternal(state, action);
+};

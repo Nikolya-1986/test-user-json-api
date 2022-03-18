@@ -6,6 +6,7 @@ import { episodeReducer } from './episode/episode.reducer';
 import { userReducer } from './user/user.reducer';
 import { EpisodeState } from './episode/episode.state';
 import { UserState } from './user/user.state';
+import { ActionReducerMap } from '@ngrx/store';
 
 export interface AppState {
     [EPISODE_STATE_NAME]: EpisodeState;
@@ -13,7 +14,7 @@ export interface AppState {
     router: RouterReducerState;
 };
 
-export const appReducer = {
+export const appReducer: ActionReducerMap<AppState> = {
     [EPISODE_STATE_NAME]: episodeReducer,
     [USER_STATE_NAME]: userReducer,
     router: routerReducer,

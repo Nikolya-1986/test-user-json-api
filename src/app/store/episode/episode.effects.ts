@@ -4,7 +4,7 @@ import { Action } from "@ngrx/store";
 import { catchError, map, Observable, of, switchMap } from "rxjs";
 
 import { FacadeService } from "../../services/facades/facade.service";
-import * as fromEpisodeActions from "./episode.actons";
+import * as fromEpisodeActions from "./episode.actions";
 
 @Injectable()
 export class EpisodeEffects {
