@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { delay, map } from 'rxjs/operators';
 
+import { EpisodeDTO } from "../interfaces/episode.interface";
 import { UserDTO } from "../interfaces/user.interface";
 
 @Injectable({
@@ -22,24 +23,24 @@ export class UserService {
         }),
     };
 
-    public getUsers(): Observable<UserDTO[]> {
-        return this._httpClient.get<UserDTO[]>(`${this.BASE_URL}/users`);
+    public getUsers(): Observable<UserDTO<EpisodeDTO>[]> {
+        return this._httpClient.get<UserDTO<EpisodeDTO>[]>(`${this.BASE_URL}/users`);
     };
 
-    public getUser(id: number): Observable<UserDTO> {
-        return this._httpClient.get<UserDTO>(`${this.BASE_URL}/users/${id}`, this.httpHeader)
+    public getUser(id: number): Observable<UserDTO<EpisodeDTO>> {
+        return this._httpClient.get<UserDTO<EpisodeDTO>>(`${this.BASE_URL}/users/${id}`, this.httpHeader)
     };
 
-    public deleteUser(id: number): Observable<UserDTO> {
-        return this._httpClient.delete<UserDTO>(`${this.BASE_URL}/users/${id}`, this.httpHeader)
+    public deleteUser(id: number): Observable<UserDTO<EpisodeDTO>> {
+        return this._httpClient.delete<UserDTO<EpisodeDTO>>(`${this.BASE_URL}/users/${id}`, this.httpHeader)
     };
 
-    public editUser(user: UserDTO): Observable<UserDTO> {
-        return this._httpClient.put<UserDTO>(`${this.BASE_URL}/users/${user.id}`, JSON.stringify(user), this.httpHeader)
+    public editUser(user: UserDTO<EpisodeDTO>): Observable<UserDTO<EpisodeDTO>> {
+        return this._httpClient.put<UserDTO<EpisodeDTO>>(`${this.BASE_URL}/users/${user.id}`, JSON.stringify(user), this.httpHeader)
     };
 
-    public createUser(user: UserDTO): Observable<UserDTO> {
-        return this._httpClient.post<UserDTO>(`${this.BASE_URL}/users`, JSON.stringify(user), this.httpHeader);
+    public createUser(user: UserDTO<EpisodeDTO>): Observable<UserDTO<EpisodeDTO>> {
+        return this._httpClient.post<UserDTO<EpisodeDTO>>(`${this.BASE_URL}/users`, JSON.stringify(user), this.httpHeader);
     };
 
     public getLanguages(): Observable<string[]> {
@@ -52,7 +53,7 @@ export class UserService {
         );
     };
 
-    private uniqueLanguages(userDTO: UserDTO[]): string[] {
+    private uniqueLanguages(userDTO: UserDTO<EpisodeDTO>[]): string[] {
         const arraysLanguages = userDTO.map(users => users.language);
         const arrayLanguages = arraysLanguages.reduce((acc, item) => {
             const uniqueLanguages = [...new Set(acc.concat(item))];

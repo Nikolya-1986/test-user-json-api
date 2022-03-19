@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
+import { EpisodeDTO } from '../../../../interfaces/episode.interface';
 import { Gender, Status, UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
@@ -10,7 +11,7 @@ import { Gender, Status, UserDTO } from '../../../../interfaces/user.interface';
 export class UsersCardsComponent implements AfterContentInit {
 
   @ContentChild('contentImage') private contentImageElementRef!: ElementRef;
-  @Input() public users: UserDTO[] | any;
+  @Input() public users: UserDTO<EpisodeDTO>[] | any;
   @Input() public error: string | any;
   @Input() public searchUserName!: string;
   @Input() public filterUserNameAge!: string;

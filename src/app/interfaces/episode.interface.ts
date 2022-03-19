@@ -6,16 +6,13 @@ export interface EpisodeDTO {
     id: number,
     name: string,
     episode: string,
-    users: string[],
+    users: any[],
     url: string,
     created: string,
 };
 
+
 export interface Episode {
-    id: number,
     name: string,
-    episode: string,
-    users: number[],
     url: string,
-    created: string,
 };

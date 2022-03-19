@@ -4,6 +4,7 @@ import { filter, fromEvent, map, Observable, Subscription, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { UserDTO } from '../../interfaces/user.interface';
+import { EpisodeDTO } from '../../interfaces/episode.interface';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
@@ -162,7 +163,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     if(this.formCreate.valid){
       const newUser = this.formCreate.getRawValue();
       const id = Math.random();
-      const userCreate: UserDTO = {
+      const userCreate: UserDTO<EpisodeDTO> = {
         ...newUser,
         id: id,
         picture: this.picture,

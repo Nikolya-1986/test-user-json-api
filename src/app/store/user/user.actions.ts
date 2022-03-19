@@ -1,4 +1,5 @@
 import { createAction, props, union } from "@ngrx/store";
+import { EpisodeDTO } from "src/app/interfaces/episode.interface";
 
 import { UserDTO } from "../../interfaces/user.interface";
 
@@ -37,47 +38,47 @@ export const loadUsersRequest = createAction (
 
 export const loadUsersSuccess = createAction (
     UsersActionsType.LOAD_USERS_SUCCESS,
-    props<{users: UserDTO[]}>(),
+    props<{ users: UserDTO<EpisodeDTO>[] }>(),
 );
 
 export const loadUserRequest = createAction (
     UsersActionsType.LOAD_USER_REQUEST,
-    props<{userId: number}>(),
+    props<{ userId: number }>(),
 );
 
 export const loadUserSuccess = createAction (
     UsersActionsType.LOAD_USER_SUCCESS,
-    props<{user: UserDTO}>(),
+    props<{ user: UserDTO<EpisodeDTO> }>(),
 );
 
 export const deleteUserRequest = createAction (
     UsersActionsType.DELETE_USER_REQUEST,
-    props<{userId: number}>(),
+    props<{ userId: number }>(),
 );
 
 export const deleteUserSuccess = createAction (
     UsersActionsType.DELETE_USER_SUCCESS,
-    props<{userId: number}>(),
+    props<{ userId: number }>(),
 );
 
 export const editUserRequest = createAction (
     UsersActionsType.EDIT_USER_REQUEST,
-    props<({userEdit: UserDTO})>(),
+    props<({ userEdit: UserDTO<EpisodeDTO> })>(),
 );
 
 export const editUserSuccess = createAction (
     UsersActionsType.EDIT_USER_SUCCESS,
-    props<({userEdit: UserDTO})>(),
+    props<({ userEdit: UserDTO<EpisodeDTO> })>(),
 );
 
 export const createUserRequest = createAction (
     UsersActionsType.CREATE_USER_REQUEST,
-    props<{userCreate: UserDTO}>(),
+    props<{ userCreate: UserDTO<EpisodeDTO> }>(),
 );
 
 export const createUserSuccess = createAction (
     UsersActionsType.CREATE_USER_SUCCESS,
-    props<{userCreate: UserDTO}>(),
+    props<{ userCreate: UserDTO<EpisodeDTO> }>(),
 );
 
 const allUserActions = union({

@@ -1,7 +1,9 @@
 <div 
     class="user__conteiner user"
     (click)="getailUser()">
-    <div class="user__head" *ngFor="let image of user.picture  | slice:0:1">
+    <div class="user__head" 
+        *ngFor="let image of user.picture  | slice:0:1"
+        >
         <img 
             [src]="image.src" 
             class="user__image"
@@ -29,6 +31,9 @@
             </li>
             <li>
                 Languages: {{ user.language }}
+            </li>
+            <li>
+                Episodes: {{ user.episode?.name }}
             </li>
         </ul>
         <ng-content select="p"></ng-content>

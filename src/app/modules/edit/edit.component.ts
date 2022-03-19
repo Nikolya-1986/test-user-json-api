@@ -7,6 +7,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
+import { EpisodeDTO } from '../../interfaces/episode.interface';
 import AppUserState from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
@@ -27,7 +28,7 @@ export class EditComponent implements OnInit {
 
   @ViewChild('languageList') languageList!: MatChipList;
   @ViewChild('uploadControl') public uploadControl!: ElementRef;
-  public userEdit$!: Observable<UserDTO | any>;
+  public userEdit$!: Observable<UserDTO<EpisodeDTO> | any>;
   public destroy$: Subject<boolean> = new Subject;
   public userId!: number;
   public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
@@ -63,9 +64,9 @@ export class EditComponent implements OnInit {
         return this.userId;
       }),
       switchMap(() => this.store.select(userSelectors.getUserSelector)),
-      tap((user) => this.setFormValues(user as UserDTO))
+      tap((user) => this.setFormValues(user as UserDTO<EpisodeDTO>))
     )
-    return this.userEdit$ as unknown as Observable<UserDTO>;
+    return this.userEdit$ as unknown as Observable<UserDTO<EpisodeDTO>>;
   };
 
   public handleFormChanges(){
@@ -195,7 +196,7 @@ export class EditComponent implements OnInit {
     })
   };
 
-  private setFormValues(user: UserDTO): void {
+  private setFormValues(user: UserDTO<EpisodeDTO>): void {
     this.formEdit.patchValue({
       picture: 
       [
@@ -231,7 +232,7 @@ export class EditComponent implements OnInit {
     })
   };
 
-  public imageChange(event: Event | any, user: UserDTO): Observable<any>{
+  public imageChange(event: Event | any, user: UserDTO<EpisodeDTO>): Observable<any>{
 
     if (event.target.files && event.target.files[0]) {
       let filesAmount = event.target.files.length;
@@ -250,7 +251,7 @@ export class EditComponent implements OnInit {
     return this.editedImage;
   };
 
-  public deleteImage(ind: number, user: UserDTO): void {
+  public deleteImage(ind: number, user: UserDTO<EpisodeDTO>): void {
     const del = user.picture.splice(ind,1);
     console.log(del)
   };
@@ -280,10 +281,10 @@ export class EditComponent implements OnInit {
     this.language.removeAt(index);
   };
   
-  public onSubmit(userEdit: UserDTO):void {
+  public onSubmit(userEdit: UserDTO<EpisodeDTO>):void {
     if(this.formEdit.valid){
       const editedUser = this.formEdit.getRawValue();
-      const userUpdated: UserDTO = {
+      const userUpdated: UserDTO<EpisodeDTO> = {
         id: userEdit.id,
         ...editedUser,
       }

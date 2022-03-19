@@ -6,12 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import { FacadeService } from '../../services/facades/facade.service';
-import { EpisodeDTO } from '../../interfaces/episode.interface';
+import { Episode, EpisodeDTO } from '../../interfaces/episode.interface';
 import { EpisodeState } from '../../store/episode/episode.state';
 import { UserState } from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
 import * as userSelectors from '../../store/user/user.selectors';
-import * as fromEpisodeSelectors from '../../store/episode/episode.selectors';
 import * as fromEpisodeActions from '../../store/episode/episode.actions';
 
 @Component({
@@ -21,7 +20,7 @@ import * as fromEpisodeActions from '../../store/episode/episode.actions';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public users$!: Observable<UserDTO[]>;
+  public users$!: Observable<UserDTO<EpisodeDTO>[]>;
   public episodes$!: Observable<EpisodeDTO[]>;
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
@@ -48,23 +47,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this._downloadDataUser();
-    this._downloadDataEpisodes();
+    this._downloadDataUsers();
     this.fetchLanguages();
     this.fetchQueryParams();
   };
 
-  private _downloadDataUser(): void {
+  private _downloadDataUsers(): void {
     this._storeUser.dispatch(userActions.loadUsersRequest());
+    this._storeEpisode.dispatch(fromEpisodeActions.loadEpisodesRequest());
     this.isLoading$ = this._storeUser.pipe(select(userSelectors.getIsLoadingSelector));
     this.users$ = this._storeUser.pipe(select(userSelectors.getUsersSelector));
     this.error$ = this._storeUser.pipe(select(userSelectors.getFailSelector));
-  };
-
-  private _downloadDataEpisodes(): void {
-    this._storeEpisode.dispatch(fromEpisodeActions.loadEpisodesRequest());
-    this.episodes$ = this._storeEpisode.pipe(select(fromEpisodeSelectors.getEpisodesSelector));
-    this.errorEpisodes$ = this._storeEpisode.pipe(select(fromEpisodeSelectors.getFailSelector))
   };
   
   public onDetailUser(id: number): void {

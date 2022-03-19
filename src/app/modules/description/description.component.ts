@@ -4,8 +4,9 @@ import { map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
-import AppUserState from '../../store/user/user.state';
+import { EpisodeDTO } from '../../interfaces/episode.interface';
 import { FacadeService } from '../../services/facades/facade.service';
+import UserState from '../../store/user/user.state';
 import * as fromUserSelectors from '../../store/user/user.selectors';
 import * as fromUserActions from '../../store/user/user.actions';
 
@@ -18,7 +19,7 @@ export class DescriptionComponent implements OnInit {
 
   @ViewChild('modal', { read: ViewContainerRef, static: false })
   private viewContainerRef!: ViewContainerRef;
-  public userDetails$!: Observable<UserDTO | any>;
+  public userDetails$!: Observable<UserDTO<EpisodeDTO> | any>;
   public userId!: number;
   public showTable!: boolean;
   public showText!: boolean;
@@ -27,7 +28,7 @@ export class DescriptionComponent implements OnInit {
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _store: Store<AppUserState>,
+    private _store: Store<UserState>,
     private _facadeService: FacadeService,
     private _router: Router,
   ) {}
@@ -36,7 +37,7 @@ export class DescriptionComponent implements OnInit {
     this.fetchUserDetail();
   };
 
-  private fetchUserDetail(): Observable<UserDTO> {
+  private fetchUserDetail(): Observable<UserDTO<EpisodeDTO>> {
     this.userDetails$ = this._activatedRoute.params.pipe(
       map((params: Params) => {
         this.userId = Number(params['id']); 
@@ -57,7 +58,7 @@ export class DescriptionComponent implements OnInit {
     this.currentImage = next === images.length ? 0 : next;
   };
 
-  public onOpenModalDeleteUser(user: UserDTO): void {
+  public onOpenModalDeleteUser(user: UserDTO<EpisodeDTO>): void {
     this._facadeService.modalWindowUserDelete(
       this.viewContainerRef, 
       'Are you sure you want to delete the user?', 

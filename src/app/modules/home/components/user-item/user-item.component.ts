@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
+import { EpisodeDTO } from '../../../../interfaces/episode.interface';
 import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
@@ -10,7 +11,7 @@ import { UserDTO } from '../../../../interfaces/user.interface';
 export class UserItemComponent implements AfterContentInit {
 
   @ContentChild('contentText') private contentTextElementRef!: ElementRef;
-  @Input() public user!: UserDTO;
+  @Input() public user!: UserDTO<EpisodeDTO>;
   @Output() public detailCurrentUser = new EventEmitter<number>();
 
   constructor(

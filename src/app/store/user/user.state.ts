@@ -1,8 +1,9 @@
-import { UserDTO } from "src/app/interfaces/user.interface";
+import { EpisodeDTO } from "src/app/interfaces/episode.interface";
+import { UserDTO } from "../../interfaces/user.interface";
 
 export interface UserState {
-    userDTO: UserDTO[],
-    userSelected?: UserDTO,
+    userDTO: UserDTO<EpisodeDTO>[],
+    userSelected?: UserDTO<EpisodeDTO>,
     loadCouter: number,
     errorMessage: string,
 };

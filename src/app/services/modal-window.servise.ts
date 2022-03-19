@@ -2,6 +2,7 @@ import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } 
 import { Observable, Subject } from 'rxjs';
 
 import { ModalWindowComponent } from '../components/modal-window/modal-window.component';
+import { EpisodeDTO } from '../interfaces/episode.interface';
 import { UserDTO } from '../interfaces/user.interface';
 
 @Injectable({
@@ -16,7 +17,12 @@ export class ModalWindowService {
     private _resolver: ComponentFactoryResolver,
   ){}
 
-  public modalWindowUserDelete(viewContainerRef: ViewContainerRef, modalTitle: string, modalBody: string, user: UserDTO): Observable<string>{
+  public modalWindowUserDelete(
+    viewContainerRef: ViewContainerRef, 
+    modalTitle: string, 
+    modalBody: string, 
+    user: UserDTO<EpisodeDTO>
+    ): Observable<string> {
     const modalFactory  = this._resolver.resolveComponentFactory(ModalWindowComponent);
     this._componentRef = viewContainerRef.createComponent(modalFactory);
     this._componentRef.instance.title = modalTitle;

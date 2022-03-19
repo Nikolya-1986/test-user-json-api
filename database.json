@@ -19,20 +19,6 @@
     {
       "email": "nikolai_sergeevich@mail.ru",
       "password": "Admin:26.02.22",
-      "token": "83",
-      "returnSecureToken": true,
-      "id": 1
-    },
-    {
-      "email": "nikolai_sergeevich@mail.ru",
-      "password": "Admin:26.02.22",
-      "token": "21",
-      "returnSecureToken": true,
-      "id": 2
-    },
-    {
-      "email": "nikolai_sergeevich@mail.ru",
-      "password": "Admin:26.02.22",
       "token": "37",
       "returnSecureToken": true,
       "id": 3
@@ -90,7 +76,8 @@
           "https://http://localhost:3000/users/6",
           "https://http://localhost:3000/users/2",
           "https://http://localhost:3000/users/9",
-          "https://http://localhost:3000/users/7"
+          "https://http://localhost:3000/users/7",
+          "https://http://localhost:3000/users/15"
         ],
         "url": "https://http://localhost:3000/episodes/3",
         "created": "2017-11-10T11:02:12.916Z"
@@ -100,8 +87,10 @@
         "name": "Meeseeks and Destroy",
         "episode": "S03E01",
         "users": [
+          "https://http://localhost:3000/users/4",
           "https://http://localhost:3000/users/8",
           "https://http://localhost:3000/users/12",
+          "https://http://localhost:3000/users/14",
           "https://http://localhost:3000/users/1",
           "https://http://localhost:3000/users/16"
         ],
@@ -113,6 +102,7 @@
         "name": "Rick Potion",
         "episode": "S03E02",
         "users": [
+          "https://http://localhost:3000/users/5",
           "https://http://localhost:3000/users/2",
           "https://http://localhost:3000/users/13",
           "https://http://localhost:3000/users/11",
@@ -129,6 +119,7 @@
         "name": "Raising Gazorpazorp",
         "episode": "S03E03",
         "users": [
+          "https://http://localhost:3000/users/6",
           "https://http://localhost:3000/users/7",
           "https://http://localhost:3000/users/8",
           "https://http://localhost:3000/users/16",
@@ -149,6 +140,10 @@
         "title": "Mr",
         "first": "Stephen",
         "last": "May"
+      },
+      "episode" : {
+        "name": "Pilot",
+        "url": "https://http://localhost:3000/episodes/1"
       },
       "location": {
         "city": "Laytown",
@@ -196,6 +191,10 @@
         "first": "Marianne",
         "last": "Claire"
       },
+      "episode" : {
+        "name": "Lawnmower Dog",
+        "url": "https://http://localhost:3000/episodes/2"
+      },
       "location": {
         "city": "Carleton",
         "country": "Canada",
@@ -239,11 +238,15 @@
       "status": "single",
       "name": {
         "title": "Mr",
-        "first": "آرسین",
-        "last": "موسوی"
+        "first": "Arsin",
+        "last": "Mysavi"
+      },
+      "episode" : {
+        "name": "Anatomy Park",
+        "url": "https://http://localhost:3000/episodes/3"
       },
       "location": {
-        "city": "مشهد",
+        "city": "Meshed",
         "country": "Iran",
         "postcode": 90704,
         "coordinates": {
@@ -287,6 +290,10 @@
         "title": "Ms",
         "first": "Serenity",
         "last": "Cole"
+      },
+      "episode" : {
+        "name": "Meeseeks and Destroy",
+        "url": "https://http://localhost:3000/episodes/4"
       },
       "location": {
         "city": "Gladstone",
@@ -335,6 +342,10 @@
         "first": "Angelina",
         "last": "Finny"
       },
+      "episode" : {
+        "name": "Rick Potion",
+        "url": "https://http://localhost:3000/episodes/5"
+      },
       "location": {
         "city": "Lyngseidet",
         "country": "Norway",
@@ -380,6 +391,10 @@
         "title": "Mr",
         "first": "Valdemar",
         "last": "Olsen"
+      },
+      "episode" : {
+        "name": "Raising Gazorpazorp",
+        "url": "https://http://localhost:3000/episodes/6"
       },
       "location": {
         "city": "Sundby",
@@ -428,6 +443,10 @@
         "first": "Pippa",
         "last": "Green"
       },
+      "episode" : {
+        "name": "Anatomy Park",
+        "url": "https://http://localhost:3000/episodes/3"
+      },
       "location": {
         "city": "Whangarei",
         "country": "New Zealand",
@@ -473,6 +492,10 @@
         "title": "Ms",
         "first": "Beritiana",
         "last": "Nogueira"
+      },
+      "episode" : {
+        "name": "Raising Gazorpazorp",
+        "url": "https://http://localhost:3000/episodes/6"
       },
       "location": {
         "city": "Lages",
@@ -520,6 +543,10 @@
         "first": "Jeanne",
         "last": "Pelletier"
       },
+      "episode" : {
+        "name": "Pilot",
+        "url": "https://http://localhost:3000/episodes/1"
+      },
       "location": {
         "city": "Trout Lake",
         "country": "Canada",
@@ -565,6 +592,10 @@
         "title": "Mr",
         "first": "Alain",
         "last": "Nieuwland"
+      },
+      "episode" : {
+        "name": "Lawnmower Dog",
+        "url": "https://http://localhost:3000/episodes/2"
       },
       "location": {
         "city": "Numansdorp",
@@ -612,6 +643,10 @@
         "first": "Emilia",
         "last": "Ahola"
       },
+      "episode" : {
+        "name": "Rick Potion",
+        "url": "https://http://localhost:3000/episodes/5"
+      },
       "location": {
         "city": "Pelkosenniemi",
         "country": "Finland",
@@ -657,6 +692,10 @@
         "title": "Mr",
         "first": "Anh",
         "last": "Scholtz"
+      },
+      "episode" : {
+        "name": "Meeseeks and Destroy",
+        "url": "https://http://localhost:3000/episodes/4"
       },
       "location": {
         "city": "Nij Altoenae",
@@ -705,6 +744,10 @@
         "first": "Samah",
         "last": "Lommers"
       },
+      "episode" : {
+        "name": "Rick Potion",
+        "url": "https://http://localhost:3000/episodes/5"
+      },
       "location": {
         "city": "Rhoon",
         "country": "Netherlands",
@@ -750,6 +793,10 @@
         "title": "Miss",
         "first": "Harper",
         "last": "Bailey"
+      },
+      "episode" : {
+        "name": "Meeseeks and Destroy",
+        "url": "https://http://localhost:3000/episodes/4"
       },
       "location": {
         "city": "Shepparton",
@@ -797,6 +844,10 @@
         "first": "Kay",
         "last": "Masson"
       },
+      "episode" : {
+        "name": "Anatomy Park",
+        "url": "https://http://localhost:3000/episodes/3"
+      },
       "location": {
         "city": "Ursy",
         "country": "Switzerland",
@@ -842,6 +893,10 @@
         "title": "Miss",
         "first": "Margie",
         "last": "Bates"
+      },
+      "episode" : {
+        "name": "Raising Gazorpazorp",
+        "url": "https://http://localhost:3000/episodes/6"
       },
       "location": {
         "city": "Adelaide",

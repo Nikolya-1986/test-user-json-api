@@ -1,15 +1,15 @@
 import { EpisodeDTO } from "./episode.interface";
 
 export interface UsersDTO {
-    results: UserDTO[],
+    results: UserDTO<EpisodeDTO>[],
 };
 
-export interface UserDTO {
+export interface UserDTO<T> {
     id: number,
     gender: Gender,
     status: Status,
     name: Name,
-    episode: EpisodeDTO,
+    episode: T,
     location: Location,
     email: string,
     website: string,

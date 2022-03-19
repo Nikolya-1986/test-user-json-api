@@ -23,7 +23,11 @@ export class EpisodeService {
     return this._httpClient.get<EpisodesDTO>(`${this.BASE_URL}/episodes`);
   };
 
-  public getСhangedEpisodes(): Observable<Episode[]> {
+  public getEpisodesUrl(url: string): Observable<Episode> {
+    return this._httpClient.get<Episode>(url);
+  };
+
+  public getСhangedEpisodes(): Observable<EpisodeDTO[]> {
     return this.getEpisodes().pipe(
      map((data: EpisodesDTO) => {
        const episodes = data.results;
@@ -36,10 +40,10 @@ export class EpisodeService {
     );
   };
 
-  private convertUrlToId(userUrl: string): number {
-    const urlSplit = userUrl.split('/');
-    const lastIndex = urlSplit.length - 1;
-    const id = Number(urlSplit[lastIndex]);
+  private convertUrlToId<T>(userUrl: T): number {
+    const urlSplit = String(userUrl).split('/');// ['https:', '', 'http:', '', 'localhost:3000', 'users', '1']
+    const lastIndex = urlSplit.length - 1;//6
+    const id = Number(urlSplit[lastIndex]);//1
     return id;
   };
 
