@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 
 import AppUserState from "./user.state";
 import * as userActions from "./user.actions";
-import { getUsersSelector } from "./user.selectors";
+import * as fromUserSelectors from "./user.selectors";
 import { FacadeService } from "src/app/services/facades/facade.service";
 
 @Injectable()
@@ -32,7 +32,7 @@ export class UsersEffects {
             switchMap((action: any) => this._facadeService.getUser(action.userId)
                 .pipe(
                     withLatestFrom(
-                        this._store.select(getUsersSelector),
+                        this._store.select(fromUserSelectors.getUsers),
                     ),
                     map(([user, users]) => {
                         if (users) {

@@ -1,14 +1,18 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { map, Observable, Subject, switchMap, takeUntil } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { forkJoin, Observable, of, Subject, takeUntil } from 'rxjs';
+import { map, switchMap, tap } from "rxjs/operators";
+import { select, Store } from '@ngrx/store';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
-import { EpisodeDTO } from '../../interfaces/episode.interface';
+import { Episode, EpisodeDTO } from '../../interfaces/episode.interface';
 import { FacadeService } from '../../services/facades/facade.service';
 import UserState from '../../store/user/user.state';
 import * as fromUserSelectors from '../../store/user/user.selectors';
 import * as fromUserActions from '../../store/user/user.actions';
+import * as fromEpisodeSelectors from 'src/app/store/episode/episode.selectors';
+import { EpisodeState } from 'src/app/store/episode/episode.state';
+import { EpisodeService } from 'src/app/services/episode.service';
 
 @Component({
   selector: 'app-description',
@@ -28,27 +32,57 @@ export class DescriptionComponent implements OnInit {
 
   constructor(
     private _activatedRoute: ActivatedRoute,
-    private _store: Store<UserState>,
+    private _storeUsers: Store<UserState>,
+    private _episodeStore: Store<EpisodeState>,
+    private _episodeService: EpisodeService,
     private _facadeService: FacadeService,
     private _router: Router,
   ) {}
 
   public ngOnInit(): void {
-    this.fetchUserDetail();
+    this._downloadDataUserDetail();
   };
 
-  private fetchUserDetail(): Observable<UserDTO<EpisodeDTO>> {
+  private _downloadDataUserDetail(): Observable<UserDTO<EpisodeDTO>> {
     this.userDetails$ = this._activatedRoute.params.pipe(
       map((params: Params) => {
         this.userId = Number(params['id']); 
-        this._store.dispatch(fromUserActions.loadUserRequest({ userId: this.userId }));
+        this._storeUsers.dispatch(fromUserActions.loadUserRequest({ userId: this.userId }));
         return this.userId;
       }),
-      switchMap(() => this._store.select(fromUserSelectors.getUserSelector)),
+      switchMap(() => this._storeUsers.select(fromUserSelectors.getUser)),
       // tap(user => console.log(user)),
     )
     return this.userDetails$;
   };
+ 
+  // private _downloadDataUserDetail() {
+  //   this.userDetails$ = this._activatedRoute.params
+  //   .pipe(
+  //     map((params: Params) => {
+  //       this.userId = Number(params['id']); 
+  //       this._storeUsers.dispatch(fromUserActions.loadUserRequest({ userId: this.userId }));
+  //       return this.userId;
+  //     }),
+  //     switchMap(() => this._storeUsers.select(fromUserSelectors.getUser)),
+  //     switchMap((user) => {
+  //       // const getEpisodes$ = this._episodeStore.select(fromEpisodeSelectors.getEpisodesSelector);
+  //       const url = String(user?.episode.url);
+  //       const getEpisode$ = this._episodeService.getLocation(url);
+  //       const getUser$ = of(user);
+  //       return forkJoin([getEpisode$, getUser$]);
+  //     }),
+  //     map(([episode, user]): UserDTO<Episode> => {
+  //       const usersWithEpisodes: UserDTO<Episode> = {
+  //         ...user,
+  //         episode,
+  //       };
+  //       return usersWithEpisodes;
+  //     }),
+  //     takeUntil(this.destroy$),
+  //     // tap(user => console.log(user)),
+  //   )
+  // };
 
   public onPreviousImage({ previous, images }: { previous: number, images: Picture[] }): void {
     this.currentImage = previous < 0 ? images.length - 1 : previous;
@@ -69,7 +103,7 @@ export class DescriptionComponent implements OnInit {
       takeUntil(this.destroy$),
     )
     .subscribe(() => {
-      this._store.dispatch(fromUserActions.deleteUserRequest({ userId: user.id }));
+      this._storeUsers.dispatch(fromUserActions.deleteUserRequest({ userId: user.id }));
     })
   };
 

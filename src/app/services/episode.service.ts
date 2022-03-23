@@ -23,10 +23,9 @@ export class EpisodeService {
     return this._httpClient.get<EpisodesDTO>(`${this.BASE_URL}/episodes`);
   };
 
-  public getEpisodesUrl(url: string): Observable<Episode> {
+  public getLocation(url: string): Observable<Episode> {
     return this._httpClient.get<Episode>(url);
   };
-
   public getСhangedEpisodes(): Observable<EpisodeDTO[]> {
     return this.getEpisodes().pipe(
      map((data: EpisodesDTO) => {

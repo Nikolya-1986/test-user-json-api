@@ -9,17 +9,17 @@ export const getIsLoadingSelector = createSelector (
     (state: UserState) => state.loadCouter !== 0,
 );
 
-export const getUsersSelector = createSelector (
+export const getUsers = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.userDTO,
 );
 
-export const getUserSelector = createSelector (
+export const getUser = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.userSelected,
 );
 
-export const getFailSelector = createSelector (
+export const getFail = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.errorMessage,
 );

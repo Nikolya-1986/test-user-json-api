@@ -9,8 +9,6 @@ import { Store } from '@ngrx/store';
 import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import { EpisodeDTO } from '../../interfaces/episode.interface';
 import AppUserState from '../../store/user/user.state';
-import * as userActions from '../../store/user/user.actions';
-import * as userSelectors from '../../store/user/user.selectors';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { phoneValidator } from '../../validators/phone.validator';
@@ -18,6 +16,8 @@ import { websiteValidator } from '../../validators/wibsite.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { lengthValidator } from '../../validators/length.validator';
 import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
+import * as userActions from '../../store/user/user.actions';
+import * as fromUserSelectors from '../../store/user/user.selectors';
 
 @Component({
   selector: 'app-edit',
@@ -63,7 +63,7 @@ export class EditComponent implements OnInit {
         this.store.dispatch(userActions.loadUserRequest({ userId: this.userId }));
         return this.userId;
       }),
-      switchMap(() => this.store.select(userSelectors.getUserSelector)),
+      switchMap(() => this.store.select(fromUserSelectors.getUser)),
       tap((user) => this.setFormValues(user as UserDTO<EpisodeDTO>))
     )
     return this.userEdit$ as unknown as Observable<UserDTO<EpisodeDTO>>;

@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { map, Observable, Subject } from 'rxjs';
-import { takeUntil } from "rxjs/operators";
+import {map, Observable, Subject } from 'rxjs';
+import {takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import { FacadeService } from '../../services/facades/facade.service';
-import { Episode, EpisodeDTO } from '../../interfaces/episode.interface';
+import { EpisodeDTO } from '../../interfaces/episode.interface';
 import { EpisodeState } from '../../store/episode/episode.state';
 import { UserState } from '../../store/user/user.state';
 import * as userActions from '../../store/user/user.actions';
@@ -56,10 +56,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     this._storeUser.dispatch(userActions.loadUsersRequest());
     this._storeEpisode.dispatch(fromEpisodeActions.loadEpisodesRequest());
     this.isLoading$ = this._storeUser.pipe(select(userSelectors.getIsLoadingSelector));
-    this.users$ = this._storeUser.pipe(select(userSelectors.getUsersSelector));
-    this.error$ = this._storeUser.pipe(select(userSelectors.getFailSelector));
+    this.users$ = this._storeUser.pipe(select(userSelectors.getUsers));
+    this.error$ = this._storeUser.pipe(select(userSelectors.getFail));
   };
-  
+
   public onDetailUser(id: number): void {
     this.router.navigate(['description', id]);
   };

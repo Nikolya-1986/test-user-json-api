@@ -15,5 +15,5 @@ export const getEpisodesSelector = createSelector (
 
 export const getFailSelector = createSelector (
     getEpisodesFeatureState,
-    getError,
+    getEpisodes,
 );

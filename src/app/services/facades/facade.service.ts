@@ -8,7 +8,7 @@ import { UserService } from "../user.service";
 import { ModalWindowService } from "../modal-window.servise";
 import { ErrorService } from "../error.service";
 import { EpisodeService } from "../episode.service";
-import { EpisodeDTO, EpisodesDTO } from "../../interfaces/episode.interface";
+import { Episode, EpisodeDTO, EpisodesDTO } from "../../interfaces/episode.interface";
 
 @Injectable({
     providedIn: 'root',

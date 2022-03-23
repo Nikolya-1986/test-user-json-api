@@ -1,4 +1,4 @@
-import { EpisodeDTO } from "src/app/interfaces/episode.interface";
+import { Episode, EpisodeDTO } from "src/app/interfaces/episode.interface";
 import { UserDTO } from "../../interfaces/user.interface";
 
 export interface UserState {

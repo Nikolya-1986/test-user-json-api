@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { delay, map } from 'rxjs/operators';
 
-import { EpisodeDTO } from "../interfaces/episode.interface";
+import { Episode, EpisodeDTO } from "../interfaces/episode.interface";
 import { UserDTO } from "../interfaces/user.interface";
 
 @Injectable({

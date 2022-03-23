@@ -22,7 +22,7 @@ export class ExtraDescriptionResolver implements Resolve<UserDTO<EpisodeDTO>> {
         const userId = activatedRoute.params['id'];
     
         return this.store.pipe(
-            select(fromUserSelectors.getUserSelector),
+            select(fromUserSelectors.getUser),
             tap(user => {
                 if(!user) {
                     this.store.dispatch(fromUserActions.loadUserRequest({ userId: userId }))

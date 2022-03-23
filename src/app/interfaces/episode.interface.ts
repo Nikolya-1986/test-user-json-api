@@ -5,10 +5,11 @@ export interface EpisodesDTO {
 export interface EpisodeDTO {
     id: number,
     name: string,
-    episode: string,
+    track: string,
     users: any[],
     url: string,
     created: string,
+    completed: string,
 };
 
 

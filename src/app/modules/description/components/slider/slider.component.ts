@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { EpisodeDTO } from '../../../../interfaces/episode.interface';
+import { Episode, EpisodeDTO } from '../../../../interfaces/episode.interface';
 import { Picture, UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
