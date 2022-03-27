@@ -1,29 +1,15 @@
-<section class="user__episode episode">
+<section class="user__episode episode"
+    *ngIf="showTable"
+    >
     <!-- <ng-template> -->
-        <table class="episode__table"
-            *ngFor="let item of TABLE_EPISODE">
+        <table class="episode__table">
             <caption>
                 Episodes
             </caption>
             <thead>
                 <tr>
-                    <th>
-                        {{ item.url }}
-                    </th>
-                    <th>
-                        {{ item.name }}
-                    </th>
-                    <th>
-                        {{ item.track }}
-                    </th>
-                    <th>
-                        {{ item.created }}
-                    </th>
-                    <th>
-                        {{ item.completed }}
-                    </th>
-                    <th>
-                        Lasted
+                    <th *ngFor="let column of TABLE_EPISODE_HEADER">
+                        {{ column  }}
                     </th>
                 </tr>
             </thead>

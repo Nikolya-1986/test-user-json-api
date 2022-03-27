@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
-import { Episode, EpisodeDTO } from '../../../../interfaces/episode.interface';
+import { EpisodeDTO } from '../../../../interfaces/episode.interface';
 import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({

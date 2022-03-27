@@ -12,7 +12,9 @@ import * as fromDescriptonConstants from '../../description-constants';
 export class EpisodesComponent implements OnInit {
 
   @Input() public userDetails!: UserDTO<EpisodeDTO>;
-  readonly TABLE_EPISODE = fromDescriptonConstants.TABLE_EPISODE
+  @Input() public showTable!: boolean;
+  
+  readonly TABLE_EPISODE_HEADER = fromDescriptonConstants.TABLE_EPISODE_HEADER;
 
   constructor() { }
 

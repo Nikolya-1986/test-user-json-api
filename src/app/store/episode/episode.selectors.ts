@@ -5,15 +5,15 @@ import { EpisodeState } from "./episode.state";
 export const EPISODE_STATE_NAME = 'episode';
 export const getEpisodesFeatureState = createFeatureSelector<EpisodeState>(EPISODE_STATE_NAME);
 
-const getEpisodes = (state: EpisodeState): EpisodeDTO[] => state.episodeDTO;
+const episodes = (state: EpisodeState): EpisodeDTO[] => state.episodeDTO;
 const getError = (state: EpisodeState): string | null => state.errorMessage;
 
-export const getEpisodesSelector = createSelector (
+export const getEpisodes = createSelector (
     getEpisodesFeatureState,
-    getEpisodes,
+    episodes,
 );
 
-export const getFailSelector = createSelector (
+export const getFail = createSelector (
     getEpisodesFeatureState,
     getEpisodes,
 );

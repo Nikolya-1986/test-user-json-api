@@ -9,6 +9,8 @@ import AppUserState from "./user.state";
 import * as userActions from "./user.actions";
 import * as fromUserSelectors from "./user.selectors";
 import { FacadeService } from "src/app/services/facades/facade.service";
+import { Position } from "src/app/interfaces/position.interface";
+import { UserDTO } from "src/app/interfaces/user.interface";
 
 @Injectable()
 export class UsersEffects {
@@ -18,9 +20,9 @@ export class UsersEffects {
             ofType(userActions.UsersActionsType.LOAD_USERS_REQUEST),
             switchMap(() => this._facadeService.getUsers()
                 .pipe(
-                    map((users) => userActions.loadUsersSuccess({users})),
+                    map((users) => userActions.loadUsersSuccess({ users })),
                     catchError((error) => of(userActions.getFail(error))),
-                )
+                ) 
             )
         ),
         { useEffectsErrorHandler: false }

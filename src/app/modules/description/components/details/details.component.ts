@@ -37,4 +37,5 @@ export class DetailsComponent implements OnInit, AfterContentInit {
   public editUser(): void {
     this.editCurrentUser.emit(this.userDetails.id);
   };
+
 }

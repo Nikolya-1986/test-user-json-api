@@ -11,9 +11,3 @@ export interface EpisodeDTO {
     created: string,
     completed: string,
 };
-
-
-export interface Episode {
-    name: string,
-    url: string,
-};

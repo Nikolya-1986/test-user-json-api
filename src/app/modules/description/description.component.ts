@@ -2,17 +2,17 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { forkJoin, Observable, of, Subject, takeUntil } from 'rxjs';
 import { map, switchMap, tap } from "rxjs/operators";
-import { select, Store } from '@ngrx/store';
+import {  select, Store } from '@ngrx/store';
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
-import { Episode, EpisodeDTO } from '../../interfaces/episode.interface';
+import { Position, PositionDTO } from '../../interfaces/position.interface';
+import { UserStoreFacade } from '../../store/user/user-store.facade';
 import { FacadeService } from '../../services/facades/facade.service';
 import UserState from '../../store/user/user.state';
-import * as fromUserSelectors from '../../store/user/user.selectors';
 import * as fromUserActions from '../../store/user/user.actions';
-import * as fromEpisodeSelectors from 'src/app/store/episode/episode.selectors';
 import { EpisodeState } from 'src/app/store/episode/episode.state';
-import { EpisodeService } from 'src/app/services/episode.service';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-description',
@@ -23,19 +23,19 @@ export class DescriptionComponent implements OnInit {
 
   @ViewChild('modal', { read: ViewContainerRef, static: false })
   private viewContainerRef!: ViewContainerRef;
-  public userDetails$!: Observable<UserDTO<EpisodeDTO> | any>;
-  public userId!: number;
+  public userDetails$!: Observable<UserDTO<Position> | any>;
   public showTable!: boolean;
   public showText!: boolean;
   public currentImage: number = 0;
-  public destroy$: Subject<boolean> = new Subject();
+  private _destroy$: Subject<boolean> = new Subject();
 
   constructor(
+    private _userStoreFacade: UserStoreFacade,
     private _activatedRoute: ActivatedRoute,
     private _storeUsers: Store<UserState>,
     private _episodeStore: Store<EpisodeState>,
-    private _episodeService: EpisodeService,
     private _facadeService: FacadeService,
+    private _userService: UserService,
     private _router: Router,
   ) {}
 
@@ -43,46 +43,33 @@ export class DescriptionComponent implements OnInit {
     this._downloadDataUserDetail();
   };
 
-  private _downloadDataUserDetail(): Observable<UserDTO<EpisodeDTO>> {
+  private _downloadDataUserDetail(): Observable<UserDTO<Position>> {
     this.userDetails$ = this._activatedRoute.params.pipe(
       map((params: Params) => {
-        this.userId = Number(params['id']); 
-        this._storeUsers.dispatch(fromUserActions.loadUserRequest({ userId: this.userId }));
-        return this.userId;
+        const userId =  Number(params['id']);
+        this._userStoreFacade.loadUser(userId);
+        return userId;
       }),
-      switchMap(() => this._storeUsers.select(fromUserSelectors.getUser)),
-      // tap(user => console.log(user)),
-    )
+      switchMap((userId: number) => this._userStoreFacade.getUser$),
+      switchMap((user) => {
+        const url = user?.position.url as string;
+        console.log(url);
+        
+        const getPosition$ = this._userService.getPosition(url);
+        const getUser$ = of(user);
+        return forkJoin([getPosition$, getUser$]);
+      }),
+      map(([position, user]) => {
+        const userWithPosition: UserDTO<Position> | any = {
+          ...user,
+          position,
+        }
+        console.log(userWithPosition);
+        return userWithPosition;
+      }),
+    );
     return this.userDetails$;
   };
- 
-  // private _downloadDataUserDetail() {
-  //   this.userDetails$ = this._activatedRoute.params
-  //   .pipe(
-  //     map((params: Params) => {
-  //       this.userId = Number(params['id']); 
-  //       this._storeUsers.dispatch(fromUserActions.loadUserRequest({ userId: this.userId }));
-  //       return this.userId;
-  //     }),
-  //     switchMap(() => this._storeUsers.select(fromUserSelectors.getUser)),
-  //     switchMap((user) => {
-  //       // const getEpisodes$ = this._episodeStore.select(fromEpisodeSelectors.getEpisodesSelector);
-  //       const url = String(user?.episode.url);
-  //       const getEpisode$ = this._episodeService.getLocation(url);
-  //       const getUser$ = of(user);
-  //       return forkJoin([getEpisode$, getUser$]);
-  //     }),
-  //     map(([episode, user]): UserDTO<Episode> => {
-  //       const usersWithEpisodes: UserDTO<Episode> = {
-  //         ...user,
-  //         episode,
-  //       };
-  //       return usersWithEpisodes;
-  //     }),
-  //     takeUntil(this.destroy$),
-  //     // tap(user => console.log(user)),
-  //   )
-  // };
 
   public onPreviousImage({ previous, images }: { previous: number, images: Picture[] }): void {
     this.currentImage = previous < 0 ? images.length - 1 : previous;
@@ -92,7 +79,7 @@ export class DescriptionComponent implements OnInit {
     this.currentImage = next === images.length ? 0 : next;
   };
 
-  public onOpenModalDeleteUser(user: UserDTO<EpisodeDTO>): void {
+  public onOpenModalDeleteUser(user: UserDTO<PositionDTO>): void {
     this._facadeService.modalWindowUserDelete(
       this.viewContainerRef, 
       'Are you sure you want to delete the user?', 
@@ -100,10 +87,10 @@ export class DescriptionComponent implements OnInit {
       user,
     )
     .pipe(
-      takeUntil(this.destroy$),
+      takeUntil(this._destroy$),
     )
     .subscribe(() => {
-      this._storeUsers.dispatch(fromUserActions.deleteUserRequest({ userId: user.id }));
+      this._userStoreFacade.deleteUser(user.id);
     })
   };
 
@@ -112,8 +99,8 @@ export class DescriptionComponent implements OnInit {
   };
 
   public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this._destroy$.next(true);
+    this._destroy$.complete();
   };
 }
 

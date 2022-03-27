@@ -8,7 +8,8 @@ import { UserService } from "../user.service";
 import { ModalWindowService } from "../modal-window.servise";
 import { ErrorService } from "../error.service";
 import { EpisodeService } from "../episode.service";
-import { Episode, EpisodeDTO, EpisodesDTO } from "../../interfaces/episode.interface";
+import { EpisodeDTO, EpisodesDTO } from "../../interfaces/episode.interface";
+import { Position, PositionDTO } from "../../interfaces/position.interface";
 
 @Injectable({
     providedIn: 'root',
@@ -109,33 +110,33 @@ export class FacadeService {
         )
     };
 
-    public getUsers(): Observable<UserDTO<EpisodeDTO>[]> {
+    public getUsers(): Observable<UserDTO<PositionDTO>[]> {
         return this.userService.getUsers().pipe(
             retry(3),
             catchError(this.errorService.errorsBackend.bind(this)),
         );
     };
 
-    public getUser(id: number): Observable<UserDTO<EpisodeDTO>> {
+    public getUser(id: number): Observable<UserDTO<PositionDTO>> {
         return this.userService.getUser(id).pipe(
             catchError(this.errorService.errorsBackend.bind(this)),
         );
     };
 
-    public deleteUser(id: number): Observable<UserDTO<EpisodeDTO>> {
+    public deleteUser(id: number): Observable<UserDTO<PositionDTO>> {
         return this.userService.deleteUser(id).pipe(
             catchError(this.errorService.errorsBackend.bind(this)),
         );
     };
 
-    public editUser(user: UserDTO<EpisodeDTO>): Observable<UserDTO<EpisodeDTO>> {
+    public editUser(user: UserDTO<PositionDTO>): Observable<UserDTO<PositionDTO>> {
         return this.userService.editUser(user).pipe(
             tap(() => console.log('User edit:', user)),
             catchError(this.errorService.errorsBackend.bind(this)),
         );
     };
 
-    public createUser(user: UserDTO<EpisodeDTO>): Observable<UserDTO<EpisodeDTO>> {
+    public createUser(user: UserDTO<PositionDTO>): Observable<UserDTO<PositionDTO>> {
         return this.userService.createUser(user).pipe(
             tap(() => console.log('User create:', user)),
             catchError(this.errorService.errorsBackend.bind(this)),
@@ -150,7 +151,13 @@ export class FacadeService {
         return this.userService.getEmails();
     };
 
-    public modalWindowUserDelete(viewContainerRef: ViewContainerRef, modalTitle: string, modalBody: string, user: UserDTO<EpisodeDTO>): Observable<string> {
+    public modalWindowUserDelete(viewContainerRef: ViewContainerRef, modalTitle: string, modalBody: string, user: UserDTO<PositionDTO>): Observable<string> {
         return this.modalWindowService.modalWindowUserDelete(viewContainerRef, modalTitle, modalBody, user);
+    };
+
+    public getPosition(url: string): Observable<Position> {
+        return this.userService.getPosition(url).pipe(
+            catchError(this.errorService.errorsBackend.bind(this)),
+        )
     };
 }

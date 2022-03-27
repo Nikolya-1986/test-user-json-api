@@ -1,16 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import {map, Observable, Subject } from 'rxjs';
-import {takeUntil } from "rxjs/operators";
+import { Store } from '@ngrx/store';
+import { map, Observable, Subject } from 'rxjs';
+import { takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import { FacadeService } from '../../services/facades/facade.service';
 import { EpisodeDTO } from '../../interfaces/episode.interface';
 import { EpisodeState } from '../../store/episode/episode.state';
-import { UserState } from '../../store/user/user.state';
-import * as userActions from '../../store/user/user.actions';
-import * as userSelectors from '../../store/user/user.selectors';
+import { PositionDTO } from '../../interfaces/position.interface';
+import { UserStoreFacade } from '../../store/user/user-store.facade';
 import * as fromEpisodeActions from '../../store/episode/episode.actions';
 
 @Component({
@@ -20,7 +19,7 @@ import * as fromEpisodeActions from '../../store/episode/episode.actions';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public users$!: Observable<UserDTO<EpisodeDTO>[]>;
+  public users$!: Observable<UserDTO<PositionDTO>[]>;
   public episodes$!: Observable<EpisodeDTO[]>;
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
@@ -39,7 +38,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public filterUserAvailable!: boolean;
 
   constructor(
-    private _storeUser: Store<UserState>,
+    private _userStoreFacade: UserStoreFacade,
     private _storeEpisode: Store<EpisodeState>,
     private _facadeService: FacadeService,
     private activateRoute: ActivatedRoute,
@@ -53,11 +52,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   private _downloadDataUsers(): void {
-    this._storeUser.dispatch(userActions.loadUsersRequest());
+    this._userStoreFacade.loadUsers();
     this._storeEpisode.dispatch(fromEpisodeActions.loadEpisodesRequest());
-    this.isLoading$ = this._storeUser.pipe(select(userSelectors.getIsLoadingSelector));
-    this.users$ = this._storeUser.pipe(select(userSelectors.getUsers));
-    this.error$ = this._storeUser.pipe(select(userSelectors.getFail));
+
+    this.isLoading$ = this._userStoreFacade.isLoading$;
+    this.users$ = this._userStoreFacade.getUsers$;
+    this.error$ = this._userStoreFacade.error$;
   };
 
   public onDetailUser(id: number): void {
@@ -106,12 +106,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public fetchLanguages(): void {
     this._facadeService.getLanguages().pipe(
-      takeUntil(this.destroy$),
       map((response) => {
         const nameButtonAllLanguages = 'All languages';
         this.languages = [nameButtonAllLanguages, ...response];
         return this.languages;
-      })
+      }),
+      takeUntil(this.destroy$),
     )
     .subscribe((result) => {
       if(!this.activelanguage) {

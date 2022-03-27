@@ -5,10 +5,7 @@ import { AuthState }  from "./auth.state";
 export const authFeatureName = 'auth';
 export const getAuthFeatureState = createFeatureSelector<AuthState>(authFeatureName);
 
-const getIsAuthenticated = (state: AuthState): boolean => {
-    console.log(state);
-    return (localStorage.getItem('token') !== null );
-};
+const getIsAuthenticated = (state: AuthState): boolean => (localStorage.getItem('token') !== null );
 const getAdmin = (state: AuthState): Auth | null => state.auth;
 const getErrorMessage = (state: AuthState): string | null => state.errorMessage;
 

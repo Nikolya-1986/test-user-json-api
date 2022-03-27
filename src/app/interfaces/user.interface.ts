@@ -1,7 +1,8 @@
 import { EpisodeDTO } from "./episode.interface";
+import { PositionDTO } from "./position.interface";
 
 export interface UsersDTO {
-    results: UserDTO<EpisodeDTO>[],
+    results: UserDTO<PositionDTO>[],
 };
 
 export interface UserDTO<T> {
@@ -9,7 +10,8 @@ export interface UserDTO<T> {
     gender: Gender,
     status: Status,
     name: Name,
-    episode: T,
+    episode: EpisodeDTO,
+    position: T,
     location: Location,
     email: string,
     website: string,

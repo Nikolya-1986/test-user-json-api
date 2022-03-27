@@ -16,8 +16,8 @@ import { websiteValidator } from '../../validators/wibsite.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { lengthValidator } from '../../validators/length.validator';
 import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
-import * as userActions from '../../store/user/user.actions';
-import * as fromUserSelectors from '../../store/user/user.selectors';
+import { Position, PositionDTO } from '../../interfaces/position.interface';
+import { UserStoreFacade } from '../../store/user/user-store.facade';
 
 @Component({
   selector: 'app-edit',
@@ -28,9 +28,8 @@ export class EditComponent implements OnInit {
 
   @ViewChild('languageList') languageList!: MatChipList;
   @ViewChild('uploadControl') public uploadControl!: ElementRef;
-  public userEdit$!: Observable<UserDTO<EpisodeDTO> | any>;
+  public userEdit$!: Observable<UserDTO<Position> | any>;
   public destroy$: Subject<boolean> = new Subject;
-  public userId!: number;
   public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
   public formEdit!: FormGroup;
   public gender: Gender[] = [Gender.female, Gender.male];
@@ -46,7 +45,7 @@ export class EditComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private store: Store<AppUserState>,
+    private _userStoreFacade: UserStoreFacade,
     private emailAsyncValidator: EmailAsyncValidator,
   ) { }
 
@@ -59,14 +58,14 @@ export class EditComponent implements OnInit {
   public fetchUserEdit() {
     this.userEdit$ = this.activatedRoute.params.pipe(
       map((params: Params) =>  {
-        this.userId = Number(params['id']); 
-        this.store.dispatch(userActions.loadUserRequest({ userId: this.userId }));
-        return this.userId;
+        const userId = Number(params['id']); 
+        this._userStoreFacade.loadUser(userId);
+        return userId;
       }),
-      switchMap(() => this.store.select(fromUserSelectors.getUser)),
-      tap((user) => this.setFormValues(user as UserDTO<EpisodeDTO>))
+      switchMap(() => this._userStoreFacade.getUser$),
+      tap((user) => this.setFormValues(user as UserDTO<Position>))
     )
-    return this.userEdit$ as unknown as Observable<UserDTO<EpisodeDTO>>;
+    return this.userEdit$ as unknown as Observable<UserDTO<Position>>;
   };
 
   public handleFormChanges(){
@@ -196,7 +195,7 @@ export class EditComponent implements OnInit {
     })
   };
 
-  private setFormValues(user: UserDTO<EpisodeDTO>): void {
+  private setFormValues(user: UserDTO<PositionDTO>): void {
     this.formEdit.patchValue({
       picture: 
       [
@@ -288,7 +287,7 @@ export class EditComponent implements OnInit {
         id: userEdit.id,
         ...editedUser,
       }
-      this.store.dispatch(userActions.editUserRequest({ userEdit: userUpdated }));
+      this._userStoreFacade.editUser(userEdit);
       console.log(userUpdated);
     }
   };

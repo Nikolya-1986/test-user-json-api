@@ -2,7 +2,7 @@ import { ComponentFactoryResolver, ComponentRef, Injectable, ViewContainerRef } 
 import { Observable, Subject } from 'rxjs';
 
 import { ModalWindowComponent } from '../components/modal-window/modal-window.component';
-import { EpisodeDTO } from '../interfaces/episode.interface';
+import { PositionDTO } from '../interfaces/position.interface';
 import { UserDTO } from '../interfaces/user.interface';
 
 @Injectable({
@@ -21,7 +21,7 @@ export class ModalWindowService {
     viewContainerRef: ViewContainerRef, 
     modalTitle: string, 
     modalBody: string, 
-    user: UserDTO<EpisodeDTO>
+    user: UserDTO<PositionDTO>
     ): Observable<string> {
     const modalFactory  = this._resolver.resolveComponentFactory(ModalWindowComponent);
     this._componentRef = viewContainerRef.createComponent(modalFactory);

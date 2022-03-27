@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { Episode, EpisodeDTO, EpisodesDTO } from '../interfaces/episode.interface';
+import { EpisodeDTO, EpisodesDTO } from '../interfaces/episode.interface';
+import { Position } from '../interfaces/position.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +24,6 @@ export class EpisodeService {
     return this._httpClient.get<EpisodesDTO>(`${this.BASE_URL}/episodes`);
   };
 
-  public getLocation(url: string): Observable<Episode> {
-    return this._httpClient.get<Episode>(url);
-  };
   public getСhangedEpisodes(): Observable<EpisodeDTO[]> {
     return this.getEpisodes().pipe(
      map((data: EpisodesDTO) => {
@@ -33,7 +31,7 @@ export class EpisodeService {
        const episodesConvert = episodes.map(episode => ({
          ...episode,
          users: episode.users.map(userUrl => this.convertUrlToId(userUrl))
-       }))
+       }));
        return episodesConvert;
      }),
     );

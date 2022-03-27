@@ -1,11 +1,11 @@
-import { Episode, EpisodeDTO } from "src/app/interfaces/episode.interface";
+import { Position, PositionDTO } from "../../interfaces/position.interface";
 import { UserDTO } from "../../interfaces/user.interface";
 
 export interface UserState {
-    userDTO: UserDTO<EpisodeDTO>[],
-    userSelected?: UserDTO<EpisodeDTO>,
+    userDTO: UserDTO<PositionDTO>[],
+    userSelected?: UserDTO<PositionDTO>,
     loadCouter: number,
-    errorMessage: string,
+    errorMessage: string, 
 };
 
 export const initialUserState: UserState = {

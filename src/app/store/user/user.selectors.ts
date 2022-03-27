@@ -4,7 +4,7 @@ import { UserState } from "./user.state";
 export const USER_STATE_NAME = 'user';
 export const getUserFeatureSelector = createFeatureSelector<UserState>(USER_STATE_NAME);
 
-export const getIsLoadingSelector = createSelector (
+export const getIsLoading = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.loadCouter !== 0,
 );
