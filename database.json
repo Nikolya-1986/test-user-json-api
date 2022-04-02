@@ -196,6 +196,233 @@
     }
   ],
 
+  "location": [
+    {
+      "id": "kkfnhdgzntew10",
+      "city": "Laytown",
+      "country": "Ireland",
+      "street": {
+        "name": "****fgh*jklj",
+        "number": 12
+      },
+      "postcode": 40302,
+      "coordinates": {
+        "latitude": "17.5676",
+        "longitude": "-12.2013"
+      }
+    },
+    {
+      "id": "dpeivhgw956-vddf",
+      "city": "Carleton",
+      "country": "Canada",
+      "street": {
+        "name": "*****fhg*****",
+        "number": 23
+      },
+      "postcode": 45646,
+      "coordinates": {
+        "latitude": "-49.0408",
+        "longitude": "-22.3120"
+      }
+    },
+    {
+      "id": "dfg02-4234xfdfgfd",
+      "city": "Meshed",
+      "country": "Iran",
+      "street": {
+        "name": "**sfds********",
+        "number": 23
+      },
+      "postcode": 90704,
+      "coordinates": {
+        "latitude": "85.4918",
+        "longitude": "73.6634"
+      }
+    },
+    {
+      "id": "fdsg9023rksfdgr34",
+      "city": "Gladstone",
+      "country": "Australia",
+      "street": {
+        "name": "**ssrqw*****g**",
+        "number": 11
+      },
+      "postcode": 7402,
+      "coordinates": {
+        "latitude": "35.7472",
+        "longitude": "-8.4574"
+      }
+    },
+    {
+      "id": "dfg-243rijsfgfdg",
+      "city": "Lyngseidet",
+      "country": "Norway",
+      "street": {
+        "name": "**ipw*****aa**",
+        "number": 8970
+      },
+      "postcode": "1284",
+      "coordinates": {
+        "latitude": "7.0445",
+        "longitude": "-20.7307"
+      }
+    },
+    {
+      "id": "dfvdf-435sdfgdfg43",
+      "city": "Sundby",
+      "country": "Denmark",
+      "street": {
+        "name": "**we*******",
+        "number": 32
+      },
+      "postcode": 79369,
+      "coordinates": {
+        "latitude": "-31.5501",
+        "longitude": "-128.5512"
+      }
+    },
+    {
+      "id": "sfg034kdfslgmdfgmds",
+      "city": "Whangarei",
+      "country": "New Zealand",
+      "street": {
+        "name": "**yf********",
+        "number": 1
+      },
+      "postcode": 12135,
+      "coordinates": {
+        "latitude": "64.5253",
+        "longitude": "23.3834"
+      }
+    },
+    {
+      "id": "fsg0-2rkofr0-43rwsdfsfd",
+      "city": "Lages",
+      "country": "Brazil",
+      "street": {
+        "name": "**lil********",
+        "number": 9
+      },
+      "postcode": 94035,
+      "coordinates": {
+        "latitude": "-77.7540",
+        "longitude": "44.9635"
+      }
+    },
+    {
+      "id": "dfgokp43-0eorwtkeor",
+      "city": "Trout Lake",
+      "country": "Canada",
+      "street": {
+        "name": "**df*****h*",
+        "number": 9
+      },
+      "postcode": "O5N 1X0",
+      "coordinates": {
+        "latitude": "-62.9076",
+        "longitude": "116.7479"
+      }
+    },
+    {
+      "id": "ghdfgh6sdfdfgyio8",
+      "city": "Numansdorp",
+      "country": "Netherlands",
+      "street": {
+        "name": "**dsf*****",
+        "number": 56
+      },
+      "postcode": 69460,
+      "coordinates": {
+        "latitude": "38.2366",
+        "longitude": "-160.8498"
+      }
+    },
+    {
+      "id": "fghg546sdfgdfgdfg4",
+      "city": "Pelkosenniemi",
+      "country": "Finland",
+      "street": {
+        "name": "***********",
+        "number": 56
+      },
+      "postcode": 98995,
+      "coordinates": {
+        "latitude": "-8.7795",
+        "longitude": "157.7161"
+      }
+    },
+    {
+      "id": "dsfg456456sdfsdfg",
+      "city": "Nij Altoenae",
+      "country": "Netherlands",
+      "street": {
+        "name": "***lq******",
+        "number": 33
+      },
+      "postcode": 33460,
+      "coordinates": {
+        "latitude": "42.7942",
+        "longitude": "-128.9090"
+      }
+    },
+    {
+      "id": "srte1hjj09sdsd456h",
+      "city": "Rhoon",
+      "country": "Netherlands",
+      "street": {
+        "name": "***qw******",
+        "number": 95
+      },
+      "postcode": 23307,
+      "coordinates": {
+        "latitude": "42.7123",
+        "longitude": "164.2425"
+      }
+    },
+    {
+      "id": "dfgg345356sdffg-87",
+      "city": "Shepparton",
+      "country": "Australia",
+      "street": {
+        "name": "***weq******",
+        "number": 65
+      },
+      "postcode": 1440,
+      "coordinates": {
+        "latitude": "-85.6094",
+        "longitude": "9.9960"
+      }
+    },
+    {
+      "id": "dfgdf456sdfdfg909-ghfg",
+      "city": "Ursy",
+      "country": "Switzerland",
+      "street": {
+        "name": "*********tyu",
+        "number": 23
+      },
+      "postcode": 6596,
+      "coordinates": {
+        "latitude": "-51.9895",
+        "longitude": "-81.6855"
+      }
+    },
+    {
+      "id": "dfg3453254dsfgdfgd",
+      "city": "Adelaide",
+      "country": "Australia",
+      "street": {
+        "name": "***df********",
+        "number": 96
+      },
+      "postcode": 5239,
+      "coordinates": {
+        "latitude": "-86.8900",
+        "longitude": "55.0804"
+      }
+    }
+  ],
+
   "users": [
     {
       "id": 1236456456879789,
@@ -207,22 +434,16 @@
         "last": "May"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/1",
-        "https://http://localhost:3000/episodes/2",
-        "https://http://localhost:3000/episodes/5",
-        "https://http://localhost:3000/episodes/6"
+        "http://localhost:3000/episodes/1",
+        "http://localhost:3000/episodes/2",
+        "http://localhost:3000/episodes/5",
+        "http://localhost:3000/episodes/6"
       ],
       "position": {
         "url": "http://localhost:3000/position/1"
       },
       "location": {
-        "city": "Laytown",
-        "country": "Ireland",
-        "postcode": 40302,
-        "coordinates": {
-          "latitude": "17.5676",
-          "longitude": "-12.2013"
-        }
+        "id": "kkfnhdgzntew10"
       },
       "email": "stephen.may@example.com",
       "language": [
@@ -262,22 +483,16 @@
         "last": "Claire"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/1",
-        "https://http://localhost:3000/episodes/3",
-        "https://http://localhost:3000/episodes/4",
-        "https://http://localhost:3000/episodes/5"
+        "http://localhost:3000/episodes/1",
+        "http://localhost:3000/episodes/3",
+        "http://localhost:3000/episodes/4",
+        "http://localhost:3000/episodes/5"
       ],
       "position": {
         "url": "http://localhost:3000/position/2"
       },
       "location": {
-        "city": "Carleton",
-        "country": "Canada",
-        "postcode": 45646,
-        "coordinates": {
-          "latitude": "-49.0408",
-          "longitude": "-22.3120"
-        }
+        "id": "dpeivhgw956-vddf"
       },
       "email": "marianne.claire@example.com",
       "language": [
@@ -317,21 +532,15 @@
         "last": "Mysavi"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/2",
-        "https://http://localhost:3000/episodes/3",
-        "https://http://localhost:3000/episodes/6"
+        "http://localhost:3000/episodes/2",
+        "http://localhost:3000/episodes/3",
+        "http://localhost:3000/episodes/6"
       ],
       "position": {
         "url": "http://localhost:3000/position/3"
       },
       "location": {
-        "city": "Meshed",
-        "country": "Iran",
-        "postcode": 90704,
-        "coordinates": {
-          "latitude": "85.4918",
-          "longitude": "73.6634"
-        }
+        "id": "dfg02-4234xfdfgfd"
       },
       "email": "arsyn.mwswy@example.com",
       "language": [
@@ -371,20 +580,14 @@
         "last": "Cole"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/6",
-        "https://http://localhost:3000/episodes/2"
+        "http://localhost:3000/episodes/6",
+        "http://localhost:3000/episodes/2"
       ],
       "position": {
         "url": "http://localhost:3000/position/4"
       },
       "location": {
-        "city": "Gladstone",
-        "country": "Australia",
-        "postcode": 7402,
-        "coordinates": {
-          "latitude": "35.7472",
-          "longitude": "-8.4574"
-        }
+        "id": "fdsg9023rksfdgr34"
       },
       "email": "serenity.cole@example.com",
       "language": [
@@ -425,21 +628,15 @@
         "last": "Finny"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/1",
-        "https://http://localhost:3000/episodes/5",
-        "https://http://localhost:3000/episodes/6"
+        "http://localhost:3000/episodes/1",
+        "http://localhost:3000/episodes/5",
+        "http://localhost:3000/episodes/6"
       ],
       "position": {
         "url": "http://localhost:3000/position/1"
       },
       "location": {
-        "city": "Lyngseidet",
-        "country": "Norway",
-        "postcode": "1284",
-        "coordinates": {
-          "latitude": "7.0445",
-          "longitude": "-20.7307"
-        }
+        "id": "dfg-243rijsfgfdg"
       },
       "email": "angelina.finnoy@example.com",
       "language": [
@@ -479,21 +676,15 @@
         "last": "Olsen"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/3",
-        "https://http://localhost:3000/episodes/4",
-        "https://http://localhost:3000/episodes/6"
+        "http://localhost:3000/episodes/3",
+        "http://localhost:3000/episodes/4",
+        "http://localhost:3000/episodes/6"
       ],
       "position": {
         "url": "http://localhost:3000/position/2"
       },
       "location": {
-        "city": "Sundby",
-        "country": "Denmark",
-        "postcode": 79369,
-        "coordinates": {
-          "latitude": "-31.5501",
-          "longitude": "-128.5512"
-        }
+        "id": "dfvdf-435sdfgdfg43"
       },
       "email": "valdemar.olsen@example.com",
       "language": [
@@ -534,20 +725,14 @@
         "last": "Green"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/6",
-        "https://http://localhost:3000/episodes/3"
+        "http://localhost:3000/episodes/6",
+        "http://localhost:3000/episodes/3"
       ],
       "position": {
         "url": "http://localhost:3000/position/3"
       },
       "location": {
-        "city": "Whangarei",
-        "country": "New Zealand",
-        "postcode": 12135,
-        "coordinates": {
-          "latitude": "64.5253",
-          "longitude": "23.3834"
-        }
+        "id": "sfg034kdfslgmdfgmds"
       },
       "email": "pippa.green@example.com",
       "language": [
@@ -587,21 +772,15 @@
         "last": "Nogueira"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/3",
-        "https://http://localhost:3000/episodes/5",
-        "https://http://localhost:3000/episodes/4"
+        "http://localhost:3000/episodes/3",
+        "http://localhost:3000/episodes/5",
+        "http://localhost:3000/episodes/4"
       ],
       "position": {
         "url": "http://localhost:3000/position/4"
       },
       "location": {
-        "city": "Lages",
-        "country": "Brazil",
-        "postcode": 94035,
-        "coordinates": {
-          "latitude": "-77.7540",
-          "longitude": "44.9635"
-        }
+        "id": "fsg0-2rkofr0-43rwsdfsfd"
       },
       "email": "beritiana.nogueira@example.com",
       "language": [
@@ -641,20 +820,14 @@
         "last": "Pelletier"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/2",
-        "https://http://localhost:3000/episodes/4"
+        "http://localhost:3000/episodes/2",
+        "http://localhost:3000/episodes/4"
       ],
       "position": {
         "url": "http://localhost:3000/position/1"
       },
       "location": {
-        "city": "Trout Lake",
-        "country": "Canada",
-        "postcode": "O5N 1X0",
-        "coordinates": {
-          "latitude": "-62.9076",
-          "longitude": "116.7479"
-        }
+        "id": "dfgokp43-0eorwtkeor"
       },
       "email": "jeanne.pelletier@example.com",
       "language": [
@@ -694,20 +867,14 @@
         "last": "Nieuwland"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/6",
-        "https://http://localhost:3000/episodes/5"
+        "http://localhost:3000/episodes/6",
+        "http://localhost:3000/episodes/5"
       ],
       "position": {
         "url": "http://localhost:3000/position/2"
       },
       "location": {
-        "city": "Numansdorp",
-        "country": "Netherlands",
-        "postcode": 69460,
-        "coordinates": {
-          "latitude": "38.2366",
-          "longitude": "-160.8498"
-        }
+        "id": "ghdfgh6sdfdfgyio8"
       },
       "email": "alain.nieuwland@example.com",
       "language": [
@@ -747,20 +914,14 @@
         "last": "Ahola"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/3",
-        "https://http://localhost:3000/episodes/4"
+        "http://localhost:3000/episodes/3",
+        "http://localhost:3000/episodes/4"
       ],
       "position": {
         "url": "http://localhost:3000/position/3"
       },
       "location": {
-        "city": "Pelkosenniemi",
-        "country": "Finland",
-        "postcode": 98995,
-        "coordinates": {
-          "latitude": "-8.7795",
-          "longitude": "157.7161"
-        }
+        "id": "fghg546sdfgdfgdfg4"
       },
       "email": "emilia.ahola@example.com",
       "language": [
@@ -800,21 +961,15 @@
         "last": "Scholtz"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/3",
-        "https://http://localhost:3000/episodes/6",
-        "https://http://localhost:3000/episodes/2"
+        "http://localhost:3000/episodes/3",
+        "http://localhost:3000/episodes/6",
+        "http://localhost:3000/episodes/2"
       ],
       "position": {
         "url": "http://localhost:3000/position/4"
       },
       "location": {
-        "city": "Nij Altoenae",
-        "country": "Netherlands",
-        "postcode": 33460,
-        "coordinates": {
-          "latitude": "42.7942",
-          "longitude": "-128.9090"
-        }
+        "id": "dsfg456456sdfsdfg"
       },
       "email": "anh.scholtz@example.com",
       "language": [
@@ -855,21 +1010,15 @@
         "last": "Lommers"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/3",
-        "https://http://localhost:3000/episodes/4",
-        "https://http://localhost:3000/episodes/6"
+        "http://localhost:3000/episodes/3",
+        "http://localhost:3000/episodes/4",
+        "http://localhost:3000/episodes/6"
       ],
       "position": {
         "url": "http://localhost:3000/position/1"
       },
       "location": {
-        "city": "Rhoon",
-        "country": "Netherlands",
-        "postcode": 23307,
-        "coordinates": {
-          "latitude": "42.7123",
-          "longitude": "164.2425"
-        }
+        "id": "srte1hjj09sdsd456h"
       },
       "email": "samah.lommers@example.com",
       "language": [
@@ -909,21 +1058,15 @@
         "last": "Bailey"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/2",
-        "https://http://localhost:3000/episodes/4",
-        "https://http://localhost:3000/episodes/6"
+        "http://localhost:3000/episodes/2",
+        "http://localhost:3000/episodes/4",
+        "http://localhost:3000/episodes/6"
       ],
       "position": {
         "url": "http://localhost:3000/position/2"
       },
       "location": {
-        "city": "Shepparton",
-        "country": "Australia",
-        "postcode": 1440,
-        "coordinates": {
-          "latitude": "-85.6094",
-          "longitude": "9.9960"
-        }
+        "id": "dfgg345356sdffg-87"
       },
       "email": "harper.bailey@example.com",
       "language": [
@@ -963,21 +1106,15 @@
         "last": "Masson"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/1",
-        "https://http://localhost:3000/episodes/3",
-        "https://http://localhost:3000/episodes/2"
+        "http://localhost:3000/episodes/1",
+        "http://localhost:3000/episodes/3",
+        "http://localhost:3000/episodes/2"
       ],
       "position": {
         "url": "http://localhost:3000/position/3"
       },
       "location": {
-        "city": "Ursy",
-        "country": "Switzerland",
-        "postcode": 6596,
-        "coordinates": {
-          "latitude": "-51.9895",
-          "longitude": "-81.6855"
-        }
+        "id": "dfgdf456sdfdfg909-ghfg"
       },
       "email": "kay.masson@example.com",
       "language": [
@@ -1017,22 +1154,16 @@
         "last": "Bates"
       },
       "episode" : [
-        "https://http://localhost:3000/episodes/1",
-        "https://http://localhost:3000/episodes/2",
-        "https://http://localhost:3000/episodes/6",
-        "https://http://localhost:3000/episodes/4"
+        "http://localhost:3000/episodes/1",
+        "http://localhost:3000/episodes/2",
+        "http://localhost:3000/episodes/6",
+        "http://localhost:3000/episodes/4"
       ],
       "position": {
         "url": "http://localhost:3000/position/4"
       },
       "location": {
-        "city": "Adelaide",
-        "country": "Australia",
-        "postcode": 5239,
-        "coordinates": {
-          "latitude": "-86.8900",
-          "longitude": "55.0804"
-        }
+        "id": "dfg3453254dsfgdfgd"
       },
       "email": "margie.bates@example.com",
       "language": [

@@ -11,11 +11,12 @@
         >
     </app-slider>
     
-    <app-episodes
+    <app-additional
         [userDetails]="userDetails"
         [showTable]="showTable"
+        (getResidentName)="onGetResidentName($event)"
         >
-    </app-episodes>
+    </app-additional>
 
     <app-details
         [userDetails]="userDetails"

@@ -84,8 +84,12 @@ export class DescriptionComponent implements OnInit {
     })
   };
 
-  public onEditCurrentUser(id: number): void{
+  public onEditCurrentUser(id: number): void {
     this._router.navigate(['edit', id]);
+  };
+
+  public onGetResidentName(id: number): void {
+    this._router.navigate(['description', id]);
   };
 
   public ngOnDestroy(): void {

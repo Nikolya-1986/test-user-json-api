@@ -16,6 +16,7 @@ import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { ExtraDescriptionResolver } from './resolvers/extra-description.resolver';
 import { AdditionalComponent } from './components/additional/additional.component';
 import { UrlPipe } from './pipes/url.pipe';
+import { NameResidentPipe } from './pipes/resident.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UrlPipe } from './pipes/url.pipe';
     SliderComponent,
     AdditionalComponent,
     UrlPipe,
+    NameResidentPipe,
   ],
   imports: [
     CommonModule,
