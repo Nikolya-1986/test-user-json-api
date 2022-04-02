@@ -1,0 +1,82 @@
+<section class="user__additional additional"
+    *ngIf="showTable"
+    >
+    <!-- <ng-template> -->
+        <table class="additional__table">
+            <caption>
+                Episodes
+            </caption>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of TABLE_EPISODE_HEADER">
+                        {{ column  }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{ userDetails.episode.url | urlConvertNumber }}
+                    </td>
+                    <td>
+                        {{ userDetails.episode.name }}
+                    </td>
+                    <td>
+                        {{ userDetails.episode.track }}
+                    </td>
+                    <td>
+                        {{ userDetails.episode.created }}
+                    </td>
+                    <td>
+                        {{ userDetails.episode.completed }}
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>    
+            </tbody>
+        </table>
+
+        <div>
+
+        </div>
+        <table class="additional__table">
+            <caption>
+                Position
+            </caption>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of TABLE_POSITION_HEADER">
+                        {{ column  }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{ userDetails.position.url| urlConvertNumber }}
+                    </td>
+                    <td>
+                        {{ userDetails.position.name }}
+                    </td>
+                    <td>
+                        {{ userDetails.position.dimension }}
+                    </td>
+                    <td>
+                        {{ userDetails.position.type }}
+                    </td>
+                    <td>
+                        <ul>
+                            <li 
+                                *ngFor="let resident of userDetails.position.residents"
+                                (click)="openResident(resident)"
+                                >
+                                {{ resident }}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>    
+            </tbody>
+        </table>
+    <!-- </ng-template> -->
+</section>

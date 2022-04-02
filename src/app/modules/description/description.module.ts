@@ -14,7 +14,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { ModalWindowModule } from '../../components/modal-window/modal-window.module';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { ExtraDescriptionResolver } from './resolvers/extra-description.resolver';
-import { EpisodesComponent } from './components/episodes/episodes.component';
+import { AdditionalComponent } from './components/additional/additional.component';
 import { UrlPipe } from './pipes/url.pipe';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { UrlPipe } from './pipes/url.pipe';
     CellColorSwitcherDirective,
     ExtraComponent,
     SliderComponent,
-    EpisodesComponent,
+    AdditionalComponent,
     UrlPipe,
   ],
   imports: [

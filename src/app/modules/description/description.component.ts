@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { forkJoin, Observable, of, Subject, takeUntil } from 'rxjs';
-import { map, switchMap } from "rxjs/operators";
+import { map, switchMap, take } from "rxjs/operators";
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import { Position, PositionDTO } from '../../interfaces/position.interface';
