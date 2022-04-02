@@ -7,6 +7,6 @@ export interface Position {
     name: string,
     type: string,
     dimension: string,
-    residents: string,
+    residents: number[],
     url: string;
 };

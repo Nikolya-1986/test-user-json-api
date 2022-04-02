@@ -148,10 +148,10 @@
       "type": "Cluster",
       "dimension": "unknown",
       "residents": [
-        "http://localhost:3000/users/1",
-        "http://localhost:3000/users/5",
-        "http://localhost:3000/users/9",
-        "http://localhost:3000/users/13"
+        1236456456879789,
+        570979065746765,
+        9474575745743647,
+        1347654765756
       ],
       "url": "http://localhost:3000/position/1"
     },
@@ -161,10 +161,10 @@
       "type": "Planet",
       "dimension": "Replacement Dimension",
       "residents": [
-        "http://localhost:3000/users/2",
-        "http://localhost:3000/users/6",
-        "http://localhost:3000/users/10",
-        "http://localhost:3000/users/14"
+        234536347657575,
+        66756756756756756,
+        1045467658688,
+        14685765875687568
       ],
       "url": "http://localhost:3000/position/2"
     },
@@ -174,10 +174,10 @@
       "type": "Microverse",
       "dimension": "Dimension C-137",
       "residents": [
-        "http://localhost:3000/users/3",
-        "http://localhost:3000/users/7",
-        "http://localhost:3000/users/11",
-        "http://localhost:3000/users/15"
+        38097895674575,
+        74545879056745764,
+        119708907890890678,
+        1534634745757
       ],
       "url": "http://localhost:3000/position/3"
     },
@@ -187,10 +187,10 @@
       "type": "Microverse",
       "dimension": "Interdimensional Cable",
       "residents": [
-        "http://localhost:3000/users/4",
-        "http://localhost:3000/users/8",
-        "http://localhost:3000/users/12",
-        "http://localhost:3000/users/16"
+        44675753453254345345,
+        813534567574567,
+        1236547708790745,
+        16345345345345
       ],
       "url": "http://localhost:3000/position/4"
     }
@@ -198,7 +198,7 @@
 
   "users": [
     {
-      "id": 1,
+      "id": 1236456456879789,
       "gender": "male",
       "status": "married",
       "name": {
@@ -253,7 +253,7 @@
       "nat": "IE"
     },
     {
-      "id": 2,
+      "id": 234536347657575,
       "gender": "female",
       "status": "divorced",
       "name": {
@@ -308,7 +308,7 @@
       "nat": "CA"
     },
     {
-      "id": 3,
+      "id": 38097895674575,
       "gender": "male",
       "status": "single",
       "name": {
@@ -362,7 +362,7 @@
       "nat": "IR"
     },
     {
-      "id": 4,
+      "id": 44675753453254345345,
       "gender": "female",
       "status": "married",
       "name": {
@@ -416,7 +416,7 @@
       "nat": "AU"
     },
     {
-      "id": 5,
+      "id": 570979065746765,
       "gender": "female",
       "status": "divorced",
       "name": {
@@ -470,7 +470,7 @@
       "nat": "NO"
     },
     {
-      "id": 6,
+      "id": 66756756756756756,
       "gender": "male",
       "status": "married",
       "name": {
@@ -525,7 +525,7 @@
       "nat": "DK"
     },
     {
-      "id": 7,
+      "id": 74545879056745764,
       "gender": "female",
       "status": "single",
       "name": {
@@ -578,7 +578,7 @@
       "nat": "NZ"
     },
     {
-      "id": 8,
+      "id": 813534567574567,
       "gender": "female",
       "status": "married",
       "name": {
@@ -632,7 +632,7 @@
       "nat": "BR"
     },
     {
-      "id": 9,
+      "id": 9474575745743647,
       "gender": "female",
       "status": "divorced",
       "name": {
@@ -685,7 +685,7 @@
       "nat": "CA"
     },
     {
-      "id": 10,
+      "id": 1045467658688,
       "gender": "male",
       "status": "married",
       "name": {
@@ -738,7 +738,7 @@
       "nat": "NL"
     },
     {
-      "id": 11,
+      "id": 119708907890890678,
       "gender": "female",
       "status": "single",
       "name": {
@@ -791,7 +791,7 @@
       "nat": "FI"
     },
     {
-      "id": 12,
+      "id": 1236547708790745,
       "gender": "male",
       "status": "married",
       "name": {
@@ -846,7 +846,7 @@
       "nat": "NL"
     },
     {
-      "id": 13,
+      "id": 1347654765756,
       "gender": "female",
       "status": "single",
       "name": {
@@ -900,7 +900,7 @@
       "nat": "NL"
     },
     {
-      "id": 14,
+      "id": 14685765875687568,
       "gender": "female",
       "status": "divorced",
       "name": {
@@ -954,7 +954,7 @@
       "nat": "AU"
     },
     {
-      "id": 15,
+      "id": 1534634745757,
       "gender": "male",
       "status": "married",
       "name": {
@@ -1008,7 +1008,7 @@
       "nat": "CH"
     },
     {
-      "id": 16,
+      "id": 16345345345345,
       "gender": "female",
       "status": "single",
       "name": {

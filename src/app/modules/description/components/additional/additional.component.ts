@@ -25,10 +25,8 @@ export class AdditionalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public openResident(a: any): void {
-    console.log(a);
-    
-    // this._router.navigate([''])
-  }
+  public openResident(residentId: number): void {
+    this._router.navigate(['description', residentId]);
+  };
 
 }
