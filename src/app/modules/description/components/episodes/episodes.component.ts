@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { EpisodeDTO } from '../../../../interfaces/episode.interface';
+import { Position } from '../../../../interfaces/position.interface';
 import { UserDTO } from '../../../../interfaces/user.interface';
 import * as fromDescriptonConstants from '../../description-constants';
 
@@ -11,7 +11,7 @@ import * as fromDescriptonConstants from '../../description-constants';
 })
 export class EpisodesComponent implements OnInit {
 
-  @Input() public userDetails!: UserDTO<EpisodeDTO>;
+  @Input() public userDetails!: UserDTO<Position>;
   @Input() public showTable!: boolean;
   
   readonly TABLE_EPISODE_HEADER = fromDescriptonConstants.TABLE_EPISODE_HEADER;

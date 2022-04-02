@@ -141,68 +141,60 @@
     ]
   },
   
-  "position": {
-    "info": {
-      "count": 4,
-      "pages": 1,
-      "next": null,
-      "prev": null
+  "position": [
+    {
+      "id": 1,
+      "name": "Trainee",
+      "type": "Cluster",
+      "dimension": "unknown",
+      "residents": [
+        "http://localhost:3000/users/1",
+        "http://localhost:3000/users/5",
+        "http://localhost:3000/users/9",
+        "http://localhost:3000/users/13"
+      ],
+      "url": "http://localhost:3000/position/1"
     },
-    "results": [
-      {
-        "id": 1,
-        "name": "Trainee",
-        "type": "Cluster",
-        "dimension": "unknown",
-        "residents": [
-          "https://http://localhost:3000/users/1",
-          "https://http://localhost:3000/users/5",
-          "https://http://localhost:3000/users/9",
-          "https://http://localhost:3000/users/13"
-        ],
-        "url": "https://http://localhost:3000/position/1"
-      },
-      {
-        "id": 2,
-        "name": "Trainee",
-        "type": "Planet",
-        "dimension": "Replacement Dimension",
-        "residents": [
-          "https://http://localhost:3000/users/2",
-          "https://http://localhost:3000/users/6",
-          "https://http://localhost:3000/users/10",
-          "https://http://localhost:3000/users/14"
-        ],
-        "url": "https://http://localhost:3000/position/2"
-      },
-      {
-        "id": 3,
-        "name": "Trainee",
-        "type": "Microverse",
-        "dimension": "Dimension C-137",
-        "residents": [
-          "https://http://localhost:3000/users/3",
-          "https://http://localhost:3000/users/7",
-          "https://http://localhost:3000/users/11",
-          "https://http://localhost:3000/users/15"
-        ],
-        "url": "https://http://localhost:3000/position/3"
-      },
-      {
-        "id": 4,
-        "name": "Senior",
-        "type": "Microverse",
-        "dimension": "Interdimensional Cable",
-        "residents": [
-          "https://http://localhost:3000/users/4",
-          "https://http://localhost:3000/users/8",
-          "https://http://localhost:3000/users/12",
-          "https://http://localhost:3000/users/16"
-        ],
-        "url": "https://http://localhost:3000/position/4"
-      }
-    ]
-  },
+    {
+      "id": 2,
+      "name": "Trainee",
+      "type": "Planet",
+      "dimension": "Replacement Dimension",
+      "residents": [
+        "http://localhost:3000/users/2",
+        "http://localhost:3000/users/6",
+        "http://localhost:3000/users/10",
+        "http://localhost:3000/users/14"
+      ],
+      "url": "http://localhost:3000/position/2"
+    },
+    {
+      "id": 3,
+      "name": "Trainee",
+      "type": "Microverse",
+      "dimension": "Dimension C-137",
+      "residents": [
+        "http://localhost:3000/users/3",
+        "http://localhost:3000/users/7",
+        "http://localhost:3000/users/11",
+        "http://localhost:3000/users/15"
+      ],
+      "url": "http://localhost:3000/position/3"
+    },
+    {
+      "id": 4,
+      "name": "Senior",
+      "type": "Microverse",
+      "dimension": "Interdimensional Cable",
+      "residents": [
+        "http://localhost:3000/users/4",
+        "http://localhost:3000/users/8",
+        "http://localhost:3000/users/12",
+        "http://localhost:3000/users/16"
+      ],
+      "url": "http://localhost:3000/position/4"
+    }
+  ],
 
   "users": [
     {
@@ -221,7 +213,7 @@
         "https://http://localhost:3000/episodes/6"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/1"
+        "url": "http://localhost:3000/position/1"
       },
       "location": {
         "city": "Laytown",
@@ -276,7 +268,7 @@
         "https://http://localhost:3000/episodes/5"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/2"
+        "url": "http://localhost:3000/position/2"
       },
       "location": {
         "city": "Carleton",
@@ -330,7 +322,7 @@
         "https://http://localhost:3000/episodes/6"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/3"
+        "url": "http://localhost:3000/position/3"
       },
       "location": {
         "city": "Meshed",
@@ -383,7 +375,7 @@
         "https://http://localhost:3000/episodes/2"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/4"
+        "url": "http://localhost:3000/position/4"
       },
       "location": {
         "city": "Gladstone",
@@ -438,7 +430,7 @@
         "https://http://localhost:3000/episodes/6"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/1"
+        "url": "http://localhost:3000/position/1"
       },
       "location": {
         "city": "Lyngseidet",
@@ -492,7 +484,7 @@
         "https://http://localhost:3000/episodes/6"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/2"
+        "url": "http://localhost:3000/position/2"
       },
       "location": {
         "city": "Sundby",
@@ -546,7 +538,7 @@
         "https://http://localhost:3000/episodes/3"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/3"
+        "url": "http://localhost:3000/position/3"
       },
       "location": {
         "city": "Whangarei",
@@ -600,7 +592,7 @@
         "https://http://localhost:3000/episodes/4"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/4"
+        "url": "http://localhost:3000/position/4"
       },
       "location": {
         "city": "Lages",
@@ -653,7 +645,7 @@
         "https://http://localhost:3000/episodes/4"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/1"
+        "url": "http://localhost:3000/position/1"
       },
       "location": {
         "city": "Trout Lake",
@@ -706,7 +698,7 @@
         "https://http://localhost:3000/episodes/5"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/2"
+        "url": "http://localhost:3000/position/2"
       },
       "location": {
         "city": "Numansdorp",
@@ -759,7 +751,7 @@
         "https://http://localhost:3000/episodes/4"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/3"
+        "url": "http://localhost:3000/position/3"
       },
       "location": {
         "city": "Pelkosenniemi",
@@ -813,7 +805,7 @@
         "https://http://localhost:3000/episodes/2"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/4"
+        "url": "http://localhost:3000/position/4"
       },
       "location": {
         "city": "Nij Altoenae",
@@ -868,7 +860,7 @@
         "https://http://localhost:3000/episodes/6"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/1"
+        "url": "http://localhost:3000/position/1"
       },
       "location": {
         "city": "Rhoon",
@@ -922,7 +914,7 @@
         "https://http://localhost:3000/episodes/6"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/2"
+        "url": "http://localhost:3000/position/2"
       },
       "location": {
         "city": "Shepparton",
@@ -976,7 +968,7 @@
         "https://http://localhost:3000/episodes/2"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/3"
+        "url": "http://localhost:3000/position/3"
       },
       "location": {
         "city": "Ursy",
@@ -1031,7 +1023,7 @@
         "https://http://localhost:3000/episodes/4"
       ],
       "position": {
-        "url": "https://http://localhost:3000/position/4"
+        "url": "http://localhost:3000/position/4"
       },
       "location": {
         "city": "Adelaide",

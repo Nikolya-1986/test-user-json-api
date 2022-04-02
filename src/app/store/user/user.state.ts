@@ -10,9 +10,9 @@ export interface UserState {
 
 export const initialUserState: UserState = {
     userDTO: [],
+    userSelected: undefined,
     loadCouter: 0,
     errorMessage: "",
-    userSelected: undefined,
 };
 
 export default interface AppUserState {

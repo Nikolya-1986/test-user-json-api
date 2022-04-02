@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter, ContentChild, ContentChildren, ElementRef, QueryList, AfterContentInit } from '@angular/core';
 
-import { EpisodeDTO } from '../../../../interfaces/episode.interface';
+import { Position } from '../../../../interfaces/position.interface';
 import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
@@ -13,10 +13,10 @@ export class DetailsComponent implements OnInit, AfterContentInit {
   @ContentChild('contentChecbox') contentChecbox!: ElementRef;
   @ContentChildren('contentButton') contentButton!: QueryList<ElementRef> ;
   
-  @Input() public userDetails!: UserDTO<EpisodeDTO>;
+  @Input() public userDetails!: UserDTO<Position>;
   @Input() public showTable!: boolean;
   @Input() public showText!: boolean;
-  @Output() public openModalDeleteUser = new EventEmitter<UserDTO<EpisodeDTO>>();
+  @Output() public openModalDeleteUser = new EventEmitter<UserDTO<Position>>();
   @Output() public editCurrentUser = new EventEmitter<number>();
 
   constructor() {}

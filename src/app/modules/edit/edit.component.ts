@@ -56,16 +56,16 @@ export class EditComponent implements OnInit {
   };
 
   public fetchUserEdit() {
-    this.userEdit$ = this.activatedRoute.params.pipe(
-      map((params: Params) =>  {
-        const userId = Number(params['id']); 
-        this._userStoreFacade.loadUser(userId);
-        return userId;
-      }),
-      switchMap(() => this._userStoreFacade.getUser$),
-      tap((user) => this.setFormValues(user as UserDTO<Position>))
-    )
-    return this.userEdit$ as unknown as Observable<UserDTO<Position>>;
+    // this.userEdit$ = this.activatedRoute.params.pipe(
+    //   map((params: Params) =>  {
+    //     const userId = Number(params['id']); 
+    //     this._userStoreFacade.loadUser(userId);
+    //     return userId;
+    //   }),
+    //   switchMap(() => this._userStoreFacade.getUser$),
+    //   tap((user) => this.setFormValues(user as UserDTO<Position>))
+    // )
+    // return this.userEdit$ as unknown as Observable<UserDTO<Position>>;
   };
 
   public handleFormChanges(){

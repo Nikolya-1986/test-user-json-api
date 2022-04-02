@@ -6,22 +6,22 @@ import { map, catchError, switchMap, tap, withLatestFrom } from 'rxjs/operators'
 import { Router } from "@angular/router";
 
 import AppUserState from "./user.state";
-import * as userActions from "./user.actions";
-import * as fromUserSelectors from "./user.selectors";
 import { FacadeService } from "src/app/services/facades/facade.service";
 import { Position } from "src/app/interfaces/position.interface";
 import { UserDTO } from "src/app/interfaces/user.interface";
+import * as fromUserActions from "./user.actions";
+import * as fromUserSelectors from "./user.selectors";
 
 @Injectable()
 export class UsersEffects {
 
     loadUsers$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
-            ofType(userActions.UsersActionsType.LOAD_USERS_REQUEST),
+            ofType(fromUserActions.UsersActionsType.LOAD_USERS_REQUEST),
             switchMap(() => this._facadeService.getUsers()
                 .pipe(
-                    map((users) => userActions.loadUsersSuccess({ users })),
-                    catchError((error) => of(userActions.getFail(error))),
+                    map((users) => fromUserActions.loadUsersSuccess({ users })),
+                    catchError((error) => of(fromUserActions.getFail(error))),
                 ) 
             )
         ),
@@ -30,7 +30,7 @@ export class UsersEffects {
 
     loadUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
-            ofType(userActions.UsersActionsType.LOAD_USER_REQUEST),
+            ofType(fromUserActions.UsersActionsType.LOAD_USER_REQUEST),
             switchMap((action: any) => this._facadeService.getUser(action.userId)
                 .pipe(
                     withLatestFrom(
@@ -38,12 +38,12 @@ export class UsersEffects {
                     ),
                     map(([user, users]) => {
                         if (users) {
-                            return (userActions.loadUserSuccess({ user }));
+                            return (fromUserActions.loadUserSuccess({ user }));
                         } else {
                             return { type: 'Empty Action' };
                         }
                     }),
-                    catchError((error) => of(userActions.getFail(error)))
+                    catchError((error) => of(fromUserActions.getFail(error)))
                 )
             )
         ),
@@ -52,12 +52,12 @@ export class UsersEffects {
 
     deleteUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
-            ofType(userActions.UsersActionsType.DELETE_USER_REQUEST),
+            ofType(fromUserActions.UsersActionsType.DELETE_USER_REQUEST),
             switchMap((action: any) => this._facadeService.deleteUser(action.userId)
                 .pipe(
                     tap(() => this._router.navigate(['/home'])),
-                    map(() => userActions.deleteUserSuccess({ userId: action.userId})),
-                    catchError((error) => of(userActions.getFail(error))),
+                    map(() => fromUserActions.deleteUserSuccess({ userId: action.userId})),
+                    catchError((error) => of(fromUserActions.getFail(error))),
                 )
             )
         ),
@@ -66,14 +66,14 @@ export class UsersEffects {
 
     editUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
-            ofType(userActions.UsersActionsType.EDIT_USER_REQUEST),
+            ofType(fromUserActions.UsersActionsType.EDIT_USER_REQUEST),
             switchMap((action: any) => {
                 console.log(action);
                 return this._facadeService.editUser(action.userEdit)
                     .pipe(
                         tap(() => this._router.navigate(['/description'])),
-                        map(() => userActions.editUserSuccess({ userEdit: action.userEdit })),
-                        catchError((error) => of(userActions.getFail(error)))
+                        map(() => fromUserActions.editUserSuccess({ userEdit: action.userEdit })),
+                        catchError((error) => of(fromUserActions.getFail(error)))
                     )
                 }
             )
@@ -83,18 +83,19 @@ export class UsersEffects {
 
     createUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
-            ofType(userActions.UsersActionsType.CREATE_USER_REQUEST),
+            ofType(fromUserActions.UsersActionsType.CREATE_USER_REQUEST),
             switchMap((action: any) => {
                 console.log(action);
                 return this._facadeService.createUser(action.userCreate)
                     .pipe(
                         tap(() => this._router.navigate(['/home'])),
-                        map(() => userActions.createUserSuccess({ userCreate: action.userCreate })),
-                        catchError((error) => of(userActions.getFail(error)))
+                        map(() => fromUserActions.createUserSuccess({ userCreate: action.userCreate })),
+                        catchError((error) => of(fromUserActions.getFail(error)))
                     )
                 }
             )
-        )
+        ),
+        { useEffectsErrorHandler: false }
     );
 
     constructor(

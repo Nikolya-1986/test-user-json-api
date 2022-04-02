@@ -17,7 +17,7 @@ export class UserStoreFacade {
     public getUsers$ = this._storeUser.pipe(select(fromUserSelectors.getUsers)); 
     public getUser$ = this._storeUser.pipe(select(fromUserSelectors.getUser)); 
     public error$ = this._storeUser.pipe(select(fromUserSelectors.getFail));
-
+    
     constructor(
         private _storeUser: Store<UserState>,
     ) {}

@@ -1,18 +1,13 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { forkJoin, Observable, of, Subject, takeUntil } from 'rxjs';
-import { map, switchMap, tap } from "rxjs/operators";
-import {  select, Store } from '@ngrx/store';
+import { map, switchMap } from "rxjs/operators";
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import { Position, PositionDTO } from '../../interfaces/position.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
 import { FacadeService } from '../../services/facades/facade.service';
-import UserState from '../../store/user/user.state';
-import * as fromUserActions from '../../store/user/user.actions';
-import { EpisodeState } from 'src/app/store/episode/episode.state';
 import { UserService } from 'src/app/services/user.service';
-
 
 @Component({
   selector: 'app-description',
@@ -23,17 +18,15 @@ export class DescriptionComponent implements OnInit {
 
   @ViewChild('modal', { read: ViewContainerRef, static: false })
   private viewContainerRef!: ViewContainerRef;
-  public userDetails$!: Observable<UserDTO<Position> | any>;
+  private _destroy$: Subject<boolean> = new Subject();
+  public userDetails$!: Observable<UserDTO<Position>>;
   public showTable!: boolean;
   public showText!: boolean;
   public currentImage: number = 0;
-  private _destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private _userStoreFacade: UserStoreFacade,
     private _activatedRoute: ActivatedRoute,
-    private _storeUsers: Store<UserState>,
-    private _episodeStore: Store<EpisodeState>,
     private _facadeService: FacadeService,
     private _userService: UserService,
     private _router: Router,
@@ -50,24 +43,21 @@ export class DescriptionComponent implements OnInit {
         this._userStoreFacade.loadUser(userId);
         return userId;
       }),
-      switchMap((userId: number) => this._userStoreFacade.getUser$),
-      switchMap((user) => {
-        const url = user?.position.url as string;
-        console.log(url);
-        
-        const getPosition$ = this._userService.getPosition(url);
+      switchMap(() => this._userStoreFacade.getUser$),
+      switchMap((user:  UserDTO<PositionDTO> | any) => {
+        const getPosition$ = this._userService.getUserPosition(user?.position.url);
         const getUser$ = of(user);
         return forkJoin([getPosition$, getUser$]);
       }),
       map(([position, user]) => {
-        const userWithPosition: UserDTO<Position> | any = {
+        const userPosition: UserDTO<Position> = {
           ...user,
           position,
         }
-        console.log(userWithPosition);
-        return userWithPosition;
+        return userPosition;
       }),
-    );
+      takeUntil(this._destroy$),
+    )
     return this.userDetails$;
   };
 

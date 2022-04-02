@@ -155,8 +155,8 @@ export class FacadeService {
         return this.modalWindowService.modalWindowUserDelete(viewContainerRef, modalTitle, modalBody, user);
     };
 
-    public getPosition(url: string): Observable<Position> {
-        return this.userService.getPosition(url).pipe(
+    public getUserPosition(url: string): Observable<Position> {
+        return this.userService.getUserPosition(url).pipe(
             catchError(this.errorService.errorsBackend.bind(this)),
         )
     };

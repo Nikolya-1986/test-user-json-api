@@ -78,7 +78,7 @@ export class UserService {
         )
     };
 
-    public getPosition(url: string): Observable<Position> {
+    public getUserPosition(url: string): Observable<Position> {
         return this._httpClient.get<Position>(url);
     };
 }
