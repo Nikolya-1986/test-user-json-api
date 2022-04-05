@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { EpisodeDTO } from '../../../interfaces/episode.interface';
+import { LocationDTO } from '../../../interfaces/location.interface';
+import { PositionDTO } from '../../../interfaces/position.interface';
 import { UserDTO } from '../../../interfaces/user.interface';
 
 @Pipe({
@@ -8,10 +9,10 @@ import { UserDTO } from '../../../interfaces/user.interface';
 })
 export class FilterNameAgePipe implements PipeTransform {
 
-  transform(users: UserDTO<EpisodeDTO>[], value: string): UserDTO<EpisodeDTO>[] {
+  transform(users: UserDTO<PositionDTO, LocationDTO>[], value: string): UserDTO<PositionDTO, LocationDTO>[] {
 
     const usersFilter = [...users];
-    usersFilter.sort((a: UserDTO<EpisodeDTO> | any , b: UserDTO<EpisodeDTO> | any) => {
+    usersFilter.sort((a: UserDTO<PositionDTO, LocationDTO> | any , b: UserDTO<PositionDTO, LocationDTO> | any) => {
       if(value === 'Dafault'){
         return a.userId - b.userId;
       };

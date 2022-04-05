@@ -37,9 +37,6 @@
             </tbody>
         </table>
 
-        <div>
-
-        </div>
         <table class="additional__table">
             <caption>
                 Position
@@ -74,6 +71,44 @@
                                 {{ resident }}
                             </li>
                         </ul>
+                    </td>
+                </tr>    
+            </tbody>
+        </table>
+
+        <table class="additional__table">
+            <caption>
+                Location
+            </caption>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of TABLE_LOCATION_HEADER">
+                        {{ column  }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{  userDetails.location.country }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.city }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.street.name }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.street.number }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.postcode }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.coordinates.latitude }}
+                    </td>
+                    <td>    
+                        {{ userDetails.location.coordinates.longitude }}
                     </td>
                 </tr>    
             </tbody>

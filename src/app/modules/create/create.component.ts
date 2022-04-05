@@ -3,7 +3,8 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, fromEvent, map, Observable, Subscription, take } from 'rxjs';
 
 import { UserDTO } from '../../interfaces/user.interface';
-import { EpisodeDTO } from '../../interfaces/episode.interface';
+import { PositionDTO } from '../../interfaces/position.interface';
+import { LocationDTO } from '../../interfaces/location.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
@@ -161,7 +162,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     if(this.formCreate.valid){
       const newUser = this.formCreate.getRawValue();
       const id = Math.random();
-      const userCreate: UserDTO<EpisodeDTO> = {
+      const userCreate: UserDTO<PositionDTO, LocationDTO> = {
         ...newUser,
         id: id,
         picture: this.picture,

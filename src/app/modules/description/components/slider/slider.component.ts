@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { Position } from '../../../../interfaces/position.interface';
+import { LocationDTO } from '../../../../interfaces/location.interface';
+import { PositionDTO } from '../../../../interfaces/position.interface';
 import { Picture, UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
@@ -10,7 +11,7 @@ import { Picture, UserDTO } from '../../../../interfaces/user.interface';
 })
 export class SliderComponent {
 
-  @Input() public userDetails!: UserDTO<Position>;
+  @Input() public userDetails!: UserDTO<PositionDTO, LocationDTO>;
   @Input() public showTable!: boolean;
   @Input() public showText!: boolean;
   @Input() public currentImage!: number;

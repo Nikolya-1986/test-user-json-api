@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
-import { EpisodeDTO } from '../../../../interfaces/episode.interface';
+import { LocationDTO } from '../../../../interfaces/location.interface';
+import { PositionDTO } from '../../../../interfaces/position.interface';
 import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
@@ -12,7 +13,7 @@ import { UserDTO } from '../../../../interfaces/user.interface';
 })
 export class ExtraComponent implements OnInit {
 
-  @Input() public userExtra$!: Observable<UserDTO<EpisodeDTO>>;
+  @Input() public userExtra$!: Observable<UserDTO<PositionDTO, LocationDTO>>;
   
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,7 +23,7 @@ export class ExtraComponent implements OnInit {
     this.fetchUserExtra();
   }
 
-  private fetchUserExtra(): Observable<UserDTO<EpisodeDTO>> {
+  private fetchUserExtra(): Observable<UserDTO<PositionDTO, LocationDTO>> {
     this.userExtra$ = this.activatedRoute.data.pipe(
       map((data) => data['extraDescription'])
     );

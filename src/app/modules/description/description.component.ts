@@ -5,6 +5,7 @@ import { map, switchMap, take } from "rxjs/operators";
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import { Position, PositionDTO } from '../../interfaces/position.interface';
+import { Location, LocationDTO } from '../../interfaces/location.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
 import { FacadeService } from '../../services/facades/facade.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,7 +20,7 @@ export class DescriptionComponent implements OnInit {
   @ViewChild('modal', { read: ViewContainerRef, static: false })
   private viewContainerRef!: ViewContainerRef;
   private _destroy$: Subject<boolean> = new Subject();
-  public userDetails$!: Observable<UserDTO<Position>>;
+  public userDetails$!: Observable<UserDTO<Position, Location>>;
   public showTable!: boolean;
   public showText!: boolean;
   public currentImage: number = 0;
@@ -36,7 +37,7 @@ export class DescriptionComponent implements OnInit {
     this._downloadDataUserDetail();
   };
 
-  private _downloadDataUserDetail(): Observable<UserDTO<Position>> {
+  private _downloadDataUserDetail(): Observable<UserDTO<Position, Location>> {
     this.userDetails$ = this._activatedRoute.params.pipe(
       map((params: Params) => {
         const userId =  Number(params['id']);
@@ -44,17 +45,19 @@ export class DescriptionComponent implements OnInit {
         return userId;
       }),
       switchMap(() => this._userStoreFacade.getUser$),
-      switchMap((user:  UserDTO<PositionDTO> | any) => {
-        const getPosition$ = this._userService.getUserPosition(user?.position.url);
+      switchMap((user:  UserDTO<PositionDTO, LocationDTO> | any) => {
+        const getPosition$ = this._facadeService.getUserPosition(user?.position.url);
+        const getLocation$ = this._facadeService.getUserLocation(user?.location.id);
         const getUser$ = of(user);
-        return forkJoin([getPosition$, getUser$]);
+        return forkJoin([getPosition$, getLocation$, getUser$]);
       }),
-      map(([position, user]) => {
-        const userPosition: UserDTO<Position> = {
+      map(([position, location, user]) => {
+        const userPositionLocation: UserDTO<Position, Location> = {
           ...user,
+          location,
           position,
         }
-        return userPosition;
+        return userPositionLocation;
       }),
       takeUntil(this._destroy$),
     )
@@ -69,7 +72,7 @@ export class DescriptionComponent implements OnInit {
     this.currentImage = next === images.length ? 0 : next;
   };
 
-  public onOpenModalDeleteUser(user: UserDTO<PositionDTO>): void {
+  public onOpenModalDeleteUser(user: UserDTO<PositionDTO, LocationDTO>): void {
     this._facadeService.modalWindowUserDelete(
       this.viewContainerRef, 
       'Are you sure you want to delete the user?', 
@@ -98,12 +101,4 @@ export class DescriptionComponent implements OnInit {
   };
 }
 
-function indentify <T>(value: T): T {
-  return value;
-}
-//Дженерики преобразуют функцию в зависимости от указанного типа данных, вожно создавать повторно используемые компоненты меняя их типы
-//Способ сообщить классам, компонентам или интерфейсам какой тип необходимо использовать при их вызове, также как во время вызова мы
-//сообщаем функции, какие значения использовать в качестве аргументов
-console.log(indentify<Number>(85));
-console.log(indentify<String>('Generic Type'));
-console.log(indentify([69,96]));//тип можно не передовать, Type Script вычислит его сам по переданным данным
+

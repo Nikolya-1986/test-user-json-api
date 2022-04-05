@@ -4,11 +4,12 @@ import { map, Observable, Subject } from 'rxjs';
 import { takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import { FacadeService } from '../../services/facades/facade.service';
+import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
 import { EpisodeDTO } from '../../interfaces/episode.interface';
-import { EpisodeState } from '../../store/episode/episode.state';
 import { PositionDTO } from '../../interfaces/position.interface';
+import { LocationDTO } from '../../interfaces/location.interface';
+import { EpisodeState } from '../../store/episode/episode.state';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
 import * as fromEpisodeActions from '../../store/episode/episode.actions';
 
@@ -19,7 +20,7 @@ import * as fromEpisodeActions from '../../store/episode/episode.actions';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public users$!: Observable<UserDTO<PositionDTO>[]>;
+  public users$!: Observable<UserDTO<PositionDTO, LocationDTO>[]>;
   public episodes$!: Observable<EpisodeDTO[]>;
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;

@@ -1,5 +1,7 @@
 import { createAction, props, union } from "@ngrx/store";
-import { Position, PositionDTO } from "../../interfaces/position.interface";
+
+import { LocationDTO } from "../../interfaces/location.interface";
+import { PositionDTO } from "../../interfaces/position.interface";
 
 import { UserDTO } from "../../interfaces/user.interface";
 
@@ -38,7 +40,7 @@ export const loadUsersRequest = createAction (
 
 export const loadUsersSuccess = createAction (
     UsersActionsType.LOAD_USERS_SUCCESS,
-    props<{ users: UserDTO<PositionDTO>[] }>(),
+    props<{ users: UserDTO<PositionDTO, LocationDTO>[] }>(),
 );
 
 export const loadUserRequest = createAction (
@@ -48,7 +50,7 @@ export const loadUserRequest = createAction (
 
 export const loadUserSuccess = createAction (
     UsersActionsType.LOAD_USER_SUCCESS,
-    props<{ user: UserDTO<PositionDTO> }>(),
+    props<{ user: UserDTO<PositionDTO, LocationDTO> }>(),
 );
 
 export const deleteUserRequest = createAction (
@@ -63,22 +65,22 @@ export const deleteUserSuccess = createAction (
 
 export const editUserRequest = createAction (
     UsersActionsType.EDIT_USER_REQUEST,
-    props<({ userEdit: UserDTO<PositionDTO> })>(),
+    props<({ userEdit: UserDTO<PositionDTO, LocationDTO> })>(),
 );
 
 export const editUserSuccess = createAction (
     UsersActionsType.EDIT_USER_SUCCESS,
-    props<({ userEdit: UserDTO<PositionDTO> })>(),
+    props<({ userEdit: UserDTO<PositionDTO, LocationDTO> })>(),
 );
 
 export const createUserRequest = createAction (
     UsersActionsType.CREATE_USER_REQUEST,
-    props<{ userCreate: UserDTO<PositionDTO> }>(),
+    props<{ userCreate: UserDTO<PositionDTO, LocationDTO> }>(),
 );
 
 export const createUserSuccess = createAction (
     UsersActionsType.CREATE_USER_SUCCESS,
-    props<{ userCreate: UserDTO<PositionDTO> }>(),
+    props<{ userCreate: UserDTO<PositionDTO, LocationDTO> }>(),
 );
 
 const allUserActions = union({

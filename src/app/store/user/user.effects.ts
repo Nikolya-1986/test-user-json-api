@@ -7,8 +7,6 @@ import { Router } from "@angular/router";
 
 import AppUserState from "./user.state";
 import { FacadeService } from "src/app/services/facades/facade.service";
-import { Position } from "src/app/interfaces/position.interface";
-import { UserDTO } from "src/app/interfaces/user.interface";
 import * as fromUserActions from "./user.actions";
 import * as fromUserSelectors from "./user.selectors";
 
@@ -33,8 +31,9 @@ export class UsersEffects {
             ofType(fromUserActions.UsersActionsType.LOAD_USER_REQUEST),
             switchMap((action: any) => this._facadeService.getUser(action.userId)
                 .pipe(
+                    // map((user) => fromUserActions.loadUserSuccess({ user })),
                     withLatestFrom(
-                        this._store.select(fromUserSelectors.getUsers),
+                        this._storeUser.select(fromUserSelectors.getUsers),
                     ),
                     map(([user, users]) => {
                         if (users) {
@@ -101,7 +100,7 @@ export class UsersEffects {
     constructor(
         private _actions$: Actions,
         private _facadeService: FacadeService,
-        private _store: Store<AppUserState>,
+        private _storeUser: Store<AppUserState>,
         private _router: Router
     ){ }
 } 

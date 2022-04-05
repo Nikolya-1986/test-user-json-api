@@ -1,5 +1,5 @@
 import { createAction, props, union } from "@ngrx/store";
-import { EpisodeDTO } from "src/app/interfaces/episode.interface";
+import { EpisodeDTO } from "../../interfaces/episode.interface";
 
 export enum EpisodeActionsType {
     GET_FAIL = '[ERROR] Get Fail',

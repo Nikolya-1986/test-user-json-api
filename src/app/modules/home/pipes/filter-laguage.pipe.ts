@@ -1,6 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { EpisodeDTO } from '../../../interfaces/episode.interface';
+import { LocationDTO } from '../../../interfaces/location.interface';
+import { PositionDTO } from '../../../interfaces/position.interface';
 import { UserDTO } from '../../../interfaces/user.interface';
 
 @Pipe({
@@ -8,7 +9,7 @@ import { UserDTO } from '../../../interfaces/user.interface';
 })
 export class FilterLaguagePipe implements PipeTransform {
 
-  transform(usersDTO: UserDTO<EpisodeDTO>[], language: string): UserDTO<EpisodeDTO>[] {
+  transform(usersDTO: UserDTO<PositionDTO, LocationDTO>[], language: string): UserDTO<PositionDTO, LocationDTO>[] {
     if(language){
       const usersFilterLanguage = usersDTO.filter((users) => {
         const languages = users.language;
