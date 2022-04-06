@@ -3,6 +3,7 @@ import { Component, Input, OnInit, Output, EventEmitter, ContentChild, ContentCh
 import { Position } from '../../../../interfaces/position.interface';
 import { Location } from '../../../../interfaces/location.interface';
 import { UserDTO } from '../../../../interfaces/user.interface';
+import * as fromDescriptonConstants from '../../../description/description-constants';
 
 @Component({
   selector: 'app-details',
@@ -19,6 +20,8 @@ export class DetailsComponent implements OnInit, AfterContentInit {
   @Input() public showText!: boolean;
   @Output() public openModalDeleteUser = new EventEmitter<UserDTO<Position, Location>>();
   @Output() public editCurrentUser = new EventEmitter<number>();
+
+  readonly TABLE_USER_HEADER = fromDescriptonConstants.TABLE_USER_HEADER;
 
   constructor() {}
 

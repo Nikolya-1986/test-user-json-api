@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { LocationDTO } from '../../../../interfaces/location.interface';
-import { PositionDTO } from '../../../../interfaces/position.interface';
 import { Picture, UserDTO } from '../../../../interfaces/user.interface';
+import { PositionDTO } from "../../../../interfaces/position.interface";
+import { LocationDTO } from "../../../../interfaces/location.interface";
 
 @Component({
   selector: 'app-slider',

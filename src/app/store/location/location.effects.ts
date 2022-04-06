@@ -7,14 +7,14 @@ import { FacadeService } from "../../services/facades/facade.service";
 import * as fromLocationActions from "./location.actions";
 
 @Injectable()
-export class EpisodeEffects {
+export class LocationEffects {
 
-    loadEpisodes$: Observable<Action> = createEffect(() => {
+    loadLocation$: Observable<Action> = createEffect(() => {
         return this._actions$.pipe(
             ofType(fromLocationActions.LocationActionsType.LOAD_LOCATION_REQUEST),
             switchMap((action: any) => this._facadeService.getUserLocation(action.id)
                 .pipe(
-                    map((_location: Location) => fromLocationActions.loadLocationSuccess({ location: action._location })),
+                    map((location) => fromLocationActions.loadLocationSuccess({ location: action.location })),
                     catchError((error) => of(fromLocationActions.getFail(error)))
                 )
             )

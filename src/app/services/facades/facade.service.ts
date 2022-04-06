@@ -3,14 +3,12 @@ import { catchError, Observable, retry, tap } from "rxjs";
 
 import { Auth } from "../../interfaces/auth.interface";
 import { UserDTO } from "../../interfaces/user.interface";
-import { EpisodeDTO, EpisodesDTO } from "../../interfaces/episode.interface";
 import { Position, PositionDTO } from "../../interfaces/position.interface";
 import { LocationDTO } from "../../interfaces/location.interface";
 import { AuthService } from "../../modules/auth/services/auth.service";
 import { UserService } from "../user.service";
 import { ModalWindowService } from "../modal-window.servise";
 import { ErrorService } from "../error.service";
-import { EpisodeService } from "../episode.service";
 import { AdditionalInfoUserService } from "../additional-info-user.service";
 
 @Injectable({
@@ -24,14 +22,6 @@ export class FacadeService {
             this._authService = this.injector.get(AuthService);
         }
         return this._authService;
-    };
-
-    private _episodeService!: EpisodeService;
-    public get episodeService(): EpisodeService {
-        if(!this._episodeService) {
-            this._episodeService = this.injector.get(EpisodeService);
-        }
-        return this._episodeService;
     };
 
     private _userService!: UserService;
@@ -106,18 +96,6 @@ export class FacadeService {
 
     public getAdminPassword(): Observable<string[]> {
         return this.authService.getAdminPassword();
-    };
-
-    public getEpisodes(): Observable<EpisodesDTO> {
-        return this.episodeService.getEpisodes().pipe(
-            catchError(this.errorService.errorsBackend.bind(this)),
-        )
-    };
-
-    public getСhangedEpisodes(): Observable<EpisodeDTO[]> {
-        return this.episodeService.getСhangedEpisodes().pipe(
-            catchError(this.errorService.errorsBackend.bind(this)),
-        )
     };
 
     public getUsers(): Observable<UserDTO<PositionDTO, LocationDTO>[]> {

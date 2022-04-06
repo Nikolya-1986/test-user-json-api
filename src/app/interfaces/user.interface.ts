@@ -1,4 +1,3 @@
-import { EpisodeDTO } from "./episode.interface";
 import { LocationDTO } from "./location.interface";
 import { PositionDTO } from "./position.interface";
 
@@ -11,7 +10,6 @@ export interface UserDTO<P, L> {
     gender: Gender,
     status: Status,
     name: Name,
-    episode: EpisodeDTO,
     position: P,
     location: L,
     email: string,

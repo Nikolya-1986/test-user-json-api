@@ -10,12 +10,9 @@ const _locationReducerInternal = createReducer (
         errorMessage: action.message,
     })),
 
-    on(fromLocationActions.loadLocationRequest, (state, { id }) => {
-        console.log(id);
-        return {
-            ...state,
-        } 
-    }),
+    on(fromLocationActions.loadLocationRequest, (state, { id }) => ({
+        ...state,
+    })),
     on(fromLocationActions.loadLocationSuccess, (state, action) => ({
         ...state,
         location: action.location,

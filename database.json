@@ -22,131 +22,9 @@
       "token": "37",
       "returnSecureToken": true,
       "id": 3
-    },
-    {
-      "email": "nikolai_sergeevich@mail.ru",
-      "password": "Admin:26.02.22",
-      "token": "5",
-      "returnSecureToken": true,
-      "id": 4
     }
   ],
-  "episodes": {
-    "info": {
-      "count": 6,
-      "pages": 1,
-      "next": null,
-      "prev": null
-    },
-    "results": [
-      {
-        "id": 1,
-        "name": "Pilot",
-        "track": "S01E01",
-        "users": [
-          "https://http://localhost:3000/users/1",
-          "https://http://localhost:3000/users/2",
-          "https://http://localhost:3000/users/5",
-          "https://http://localhost:3000/users/15",
-          "https://http://localhost:3000/users/16"
-        ],
-        "url": "https://http://localhost:3000/episodes/1",
-        "created": "2017-11-10T08:16:33.798Z",
-        "completed": "2017-11-10T10:10:33.798Z"
-      },
-      {
-        "id": 2,
-        "name": "Lawnmower Dog",
-        "track": "S02E01",
-        "users": [
-          "https://http://localhost:3000/users/1",
-          "https://http://localhost:3000/users/3",
-          "https://http://localhost:3000/users/4",
-          "https://http://localhost:3000/users/9",
-          "https://http://localhost:3000/users/12",
-          "https://http://localhost:3000/users/14",
-          "https://http://localhost:3000/users/15",
-          "https://http://localhost:3000/users/16"
-        ],
-        "url": "https://http://localhost:3000/episodes/2",
-        "created": "2017-11-10T10:16:45.022Z",
-        "completed": "2017-11-10T11:00:03.798Z"
-      },
-      {
-        "id": 3,
-        "name": "Anatomy Park",
-        "track": "S02E02",
-        "users": [
-          "https://http://localhost:3000/users/2",
-          "https://http://localhost:3000/users/3",
-          "https://http://localhost:3000/users/6",
-          "https://http://localhost:3000/users/7",
-          "https://http://localhost:3000/users/8",
-          "https://http://localhost:3000/users/11",
-          "https://http://localhost:3000/users/12",
-          "https://http://localhost:3000/users/13",
-          "https://http://localhost:3000/users/15"
-        ],
-        "url": "https://http://localhost:3000/episodes/3",
-        "created": "2017-11-10T11:02:12.916Z",
-        "completed": "2017-11-10T12:12:22.798Z"
-      },
-      {
-        "id": 4,
-        "name": "Meeseeks and Destroy",
-        "track": "S03E01",
-        "users": [
-          "https://http://localhost:3000/users/2",
-          "https://http://localhost:3000/users/6",
-          "https://http://localhost:3000/users/8",
-          "https://http://localhost:3000/users/9",
-          "https://http://localhost:3000/users/11",
-          "https://http://localhost:3000/users/13",
-          "https://http://localhost:3000/users/14",
-          "https://http://localhost:3000/users/16"
-        ],
-        "url": "https://http://localhost:3000/episodes/4",
-        "created": "2017-11-10T12:16:12.236Z",
-        "completed": "2017-11-10T13:01:22.798Z"
-      },
-      {
-        "id": 5,
-        "name": "Rick Potion",
-        "track": "S03E02",
-        "users": [
-          "https://http://localhost:3000/users/5",
-          "https://http://localhost:3000/users/2",
-          "https://http://localhost:3000/users/5",
-          "https://http://localhost:3000/users/8",
-          "https://http://localhost:3000/users/10"
-        ],
-        "url": "https://http://localhost:3000/episodes/5",
-        "created": "2017-11-10T14:02:31.339Z",
-        "completed": "2017-11-10T16:00:22.798Z"
-      },
-      {
-        "id": 6,
-        "name": "Raising Gazorpazorp",
-        "track": "S03E03",
-        "users": [
-          "https://http://localhost:3000/users/1",
-          "https://http://localhost:3000/users/3",
-          "https://http://localhost:3000/users/4",
-          "https://http://localhost:3000/users/5",
-          "https://http://localhost:3000/users/6",
-          "https://http://localhost:3000/users/7",
-          "https://http://localhost:3000/users/10",
-          "https://http://localhost:3000/users/12",
-          "https://http://localhost:3000/users/13",
-          "https://http://localhost:3000/users/14",
-          "https://http://localhost:3000/users/16"
-        ],
-        "url": "https://http://localhost:3000/episodes/6",
-        "created": "2017-11-10T16:02:55.441Z",
-        "completed": "2017-11-10T17:10:22.798Z"
-      }
-    ]
-  },
+
   "position": [
     {
       "id": 1,
@@ -437,12 +315,6 @@
         "first": "Stephen",
         "last": "May"
       },
-      "episode": [
-        "http://localhost:3000/episodes/1",
-        "http://localhost:3000/episodes/2",
-        "http://localhost:3000/episodes/5",
-        "http://localhost:3000/episodes/6"
-      ],
       "position": {
         "url": "http://localhost:3000/position/1"
       },
@@ -486,12 +358,6 @@
         "first": "Marianne",
         "last": "Claire"
       },
-      "episode": [
-        "http://localhost:3000/episodes/1",
-        "http://localhost:3000/episodes/3",
-        "http://localhost:3000/episodes/4",
-        "http://localhost:3000/episodes/5"
-      ],
       "position": {
         "url": "http://localhost:3000/position/2"
       },
@@ -535,11 +401,6 @@
         "first": "Arsin",
         "last": "Mysavi"
       },
-      "episode": [
-        "http://localhost:3000/episodes/2",
-        "http://localhost:3000/episodes/3",
-        "http://localhost:3000/episodes/6"
-      ],
       "position": {
         "url": "http://localhost:3000/position/3"
       },
@@ -583,10 +444,6 @@
         "first": "Serenity",
         "last": "Cole"
       },
-      "episode": [
-        "http://localhost:3000/episodes/6",
-        "http://localhost:3000/episodes/2"
-      ],
       "position": {
         "url": "http://localhost:3000/position/4"
       },
@@ -631,11 +488,6 @@
         "first": "Angelina",
         "last": "Finny"
       },
-      "episode": [
-        "http://localhost:3000/episodes/1",
-        "http://localhost:3000/episodes/5",
-        "http://localhost:3000/episodes/6"
-      ],
       "position": {
         "url": "http://localhost:3000/position/1"
       },
@@ -679,11 +531,6 @@
         "first": "Valdemar",
         "last": "Olsen"
       },
-      "episode": [
-        "http://localhost:3000/episodes/3",
-        "http://localhost:3000/episodes/4",
-        "http://localhost:3000/episodes/6"
-      ],
       "position": {
         "url": "http://localhost:3000/position/2"
       },
@@ -728,10 +575,6 @@
         "first": "Pippa",
         "last": "Green"
       },
-      "episode": [
-        "http://localhost:3000/episodes/6",
-        "http://localhost:3000/episodes/3"
-      ],
       "position": {
         "url": "http://localhost:3000/position/3"
       },
@@ -775,11 +618,6 @@
         "first": "Beritiana",
         "last": "Nogueira"
       },
-      "episode": [
-        "http://localhost:3000/episodes/3",
-        "http://localhost:3000/episodes/5",
-        "http://localhost:3000/episodes/4"
-      ],
       "position": {
         "url": "http://localhost:3000/position/4"
       },
@@ -823,10 +661,6 @@
         "first": "Jeanne",
         "last": "Pelletier"
       },
-      "episode": [
-        "http://localhost:3000/episodes/2",
-        "http://localhost:3000/episodes/4"
-      ],
       "position": {
         "url": "http://localhost:3000/position/1"
       },
@@ -870,10 +704,6 @@
         "first": "Alain",
         "last": "Nieuwland"
       },
-      "episode": [
-        "http://localhost:3000/episodes/6",
-        "http://localhost:3000/episodes/5"
-      ],
       "position": {
         "url": "http://localhost:3000/position/2"
       },
@@ -917,10 +747,6 @@
         "first": "Emilia",
         "last": "Ahola"
       },
-      "episode": [
-        "http://localhost:3000/episodes/3",
-        "http://localhost:3000/episodes/4"
-      ],
       "position": {
         "url": "http://localhost:3000/position/3"
       },
@@ -964,11 +790,6 @@
         "first": "Anh",
         "last": "Scholtz"
       },
-      "episode": [
-        "http://localhost:3000/episodes/3",
-        "http://localhost:3000/episodes/6",
-        "http://localhost:3000/episodes/2"
-      ],
       "position": {
         "url": "http://localhost:3000/position/4"
       },
@@ -1013,11 +834,6 @@
         "first": "Samah",
         "last": "Lommers"
       },
-      "episode": [
-        "http://localhost:3000/episodes/3",
-        "http://localhost:3000/episodes/4",
-        "http://localhost:3000/episodes/6"
-      ],
       "position": {
         "url": "http://localhost:3000/position/1"
       },
@@ -1061,11 +877,6 @@
         "first": "Harper",
         "last": "Bailey"
       },
-      "episode": [
-        "http://localhost:3000/episodes/2",
-        "http://localhost:3000/episodes/4",
-        "http://localhost:3000/episodes/6"
-      ],
       "position": {
         "url": "http://localhost:3000/position/2"
       },
@@ -1109,11 +920,6 @@
         "first": "Kay",
         "last": "Masson"
       },
-      "episode": [
-        "http://localhost:3000/episodes/1",
-        "http://localhost:3000/episodes/3",
-        "http://localhost:3000/episodes/2"
-      ],
       "position": {
         "url": "http://localhost:3000/position/3"
       },
@@ -1157,12 +963,6 @@
         "first": "Margie",
         "last": "Bates"
       },
-      "episode": [
-        "http://localhost:3000/episodes/1",
-        "http://localhost:3000/episodes/2",
-        "http://localhost:3000/episodes/6",
-        "http://localhost:3000/episodes/4"
-      ],
       "position": {
         "url": "http://localhost:3000/position/4"
       },

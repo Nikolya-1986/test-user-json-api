@@ -1,4 +1,4 @@
-export const TABLE_EPISODE_HEADER: string[]  = [ '№ episode', 'Name', 'Tracks', 'Created', 'Сompleted', 'Last' ];
+export const TABLE_USER_HEADER: string[]  = [ 'Appeal', 'First name', 'Last name', ' Date of birthday', 'Gender', 'Status', ' Languages', ' Date registered' ];
 
 export const TABLE_POSITION_HEADER: string[]  = [ '№ position', 'Name', 'Dimension', 'Type', 'Residents' ];
 

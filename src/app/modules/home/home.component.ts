@@ -6,12 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { FacadeService } from '../../services/facades/facade.service';
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
-import { EpisodeDTO } from '../../interfaces/episode.interface';
 import { PositionDTO } from '../../interfaces/position.interface';
 import { LocationDTO } from '../../interfaces/location.interface';
-import { EpisodeState } from '../../store/episode/episode.state';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
-import * as fromEpisodeActions from '../../store/episode/episode.actions';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +18,6 @@ import * as fromEpisodeActions from '../../store/episode/episode.actions';
 export class HomeComponent implements OnInit, OnDestroy {
 
   public users$!: Observable<UserDTO<PositionDTO, LocationDTO>[]>;
-  public episodes$!: Observable<EpisodeDTO[]>;
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
   public errorEpisodes$!: Observable<string | null>;
@@ -40,7 +36,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private _userStoreFacade: UserStoreFacade,
-    private _storeEpisode: Store<EpisodeState>,
     private _facadeService: FacadeService,
     private activateRoute: ActivatedRoute,
     private router: Router,
@@ -54,8 +49,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private _downloadDataUsers(): void {
     this._userStoreFacade.loadUsers();
-    this._storeEpisode.dispatch(fromEpisodeActions.loadEpisodesRequest());
-
     this.isLoading$ = this._userStoreFacade.isLoading$;
     this.users$ = this._userStoreFacade.getUsers$;
     this.error$ = this._userStoreFacade.error$;

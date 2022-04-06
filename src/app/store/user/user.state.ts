@@ -16,6 +16,6 @@ export const initialUserState: UserState = {
     errorMessage: "",
 };
 
-export default interface AppUserState {
+export default interface DefaultUserState {
     user: UserState,
 }

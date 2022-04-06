@@ -7,7 +7,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
-import { EpisodeDTO } from '../../interfaces/episode.interface';
+import { Position, PositionDTO } from '../../interfaces/position.interface';
+import { LocationDTO } from '../../interfaces/location.interface';
 import AppUserState from '../../store/user/user.state';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
@@ -16,9 +17,7 @@ import { websiteValidator } from '../../validators/wibsite.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { lengthValidator } from '../../validators/length.validator';
 import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
-import { Position, PositionDTO } from '../../interfaces/position.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
-import { LocationDTO } from '../../interfaces/location.interface';
 
 @Component({
   selector: 'app-edit',
@@ -56,7 +55,7 @@ export class EditComponent implements OnInit {
     this.handleFormChanges();
   };
 
-  public fetchUserEdit() {
+  public fetchUserEdit(): void {
     // this.userEdit$ = this.activatedRoute.params.pipe(
     //   map((params: Params) =>  {
     //     const userId = Number(params['id']); 
@@ -64,9 +63,9 @@ export class EditComponent implements OnInit {
     //     return userId;
     //   }),
     //   switchMap(() => this._userStoreFacade.getUser$),
-    //   tap((user) => this.setFormValues(user as UserDTO<Position>))
+    //   tap((user) => this.setFormValues(user as UserDTO<Position, Location, Episode>))
     // )
-    // return this.userEdit$ as unknown as Observable<UserDTO<Position>>;
+    // return this.userEdit$ as unknown as Observable<UserDTO<<Position, Location, Episode>>;
   };
 
   public handleFormChanges(){

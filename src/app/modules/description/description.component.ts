@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { forkJoin, Observable, of, Subject, takeUntil } from 'rxjs';
-import { map, switchMap, take } from "rxjs/operators";
+import { map, switchMap, take, tap } from "rxjs/operators";
 
 import { Picture, UserDTO } from '../../interfaces/user.interface';
 import { Position, PositionDTO } from '../../interfaces/position.interface';
 import { Location, LocationDTO } from '../../interfaces/location.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
 import { FacadeService } from '../../services/facades/facade.service';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from '../../services/user.service';
+import { PositionStoreFacade } from 'src/app/store/position/position-store.facade';
+import { LocationStoreFacade } from 'src/app/store/location/location-store.facade';
 
 @Component({
   selector: 'app-description',
@@ -18,6 +20,7 @@ import { UserService } from 'src/app/services/user.service';
 export class DescriptionComponent implements OnInit {
 
   @ViewChild('modal', { read: ViewContainerRef, static: false })
+
   private viewContainerRef!: ViewContainerRef;
   private _destroy$: Subject<boolean> = new Subject();
   public userDetails$!: Observable<UserDTO<Position, Location>>;
@@ -27,6 +30,8 @@ export class DescriptionComponent implements OnInit {
 
   constructor(
     private _userStoreFacade: UserStoreFacade,
+    private _positionStoreFacade: PositionStoreFacade,
+    private _locationStoreFacade: LocationStoreFacade,
     private _activatedRoute: ActivatedRoute,
     private _facadeService: FacadeService,
     private _userService: UserService,
@@ -46,18 +51,22 @@ export class DescriptionComponent implements OnInit {
       }),
       switchMap(() => this._userStoreFacade.getUser$),
       switchMap((user:  UserDTO<PositionDTO, LocationDTO> | any) => {
+        this._positionStoreFacade.loadPosition(user?.position.url);
+        this._locationStoreFacade.loadLocation(user?.location.id);
         const getPosition$ = this._facadeService.getUserPosition(user?.position.url);
         const getLocation$ = this._facadeService.getUserLocation(user?.location.id);
         const getUser$ = of(user);
         return forkJoin([getPosition$, getLocation$, getUser$]);
       }),
       map(([position, location, user]) => {
-        const userPositionLocation: UserDTO<Position, Location> = {
+        const userAdditionalinfo: UserDTO<Position, Location> = {
           ...user,
           location,
           position,
         }
-        return userPositionLocation;
+        console.log(userAdditionalinfo);
+        
+        return userAdditionalinfo;
       }),
       takeUntil(this._destroy$),
     )

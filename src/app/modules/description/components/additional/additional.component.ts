@@ -17,7 +17,6 @@ export class AdditionalComponent implements OnInit {
   @Input() public showTable!: boolean;
   @Output() public getResidentName = new EventEmitter<number>();
   
-  readonly TABLE_EPISODE_HEADER = fromDescriptonConstants.TABLE_EPISODE_HEADER;
   readonly TABLE_POSITION_HEADER = fromDescriptonConstants.TABLE_POSITION_HEADER;
   readonly TABLE_LOCATION_HEADER = fromDescriptonConstants.TABLE_LOCATION_HEADER
 

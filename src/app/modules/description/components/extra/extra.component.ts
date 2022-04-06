@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
-import { LocationDTO } from '../../../../interfaces/location.interface';
-import { PositionDTO } from '../../../../interfaces/position.interface';
+import { PositionDTO } from "../../../../interfaces/position.interface";
+import { LocationDTO } from "../../../../interfaces/location.interface";
 import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({

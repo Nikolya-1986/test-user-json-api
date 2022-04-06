@@ -2,7 +2,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { LocationDTO } from '../../../interfaces/location.interface';
 import { PositionDTO } from '../../../interfaces/position.interface';
-import { EpisodeDTO } from '../../../interfaces/episode.interface';
 import { Status, UserDTO } from '../../../interfaces/user.interface';
 
 @Pipe({

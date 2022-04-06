@@ -2,7 +2,6 @@ import { createAction, props, union } from "@ngrx/store";
 
 import { LocationDTO } from "../../interfaces/location.interface";
 import { PositionDTO } from "../../interfaces/position.interface";
-
 import { UserDTO } from "../../interfaces/user.interface";
 
 export enum UsersActionsType {

@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { LocationDTO } from '../../../interfaces/location.interface';
-import { PositionDTO } from '../../../interfaces/position.interface';
-import { UserDTO } from '../../../interfaces/user.interface';
+import { PositionDTO } from "../../../interfaces/position.interface";
+import { LocationDTO } from "../../../interfaces/location.interface";
+import { UserDTO } from "../../../interfaces/user.interface";
 
 @Pipe({
   name: 'nameResident'

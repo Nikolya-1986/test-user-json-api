@@ -4,24 +4,23 @@ import { Action } from "@ngrx/store";
 import { catchError, map, Observable, of, switchMap } from "rxjs";
 
 import { FacadeService } from "../../services/facades/facade.service";
-import * as fromEpisodeActions from "./episode.actions";
+import * as fromPositionActions from "./position.actions";
 
 @Injectable()
-export class EpisodeEffects {
+export class PositionEffects {
 
-    loadEpisodes$: Observable<Action> = createEffect(() => {
+    loadPosition$: Observable<Action> = createEffect(() => {
         return this._actions$.pipe(
-            ofType(fromEpisodeActions.EpisodeActionsType.LOAD_EPISODES_REQUEST),
-            switchMap(() => this._facadeService.getСhangedEpisodes()
+            ofType(fromPositionActions.PositionActionsType.LOAD_POSITION_REQUEST),
+            switchMap((action: any) => this._facadeService.getUserPosition(action.url)
                 .pipe(
-                    map(episodes => fromEpisodeActions.loadEpisodesSuccess({ episodes })),
-                    catchError((error) => of(fromEpisodeActions.getFail(error)))
+                    map((position) => fromPositionActions.loadPositionSuccess({ position })),
+                    catchError((error) => of(fromPositionActions.getFail(error)))
                 )
             )
         )}, 
         { useEffectsErrorHandler: false }
     );
-
     constructor(
         private _actions$: Actions,
         private _facadeService: FacadeService,

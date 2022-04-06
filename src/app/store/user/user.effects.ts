@@ -5,8 +5,8 @@ import { Observable, of } from "rxjs";
 import { map, catchError, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Router } from "@angular/router";
 
+import { FacadeService } from "../../services/facades/facade.service";
 import AppUserState from "./user.state";
-import { FacadeService } from "src/app/services/facades/facade.service";
 import * as fromUserActions from "./user.actions";
 import * as fromUserSelectors from "./user.selectors";
 

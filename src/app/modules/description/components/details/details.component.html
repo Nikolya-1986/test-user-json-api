@@ -22,29 +22,8 @@
     <ng-template [isVisibleOrNot]="showTable">
         <table class="details__table">
             <tr>
-                <th>
-                    Appeal
-                </th>
-                <th>
-                    First name
-                </th>
-                <th>
-                    Last name
-                </th>
-                <th>
-                    Date of birthday
-                </th>
-                <th>
-                    Gender
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    Languages
-                </th>
-                <th>
-                    Date registered
+                <th *ngFor="let column of TABLE_USER_HEADER">
+                    {{ column }}
                 </th>
             </tr>
             <tr>

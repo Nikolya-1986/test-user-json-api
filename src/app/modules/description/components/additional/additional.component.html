@@ -2,40 +2,6 @@
     *ngIf="showTable"
     >
     <!-- <ng-template> -->
-        <table class="additional__table">
-            <caption>
-                Episodes
-            </caption>
-            <thead>
-                <tr>
-                    <th *ngFor="let column of TABLE_EPISODE_HEADER">
-                        {{ column  }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        {{ userDetails.episode.url | urlConvertNumber }}
-                    </td>
-                    <td>
-                        {{ userDetails.episode.name }}
-                    </td>
-                    <td>
-                        {{ userDetails.episode.track }}
-                    </td>
-                    <td>
-                        {{ userDetails.episode.created }}
-                    </td>
-                    <td>
-                        {{ userDetails.episode.completed }}
-                    </td>
-                    <td>
-
-                    </td>
-                </tr>    
-            </tbody>
-        </table>
 
         <table class="additional__table">
             <caption>

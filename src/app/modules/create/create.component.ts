@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, fromEvent, map, Observable, Subscription, take } from 'rxjs';
 
-import { UserDTO } from '../../interfaces/user.interface';
 import { PositionDTO } from '../../interfaces/position.interface';
 import { LocationDTO } from '../../interfaces/location.interface';
+import { UserDTO } from '../../interfaces/user.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';

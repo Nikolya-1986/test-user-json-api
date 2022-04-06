@@ -1,15 +1,15 @@
 import { Location } from "../../interfaces/location.interface";
 
 export interface LocationState {
-    location: Location | undefined,
-    errorMessage: string | null,
+    location: Location | null,
+    errorMessage: string,
 };
 
 export const initialLocationState: LocationState = {
-    location: undefined,
-    errorMessage: null,
+    location: null,
+    errorMessage: 'Location state is empy',
 };
 
-export default interface AppLocationState {
+export default interface DefaultLocationState {
     locationState: LocationState,
 };
