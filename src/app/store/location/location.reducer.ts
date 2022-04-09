@@ -1,10 +1,10 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { initialLocationState, LocationState } from "./location.state";
 
+import * as fromLocationState from "./location.state";
 import * as fromLocationActions from "./location.actions";
 
 const _locationReducerInternal = createReducer (
-    initialLocationState,
+    fromLocationState.initialLocationState,
     on(fromLocationActions.getFail, (state, action) => ({
         ...state,
         errorMessage: action.message,
@@ -19,6 +19,6 @@ const _locationReducerInternal = createReducer (
     })),
 );
 
-export function locationReducer(state: LocationState | undefined, action: Action) {
+export function locationReducer(state: fromLocationState.LocationState | undefined, action: Action) {
     return _locationReducerInternal(state, action);
 };

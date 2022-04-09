@@ -1,13 +1,13 @@
 import { Directive, HostBinding } from '@angular/core';
 
 @Directive({
-  selector: '[appCellColor]'
+  selector: 'td'
 })
 export class CellColorDirective {
 
-  @HostBinding('class') bgClass: string = '';
+  @HostBinding('class.black') bgClass: string = '';
 
   setColor(dark: Boolean){
-    this.bgClass = dark ? "black": ''
+    this.bgClass = dark ? 'black': '';
   }
 }

@@ -14,7 +14,7 @@ export class LocationEffects {
             ofType(fromLocationActions.LocationActionsType.LOAD_LOCATION_REQUEST),
             switchMap((action: any) => this._facadeService.getUserLocation(action.id)
                 .pipe(
-                    map((location) => fromLocationActions.loadLocationSuccess({ location: action.location })),
+                    map((location) => fromLocationActions.loadLocationSuccess({ location })),
                     catchError((error) => of(fromLocationActions.getFail(error)))
                 )
             )

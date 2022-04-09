@@ -24,8 +24,6 @@ import { AuthInterceptor } from './interseptors/auth.interceptor';
 import { ErrorInterceptor } from './interseptors/error.interceptor';
 import { AuthService } from './modules/auth/services/auth.service';
 import { appReducer } from './store/app-user.state';
-import { PositionEffects } from './store/position/position.effects';
-import { LocationEffects } from './store/location/location.effects';
 
 const ISLOADING_INTERSEPTOR: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -64,7 +62,7 @@ const ERROR_INTERSEPTOR: Provider = {
       maxAge: 25, 
       logOnly: environment.production 
     }),
-    EffectsModule.forRoot([UsersEffects, PositionEffects, LocationEffects]),
+    EffectsModule.forRoot([UsersEffects]),
     StoreRouterConnectingModule.forRoot({
       serializer: CustomSerializer,
     }),

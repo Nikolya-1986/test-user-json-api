@@ -1,9 +1,18 @@
-<div class="details__container details">
+<section class="details__container details">
 
     <div class="details__choice">
         <ng-content select="[button-back]"></ng-content>
         <ng-content select="[checbox-show-data]"></ng-content>
         <ng-container *ngIf="showTable">
+            <mat-checkbox checbox-show-data
+                class="example-margin" 
+                [(ngModel)]="darkColor"
+                (change)="showText=!showText"
+                >
+                <span>
+                    {{ showText ? 'Color black' : 'Color white' }}
+                </span>
+            </mat-checkbox>
             <button 
                 mat-raised-button color="accent"
                 (click)="deleteUser()"
@@ -20,9 +29,9 @@
     </div>
     
     <ng-template [isVisibleOrNot]="showTable">
-        <table class="details__table">
+        <table class="details__table" [paCellDarkColor]="darkColor">
             <tr>
-                <th *ngFor="let column of TABLE_USER_HEADER">
+                <th *ngFor="let column of TABLE_USER_HEADER; let index = index">
                     {{ column }}
                 </th>
             </tr>
@@ -55,4 +64,4 @@
         </table>
     </ng-template>
     <ng-content *ngIf="showTable" selcet="[button-extra]"></ng-content>
-</div>
+</section>

@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { Actions, concatLatestFrom, createEffect, ofType } from "@ngrx/effects";
 import { Action, Store } from "@ngrx/store";
-import { Observable, of } from "rxjs";
+import { combineLatest, forkJoin, Observable, of } from "rxjs";
 import { map, catchError, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { Router } from "@angular/router";
 
 import { FacadeService } from "../../services/facades/facade.service";
 import AppUserState from "./user.state";
 import * as fromUserActions from "./user.actions";
+import * as fromPositionActions from "../position/position.actions";
+import * as fromLocationActions from "../location/location.actions";
 import * as fromUserSelectors from "./user.selectors";
 
 @Injectable()
@@ -26,28 +28,79 @@ export class UsersEffects {
         { useEffectsErrorHandler: false }
     );
 
+    // loadUser$: Observable<Action> = createEffect(() => this._actions$
+    //     .pipe(
+    //         ofType(fromUserActions.UsersActionsType.LOAD_USER_REQUEST),
+    //         switchMap((action: any) => this._facadeService.getUser(action.userId)
+    //             .pipe(
+    //                 withLatestFrom(
+    //                     this._storeUser.select(fromUserSelectors.getUsers),
+    //                 ),
+    //                 map(([user, users]) => {
+    //                     console.log(users);
+    //                     console.log(user);
+    //                     if (users) {
+    //                         return (fromUserActions.loadUserSuccess({ user }));
+    //                     } else {
+    //                         return { type: 'Empty Action' };
+    //                     }
+    //                 }),
+    //                 catchError((error) => of(fromUserActions.getFail(error)))
+    //             )
+    //         )
+    //     ),
+    //     { useEffectsErrorHandler: false }    
+    // );
+
     loadUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(
             ofType(fromUserActions.UsersActionsType.LOAD_USER_REQUEST),
-            switchMap((action: any) => this._facadeService.getUser(action.userId)
+            concatLatestFrom(() => this._storeUser.select(fromUserSelectors.getUser)),
+            switchMap(([action, user]: any) => {
+                return this._facadeService.getUser(action.userId)
                 .pipe(
-                    // map((user) => fromUserActions.loadUserSuccess({ user })),
-                    withLatestFrom(
-                        this._storeUser.select(fromUserSelectors.getUsers),
-                    ),
-                    map(([user, users]) => {
-                        if (users) {
-                            return (fromUserActions.loadUserSuccess({ user }));
-                        } else {
-                            return { type: 'Empty Action' };
-                        }
+                    map((user) => {
+                        return fromUserActions.loadUserSuccess({ user })
                     }),
+                    tap((user) => console.log(user)),
                     catchError((error) => of(fromUserActions.getFail(error)))
                 )
-            )
+            })
         ),
-        { useEffectsErrorHandler: false }    
+        { useEffectsErrorHandler: false } 
     );
+    
+    // loadUser$: Observable<Action> = createEffect(() => this._actions$
+    //     .pipe(
+    //         ofType(fromUserActions.UsersActionsType.LOAD_USER_REQUEST),
+    //         switchMap((action: any) => {
+    //             return this._facadeService.getUser(action.userId)
+    //             .pipe(
+    //                 switchMap((user) => {
+    //                     const getUser$ = of(user);
+    //                     const getPosition$ = this._facadeService.getUserPosition(user.position.url);
+    //                     const getLocation$ = this._facadeService.getUserLocation(user.location.id);
+    //                     return forkJoin([getUser$, getPosition$, getLocation$]);
+    //                 }),
+    //                 switchMap(([user, position, location]) => {
+    //                     const userAdditional = {
+    //                         ...user,
+    //                         position,
+    //                         location
+    //                     }
+    //                     console.log(userAdditional);
+    //                     return [
+    //                         fromUserActions.loadUserSuccess({ user }),
+    //                         fromPositionActions.loadPositionSuccess({ position }),
+    //                         fromLocationActions.loadLocationSuccess({ location })
+    //                     ]
+    //                 }),
+    //                 catchError((error) => of(fromUserActions.getFail(error)))
+    //             )
+    //         })
+    //     ),
+    //     { useEffectsErrorHandler: false } 
+    // );
 
     deleteUser$: Observable<Action> = createEffect(() => this._actions$
         .pipe(

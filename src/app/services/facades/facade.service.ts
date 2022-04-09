@@ -4,7 +4,7 @@ import { catchError, Observable, retry, tap } from "rxjs";
 import { Auth } from "../../interfaces/auth.interface";
 import { UserDTO } from "../../interfaces/user.interface";
 import { Position, PositionDTO } from "../../interfaces/position.interface";
-import { LocationDTO } from "../../interfaces/location.interface";
+import { Location, LocationDTO } from "../../interfaces/location.interface";
 import { AuthService } from "../../modules/auth/services/auth.service";
 import { UserService } from "../user.service";
 import { ModalWindowService } from "../modal-window.servise";
