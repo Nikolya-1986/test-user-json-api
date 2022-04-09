@@ -1,0 +1,83 @@
+<section class="user__additional additional"
+    *ngIf="showTable"
+    >
+    <!-- <ng-template> -->
+
+        <table class="additional__table">
+            <caption>
+                Position
+            </caption>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of TABLE_POSITION_HEADER">
+                        {{ column  }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{ userDetails.position.url| urlConvertNumber }}
+                    </td>
+                    <td>
+                        {{ userDetails.position.name }}
+                    </td>
+                    <td>
+                        {{ userDetails.position.dimension }}
+                    </td>
+                    <td>
+                        {{ userDetails.position.type }}
+                    </td>
+                    <td>    
+                        <ul>
+                            <li 
+                                *ngFor="let resident of userDetails.position.residents"
+                                (click)="openResident(resident)"
+                                >
+                                {{ resident }}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>    
+            </tbody>
+        </table>
+
+        <table class="additional__table">
+            <caption>
+                Location
+            </caption>
+            <thead>
+                <tr>
+                    <th *ngFor="let column of TABLE_LOCATION_HEADER">
+                        {{ column  }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        {{  userDetails.location.country }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.city }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.street.name }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.street.number }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.postcode }}
+                    </td>
+                    <td>
+                        {{ userDetails.location.coordinates.latitude }}
+                    </td>
+                    <td>    
+                        {{ userDetails.location.coordinates.longitude }}
+                    </td>
+                </tr>    
+            </tbody>
+        </table>
+    <!-- </ng-template> -->
+</section>

@@ -1,4 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
+
+import { LocationDTO } from '../../../interfaces/location.interface';
+import { PositionDTO } from '../../../interfaces/position.interface';
 import { Status, UserDTO } from '../../../interfaces/user.interface';
 
 @Pipe({
@@ -6,7 +9,7 @@ import { Status, UserDTO } from '../../../interfaces/user.interface';
 })
 export class FilterStatusPipe implements PipeTransform {
 
-  transform(users: UserDTO[], status: Status): UserDTO[] {
+  transform(users: UserDTO<PositionDTO, LocationDTO>[], status: Status): UserDTO<PositionDTO, LocationDTO>[] {
     return status === Status.all ? users : users.filter(user => user.status === status);
   }
 }

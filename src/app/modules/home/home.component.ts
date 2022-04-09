@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { map, Observable, Subject } from 'rxjs';
 import { takeUntil } from "rxjs/operators";
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { FacadeService } from '../../services/facades/facade.service';
 import { Gender, Status, UserDTO } from '../../interfaces/user.interface';
-import * as userActions from '../../store/user/user.actions';
-import * as userSelectors from '../../store/user/user.selectors';
-import AppUserState from '../../store/user/user.state';
-import { FacadeService } from 'src/app/services/facades/facade.service';
+import { PositionDTO } from '../../interfaces/position.interface';
+import { LocationDTO } from '../../interfaces/location.interface';
+import { UserStoreFacade } from '../../store/user/user-store.facade';
 
 @Component({
   selector: 'app-home',
@@ -17,9 +17,10 @@ import { FacadeService } from 'src/app/services/facades/facade.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  public users$!: Observable<UserDTO[]>;
+  public users$!: Observable<UserDTO<PositionDTO, LocationDTO>[]>;
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
+  public errorEpisodes$!: Observable<string | null>;
   public destroy$: Subject<boolean> = new Subject();
   public searchUserName: string = '';
   public filterUserNameAge: string = 'Default';
@@ -34,21 +35,25 @@ export class HomeComponent implements OnInit, OnDestroy {
   public filterUserAvailable!: boolean;
 
   constructor(
-    private store: Store<AppUserState>,
+    private _userStoreFacade: UserStoreFacade,
     private _facadeService: FacadeService,
     private activateRoute: ActivatedRoute,
     private router: Router,
   ) {}
 
   public ngOnInit(): void {
-    this.store.dispatch(userActions.loadUsersRequest());
-    this.isLoading$ = this.store.pipe(select(userSelectors.getIsLoadingSelector));
-    this.users$ = this.store.pipe(select(userSelectors.getUsersSelector));
-    this.error$ = this.store.pipe(select(userSelectors.getFailSelector));
+    this._downloadDataUsers();
     this.fetchLanguages();
     this.fetchQueryParams();
   };
-  
+
+  private _downloadDataUsers(): void {
+    this._userStoreFacade.loadUsers();
+    this.isLoading$ = this._userStoreFacade.isLoading$;
+    this.users$ = this._userStoreFacade.getUsers$;
+    this.error$ = this._userStoreFacade.error$;
+  };
+
   public onDetailUser(id: number): void {
     this.router.navigate(['description', id]);
   };
@@ -95,12 +100,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public fetchLanguages(): void {
     this._facadeService.getLanguages().pipe(
-      takeUntil(this.destroy$),
       map((response) => {
         const nameButtonAllLanguages = 'All languages';
         this.languages = [nameButtonAllLanguages, ...response];
         return this.languages;
-      })
+      }),
+      takeUntil(this.destroy$),
     )
     .subscribe((result) => {
       if(!this.activelanguage) {

@@ -1,13 +1,15 @@
 import { createAction, props, union } from "@ngrx/store";
 
+import { LocationDTO } from "../../interfaces/location.interface";
+import { PositionDTO } from "../../interfaces/position.interface";
 import { UserDTO } from "../../interfaces/user.interface";
 
 export enum UsersActionsType {
     LOAD_START = '[LOADING] Load Start',
     LOAD_END = '[LOADING] Load End',
     GET_FAIL = '[ERROR] Get Fail',
-    LOAD_USERS_REQUEST = '[USER] Load Users Request',
-    LOAD_USERS_SUCCESS = '[USER] Load Users Success',
+    LOAD_USERS_REQUEST = '[USERS] Load Users Request',
+    LOAD_USERS_SUCCESS = '[USERS] Load Users Success',
     LOAD_USER_REQUEST = '[USER] Load User Request',
     LOAD_USER_SUCCESS = '[USER] Load User Success',
     DELETE_USER_REQUEST = '[USER] Delete User Request',
@@ -37,47 +39,47 @@ export const loadUsersRequest = createAction (
 
 export const loadUsersSuccess = createAction (
     UsersActionsType.LOAD_USERS_SUCCESS,
-    props<{users: UserDTO[]}>(),
+    props<{ users: UserDTO<PositionDTO, LocationDTO>[] }>(),
 );
 
 export const loadUserRequest = createAction (
     UsersActionsType.LOAD_USER_REQUEST,
-    props<{userId: number}>(),
+    props<{ userId: number }>(),
 );
 
 export const loadUserSuccess = createAction (
     UsersActionsType.LOAD_USER_SUCCESS,
-    props<{user: UserDTO}>(),
+    props<{ user: UserDTO<PositionDTO, LocationDTO> }>(),
 );
 
 export const deleteUserRequest = createAction (
     UsersActionsType.DELETE_USER_REQUEST,
-    props<{userId: number}>(),
+    props<{ userId: number }>(),
 );
 
 export const deleteUserSuccess = createAction (
     UsersActionsType.DELETE_USER_SUCCESS,
-    props<{userId: number}>(),
+    props<{ userId: number }>(),
 );
 
 export const editUserRequest = createAction (
     UsersActionsType.EDIT_USER_REQUEST,
-    props<({userEdit: UserDTO})>(),
+    props<({ userEdit: UserDTO<PositionDTO, LocationDTO> })>(),
 );
 
 export const editUserSuccess = createAction (
     UsersActionsType.EDIT_USER_SUCCESS,
-    props<({userEdit: UserDTO})>(),
+    props<({ userEdit: UserDTO<PositionDTO, LocationDTO> })>(),
 );
 
 export const createUserRequest = createAction (
     UsersActionsType.CREATE_USER_REQUEST,
-    props<{userCreate: UserDTO}>(),
+    props<{ userCreate: UserDTO<PositionDTO, LocationDTO> }>(),
 );
 
 export const createUserSuccess = createAction (
     UsersActionsType.CREATE_USER_SUCCESS,
-    props<{userCreate: UserDTO}>(),
+    props<{ userCreate: UserDTO<PositionDTO, LocationDTO> }>(),
 );
 
 const allUserActions = union({

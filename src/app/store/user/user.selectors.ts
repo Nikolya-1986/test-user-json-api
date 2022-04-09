@@ -1,25 +1,25 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
+import { UserState } from "./user.state";
 
-import { UserState } from "./user.reducer";
+export const USER_STATE_NAME = 'user';
+export const getUserFeatureSelector = createFeatureSelector<UserState>(USER_STATE_NAME);
 
-export const getUserFeatureSelector = createFeatureSelector<UserState>('user');
-
-export const getIsLoadingSelector = createSelector (
+export const getIsLoading = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.loadCouter !== 0,
 );
 
-export const getUsersSelector = createSelector (
+export const getUsers = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.userDTO,
 );
 
-export const getUserSelector = createSelector (
+export const getUser = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.userSelected,
 );
 
-export const getFailSelector = createSelector (
+export const getFail = createSelector (
     getUserFeatureSelector,
     (state: UserState) => state.errorMessage,
-)
+);

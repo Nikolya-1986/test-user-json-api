@@ -11,9 +11,12 @@ import { CellColorDirective } from './directives/cell-color.directive';
 import { CellColorSwitcherDirective } from './directives/cell-color-switcher.directive';
 import { ExtraComponent } from './components/extra/extra.component';
 import { SliderComponent } from './components/slider/slider.component';
-import { ModalWindowModule } from 'src/app/components/modal-window/modal-window.module';
+import { ModalWindowModule } from '../../components/modal-window/modal-window.module';
 import { ApplicationPipesModule } from '../../pipes/application-pipes.module';
 import { ExtraDescriptionResolver } from './resolvers/extra-description.resolver';
+import { AdditionalComponent } from './components/additional/additional.component';
+import { UrlPipe } from './pipes/url.pipe';
+import { NameResidentPipe } from './pipes/resident.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { ExtraDescriptionResolver } from './resolvers/extra-description.resolver
     CellColorSwitcherDirective,
     ExtraComponent,
     SliderComponent,
+    AdditionalComponent,
+    UrlPipe,
+    NameResidentPipe,
   ],
   imports: [
     CommonModule,

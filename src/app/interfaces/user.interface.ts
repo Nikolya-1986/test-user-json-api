@@ -1,13 +1,17 @@
+import { LocationDTO } from "./location.interface";
+import { PositionDTO } from "./position.interface";
+
 export interface UsersDTO {
-    results: UserDTO[],
+    results: UserDTO<PositionDTO, LocationDTO>[],
 };
 
-export interface UserDTO {
+export interface UserDTO<P, L> {
     id: number,
     gender: Gender,
     status: Status,
     name: Name,
-    location: Location,
+    position: P,
+    location: L,
     email: string,
     website: string,
     language: string[],
@@ -45,31 +49,6 @@ export enum Appeal {
     Ms = 'Ms',
     Mrs = 'Mrs',
     Miss = 'Miss'
-};
-
-export interface Location {
-    street: Street,
-    city: string,
-    state: string,
-    country: string,
-    postcode: string,
-    coordinates: Coordinates,
-    timezone: Timezone,
-};
-
-export interface Street {
-    number: number,
-    name: string
-};
-
-export interface Coordinates {
-    latitude: string,
-    longitude: string,
-};
-
-export interface Timezone {
-    offset: string,
-    description: string,
 };
 
 export interface Login {

@@ -10,10 +10,18 @@
         (nextImage)="onNextImage($event)"
         >
     </app-slider>
+    
+    <app-additional
+        [userDetails]="userDetails"
+        [showTable]="showTable"
+        (getResidentName)="onGetResidentName($event)"
+        >
+    </app-additional>
 
     <app-details
         [userDetails]="userDetails"
         [showTable]="showTable"
+        [darkColor]="darkColor"
         [showText]="showText"
         (openModalDeleteUser)="onOpenModalDeleteUser($event)"
         (editCurrentUser)="onEditCurrentUser($event)"

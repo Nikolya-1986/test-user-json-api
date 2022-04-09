@@ -1,5 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+import { LocationDTO } from '../../../interfaces/location.interface';
+import { PositionDTO } from '../../../interfaces/position.interface';
 import { UserDTO } from '../../../interfaces/user.interface';
 
 @Pipe({
@@ -7,7 +9,7 @@ import { UserDTO } from '../../../interfaces/user.interface';
 })
 export class FilterAvailablePipe implements PipeTransform {
 
-  transform(users: UserDTO[], value: boolean): UserDTO[] {
+  transform(users: UserDTO<PositionDTO, LocationDTO>[], value: boolean): UserDTO<PositionDTO, LocationDTO>[] {
     if(value) {
       return value === true ? users.filter(user => user.available === value) : users;
     }

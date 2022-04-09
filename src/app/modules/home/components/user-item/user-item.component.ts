@@ -1,5 +1,7 @@
 import { AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
 
+import { LocationDTO } from '../../../../interfaces/location.interface';
+import { PositionDTO } from '../../../../interfaces/position.interface';
 import { UserDTO } from '../../../../interfaces/user.interface';
 
 @Component({
@@ -10,7 +12,7 @@ import { UserDTO } from '../../../../interfaces/user.interface';
 export class UserItemComponent implements AfterContentInit {
 
   @ContentChild('contentText') private contentTextElementRef!: ElementRef;
-  @Input() public user!: UserDTO;
+  @Input() public user!: UserDTO<PositionDTO, LocationDTO>;
   @Output() public detailCurrentUser = new EventEmitter<number>();
 
   constructor(

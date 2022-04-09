@@ -1,9 +1,18 @@
-<div class="details__container details">
+<section class="details__container details">
 
     <div class="details__choice">
         <ng-content select="[button-back]"></ng-content>
         <ng-content select="[checbox-show-data]"></ng-content>
         <ng-container *ngIf="showTable">
+            <mat-checkbox checbox-show-data
+                class="example-margin" 
+                [(ngModel)]="darkColor"
+                (change)="showText=!showText"
+                >
+                <span>
+                    {{ showText ? 'Color black' : 'Color white' }}
+                </span>
+            </mat-checkbox>
             <button 
                 mat-raised-button color="accent"
                 (click)="deleteUser()"
@@ -18,49 +27,12 @@
             </button>
         </ng-container>
     </div>
-
+    
     <ng-template [isVisibleOrNot]="showTable">
-        <table class="details__table">
+        <table class="details__table" [paCellDarkColor]="darkColor">
             <tr>
-                <th>
-                    Appeal
-                </th>
-                <th>
-                    First name
-                </th>
-                <th>
-                    Last name
-                </th>
-                <th>
-                    Date of birthday
-                </th>
-                <th>
-                    Gender
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    Country
-                </th>
-                <th>
-                    City
-                </th>
-                <th>
-                    Post code
-                </th>
-                <th>
-                    Coordinates latitude
-                </th>
-                <th>
-                    Coordinates longitude
-                </th>
-                <th>
-                <th>
-                    Languages
-                </th>
-                <th>
-                    Date registered
+                <th *ngFor="let column of TABLE_USER_HEADER; let index = index">
+                    {{ column }}
                 </th>
             </tr>
             <tr>
@@ -83,22 +55,6 @@
                     {{ userDetails.status }}
                 </td>
                 <td>
-                    {{ userDetails.location.country }}
-                </td>
-                <td>
-                    {{ userDetails.location.city }}
-                </td>
-                <td>
-                    {{ userDetails.location.postcode }}
-                </td>
-                <td>
-                    {{ userDetails.location.coordinates.latitude }}
-                </td>
-                <td>
-                    {{ userDetails.location.coordinates.longitude }}
-                </td>
-                <td>
-                <td>
                     {{ userDetails.language }}
                 </td>
                 <td>
@@ -108,4 +64,4 @@
         </table>
     </ng-template>
     <ng-content *ngIf="showTable" selcet="[button-extra]"></ng-content>
-</div>
+</section>

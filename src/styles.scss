@@ -7,10 +7,12 @@
     --primary-color-3: #F2906B;
     --primary-color-4: #0d9700;
     --primary-color-5: #ffee00;
+    --primary-color-6: blueviolet;
     --dark-color-1: #452F21;
     --dark-color-2: #575757;
     --dark-color-3: #262626;
     --dark-color-4: #1a1a1a;
+    --dark-color-5: #000000;
     --transparent-color: rgba(2, 2, 2, 0.582);
 }
 
@@ -80,6 +82,10 @@ a {
 
 .active a {
     color: var(--primary-color-1);
+}
+
+.black {
+    color: var(--dark-color-5);
 }
 
 .content {

@@ -1,5 +1,7 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
+import { LocationDTO } from '../../../interfaces/location.interface';
+import { PositionDTO } from '../../../interfaces/position.interface';
 import { UserDTO } from '../../../interfaces/user.interface';
 
 @Pipe({
@@ -7,7 +9,7 @@ import { UserDTO } from '../../../interfaces/user.interface';
 })
 export class SearchNamePipe implements PipeTransform {
 
-  transform(users: UserDTO[], searchUserName: string = ''): UserDTO[] {
+  transform(users: UserDTO<PositionDTO, LocationDTO>[], searchUserName: string = ''): UserDTO<PositionDTO, LocationDTO>[] {
     if(searchUserName.trim()){
       const filterUsers = users.filter(user => {
         const lowerUserName = user.name.first.toLowerCase();

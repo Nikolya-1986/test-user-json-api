@@ -7,9 +7,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
+import { Position, PositionDTO } from '../../interfaces/position.interface';
+import { LocationDTO } from '../../interfaces/location.interface';
 import AppUserState from '../../store/user/user.state';
-import * as userActions from '../../store/user/user.actions';
-import * as userSelectors from '../../store/user/user.selectors';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { phoneValidator } from '../../validators/phone.validator';
@@ -17,6 +17,7 @@ import { websiteValidator } from '../../validators/wibsite.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { lengthValidator } from '../../validators/length.validator';
 import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
+import { UserStoreFacade } from '../../store/user/user-store.facade';
 
 @Component({
   selector: 'app-edit',
@@ -27,9 +28,8 @@ export class EditComponent implements OnInit {
 
   @ViewChild('languageList') languageList!: MatChipList;
   @ViewChild('uploadControl') public uploadControl!: ElementRef;
-  public userEdit$!: Observable<UserDTO | any>;
+  public userEdit$!: Observable<UserDTO<PositionDTO, LocationDTO> | any>;
   public destroy$: Subject<boolean> = new Subject;
-  public userId!: number;
   public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
   public formEdit!: FormGroup;
   public gender: Gender[] = [Gender.female, Gender.male];
@@ -45,7 +45,7 @@ export class EditComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private store: Store<AppUserState>,
+    private _userStoreFacade: UserStoreFacade,
     private emailAsyncValidator: EmailAsyncValidator,
   ) { }
 
@@ -55,17 +55,17 @@ export class EditComponent implements OnInit {
     this.handleFormChanges();
   };
 
-  public fetchUserEdit() {
-    this.userEdit$ = this.activatedRoute.params.pipe(
-      map((params: Params) =>  {
-        this.userId = Number(params['id']); 
-        this.store.dispatch(userActions.loadUserRequest({ userId: this.userId }));
-        return this.userId;
-      }),
-      switchMap(() => this.store.select(userSelectors.getUserSelector)),
-      tap((user) => this.setFormValues(user as UserDTO))
-    )
-    return this.userEdit$ as unknown as Observable<UserDTO>;
+  public fetchUserEdit(): void {
+    // this.userEdit$ = this.activatedRoute.params.pipe(
+    //   map((params: Params) =>  {
+    //     const userId = Number(params['id']); 
+    //     this._userStoreFacade.loadUser(userId);
+    //     return userId;
+    //   }),
+    //   switchMap(() => this._userStoreFacade.getUser$),
+    //   tap((user) => this.setFormValues(user as UserDTO<Position, Location, Episode>))
+    // )
+    // return this.userEdit$ as unknown as Observable<UserDTO<<Position, Location, Episode>>;
   };
 
   public handleFormChanges(){
@@ -195,7 +195,7 @@ export class EditComponent implements OnInit {
     })
   };
 
-  private setFormValues(user: UserDTO): void {
+  private setFormValues(user: UserDTO<PositionDTO, LocationDTO>): void {
     this.formEdit.patchValue({
       picture: 
       [
@@ -212,15 +212,15 @@ export class EditComponent implements OnInit {
       gender: user.gender,
       status: user.status,
       dob: user.dob,
-      location: {
-        country: user.location.country,
-        city: user.location.city,
-        postcode: user.location.postcode,
-        coordinates: {
-          latitude: user.location.coordinates.latitude,
-          longitude: user.location.coordinates.longitude,
-        }
-      },
+      // location: {
+      //   country: user.location.country,
+      //   city: user.location.city,
+      //   postcode: user.location.postcode,
+      //   coordinates: {
+      //     latitude: user.location.coordinates.latitude,
+      //     longitude: user.location.coordinates.longitude,
+      //   }
+      // },
       email: user.email,
       website: user.website,
       language: [...user.language],
@@ -231,7 +231,7 @@ export class EditComponent implements OnInit {
     })
   };
 
-  public imageChange(event: Event | any, user: UserDTO): Observable<any>{
+  public imageChange(event: Event | any, user: UserDTO<PositionDTO, LocationDTO>): Observable<any>{
 
     if (event.target.files && event.target.files[0]) {
       let filesAmount = event.target.files.length;
@@ -250,7 +250,7 @@ export class EditComponent implements OnInit {
     return this.editedImage;
   };
 
-  public deleteImage(ind: number, user: UserDTO): void {
+  public deleteImage(ind: number, user: UserDTO<PositionDTO, LocationDTO>): void {
     const del = user.picture.splice(ind,1);
     console.log(del)
   };
@@ -280,15 +280,15 @@ export class EditComponent implements OnInit {
     this.language.removeAt(index);
   };
   
-  public onSubmit(userEdit: UserDTO):void {
-    if(this.formEdit.valid){
-      const editedUser = this.formEdit.getRawValue();
-      const userUpdated: UserDTO = {
-        id: userEdit.id,
-        ...editedUser,
-      }
-      this.store.dispatch(userActions.editUserRequest({ userEdit: userUpdated }));
-      console.log(userUpdated);
-    }
+  public onSubmit(userEdit: UserDTO<PositionDTO, LocationDTO>):void {
+    // if(this.formEdit.valid){
+    //   const editedUser = this.formEdit.getRawValue();
+    //   const userUpdated: UserDTO<PositionDTO, LocationDTO> = {
+    //     id: userEdit.id,
+    //     ...editedUser,
+    //   }
+    //   this._userStoreFacade.editUser(userEdit);
+    //   console.log(userUpdated);
+    // }
   };
 }

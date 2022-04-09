@@ -3,6 +3,8 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { delay, map } from 'rxjs/operators';
 
+import { LocationDTO } from "../interfaces/location.interface";
+import { PositionDTO } from "../interfaces/position.interface";
 import { UserDTO } from "../interfaces/user.interface";
 
 @Injectable({
@@ -22,24 +24,24 @@ export class UserService {
         }),
     };
 
-    public getUsers(): Observable<UserDTO[]> {
-        return this._httpClient.get<UserDTO[]>(`${this.BASE_URL}/results`);
+    public getUsers(): Observable<UserDTO<PositionDTO, LocationDTO>[]> {
+        return this._httpClient.get<UserDTO<PositionDTO, LocationDTO>[]>(`${this.BASE_URL}/users`);
     };
 
-    public getUser(id: number): Observable<UserDTO> {
-        return this._httpClient.get<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader)
+    public getUser(id: number): Observable<UserDTO<PositionDTO, LocationDTO>> {
+        return this._httpClient.get<UserDTO<PositionDTO, LocationDTO>>(`${this.BASE_URL}/users/${id}`, this.httpHeader)
     };
 
-    public deleteUser(id: number): Observable<UserDTO> {
-        return this._httpClient.delete<UserDTO>(`${this.BASE_URL}/results/${id}`, this.httpHeader)
+    public deleteUser(id: number): Observable<UserDTO<PositionDTO, LocationDTO>> {
+        return this._httpClient.delete<UserDTO<PositionDTO, LocationDTO>>(`${this.BASE_URL}/users/${id}`, this.httpHeader)
     };
 
-    public editUser(user: UserDTO): Observable<UserDTO> {
-        return this._httpClient.put<UserDTO>(`${this.BASE_URL}/results/${user.id}`, JSON.stringify(user), this.httpHeader)
+    public editUser(user: UserDTO<PositionDTO, LocationDTO>): Observable<UserDTO<PositionDTO, LocationDTO>> {
+        return this._httpClient.put<UserDTO<PositionDTO, LocationDTO>>(`${this.BASE_URL}/users/${user.id}`, JSON.stringify(user), this.httpHeader)
     };
 
-    public createUser(user: UserDTO): Observable<UserDTO> {
-        return this._httpClient.post<UserDTO>(`${this.BASE_URL}/results`, JSON.stringify(user), this.httpHeader);
+    public createUser(user: UserDTO<PositionDTO, LocationDTO>): Observable<UserDTO<PositionDTO, LocationDTO>> {
+        return this._httpClient.post<UserDTO<PositionDTO, LocationDTO>>(`${this.BASE_URL}/users`, JSON.stringify(user), this.httpHeader);
     };
 
     public getLanguages(): Observable<string[]> {
@@ -52,7 +54,7 @@ export class UserService {
         );
     };
 
-    private uniqueLanguages(userDTO: UserDTO[]): string[] {
+    private uniqueLanguages(userDTO: UserDTO<PositionDTO, LocationDTO>[]): string[] {
         const arraysLanguages = userDTO.map(users => users.language);
         const arrayLanguages = arraysLanguages.reduce((acc, item) => {
             const uniqueLanguages = [...new Set(acc.concat(item))];
@@ -76,4 +78,5 @@ export class UserService {
             })
         )
     };
+
 }

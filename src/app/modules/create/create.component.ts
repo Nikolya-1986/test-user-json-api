@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { filter, fromEvent, map, Observable, Subscription, take } from 'rxjs';
-import { Store } from '@ngrx/store';
 
+import { PositionDTO } from '../../interfaces/position.interface';
+import { LocationDTO } from '../../interfaces/location.interface';
 import { UserDTO } from '../../interfaces/user.interface';
+import { UserStoreFacade } from '../../store/user/user-store.facade';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
 import { lengthValidator } from '../../validators/length.validator';
 import { phoneValidator } from '../../validators/phone.validator';
-import AppUserState from '../../store/user/user.state';
-import * as userActions from '../../store/user/user.actions';
 
 @Component({
   selector: 'app-create',
@@ -27,8 +27,8 @@ export class CreateComponent implements OnInit, OnDestroy {
   public registeredDate = new Date() as unknown as string;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private store: Store<AppUserState>,
+    private _formBuilder: FormBuilder,
+    private _userStoreFacade: UserStoreFacade,
   ) { }
 
   public ngOnInit(): void {
@@ -36,9 +36,9 @@ export class CreateComponent implements OnInit, OnDestroy {
   };
 
   public reactiveFormCreate(): void {
-    this.formCreate = this.formBuilder.group({
+    this.formCreate = this._formBuilder.group({
       picture: [this.picture, [imageValidator]],
-      name: this.formBuilder.group({
+      name: this._formBuilder.group({
         title: [''],
         first: [''],
         last: [''],
@@ -51,11 +51,11 @@ export class CreateComponent implements OnInit, OnDestroy {
           dateValidator,
         ],
       ],
-      location: this.formBuilder.group({
+      location: this._formBuilder.group({
         country: ['RU', [Validators.required,]],
         city: [''],
         postcode: [''],
-        coordinates: this.formBuilder.group({
+        coordinates: this._formBuilder.group({
           latitude: ['',
             [
               Validators.required,
@@ -77,7 +77,7 @@ export class CreateComponent implements OnInit, OnDestroy {
           websiteValidator,
         ]
       ],
-      language: this.formBuilder.array([this.createElementLanguage()]),
+      language: this._formBuilder.array([this.createElementLanguage()]),
       available: [false],
       registered: [{ value: this.registeredDate, disabled: true }],
       phone: ['', 
@@ -140,7 +140,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     return this.formCreate.get('language') as FormArray;
   }
   public createElementLanguage(): FormArray | any {
-    return this.formBuilder.control('', 
+    return this._formBuilder.control('', 
       [
         Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
         // lengthValidator,
@@ -162,12 +162,12 @@ export class CreateComponent implements OnInit, OnDestroy {
     if(this.formCreate.valid){
       const newUser = this.formCreate.getRawValue();
       const id = Math.random();
-      const userCreate: UserDTO = {
+      const userCreate: UserDTO<PositionDTO, LocationDTO> = {
         ...newUser,
         id: id,
         picture: this.picture,
       }
-      this.store.dispatch(userActions.createUserRequest({ userCreate: userCreate }));
+      this._userStoreFacade.createUser(userCreate);
       console.log(userCreate);
       this.updateTreeValidity(userCreate);
     }
