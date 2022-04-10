@@ -1,23 +1,21 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { combineLatest, fromEvent, map, Observable, Subject, switchMap, tap } from 'rxjs';
+import { combineLatest, forkJoin, fromEvent, map, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Store } from '@ngrx/store';
 
 import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
-import { Position, PositionDTO } from '../../interfaces/position.interface';
-import { LocationDTO } from '../../interfaces/location.interface';
-import AppUserState from '../../store/user/user.state';
+import { Position, PositionDTO, PositionName, Type, Dimension } from '../../interfaces/position.interface';
+import { LocationDTO, Location } from '../../interfaces/location.interface';
+import { UserStoreFacade } from '../../store/user/user-store.facade';
+import { FacadeService } from '../../services/facades/facade.service';
 import { imageValidator } from '../../validators/image.validator';
 import { dateValidator } from '../../validators/date-birthday.validator';
 import { phoneValidator } from '../../validators/phone.validator';
 import { websiteValidator } from '../../validators/wibsite.validator';
 import { coordinatesValidator } from '../../validators/coordinates.validator';
 import { lengthValidator } from '../../validators/length.validator';
-import { EmailAsyncValidator } from '../../validators/async/email-async.validator';
-import { UserStoreFacade } from '../../store/user/user-store.facade';
 
 @Component({
   selector: 'app-edit',
@@ -28,47 +26,65 @@ export class EditComponent implements OnInit {
 
   @ViewChild('languageList') languageList!: MatChipList;
   @ViewChild('uploadControl') public uploadControl!: ElementRef;
-  public userEdit$!: Observable<UserDTO<PositionDTO, LocationDTO> | any>;
-  public destroy$: Subject<boolean> = new Subject;
-  public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
+
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   public formEdit!: FormGroup;
+  public userEdit$!: Observable<UserDTO<Position, Location>>;
+  public appeal: Appeal[] = [Appeal.Miss, Appeal.Mr, Appeal.Mrs, Appeal.Ms];
+  public positionName: PositionName[] = [PositionName.Trainee, PositionName.Junior, PositionName.Midle, PositionName.Senior];
+  public type: Type[] = [Type.Cluster, Type.Planet, Type.Microverse, Type.Advanced];
+  public dimension: Dimension[] = [Dimension.Unknown, Dimension.Replacement, Dimension.Cable, Dimension.Interdimensional];
   public gender: Gender[] = [Gender.female, Gender.male];
   public statuses: Status[] = [Status.divorced, Status.married, Status.single];
-  public selectedValueCountry = null;
-  public selectedValueCity = null;
   public selectable: boolean = true;
   public removable: boolean = true;
   public addOnBlur: boolean = true;
-  public editedImage!: any;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  private _editedImage!: any;
+  private _destroy$: Subject<boolean> = new Subject();
+  
   
   constructor(
-    public formBuilder: FormBuilder,
-    private activatedRoute: ActivatedRoute,
+    private _formBuilder: FormBuilder,
+    private _activatedRoute: ActivatedRoute,
+    private _facadeService: FacadeService,
     private _userStoreFacade: UserStoreFacade,
-    private emailAsyncValidator: EmailAsyncValidator,
   ) { }
 
   public ngOnInit(): void {
-    this.reactiveForm();
-    this.fetchUserEdit();
-    this.handleFormChanges();
+    this._reactiveForm();
+    this._fetchUserEdit();
+    this._handleFormChanges();
   };
 
-  public fetchUserEdit(): void {
-    // this.userEdit$ = this.activatedRoute.params.pipe(
-    //   map((params: Params) =>  {
-    //     const userId = Number(params['id']); 
-    //     this._userStoreFacade.loadUser(userId);
-    //     return userId;
-    //   }),
-    //   switchMap(() => this._userStoreFacade.getUser$),
-    //   tap((user) => this.setFormValues(user as UserDTO<Position, Location, Episode>))
-    // )
-    // return this.userEdit$ as unknown as Observable<UserDTO<<Position, Location, Episode>>;
+  private _fetchUserEdit(): Observable<UserDTO<Position, Location>> {
+    this.userEdit$ = this._activatedRoute.params.pipe(
+      map((params: Params) => {
+        const userId =  Number(params['id']);
+        this._userStoreFacade.loadUser(userId);
+        return userId;
+      }),
+      switchMap(() => (this._userStoreFacade.getUser$)),
+      switchMap((user:  UserDTO<PositionDTO, LocationDTO> | any) => {
+        const getPosition$ = this._facadeService.getUserPosition(user?.position.url);
+        const getLocation$ = this._facadeService.getUserLocation(user?.location.id);
+        const getUser$ = of(user);
+        return forkJoin([getPosition$, getLocation$, getUser$]);
+      }),
+      map(([position, location, user]) => {
+        const userAdditionalinfo: UserDTO<Position, Location> = {
+          ...user,
+          location,
+          position,
+        }
+        return userAdditionalinfo;
+      }),
+      tap((user) => this.setFormValues(user as unknown as UserDTO<Position, Location>)),
+      takeUntil(this._destroy$),
+    )
+    return this.userEdit$;
   };
 
-  public handleFormChanges(){
+  private _handleFormChanges(): void {
     combineLatest([this.formEdit.valueChanges, this.formEdit.statusChanges])
     .subscribe((user) => {
       if(this.formEdit.valid){
@@ -77,27 +93,27 @@ export class EditComponent implements OnInit {
         console.log('Form validation status: ERROR', user);
       }
     })
-    this.updateTreeValidity(this.formEdit);
+    this._updateTreeValidity(this.formEdit);
   };
 
-  private updateTreeValidity(group: FormGroup | FormArray | any): void {
+  private _updateTreeValidity(group: FormGroup | FormArray | any): void {
     Object.keys(group.controls).forEach((key: string) => {
       const control = group.controls[key];
 
       if(control instanceof FormGroup || control instanceof FormArray){
-        this.updateTreeValidity(control)
+        this._updateTreeValidity(control)
       }else {
         control.updateValueAndValidity();
       }
     })
   };
 
-  public reactiveForm(): void {
-    this.formEdit = this.formBuilder.group({
+  private _reactiveForm(): void {
+    this.formEdit = this._formBuilder.group({
       picture: ['',               
         [imageValidator]
       ],
-      name: this.formBuilder.group({
+      name: this._formBuilder.group({
         title: [''],
         first: ['', 
           [
@@ -120,7 +136,24 @@ export class EditComponent implements OnInit {
           dateValidator,
         ],
       ],
-      location: this.formBuilder.group({
+      position: this._formBuilder.group({
+        name: ['',
+          [
+            Validators.required,
+          ]
+        ],
+        type: ['',
+          [
+            Validators.required,
+          ]
+        ],
+        dimension: ['',
+          [
+            Validators.required,
+          ]
+        ],
+      }),
+      location: this._formBuilder.group({
         country: ['', 
           [
             Validators.required,
@@ -133,6 +166,20 @@ export class EditComponent implements OnInit {
             Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
           ]
         ],
+        street: this._formBuilder.group({
+          name: ['',
+            [
+              Validators.required,
+              Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
+            ]
+          ],
+          number: ['',
+            [
+              Validators.required,
+              Validators.pattern("^[0-9]+$"),
+            ]
+          ]
+        }),
         postcode: ['',
           [
             Validators.required,
@@ -141,7 +188,7 @@ export class EditComponent implements OnInit {
             Validators.maxLength(6),
           ]
         ],
-        coordinates: this.formBuilder.group({
+        coordinates: this._formBuilder.group({
           latitude: ['',
             [
               Validators.required,
@@ -156,22 +203,15 @@ export class EditComponent implements OnInit {
           ]
         })
       }),
-      email: ['', 
-        [
-          Validators.required, 
-          Validators.email,
-          Validators.pattern('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'),
-        ],
-        this.emailAsyncValidator.validate.bind(this.emailAsyncValidator)
-      ],
+      email: [ {value: '', disabled: true} ],
       website: ['',
         [
           Validators.required,
           websiteValidator,
         ]
       ],
-      language: this.formBuilder.array([
-        this.formBuilder.control(''),
+      language: this._formBuilder.array([
+        this._formBuilder.control(''),
         [
           Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
           lengthValidator,
@@ -195,7 +235,7 @@ export class EditComponent implements OnInit {
     })
   };
 
-  private setFormValues(user: UserDTO<PositionDTO, LocationDTO>): void {
+  private setFormValues(user: UserDTO<Position, Location>): void {
     this.formEdit.patchValue({
       picture: 
       [
@@ -212,15 +252,24 @@ export class EditComponent implements OnInit {
       gender: user.gender,
       status: user.status,
       dob: user.dob,
-      // location: {
-      //   country: user.location.country,
-      //   city: user.location.city,
-      //   postcode: user.location.postcode,
-      //   coordinates: {
-      //     latitude: user.location.coordinates.latitude,
-      //     longitude: user.location.coordinates.longitude,
-      //   }
-      // },
+      position: {
+        name: user.position.name,
+        type: user.position.type,
+        dimension: user.position.dimension,
+      },
+      location: {
+        city: user.location.city,
+        country: user.location.country,
+        street: {
+          name: user.location.street.name,
+          number: user.location.street.number,
+        },
+        postcode: user.location.postcode,
+        coordinates: {
+          latitude: user.location.coordinates.latitude,
+          longitude: user.location.coordinates.longitude,
+        }
+      },
       email: user.email,
       website: user.website,
       language: [...user.language],
@@ -241,13 +290,13 @@ export class EditComponent implements OnInit {
         reader.readAsDataURL(event.target.files[i]);
         return fromEvent(reader, 'load').pipe(
           map((event:any) => {
-            this.editedImage = event.target.result;
-            user.picture.push({ src: this.editedImage });
+            this._editedImage = event.target.result;
+            user.picture.push({ src: this._editedImage });
           })
         )
       }
     }
-    return this.editedImage;
+    return this._editedImage;
   };
 
   public deleteImage(ind: number, user: UserDTO<PositionDTO, LocationDTO>): void {
@@ -260,7 +309,7 @@ export class EditComponent implements OnInit {
   };
 
   private initLanguage(language: string): FormControl {
-    return this.formBuilder.control(language);
+    return this._formBuilder.control(language);
   };
 
   public addLanguage(event: MatChipInputEvent, form: FormGroup): void {
@@ -280,15 +329,15 @@ export class EditComponent implements OnInit {
     this.language.removeAt(index);
   };
   
-  public onSubmit(userEdit: UserDTO<PositionDTO, LocationDTO>):void {
-    // if(this.formEdit.valid){
-    //   const editedUser = this.formEdit.getRawValue();
-    //   const userUpdated: UserDTO<PositionDTO, LocationDTO> = {
-    //     id: userEdit.id,
-    //     ...editedUser,
-    //   }
-    //   this._userStoreFacade.editUser(userEdit);
-    //   console.log(userUpdated);
-    // }
+  public onSubmit(userEdit: UserDTO<Position, Location>):void {
+    if(this.formEdit.valid){
+      const editedUser = this.formEdit.getRawValue();
+      const userUpdated: UserDTO<Position, Location> = {
+        id: userEdit.id,
+        ...editedUser,
+      }
+      this._userStoreFacade.editUser(userEdit);
+      console.log(userUpdated);
+    }
   };
 }

@@ -19,18 +19,17 @@
     {
       "email": "nikolai_sergeevich@mail.ru",
       "password": "Admin:26.02.22",
-      "token": "37",
+      "token": "72",
       "returnSecureToken": true,
-      "id": 3
+      "id": 4
     }
   ],
-
   "position": [
     {
       "id": 1,
       "name": "Trainee",
       "type": "Cluster",
-      "dimension": "unknown",
+      "dimension": "Unknown",
       "residents": [
         1236456456879789,
         570979065746765,
@@ -41,9 +40,9 @@
     },
     {
       "id": 2,
-      "name": "Trainee",
+      "name": "Junior",
       "type": "Planet",
-      "dimension": "Replacement Dimension",
+      "dimension": "Replacement",
       "residents": [
         234536347657575,
         66756756756756750,
@@ -54,9 +53,9 @@
     },
     {
       "id": 3,
-      "name": "Trainee",
+      "name": "Midle",
       "type": "Microverse",
-      "dimension": "Dimension C-137",
+      "dimension": "Cable",
       "residents": [
         38097895674575,
         74545879056745760,
@@ -68,8 +67,8 @@
     {
       "id": 4,
       "name": "Senior",
-      "type": "Microverse",
-      "dimension": "Interdimensional Cable",
+      "type": "Advanced",
+      "dimension": "Interdimensional",
       "residents": [
         44675753453254345000,
         813534567574567,

@@ -161,6 +161,51 @@
                         Your birthday must be greater than <strong>today's date!</strong>
                     </mat-error>
                 </mat-form-field>
+                <!-- position -->
+                <ng-container formGroupName="position">
+                    <!-- name -->
+                    <mat-form-field>
+                        <mat-label>
+                            Position name
+                        </mat-label>
+                        <mat-select formControlName="name">
+                            <mat-option 
+                                [value]="item" 
+                                *ngFor="let item of positionName"
+                                >
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- type -->
+                    <mat-form-field>
+                        <mat-label>
+                            Position type
+                        </mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option 
+                                [value]="item" 
+                                *ngFor="let item of type"
+                                >
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- dimension -->
+                    <mat-form-field>
+                        <mat-label>
+                            Position dimension
+                        </mat-label>
+                        <mat-select formControlName="dimension">
+                            <mat-option 
+                                [value]="item" 
+                                *ngFor="let item of dimension"
+                                >
+                                {{ item }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
                 <!-- location -->
                 <ng-container formGroupName="location">
                     <!-- Countries -->
@@ -191,6 +236,43 @@
                             You must provide only <strong>letters!</strong>
                         </mat-error> 
                     </mat-form-field>
+                    <!-- Street -->
+                    <ng-container formGroupName="street">
+                        <!-- Street name -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>
+                                Street name
+                            </mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Street name"
+                                formControlName="name"
+                            />
+                            <mat-error *ngIf="formEdit.get('location')?.get('street')?.get('name')?.hasError('required')">
+                                You must provide a <strong>street name!</strong>
+                            </mat-error>  
+                            <mat-error *ngIf="formEdit.get('location')?.get('street')?.get('name')?.hasError('pattern')">
+                                You must provide only <strong>letters!</strong>
+                            </mat-error>
+                        </mat-form-field>
+                        <!-- Street number -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>
+                                Street number
+                            </mat-label>
+                            <input 
+                                matInput 
+                                placeholder="Street number"
+                                formControlName="number"
+                            />
+                            <mat-error *ngIf="formEdit.get('location')?.get('street')?.get('number')?.hasError('required')">
+                                You must provide a <strong>street number!</strong>
+                            </mat-error>  
+                            <mat-error *ngIf="formEdit.get('location')?.get('street')?.get('number')?.hasError('pattern')">
+                                You must provide only <strong>numbers!</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </ng-container>
                     <!-- Postcode -->
                     <mat-form-field class="example-full-width">
                         <mat-label>
@@ -253,24 +335,15 @@
                     </ng-container>
                 </ng-container>
                 <!-- Email -->
-                <mat-form-field class="example-full-width">
+                <mat-form-field>
                     <mat-label>
                         Email
                     </mat-label>
                     <input 
                         matInput 
-                        placeholder="Email" 
+                        value= "{{ userEdit.email }}"
                         formControlName="email"
                     />
-                    <mat-error *ngIf="formEdit.get('email')?.hasError('required')">
-                        You must provide a <strong>email!</strong>
-                    </mat-error>  
-                    <mat-error *ngIf="formEdit.get('email')?.hasError('pattern')">
-                        You must provide a <strong>valid email address!</strong>
-                    </mat-error> 
-                    <mat-error *ngIf="formEdit.get('email')?.hasError('emailTaken')">
-                        You must provide a <strong>unregistered email!</strong>
-                    </mat-error> 
                 </mat-form-field>
                 <!-- Website -->
                 <mat-form-field class="example-full-width">
