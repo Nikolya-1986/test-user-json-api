@@ -13,11 +13,16 @@
                     {{ showText ? 'Color black' : 'Color white' }}
                 </span>
             </mat-checkbox>
-            <button 
+            <button tooltipDirective
                 mat-raised-button color="accent"
                 (click)="deleteUser()"
                 >
                 Delete
+                <ng-template #tooltipTemplate>      
+                    <div class="tooltip">   
+                        Delete user!
+                    </div>      
+                </ng-template>  
             </button>
             <button 
                 mat-raised-button color="warn"

@@ -332,7 +332,7 @@ export class EditComponent implements OnInit {
   public onSubmit(userEdit: UserDTO<Position, Location>):void {
     if(this.formEdit.valid){
       const editedUser = this.formEdit.getRawValue();
-      const userUpdated: UserDTO<Position, Location> = {
+      const userUpdated = {
         id: userEdit.id,
         ...editedUser,
       }

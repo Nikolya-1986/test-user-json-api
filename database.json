@@ -315,10 +315,31 @@
         "last": "May"
       },
       "position": {
+        "id": 1,
+        "name": "Trainee",
+        "type": "Cluster",
+        "dimension": "Unknown",
+        "residents": [
+          1236456456879789,
+          570979065746765,
+          9474575745743648,
+          1347654765756
+        ],
         "url": "http://localhost:3000/position/1"
       },
       "location": {
-        "id": "kkfnhdgzntew10"
+        "id": "kkfnhdgzntew10",
+        "city": "Laytown",
+        "country": "Ireland",
+        "street": {
+          "name": "****fgh*jklj",
+          "number": 12
+        },
+        "postcode": 40302,
+        "coordinates": {
+          "latitude": "17.5676",
+          "longitude": "-12.2013"
+        }
       },
       "email": "stephen.may@example.com",
       "language": [
