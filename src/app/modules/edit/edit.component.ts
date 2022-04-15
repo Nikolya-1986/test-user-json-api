@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { combineLatest, forkJoin, fromEvent, map, Observable, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { combineLatest, forkJoin, fromEvent, map, Observable, of, Subject, switchMap, take, takeUntil, tap, filter } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent, MatChipList } from '@angular/material/chips';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Appeal, Gender, Status, UserDTO } from '../../interfaces/user.interface';
+import { Appeal, Gender, Picture, Status, UserDTO } from '../../interfaces/user.interface';
 import { Position, PositionDTO, PositionName, Type, Dimension } from '../../interfaces/position.interface';
 import { LocationDTO, Location } from '../../interfaces/location.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
@@ -39,9 +39,7 @@ export class EditComponent implements OnInit {
   public selectable: boolean = true;
   public removable: boolean = true;
   public addOnBlur: boolean = true;
-  private _editedImage!: any;
   private _destroy$: Subject<boolean> = new Subject();
-  
   
   constructor(
     private _formBuilder: FormBuilder,
@@ -280,26 +278,28 @@ export class EditComponent implements OnInit {
     })
   };
 
-  public imageChange(event: Event | any, user: UserDTO<PositionDTO, LocationDTO>): Observable<any>{
-
-    if (event.target.files && event.target.files[0]) {
-      let filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {
-
-        const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[i]);
-        return fromEvent(reader, 'load').pipe(
-          map((event:any) => {
-            this._editedImage = event.target.result;
-            user.picture.push({ src: this._editedImage });
-          })
-        )
-      }
-    }
-    return this._editedImage;
+  public imageChange(inputEvent: Event, picture: Picture[]): Observable<{ src: string }[]> | any {
+    const base64string$ = this._getBase64fromFile(inputEvent as ProgressEvent<HTMLInputElement>).pipe(take(1));
+    base64string$.subscribe(image => { 
+      const editImage = image;
+      Object.preventExtensions(picture);
+      picture.push({ src: editImage });
+    })
+    return picture;
   };
 
-  public deleteImage(ind: number, user: UserDTO<PositionDTO, LocationDTO>): void {
+  private _getBase64fromFile(_event: any): Observable<string> {
+    const reader = new FileReader();
+    reader.readAsDataURL(_event.target.files[0]);
+
+    return fromEvent(reader, 'load')
+    .pipe(
+      filter(() => _event.target.files && _event.target.files.length > 0),
+      map(() => reader.result as string)
+    );
+  };
+
+  public deleteImage(ind: number, user: UserDTO<Position, Location>): void {
     const del = user.picture.splice(ind,1);
     console.log(del)
   };

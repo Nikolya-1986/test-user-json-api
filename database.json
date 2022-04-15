@@ -19,9 +19,9 @@
     {
       "email": "nikolai_sergeevich@mail.ru",
       "password": "Admin:26.02.22",
-      "token": "72",
+      "token": "55",
       "returnSecureToken": true,
-      "id": 4
+      "id": 5
     }
   ],
   "position": [
@@ -84,7 +84,7 @@
       "city": "Laytown",
       "country": "Ireland",
       "street": {
-        "name": "****fgh*jklj",
+        "name": "Downing",
         "number": 12
       },
       "postcode": 40302,
@@ -98,7 +98,7 @@
       "city": "Carleton",
       "country": "Canada",
       "street": {
-        "name": "*****fhg*****",
+        "name": "Oxford",
         "number": 23
       },
       "postcode": 45646,
@@ -112,7 +112,7 @@
       "city": "Meshed",
       "country": "Iran",
       "street": {
-        "name": "**sfds********",
+        "name": "Oxford",
         "number": 23
       },
       "postcode": 90704,
@@ -126,7 +126,7 @@
       "city": "Gladstone",
       "country": "Australia",
       "street": {
-        "name": "**ssrqw*****g**",
+        "name": "Mall",
         "number": 11
       },
       "postcode": 7402,
@@ -140,7 +140,7 @@
       "city": "Lyngseidet",
       "country": "Norway",
       "street": {
-        "name": "**ipw*****aa**",
+        "name": "Oxford",
         "number": 8970
       },
       "postcode": "1284",
@@ -154,7 +154,7 @@
       "city": "Sundby",
       "country": "Denmark",
       "street": {
-        "name": "**we*******",
+        "name": "Strand",
         "number": 32
       },
       "postcode": 79369,
@@ -168,7 +168,7 @@
       "city": "Whangarei",
       "country": "New Zealand",
       "street": {
-        "name": "**yf********",
+        "name": "Baker",
         "number": 1
       },
       "postcode": 12135,
@@ -182,7 +182,7 @@
       "city": "Lages",
       "country": "Brazil",
       "street": {
-        "name": "**lil********",
+        "name": "Kensington",
         "number": 9
       },
       "postcode": 94035,
@@ -196,7 +196,7 @@
       "city": "Trout Lake",
       "country": "Canada",
       "street": {
-        "name": "**df*****h*",
+        "name": "Whitehall",
         "number": 9
       },
       "postcode": "O5N 1X0",
@@ -210,7 +210,7 @@
       "city": "Numansdorp",
       "country": "Netherlands",
       "street": {
-        "name": "**dsf*****",
+        "name": "Farrington",
         "number": 56
       },
       "postcode": 69460,
@@ -224,7 +224,7 @@
       "city": "Pelkosenniemi",
       "country": "Finland",
       "street": {
-        "name": "***********",
+        "name": "Piccadilly",
         "number": 56
       },
       "postcode": 98995,
@@ -238,7 +238,7 @@
       "city": "Nij Altoenae",
       "country": "Netherlands",
       "street": {
-        "name": "***lq******",
+        "name": "Piccadilly",
         "number": 33
       },
       "postcode": 33460,
@@ -252,7 +252,7 @@
       "city": "Rhoon",
       "country": "Netherlands",
       "street": {
-        "name": "***qw******",
+        "name": "Fleet",
         "number": 95
       },
       "postcode": 23307,
@@ -266,7 +266,7 @@
       "city": "Shepparton",
       "country": "Australia",
       "street": {
-        "name": "***weq******",
+        "name": "Garden",
         "number": 65
       },
       "postcode": 1440,
@@ -280,7 +280,7 @@
       "city": "Ursy",
       "country": "Switzerland",
       "street": {
-        "name": "*********tyu",
+        "name": "Regent",
         "number": 23
       },
       "postcode": 6596,
@@ -294,7 +294,7 @@
       "city": "Adelaide",
       "country": "Australia",
       "street": {
-        "name": "***df********",
+        "name": "Regent",
         "number": 96
       },
       "postcode": 5239,

@@ -32,10 +32,10 @@ export class CreateComponent implements OnInit, OnDestroy {
   ) { }
 
   public ngOnInit(): void {
-    this.reactiveFormCreate()
+    this._reactiveFormCreate()
   };
 
-  public reactiveFormCreate(): void {
+  private _reactiveFormCreate(): void {
     this.formCreate = this._formBuilder.group({
       picture: [this.picture, [imageValidator]],
       name: this._formBuilder.group({
