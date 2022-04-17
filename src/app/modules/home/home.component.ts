@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   public isLoading$!: Observable<boolean>;
   public error$!: Observable<string>;
   public errorEpisodes$!: Observable<string | null>;
-  public destroy$: Subject<boolean> = new Subject();
   public searchUserName: string = '';
   public filterUserNameAge: string = 'Default';
   public sortParamets: string[] = ['Default', 'Alphabet(Aa-Zz)', 'Alphabet(Zz-Aa)', 'Age(Old-young)', 'Age(Young-old)'];
@@ -33,6 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   public languages!: string[];//keep all languages from server
   public activelanguage!: string;
   public filterUserAvailable!: boolean;
+  private _destroy$: Subject<boolean> = new Subject();
 
   constructor(
     private _userStoreFacade: UserStoreFacade,
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this._downloadDataUsers();
-    this.fetchLanguages();
+    this.fetchLanguages(); 
     this.fetchQueryParams();
   };
 
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   public fetchQueryParams(): void{
     this.activateRoute.queryParamMap.pipe(
-      takeUntil(this.destroy$),
+      takeUntil(this._destroy$),
     )
     .subscribe(queryParams => {
       this.searchUserName = queryParams.get('selectedSearchName') || '';
@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.languages = [nameButtonAllLanguages, ...response];
         return this.languages;
       }),
-      takeUntil(this.destroy$),
+      takeUntil(this._destroy$),
     )
     .subscribe((result) => {
       if(!this.activelanguage) {
@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   public ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.complete();
+    this._destroy$.next(true);
+    this._destroy$.complete();
   };
 }

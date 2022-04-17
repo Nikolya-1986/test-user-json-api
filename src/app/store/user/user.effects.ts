@@ -120,7 +120,6 @@ export class UsersEffects {
         .pipe(
             ofType(fromUserActions.UsersActionsType.EDIT_USER_REQUEST),
             switchMap((action: any) => {
-                console.log(action);
                 return this._facadeService.editUser(action.userEdit)
                     .pipe(
                         tap(() => this._router.navigate(['/description'])),

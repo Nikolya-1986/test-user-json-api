@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { forkJoin, Observable, of, Subject, takeUntil } from 'rxjs';
 import { map, switchMap } from "rxjs/operators";
@@ -14,7 +14,7 @@ import { FacadeService } from '../../services/facades/facade.service';
   templateUrl: './description.component.html',
   styleUrls: ['./description.component.scss'],
 })
-export class DescriptionComponent implements OnInit {
+export class DescriptionComponent implements OnInit, OnDestroy {
 
   @ViewChild('modal', { read: ViewContainerRef, static: false })
 

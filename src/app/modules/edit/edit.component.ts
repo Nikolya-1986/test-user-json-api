@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { combineLatest, forkJoin, fromEvent, map, Observable, of, Subject, switchMap, take, takeUntil, tap, filter } from 'rxjs';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
@@ -22,7 +22,7 @@ import { lengthValidator } from '../../validators/length.validator';
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit {
+export class EditComponent implements OnInit, OnDestroy {
 
   @ViewChild('languageList') languageList!: MatChipList;
   @ViewChild('uploadControl') public uploadControl!: ElementRef;
@@ -83,7 +83,9 @@ export class EditComponent implements OnInit {
   };
 
   private _handleFormChanges(): void {
-    combineLatest([this.formEdit.valueChanges, this.formEdit.statusChanges])
+    combineLatest([this.formEdit.valueChanges, this.formEdit.statusChanges]).pipe(
+      takeUntil(this._destroy$),
+    )
     .subscribe((user) => {
       if(this.formEdit.valid){
         console.log('Form validation status: SUCESS', user);
@@ -300,8 +302,7 @@ export class EditComponent implements OnInit {
   };
 
   public deleteImage(ind: number, user: UserDTO<Position, Location>): void {
-    const del = user.picture.splice(ind,1);
-    console.log(del)
+    user.picture.splice(ind,1);
   };
 
   get language(): FormArray {
@@ -329,15 +330,19 @@ export class EditComponent implements OnInit {
     this.language.removeAt(index);
   };
   
-  public onSubmit(userEdit: UserDTO<Position, Location>):void {
+  public onSubmit(userEdit: UserDTO<PositionDTO, LocationDTO>):void {
     if(this.formEdit.valid){
       const editedUser = this.formEdit.getRawValue();
       const userUpdated = {
         id: userEdit.id,
         ...editedUser,
       }
-      this._userStoreFacade.editUser(userEdit);
-      console.log(userUpdated);
+      this._userStoreFacade.editUser(userUpdated);
     }
+  };
+
+  public ngOnDestroy(): void {
+    this._destroy$.next(true);
+    this._destroy$.complete();
   };
 }

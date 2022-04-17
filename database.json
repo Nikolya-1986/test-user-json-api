@@ -307,53 +307,27 @@
   "users": [
     {
       "id": 1236456456879789,
-      "gender": "male",
-      "status": "married",
       "name": {
         "title": "Mr",
         "first": "Stephen",
         "last": "May"
       },
+      "gender": "male",
+      "status": "married",
+      "dob": "1997-05-06T22:14:49.869Z",
       "position": {
-        "id": 1,
-        "name": "Trainee",
-        "type": "Cluster",
-        "dimension": "Unknown",
-        "residents": [
-          1236456456879789,
-          570979065746765,
-          9474575745743648,
-          1347654765756
-        ],
         "url": "http://localhost:3000/position/1"
       },
       "location": {
-        "id": "kkfnhdgzntew10",
-        "city": "Laytown",
-        "country": "Ireland",
-        "street": {
-          "name": "****fgh*jklj",
-          "number": 12
-        },
-        "postcode": 40302,
-        "coordinates": {
-          "latitude": "17.5676",
-          "longitude": "-12.2013"
-        }
+        "id": "kkfnhdgzntew10"
       },
       "email": "stephen.may@example.com",
+      "website": "http://ertfdsve.com",
       "language": [
         "English",
         "Spanish"
       ],
       "available": true,
-      "website": "http://ertfdsve.com",
-      "login": {
-        "uuid": "e9084865-bfcf-42da-9e68-b22048cc2336",
-        "username": "happyleopard772",
-        "password": "tarpon"
-      },
-      "dob": "1997-05-06T22:14:49.869Z",
       "registered": "2004-08-31T23:25:00.959Z",
       "phone": "021-577-1124",
       "picture": [
