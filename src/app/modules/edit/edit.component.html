@@ -33,6 +33,7 @@
                                     readonly 
                                     name="File" 
                                     placeholder="picture"
+                                    imageValidatorDIR
                                 />
                                 <button 
                                     mat-flat-button 
@@ -147,6 +148,7 @@
                         matInput 
                         [matDatepicker]="birthdayDatepicker" 
                         formControlName="dob"
+                        dateBirthdayValidatorDIR
                     />
                     <mat-datepicker-toggle 
                         matSuffix 
@@ -307,12 +309,13 @@
                                 matInput 
                                 placeholder="Latitude: -/+XXX.XXXX"
                                 formControlName="latitude"
+                                coordinatesValidatorDIR
                             />
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('latitude')?.hasError('required')">
                                 You must provide a <strong>latitude!</strong>
                             </mat-error>  
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('latitude')?.hasError('ivalidCoordinates')">
-                                You must provide only <strong>corect latitude!</strong>
+                                You must provide next format: <strong>-/+XXX.XXXX!</strong>
                             </mat-error>
                         </mat-form-field>
                         <!-- Longitude -->
@@ -324,12 +327,13 @@
                                 matInput 
                                 placeholder="Longitude: -/+XXX.XXXX"
                                 formControlName="longitude"
+                                coordinatesValidatorDIR
                             />
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('required')">
                                 You must provide a <strong>longitude!</strong>
                             </mat-error>  
                             <mat-error *ngIf="formEdit.get('location')?.get('coordinates')?.get('longitude')?.hasError('ivalidCoordinates')">
-                                You must provide only <strong>corect longitude!</strong>
+                                You must provide next format: <strong>-/+XXX.XXXX!</strong>
                             </mat-error>
                         </mat-form-field>
                     </ng-container>
@@ -354,6 +358,7 @@
                         matInput 
                         placeholder="Website" 
                         formControlName="website"
+                        websiteValidatorDIR
                     />
                     <mat-error *ngIf="formEdit.get('website')?.hasError('required')">
                         You must provide a <strong>website!</strong>
@@ -386,6 +391,7 @@
                             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                             [matChipInputAddOnBlur]="addOnBlur"
                             (matChipInputTokenEnd)="addLanguage($event, formEdit)"
+                            lengthValidatorDIR
                         />
                     </mat-chip-list>
                     <mat-error *ngIf="formEdit.get('language')?.hasError('isEmpty')">
@@ -416,6 +422,7 @@
                         matInput 
                         placeholder="(XXX)-XXX-XXXX"
                         formControlName="phone"
+                        phoneValidatorDIR
                     />
                     <mat-icon matSuffix>
                         mode_edit

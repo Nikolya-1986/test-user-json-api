@@ -10,6 +10,7 @@ import { ControlValueAccessor, NgControl, ValidationErrors, ValidatorFn, Validat
 export class CheckboxAccessorComponent implements OnInit, ControlValueAccessor {
 
   @Input() public isRequired!: boolean;
+  @Input() public type = 'type';
   @Input() public label!: string; //это обновлённое значение к которому обращается класс
   @Input() public isAppeal!: boolean;
   @Input() public isGender!: boolean;

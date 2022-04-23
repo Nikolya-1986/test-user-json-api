@@ -6,12 +6,6 @@ import { PositionDTO } from '../../interfaces/position.interface';
 import { LocationDTO } from '../../interfaces/location.interface';
 import { UserDTO } from '../../interfaces/user.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
-import { imageValidator } from '../../validators/image.validator';
-import { dateValidator } from '../../validators/date-birthday.validator';
-import { coordinatesValidator } from '../../validators/coordinates.validator';
-import { websiteValidator } from '../../validators/wibsite.validator';
-import { lengthValidator } from '../../validators/length.validator';
-import { phoneValidator } from '../../validators/phone.validator';
 
 @Component({
   selector: 'app-create',
@@ -37,7 +31,7 @@ export class CreateComponent implements OnInit, OnDestroy {
 
   private _reactiveFormCreate(): void {
     this.formCreate = this._formBuilder.group({
-      picture: [this.picture, [imageValidator]],
+      picture: [this.picture],
       name: this._formBuilder.group({
         title: [''],
         first: [''],
@@ -45,47 +39,24 @@ export class CreateComponent implements OnInit, OnDestroy {
       }),
       gender: [false],
       status: [false],
-      dob: ['', 
-        [
-          Validators.required,
-          dateValidator,
-        ],
-      ],
+      dob: [''],
       location: this._formBuilder.group({
         country: ['RU', [Validators.required,]],
         city: [''],
         postcode: [''],
         coordinates: this._formBuilder.group({
-          latitude: ['',
-            [
-              Validators.required,
-              coordinatesValidator,
-            ]
+          latitude: ['', [Validators.required]
           ],
-          longitude: ['',
-            [
-              Validators.required,
-              coordinatesValidator,
-            ]
+          longitude: ['', [Validators.required]
           ]
         })
       }),
       email: [''],
-      website: ['',
-        [
-          Validators.required,
-          websiteValidator,
-        ]
-      ],
+      website: [''],
       language: this._formBuilder.array([this.createElementLanguage()]),
       available: [false],
       registered: [{ value: this.registeredDate, disabled: true }],
-      phone: ['', 
-        [
-          Validators.required,
-          phoneValidator,
-        ]
-      ],
+      phone: [''],
       nat: [''],
     });
     this.handleFormChanges();
@@ -140,11 +111,7 @@ export class CreateComponent implements OnInit, OnDestroy {
     return this.formCreate.get('language') as FormArray;
   }
   public createElementLanguage(): FormArray | any {
-    return this._formBuilder.control('', 
-      [
-        Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-        // lengthValidator,
-      ]
+    return this._formBuilder.control('', [Validators.pattern("^[a-zA-Z][a-zA-Z]+$")]
     );
   };
 

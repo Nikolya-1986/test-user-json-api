@@ -2,7 +2,8 @@
     <label for="first">
         {{ label }}
     </label>
-    <input [type]="type"
+    <input 
+        [type]="type"
         (input)="onChange(inputName.value)" 
         (change)="onChange(inputName.value)" 
         (blur)="onTouched()"
@@ -18,66 +19,67 @@
         [@visibilityChanged]="controlDir.control?.touched && controlDir.control?.invalid"
         >
         <ng-container *ngIf="isRequired && controlDir && controlDir.control?.touched && controlDir.control?.invalid">
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="isRequired"
                 >
                 🚫 &nbsp; You must provide a <strong> {{ controlDir.name }}! </strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="patternLettersNumbers"
                 >
                 🚫 &nbsp; You must provide only <strong>letters and numbers!</strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="patternLetters"
                 >
                 🚫 &nbsp; You must provide only <strong>letters!</strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="patternNumbers"
                 >
                 🚫 &nbsp; You must provide only <strong>numbers!</strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="patternEmail"
                 >
                 🚫 &nbsp; You must provide a <strong>valid {{ controlDir.name }}!</strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="controlDir.getError('emailTaken')"
                 >
                 🚫 &nbsp; You must provide a <strong>unregistered {{ controlDir.name }}!</strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="patternPassword"
                 >
                 🚫 &nbsp; You must provide <strong>valid {{ controlDir.name }}!</strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="patternMinLength"
                 >
                 🚫 &nbsp; You must provide not less than <strong>{{ this.patternMinLength }} symbols!</strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="patternMaxLength"
                 >
                 🚫 &nbsp; You must provide not more than <strong>{{ this.patternMaxLength }} symbols!</strong>
             </small>
-            <small class="error"
+            <small 
+                class="error"
                 *ngIf="patternCapitalLetters"
                 >
                 🚫 &nbsp; You must provide only <strong>capital letters!</strong>
             </small>
-            <!-- <small class="error"
-                *ngIf="emailAsyncValidator"
-                >
-                🚫 &nbsp; User with this email is <strong>not registered!</strong>
-            </small>
-            <small class="error"
-                *ngIf="passwordAsyncValidator"
-                >
-                🚫 &nbsp; You entered the <strong>wrong password!</strong>
-            </small> -->
+            <ng-content></ng-content>
         </ng-container>
         <ng-container *ngIf="controlDir.control?.dirty && controlDir.control?.pending">
             <small class="waiting">

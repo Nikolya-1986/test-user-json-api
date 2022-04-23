@@ -1,10 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Optional, Self, ViewChild } from '@angular/core';
-import { ControlValueAccessor, DefaultValueAccessor, NgControl, NG_ASYNC_VALIDATORS, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
+import { ControlValueAccessor, DefaultValueAccessor, NgControl, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { ReplaySubject, Subject, takeUntil } from 'rxjs';
 
-import { PasswordAsyncValidator } from '../../../validators/async/password-async.validator';
-import { EmailAsyncValidator } from '../../../validators/async/email-async.validator';
+import { CoordinatesValidatorDirective } from 'src/app/directives/coordinates-validator.directive';
 
 // const ASYNC_VALIDATORS = {
 //   provide: NG_ASYNC_VALIDATORS,
@@ -33,7 +32,9 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
 
   @ViewChild('inputName') inputName!: ElementRef;
   @ViewChild(DefaultValueAccessor) defaultValueAccessor!: DefaultValueAccessor;
-  @Input() public type = 'text';
+  
+  @Input() public coordinatesValidatorDIR: CoordinatesValidatorDirective;
+  @Input() public type = 'type';
   @Input() public isRequired!: boolean;
   @Input() public patternLettersNumbers!: string;
   @Input() public patternLetters!: string;
@@ -51,8 +52,6 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
   
   constructor(
     @Self() @Optional() public controlDir: NgControl,
-    // public emailAsyncValidator: EmailAsyncValidator,
-    // public passwordAsyncValidator: PasswordAsyncValidator,
   ) {
     this.controlDir.valueAccessor = this;
   };
@@ -114,12 +113,6 @@ export class InputAccessorComponent implements ControlValueAccessor, Validator, 
     if(this.patternPassword) {
       validators.push(Validators.pattern(this.patternPassword));
     }
-    // if (this.emailAsyncValidator) {
-    //   validators.push(this.emailAsyncValidator.validate.bind(this.emailAsyncValidator));
-    // }
-    // if(this.passwordAsyncValidator) {
-    //   validators.push(this.passwordAsyncValidator.validate.bind(this.passwordAsyncValidator));
-    // }
     if(this.patternMaxLength) {
       validators.push(Validators.maxLength(this.patternMaxLength));
     }

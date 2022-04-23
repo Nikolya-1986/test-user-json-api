@@ -10,13 +10,6 @@ import { Position, PositionDTO, PositionName, Type, Dimension } from '../../inte
 import { LocationDTO, Location } from '../../interfaces/location.interface';
 import { UserStoreFacade } from '../../store/user/user-store.facade';
 import { FacadeService } from '../../services/facades/facade.service';
-import { imageValidator } from '../../validators/image.validator';
-import { dateValidator } from '../../validators/date-birthday.validator';
-import { phoneValidator } from '../../validators/phone.validator';
-import { websiteValidator } from '../../validators/wibsite.validator';
-import { coordinatesValidator } from '../../validators/coordinates.validator';
-import { lengthValidator } from '../../validators/length.validator';
-
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
@@ -110,9 +103,7 @@ export class EditComponent implements OnInit, OnDestroy {
 
   private _reactiveForm(): void {
     this.formEdit = this._formBuilder.group({
-      picture: ['',               
-        [imageValidator]
-      ],
+      picture: [''],
       name: this._formBuilder.group({
         title: [''],
         first: ['', 
@@ -130,11 +121,7 @@ export class EditComponent implements OnInit, OnDestroy {
       }),
       gender: [false, [Validators.required]],
       status: [''],
-      dob: ['', 
-        [
-          Validators.required,
-          dateValidator,
-        ],
+      dob: ['', [Validators.required],
       ],
       position: this._formBuilder.group({
         name: ['',
@@ -192,39 +179,25 @@ export class EditComponent implements OnInit, OnDestroy {
           latitude: ['',
             [
               Validators.required,
-              coordinatesValidator,
             ]
           ],
           longitude: ['',
             [
               Validators.required,
-              coordinatesValidator,
             ]
           ]
         })
       }),
       email: [ {value: '', disabled: true} ],
-      website: ['',
-        [
-          Validators.required,
-          websiteValidator,
-        ]
+      website: ['', [Validators.required]
       ],
       language: this._formBuilder.array([
         this._formBuilder.control(''),
-        [
-          Validators.pattern("^[a-zA-Z][a-zA-Z]+$"),
-          lengthValidator,
-        ],
+        [Validators.pattern("^[a-zA-Z][a-zA-Z]+$")],
       ]),
       available: ['', [Validators.required]],
       registered: [ {value: '', disabled: true} ],
-      phone: ['', 
-        [
-          Validators.required,
-          phoneValidator,
-        ]
-      ],
+      phone: ['', [Validators.required]],
       nat: ['', 
         [
           Validators.required,

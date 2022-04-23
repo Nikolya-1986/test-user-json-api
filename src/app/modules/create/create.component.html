@@ -22,6 +22,7 @@
                 (change)="addPicture($event)" 
                 type="file"
                 formControlName="picture"
+                imageValidatorDIR
             />
             <div class="validation">
                 <ng-container *ngIf="formCreate.controls['picture'].touched && formCreate.controls['picture'].invalid">
@@ -49,6 +50,7 @@
             <div class="create__form-checkbox">
                 <app-checkbox-accessor
                     formControlName="title"
+                    type="text" 
                     [isRequired]="true"
                     [label]="'Appeal'"
                     [isAppeal]="true"
@@ -58,6 +60,7 @@
             <!-- First name -->
             <app-input-accessor 
                 formControlName="first"
+                type="text" 
                 [placeholder]="'Enter your first name...'"
                 [isRequired]="true"
                 [label] = "'First name'"
@@ -67,6 +70,7 @@
             <!-- Last name -->
             <app-input-accessor
                 formControlName="last"
+                type="text" 
                 [placeholder]="'Enter your last name...'"
                 [isRequired]="true"
                 [label] = "'Last name'"
@@ -78,6 +82,7 @@
         <div class="create__form-checkbox">
             <app-checkbox-accessor 
                 formControlName="gender"
+                type="checkbox"
                 [isRequired]="true"
                 [label]="'Gender'"
                 [isGender]="true"
@@ -88,6 +93,7 @@
         <div class="create__form-checkbox">
             <app-checkbox-accessor
                 formControlName="status"
+                type="checkbox"
                 [isRequired]="true"
                 [label]="'Status'"
                 [isStatus]="true"
@@ -95,34 +101,19 @@
             </app-checkbox-accessor>
         </div>
         <!-- Date of birth -->
-        <div class="create__form-group form-group">
-            <label for="date">
-                Date of birth
-            </label>
-            <input id="date"
-                type="date"
-                formControlName="dob"
-            />
-            <div class="validation">
-                <ng-container *ngIf="formCreate.get('dob')?.invalid && formCreate.get('dob')?.touched">
-                    <small class="error"
-                        *ngIf="formCreate.get('dob')?.hasError('required')"
-                        >
-                        🚫 &nbsp; You must provide a <strong>date of birth!</strong>
-                    </small>
-                        <small class="error"
-                        *ngIf="formCreate.get('dob')?.hasError('invalidDate')"
-                        >
-                        🚫 &nbsp; Your birthday must be greater than <strong>today's date!</strong>
-                    </small>
-                </ng-container>
-                <ng-container *ngIf="formCreate.get('dob')?.dirty && formCreate.get('dob')?.valid">
-                    <small class="available">
-                        ✅ &nbsp;Hurray, date of birth is valid!
-                    </small>
-                </ng-container>
-            </div>
-        </div>
+        <app-input-accessor
+            formControlName="dob"
+            type="date"
+            [isRequired]="true"
+            [label] = "'Date of birth'"
+            dateBirthdayValidatorDIR
+            >
+            <small class="error"
+                *ngIf="formCreate.get('dob')?.hasError('invalidDate')"
+                >
+                🚫 &nbsp; Your birthday must be greater than <strong>today's date!</strong>
+            </small>
+        </app-input-accessor>
         <!-- location -->
         <ng-container formGroupName="location">
             <!-- Country -->
@@ -132,6 +123,7 @@
             <!-- City -->
             <app-input-accessor
                 formControlName="city"
+                type="text" 
                 [placeholder]="'Enter your city...'"
                 [isRequired]="true"
                 [label] = "'City'"
@@ -141,6 +133,7 @@
             <!-- Postcode -->
             <app-input-accessor
                 formControlName="postcode"
+                type="text" 
                 [placeholder]="'Enter your postcode...'"
                 [isRequired]="true"
                 [label] = "'Postcode'"
@@ -161,6 +154,7 @@
                         placeholder="Latitude has next format: -/+XXX.XXXX"
                         formControlName="latitude"
                         autocomplete="off"
+                        coordinatesValidatorDIR
                     />
                     <div class="validation">
                         <ng-container 
@@ -175,7 +169,7 @@
                             <small class="error"
                                 *ngIf="formCreate.get('location')?.get('coordinates')?.get('latitude')?.hasError('ivalidCoordinates')"
                                 >
-                                🚫 &nbsp; You must provide only <strong>coordinates latitude!</strong>
+                                🚫 &nbsp; You must provide next format: <strong>-/+XXX.XXXX!</strong>
                             </small>
                         </ng-container>
                         <ng-container 
@@ -198,6 +192,7 @@
                         placeholder="Longitude has next format: -/+XXX.XXXX"
                         formControlName="longitude"
                         autocomplete="off"
+                        coordinatesValidatorDIR
                     />
                     <div class="validation">
                         <ng-container
@@ -212,7 +207,7 @@
                             <small class="error"
                                 *ngIf="formCreate.get('location')?.get('coordinates')?.get('longitude')?.hasError('ivalidCoordinates')"
                                 >
-                                🚫 &nbsp; You must provide only <strong>corect longitude!</strong>
+                                🚫 &nbsp; You must provide next format: <strong>-/+XXX.XXXX!</strong>
                             </small>
                         </ng-container>
                         <ng-container
@@ -230,6 +225,7 @@
         <!-- Email -->
         <app-input-accessor
             formControlName="email"
+            type="text" 
             [isRequired]="true"
             [placeholder]="'Enter your email...'"
             [label] = "'Email'"
@@ -237,36 +233,20 @@
             >
         </app-input-accessor>
         <!-- Website -->
-        <div class="create__form-group form-group">
-            <label for="website">
-                Website
-            </label>
-            <input id="website"
-                type="url" 
-                placeholder="Enter website..." 
-                formControlName="website" 
-                autocomplete="off"
-            />
-            <div class="validation">
-                <ng-container *ngIf="formCreate.get('website')?.invalid && formCreate.get('website')?.touched">
-                    <small class="error"
-                        *ngIf="formCreate.get('website')?.hasError('required')"
-                        >
-                        🚫 &nbsp; You must provide a <strong>website!</strong>
-                    </small>
-                    <small class="error"
-                        *ngIf="formCreate.get('website')?.hasError('invlidUrl')"
-                        >
-                        🚫 &nbsp; Your website address must be <strong>http://*****.com!</strong>
-                    </small>
-                </ng-container>
-                <ng-container *ngIf="formCreate.get('website')?.disable && formCreate.get('website')?.valid">
-                    <small class="available">
-                        ✅ &nbsp; Hurray, coordinates website valid!
-                    </small>
-                </ng-container>
-            </div>
-        </div>
+        <app-input-accessor
+            formControlName="website"
+            type="text" 
+            [isRequired]="true"
+            [placeholder]="'Enter your website...'"
+            [label] = "'Website'"
+            websiteValidatorDIR
+            >
+            <small class="error"
+                *ngIf="formCreate.get('website')?.hasError('invlidUrl')"
+                >
+                🚫 &nbsp; Your website address must be <strong>http://*****.com!</strong>
+            </small>
+        </app-input-accessor>
         <!-- Languages Array-->
         <div class="create__form-group form-group"
             formArrayName="language"
@@ -289,6 +269,7 @@
                             id="language"
                             type="text"  
                             [formControlName]="ind"
+                            lengthValidatorDIR
                         />
                     </td>             
                     <td>
@@ -321,6 +302,7 @@
         <div class="create__form-checkbox">
             <app-checkbox-accessor
                 formControlName="available"
+                type="checkbox"
                 [isRequired]="true"
                 [label]="'Available'"
                 [isAvailable]="true"
@@ -339,39 +321,24 @@
             {{ registeredDate | localTime }}
         </div>
         <!-- Phone -->
-        <div class="create__form-group form-group">
-            <label for="phone">
-                Phone
-            </label>
-            <input id="phone"
-                type="tel" 
-                placeholder="Enter phone next format: 989-365-4108..." 
-                formControlName="phone" 
-                autocomplete="off"
-            />
-            <div class="validation">
-                <ng-container *ngIf="formCreate.get('phone')?.invalid && formCreate.get('phone')?.touched">
-                    <small class="error"
-                        *ngIf="formCreate.get('phone')?.hasError('required')"
-                        >
-                        🚫 &nbsp; You must provide a <strong>phone!</strong>
-                    </small>
-                        <small class="error"
-                        *ngIf="formCreate.get('phone')?.hasError('invalidPhone')"
-                        >
-                        🚫 &nbsp;You must provide a <strong>valid phone!</strong>
-                    </small>
-                </ng-container>
-                <ng-container *ngIf="formCreate.get('phone')?.touched && formCreate.get('phone')?.valid">
-                    <small class="available">
-                        ✅ &nbsp; Hurray, coordinates phone valid!
-                    </small>
-                </ng-container>
-            </div>
-        </div>
+        <app-input-accessor
+            formControlName="phone"
+            type="tel" 
+            [isRequired]="true"
+            [placeholder]="'Enter phone next format: 989-365-4108...'"
+            [label] = "'Phone'"
+            phoneValidatorDIR
+            >
+            <small class="error"
+                *ngIf="formCreate.get('phone')?.hasError('invalidPhone')"
+                >
+                🚫 &nbsp;You must provide a <strong>valid phone!</strong>
+            </small>
+        </app-input-accessor>
         <!-- Nationality -->
         <app-input-accessor
             formControlName="nat"
+            type="text"
             [placeholder]="'Enter your nationality...'"
             [isRequired]="true"
             [label] = "'Nationality'"
